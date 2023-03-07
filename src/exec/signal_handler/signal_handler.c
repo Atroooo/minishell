@@ -6,12 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/07 16:48:06 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/07 16:51:02 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
+//Reste le cas ou on ctrl + c ou ctrl + \\ au tout debut sans rien ecrire
 void	signal_action(int sig, siginfo_t *info, void *context)
 {
 	(void) info;
