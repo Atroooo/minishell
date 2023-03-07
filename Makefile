@@ -1,4 +1,4 @@
-.PHONY:     			all $(NAME) clear mkbuild lib minilibx clear clean fclean re sanitize
+.PHONY:     			all $(NAME) mkbuild lib clean fclean re sanitize
 
 NAME					= minishell
 
@@ -23,8 +23,6 @@ LDLIBS					= -lreadline
 SANITIZE				= $(CFLAGS) -fsanitize=address
 
 RM 						= rm -rf
-CLEAR					= clear
-
 
 $(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE) Makefile
 						@mkdir -p $(@D)
@@ -34,9 +32,6 @@ all: 					clear mkbuild lib $(HEADER_DIR) $(NAME)
 						
 mkbuild:
 						@mkdir -p build
-
-clear:
-						$(CLEAR)
 						
 $(NAME): 				$(OBJECTS) $(LIB_DIR)$(LIBFT)
 						$(GCC) $(CFLAGS) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(LDLIBS)
