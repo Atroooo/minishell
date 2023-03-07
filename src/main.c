@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/07 14:54:51 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/07 16:47:46 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,21 @@ int	main(int argc, char *argv[], char *env[])
 	(void) argv;
 	(void) argc;
 	(void) env;
+
 	line = readline("prompt> ");
-	while (line != NULL)
+	while (1)
 	{
-		add_history(line);
-		parsing(line);
-		free(line);
-		line = readline("prompt> ");
+		signal_handler();
+		while (line != NULL)
+		{
+			add_history(line);
+			// parsing(line);
+			free(line);
+			line = readline("prompt> ");
+		}
+		if (!line)
+			exit(0);
+		rl_clear_history();
 	}
-	rl_clear_history();
 	return (0);
 }
