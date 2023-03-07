@@ -10,6 +10,9 @@ HEADER_FILE				= minishell.h
 DIR						= src/
 SRC			 			= main.c \
 						  parsing/parsing.c \
+						  exec/redirect/redirect.c \
+						  exec/builtins/echo.c \
+						  #exec/pipe/
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
@@ -18,7 +21,7 @@ LIB_DIR					= libft/
 
 	
 GCC						= gcc
-CFLAGS					= -Wall -Wextra -g3 #-Werror
+CFLAGS					= -Wall -Wextra -Werror -g3 
 LDLIBS					= -lreadline
 SANITIZE				= $(CFLAGS) -fsanitize=address
 

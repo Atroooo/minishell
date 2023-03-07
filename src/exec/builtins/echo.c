@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/07 14:54:51 by lcompieg         ###   ########.fr       */
+/*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/03/07 14:55:29 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "minishell.h"
 
-int	main(int argc, char *argv[], char *env[])
+void	ft_echo(char **args)
 {
-	char	*line;
+    int		i;
+    int		n;
 
-	(void) argv;
-	(void) argc;
-	(void) env;
-	line = readline("prompt> ");
-	while (line != NULL)
-	{
-		add_history(line);
-		parsing(line);
-		free(line);
-		line = readline("prompt> ");
-	}
-	rl_clear_history();
-	return (0);
+    i = 1;
+    n = 0;
+    if (args[1] && ft_strcmp(args[1], "-n") == 0)
+    {
+        n = 1;
+        i++;
+    }
+    while (args[i])
+    {
+        ft_putstr_fd(args[i], 2);
+        if (args[i + 1])
+            ft_putchar_fd(' ', 2);
+        i++;
+    }
+    if (!n)
+        ft_putchar_fd('\n', 2);
 }
