@@ -28,7 +28,7 @@ $(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE) Makefile
 						@mkdir -p $(@D)
 						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -c $< -o $@
 
-all: 					clear mkbuild lib $(HEADER_DIR) $(NAME) 
+all: 					mkbuild lib $(HEADER_DIR) $(NAME) 
 						
 mkbuild:
 						@mkdir -p build
