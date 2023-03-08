@@ -10,6 +10,7 @@ HEADER_FILE				= minishell.h
 DIR						= src/
 SRC			 			= main.c \
 						  parsing/parsing.c \
+						  parsing/input_operator_error.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	

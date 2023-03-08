@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/07 09:10:56 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/07 14:36:02 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 # include "../libft/header/libft.h"
 
 void	parsing(char *line);
+int		input_operator_check(char *cmd_line);
 
 #endif
