@@ -12,7 +12,12 @@ SRC			 			= main.c \
 						  parsing/parsing.c \
 						  exec/redirect/redirect.c \
 						  exec/signal_handler/signal_handler.c \
-						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/pwd.c \
+						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/pwd.c exec/builtins/export.c \
+						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c \
+						  exec/pipe/dup_manager.c exec/pipe/execution.c exec/pipe/get_exec_done.c \
+						  exec/pipe/get_exec_done_utils.c exec/pipe/get_path.c exec/pipe/heredoc.c \
+						  exec/pipe/quit_utils.c exec/pipe/utils.c \
+						  exec/utils/chained_list.c
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
