@@ -6,28 +6,30 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/07 15:31:03 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/08 11:22:20 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void	ft_echo(char **args)
+void	ft_echo(char **cmd)
 {
 	int	i;
 	int	n;
 
+	if (!cmd)
+		return ;
 	i = 1;
 	n = 0;
-	if (args[1] && ft_strcmp(args[1], "-n") == 0)
+	if (cmd[1] && ft_strcmp(cmd[1], "-n") == 0)
 	{
 		n = 1;
 		i++;
 	}
-	while (args[i])
+	while (cmd[i])
 	{
-		ft_putstr_fd(args[i], 2);
-		if (args[i + 1])
+		ft_putstr_fd(cmd[i], 2);
+		if (cmd[i + 1])
 			ft_putchar_fd(' ', 2);
 		i++;
 	}

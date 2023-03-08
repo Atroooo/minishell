@@ -20,6 +20,7 @@ int	main(int argc, char *argv[], char *env[])
 	(void) argc;
 	(void) env;
 
+	signal_handler();
 	line = readline("prompt> ");
 	while (1)
 	{
@@ -27,7 +28,7 @@ int	main(int argc, char *argv[], char *env[])
 		while (line != NULL)
 		{
 			add_history(line);
-			// parsing(line);
+			parsing(line);
 			free(line);
 			line = readline("prompt> ");
 		}

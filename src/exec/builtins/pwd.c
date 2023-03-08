@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/08 11:21:51 by lcompieg         ###   ########.fr       */
+/*   Created: 2023/03/08 11:17:56 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/03/08 11:25:23 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/minishell.h"
+#include "../../../header/minishell.h"
 
-void	parsing(char *line)
+void    ft_pwd(char **cmd)
 {
-	char	**cmd_line;
-
-	cmd_line = ft_split(line, ' ');
-    if (!cmd_line)
+    if (!cmd)
         return ;
-    redirect_input(cmd_line);
-    redirect_output(cmd_line);
-    redirect_output_append(cmd_line);
-    ft_echo(cmd_line);
-    ft_cd(cmd_line);
-    ft_pwd(cmd_line);
+    if (ft_strcmp(cmd[0], "pwd") != 0)
+        return ;
+    if (cmd[1])
+    {
+        ft_putstr_fd("pwd: too many arguments\n", 2);
+        return ;
+    }
+    ft_putstr_fd(getcwd(NULL, 0), 2);
+    ft_putchar_fd('\n', 2);
 }

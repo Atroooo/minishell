@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/08 11:21:51 by lcompieg         ###   ########.fr       */
+/*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/03/08 11:25:03 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/minishell.h"
+#include "../../../header/minishell.h"
 
-void	parsing(char *line)
+void    ft_cd(char **cmd)
 {
-	char	**cmd_line;
+	char	*path;
 
-	cmd_line = ft_split(line, ' ');
-    if (!cmd_line)
-        return ;
-    redirect_input(cmd_line);
-    redirect_output(cmd_line);
-    redirect_output_append(cmd_line);
-    ft_echo(cmd_line);
-    ft_cd(cmd_line);
-    ft_pwd(cmd_line);
+	if (!cmd)
+		return ;
+	if (ft_strcmp(cmd[0], "cd") != 0)
+		return ;
+	if (cmd[1] == NULL)
+		path = ft_strdup(getenv("HOME"));
+	else
+		path = ft_strdup(cmd[1]);
+	if (path == NULL)
+		return ;
+	if (chdir(path) == -1)
+	{
+		printf("cd: no such file or directory: %s", path);
+		free(path);
+		return ;
+	}
 }

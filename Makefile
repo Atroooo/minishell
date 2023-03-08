@@ -9,11 +9,10 @@ HEADER_FILE				= minishell.h
 
 DIR						= src/
 SRC			 			= main.c \
+						  parsing/parsing.c \
 						  exec/redirect/redirect.c \
 						  exec/signal_handler/signal_handler.c \
-						  #exec/builtins/echo.c \
-						  #parsing/parsing.c \
-						  #exec/pipe/
+						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/pwd.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
