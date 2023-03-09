@@ -6,17 +6,17 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/08 12:42:55 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:20:04 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void    ft_exit(char **cmd)
+void	ft_exit(char **cmd)
 {
-    if (!cmd)
-        return ;
-    if (ft_strcmp(cmd[0], "exit") != 0)
-        return ;
-    exit(0);
+	if (!cmd)
+		return ;
+	if (ft_strcmp(cmd[0], "exit") != 0)
+		return ;
+	exit(0);
 }

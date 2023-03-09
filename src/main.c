@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/08 16:28:53 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:10:13 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_struct(t_environ *env_list)
 
 void	init_env(t_environ **env_list)
 {
-	char    **env;
+	char	**env;
 	int		i;
 
 	env = ft_split(getenv("PATH"), ':');

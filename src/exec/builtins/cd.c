@@ -6,13 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/08 11:33:54 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:20:15 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void    ft_cd(char **cmd)
+void	ft_cd(char **cmd)
 {
 	char	*path;
 
