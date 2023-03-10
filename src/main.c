@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/09 11:10:13 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:38:25 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char *argv[], char *env[])
 		while (line != NULL)
 		{
 			add_history(line);
-			parsing(line, &env_list);
+			parsing(line, env, &env_list);
 			free(line);
 			line = readline("prompt> ");
 		}

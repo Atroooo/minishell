@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/08 16:31:34 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:50:53 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct t_env
 }	t_env;
 
 /*Parsing*/
-void		parsing(char *line, t_environ **env_list);
+void		parsing(char *line, char *env[], t_environ **env_list);
 
 /*Signal*/
 void    	signal_handler(void);
@@ -51,22 +51,21 @@ void		redirect_output(char **cmd);
 void		redirect_output_append(char **cmd);
 
 /*Pipe*/
-void	get_exec_done(char **argv, char **env, t_env *st);
-void	quit_function(t_env *st, int error_code);
+int		exec_cmd(int argc, char **argv, char *env[]);
+int		open_files(int argc, char **argv, t_env *st);
+void	dup_manager(t_env *st);
 void	set_up_struct(t_env *st, int argc, char **argv);
-void	free_pipe(t_env *st);
-void	close_function(t_env *st);
+char	*get_path(char *cmd, char *paths, t_env *st);
+void	no_path(t_env *st, char **arg_vec);
+void	path_is_null(t_env *st, char **arg_vec, char **argv);
 int		heredoc(t_env *st, char **argv);
-void	set_up_struct(t_env *st, int argc, char **argv);
+void	get_exec_done(char **argv, char **env, t_env *st);
+void	execution(char **argv, char *env[], t_env *st);
 void	error_execve(char **arg_vec, char *path, t_env *st);
 void	free_env_exit(t_env *st, int i);
-void	path_is_null(t_env *st, char **arg_vec, char **argv);
-void	no_path(t_env *st, char **arg_vec);
-void	open_files(int argc, char **argv, t_env *st);
+void	free_pipe(t_env *st);
 void	close_function(t_env *st);
-void	execution(char **argv, char *env[], t_env *st);
-void	dup_manager(t_env *st);
-char	*get_path(char *cmd, char *paths, t_env *st);
+void	quit_function(t_env *st, int error_code);
 
 /*Builtins*/
 void		ft_echo(char **cmd);

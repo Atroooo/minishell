@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/08 13:36:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:49:44 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_up_struct(t_env *st, int argc, char **argv)
 	set_up_pipe(st);
 }
 
-void	open_files(int argc, char **argv, t_env *st)
+int	open_files(int argc, char **argv, t_env *st)
 {
 	int	hdoc;
 
@@ -58,7 +58,7 @@ void	open_files(int argc, char **argv, t_env *st)
 	{
 		ft_printf("Cannot open file : %s\n", argv[1]);
 		free(st);
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	if (hdoc == 0)
 		st->outfile = open(argv[argc -1], O_RDWR | O_CREAT | O_APPEND, 0644);
@@ -66,4 +66,5 @@ void	open_files(int argc, char **argv, t_env *st)
 		st->outfile = open(argv[argc -1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (st->outfile == -1)
 		quit_function(st, 0);
+	return (1);
 }
