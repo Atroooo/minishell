@@ -11,8 +11,10 @@ DIR						= src/
 SRC			 			= main.c \
 						  parsing/parsing.c \
 						  parsing/input_operator_error.c \
-						  parsing/set_up_struct.c \
 						  parsing/split_line.c \
+						  parsing/get_cmd.c \
+						  parsing/get_flag.c \
+						  parsing/get_utils.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	

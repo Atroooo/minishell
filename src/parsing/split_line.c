@@ -6,22 +6,27 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/09 12:41:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/10 20:21:50 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-int	get_len(char *line)
+int	count_content(char *line)
 {
-	int	i;
+	int		i;
+	int		content_nbr;
+	char	quote;
 
 	i = 0;
-	while (line[i] != '\0' && line[i] != ' ')
+	content_nbr = 0;
+	quote = 0;
+	while (line[i])
 	{
+
 		i++;
 	}
-	return (i);
+	return (content_nbr);
 }
 
 static int	count_split(char *line)
@@ -49,77 +54,6 @@ static int	get_content(char *line, t_cmd *cmd)
 	return (0);
 }
 
-static int	get_flag(char *line, t_cmd *cmd)
-{
-	int	i;
-	int	y;
-
-	y = 0;
-	i = 0;
-	while (line[i] & (line[i] == ' ' && line[i + 1] != '-'))
-	{
-		
-	}
-	// while (line[i] != '\0' && line[i] == ' ')
-	// 	i++;
-	// while (line[i] != '\0' && line[i] != ' ')
-	// {
-	// 	cmd->flag[y] = line[i];
-	// 	i++;
-	// 	y++;
-	// }
-	return (0);
-}
-
-static int	get_cmd(char *line, t_cmd *cmd)
-{
-	int	i;
-	int	y;
-
-	y = 0;
-	i = 0;
-	while (line[i] != '\0' && line[i] == ' ')
-		i++;
-	cmd->cmd = malloc(sizeof(char) * (get_len(&line[i]) + 1));
-	if (cmd->cmd == NULL)
-		exit(1); //A GERER PLUS TARD
-	while (line[i] != '\0' && line[i] != ' ')
-	{
-		cmd->cmd[y] = line[i];
-		i++;
-		y++;
-	}
-	while (line[i] != '\0' && line[i] == ' ')
-		i++;
-	cmd->cmd[y] = '\0';
-	return (i);
-}
-
-// static int	check_if_separator(char c, t_cmd *cmd)
-// {
-// 	if (c == '\0')
-// 	{
-// 		cmd->separator = '\0';
-// 		return (1);
-// 	}
-// 	else if (c == '|')
-// 	{
-// 		cmd->separator = '|';
-// 		return (1);
-// 	}
-// 	else if (c == ';')
-// 	{
-// 		cmd->separator = ';';
-// 		return (1);
-// 	}
-// 	else if (c == '&')
-// 	{
-// 		cmd->separator = '&';
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
 static void	set_cmd_struct(char *line, t_line *all_cmd)
 {
 	int	line_index;
@@ -127,7 +61,7 @@ static void	set_cmd_struct(char *line, t_line *all_cmd)
 
 	line_index = 0;
 	cmd_index = 0;
-	while (line[line_index] != '\0')
+	while (line[line_index] != '\0' && cmd_index < 1)
 	{
 		line_index += get_cmd(&line[line_index], &all_cmd->cmd[cmd_index]);
 		line_index += get_flag(&line[line_index], &all_cmd->cmd[cmd_index]);

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/09 10:57:07 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/10 20:47:24 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef struct t_cmd
 {
 	char	*cmd;
-	char	*flag;
+	char	**flag;
 	char	**content;
 	char	separator;
 }t_cmd;
@@ -36,5 +36,9 @@ typedef struct t_line
 void	parsing(char *line, t_line *all_cmd);
 void	split_line(char *line, t_line *all_cmd);
 int		input_operator_check(char *cmd);
+int		get_cmd(char *line, t_cmd *cmd);
+int		get_flag(char *line, t_cmd *cmd);
+int		skip_space(char *line);
+int		count_len(char *line);
 
 #endif

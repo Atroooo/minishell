@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_up_struct.c                                    :+:      :+:    :+:   */
+/*   get_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 13:05:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/08 15:17:47 by vgonnot          ###   ########.fr       */
+/*   Created: 2023/03/10 20:25:13 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/03/10 20:26:02 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-void	set_up_struct(char *cmd)
+int	skip_space(char *line)
 {
+	int	i;
 
+	i = 0;
+	while (line[i] != '\0' && line[i] == ' ')
+		i++;
+	return (i);
 }
-	
+
+int	count_len(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != '\0' && line[i] != ' ')
+	{
+		i++;
+	}
+	return (i);
+}
