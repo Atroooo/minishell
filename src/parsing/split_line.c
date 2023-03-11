@@ -6,48 +6,11 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/10 20:21:50 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/11 17:33:38 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-int	count_content(char *line)
-{
-	int		i;
-	int		content_nbr;
-	char	quote;
-
-	i = 0;
-	content_nbr = 0;
-	quote = 0;
-	while (line[i])
-	{
-
-		i++;
-	}
-	return (content_nbr);
-}
-
-static int	count_split(char *line)
-{
-	int	i;
-	int	nbr_split;
-
-	nbr_split = 1;
-	i = 0;
-	while (line[i] != 0)
-	{
-		if (line[i] == '|' || line[i] == ';' || line[i] == '&')
-		{
-			nbr_split += 1;
-			if (line[i] == line[i + 1])
-				i++;
-		}
-		i++;
-	}
-	return (nbr_split);
-}
 
 static int	get_content(char *line, t_cmd *cmd)
 {
