@@ -14,6 +14,7 @@ SRC			 			= main.c \
 						  parsing/split_line.c \
 						  parsing/get_cmd.c \
 						  parsing/get_flag.c \
+						  parsing/get_content.c \
 						  parsing/get_utils.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)

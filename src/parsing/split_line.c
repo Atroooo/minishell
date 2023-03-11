@@ -6,15 +6,30 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/11 17:33:38 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/11 18:18:28 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-static int	get_content(char *line, t_cmd *cmd)
+static int	count_split(char *line)
 {
-	return (0);
+	int	i;
+	int	nbr_split;
+
+	nbr_split = 1;
+	i = 0;
+	while (line[i] != 0)
+	{
+		if (line[i] == '|' || line[i] == ';' || line[i] == '&')
+		{
+			nbr_split += 1;
+			if (line[i] == line[i + 1])
+				i++;
+		}
+		i++;
+	}
+	return (nbr_split);
 }
 
 static void	set_cmd_struct(char *line, t_line *all_cmd)
