@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/10 20:47:24 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/11 17:37:16 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	split_line(char *line, t_line *all_cmd);
 int		input_operator_check(char *cmd);
 int		get_cmd(char *line, t_cmd *cmd);
 int		get_flag(char *line, t_cmd *cmd);
+int		get_content(char *line, t_cmd *cmd);
 int		skip_space(char *line);
 int		count_len(char *line);
 

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 20:19:23 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/10 20:48:01 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/12 17:18:04 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static int	copy_all_flag(char *line, t_cmd *cmd, int line_index, int nbr_flag)
 		line_index += copy_flag(&line[line_index], cmd->flag[flag_index]);
 		flag_index++;
 	}
+	if (line[line_index] == '\0')
+		line_index -= 1;
 	return (line_index);
 }
 
@@ -81,13 +83,13 @@ int	get_flag(char *line, t_cmd *cmd)
 	int	line_index;
 	int	nbr_flag;
 
-	line_index = 0;
+	line_index = skip_space(line);
 	if (line[line_index] != '-')
 		return (0);
 	nbr_flag = count_number_flag(line);
 	cmd->flag = malloc(sizeof(char *) * nbr_flag);
 	if (cmd->flag == NULL)
 		exit(1); //A GERER PLUS TARD
-	copy_all_flag(line, cmd, line_index, nbr_flag);
+	line_index += copy_all_flag(line, cmd, line_index, nbr_flag);
 	return (line_index);
 }

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/11 18:18:28 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/12 19:54:32 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ static void	set_cmd_struct(char *line, t_line *all_cmd)
 	while (line[line_index] != '\0' && cmd_index < 1)
 	{
 		line_index += get_cmd(&line[line_index], &all_cmd->cmd[cmd_index]);
+		//printf("index 1 = %d\n", line_index);
 		line_index += get_flag(&line[line_index], &all_cmd->cmd[cmd_index]);
+		//printf("index 2 = %d\n", line_index);
 		line_index += get_content(&line[line_index], &all_cmd->cmd[cmd_index]);
+		//printf("index 3 = %d\n", line_index);
 		all_cmd->cmd[cmd_index].separator = line[line_index];
 		if (all_cmd->cmd[cmd_index].separator == '\0')
 			break ;
