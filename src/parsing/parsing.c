@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 13:33:27 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/13 14:30:01 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ void	parsing(char *line, char *env[], t_environ **env_list )
     ft_exit(cmd_line);
     if (ft_strcmp(cmd_line[0], "exec") == 0)
     {
-        strr = malloc(sizeof(char *) * 5);
+        strr = malloc(sizeof(char *) * 6);
 		strr[0] = " ";
 		strr[1] = "Makefile";
 		strr[2] = "ls -la";
-		strr[3] = "wc -l";
-		strr[4] = "ls -la";
-        strr[5] = "outfile";
-        exec_cmd(6, strr, env);
+		strr[3] = " ";
+        strr[4] = "outfile";
+        exec_cmd(5, strr, env);
     }
 
 }

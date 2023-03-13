@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/09 11:20:15 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:09:03 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_cd(char **cmd)
 		return ;
 	if (chdir(path) == -1)
 	{
-		printf("cd: no such file or directory: %s", path);
+		printf("bash: cd: %s: no such file or directory\n", path);
 		free(path);
 		return ;
 	}
