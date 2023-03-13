@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 14:49:02 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/13 20:38:18 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	count_split(char *line)
 	i = 0;
 	while (line[i] != 0)
 	{
-		if (line[i] == '|' || line[i] == ';' || line[i] == '&')
+		if (line[i] == '|')
 		{
 			nbr_split += 1;
 			if (line[i] == line[i + 1])
@@ -34,24 +34,25 @@ static int	count_split(char *line)
 
 static void	set_cmd_struct(char *line, t_line *all_cmd)
 {
-	int	line_index;
-	int	cmd_index;
+	int		line_index;
+	char	**line_splitted;
+	int		cmd_index;
+	int		i;
 
+
+
+	i = 0;
+	line_splitted = ft_split(line, '|');
 	line_index = 0;
 	cmd_index = 0;
-	while (line[line_index] != '\0' && cmd_index < 1)
+	while (line_splitted[i])
 	{
-		line_index += get_cmd(&line[line_index], &all_cmd->cmd[cmd_index]);
-		//printf("index 1 = %d\n", line_index);
-		line_index += get_flag(&line[line_index], &all_cmd->cmd[cmd_index]);
-		//printf("index 2 = %d\n", line_index);
-		line_index += get_content(&line[line_index], &all_cmd->cmd[cmd_index]);
-		//printf("index 3 = %d\n", line_index);
-		all_cmd->cmd[cmd_index].separator = line[line_index];
-		if (all_cmd->cmd[cmd_index].separator == '\0')
-			break ;
+		line_index = 0;
+		line_index += get_cmd(&line_splitted[i][line_index], &all_cmd->cmd[cmd_index]);
+		line_index += get_flag(&line_splitted[i][line_index], &all_cmd->cmd[cmd_index]);
+		line_index += get_content(&line_splitted[i][line_index], &all_cmd->cmd[cmd_index]);
 		cmd_index += 1;
-		line_index += 1;
+		i += 1;
 	}
 }
 
@@ -80,5 +81,5 @@ void	split_line(char *line, t_line *all_cmd)
 	if (all_cmd->cmd == NULL)
 		exit(1); //A GERER
  	set_cmd_struct(line, all_cmd);
-	//print_parsing(all_cmd);
+	print_parsing(all_cmd);
 }

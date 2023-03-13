@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 17:35:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 15:23:24 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/13 17:45:30 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int	copy_all_content(char *line, t_cmd *cmd, int nbr_content)
 		if (cmd->content == NULL)
 			exit (1);
 		line_index += copy_content(&line[line_index], cmd->content[content_index]);
-		printf("%s\n", cmd->content[content_index]);
 		content_index += 1;
 	}
 	cmd->content[content_index] = NULL;

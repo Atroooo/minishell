@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 19:47:49 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/10 20:25:34 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/13 20:31:22 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	get_cmd(char *line, t_cmd *cmd)
 	cmd->cmd = malloc(sizeof(char) * (count_len(&line[line_index]) + 1));
 	if (cmd->cmd == NULL)
 		exit(1); //A GERER PLUS TARD
-	line_index += skip_space(&line[line_index]);
-	line_index += copy_cmd(line, cmd);
+	line_index += copy_cmd(&line[line_index], cmd);
 	return (line_index);
 }
