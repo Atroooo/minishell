@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/09 11:18:30 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/13 15:11:46 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	print_list(t_environ *env_list)
 	while (env_list)
 	{
 		if (env_list->name && env_list->value)
-			printf("%s=%s\n", env_list->name, env_list->value);
+			ft_printf("%s=%s\n", env_list->name, env_list->value);
 		else if (env_list->name && !env_list->value)
-			printf("%s=\n", env_list->name);
+			ft_printf("%s=\n", env_list->name);
 		env_list = env_list->next;
 	}
 }
@@ -45,8 +45,21 @@ t_environ	*add_env_value(char *str, t_environ *env_list)
 	char	*name;
 	char	*value;
 
-	name = ft_substr(str, 0, ft_intchr(str, '='));
-	value = ft_substr(str, ft_intchr(str, '=') + 1, ft_strlen(str));
+	if (str[0] == '$' && str[1] == '$')
+	{
+		ft_printf("bash: %s not a valid identifier\n");
+		return (env_list);
+	}
+	if (str[0] == '$')
+	{
+		name = ft_substr(str, 1, ft_intchr(str, '=') - 1);
+		value = ft_substr(str, ft_intchr(str, '=') + 1, ft_strlen(str));
+	}
+	else
+	{
+		name = ft_substr(str, 0, ft_intchr(str, '='));
+		value = ft_substr(str, ft_intchr(str, '=') + 1, ft_strlen(str));
+	}
 	ft_lst_addback_env(&env_list, ft_lstnew_env(name, value));
 	free(name);
 	free(value);

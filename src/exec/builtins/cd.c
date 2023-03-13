@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/13 14:09:03 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/13 15:03:33 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void	ft_cd(char **cmd)
 		return ;
 	if (chdir(path) == -1)
 	{
-		printf("bash: cd: %s: no such file or directory\n", path);
+		ft_putstr_fd("bash: cd: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(" no such file or directory\n", 2);
 		free(path);
 		return ;
 	}

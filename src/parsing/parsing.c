@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 14:30:01 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/13 14:51:13 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parsing(char *line, char *env[], t_environ **env_list )
     redirect_input(cmd_line);
     redirect_output(cmd_line);
     redirect_output_append(cmd_line);
-    ft_echo(cmd_line);
+    ft_echo(cmd_line, *env_list);
     ft_cd(cmd_line);
     ft_pwd(cmd_line);
     if (ft_strcmp(cmd_line[0], "export") == 0)

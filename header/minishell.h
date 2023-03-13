@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 13:19:33 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/13 15:24:27 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 # include <sys/wait.h>
 # include "../libft/header/libft.h"
 
-typedef struct s_environ{
+typedef struct s_environ
+{
 	char				*name;
-    char            	*value;
+	char				*value;
 	struct s_environ	*next;
 }	t_environ;
 
@@ -43,7 +44,7 @@ typedef struct t_env
 void		parsing(char *line, char *env[], t_environ **env_list);
 
 /*Signal*/
-void    	signal_handler(void);
+void		signal_handler(void);
 
 /*Redirect*/
 void		redirect_input(char **cmd);
@@ -68,7 +69,7 @@ void		close_function(t_env *st);
 int			quit_function(t_env *st, int error_code);
 
 /*Builtins*/
-void		ft_echo(char **cmd);
+void		ft_echo(char **cmd, t_environ *env_list);
 void		ft_cd(char **cmd);
 void		ft_pwd(char **cmd);
 t_environ	*ft_export(char **cmd, t_environ *env_list);
