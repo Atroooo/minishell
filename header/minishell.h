@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/11 17:37:16 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/13 13:21:27 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct t_line
 	t_cmd	*cmd;
 	char	*infile;
 	char	*outfile;
+	int		nbr_cmd;
 }t_line;
 
 void	parsing(char *line, t_line *all_cmd);

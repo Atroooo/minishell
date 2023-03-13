@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/12 19:54:32 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/13 14:49:02 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,30 @@ static void	set_cmd_struct(char *line, t_line *all_cmd)
 	}
 }
 
+void	print_parsing(t_line *all_cmd)
+{
+	int	i;
+
+	i = 0;
+	while (i < all_cmd->nbr_cmd)
+	{
+		printf("cmd = %s\n", all_cmd->cmd[i].cmd);
+		printf("flag = ");
+		ft_print_2d_array(all_cmd->cmd[i].flag);
+		printf("\n");
+		printf("content = ");
+		ft_print_2d_array(all_cmd->cmd[i].content);
+		printf("\n");
+		i++;
+	}
+}
+
 void	split_line(char *line, t_line *all_cmd)
 {
-	int	nbr_split;
-
-	nbr_split = count_split(line);
-	all_cmd->cmd = malloc(sizeof(t_cmd) * (nbr_split + 1));
+	all_cmd->nbr_cmd = count_split(line);
+	all_cmd->cmd = malloc(sizeof(t_cmd) * (all_cmd->nbr_cmd));
 	if (all_cmd->cmd == NULL)
 		exit(1); //A GERER
  	set_cmd_struct(line, all_cmd);
+	//print_parsing(all_cmd);
 }

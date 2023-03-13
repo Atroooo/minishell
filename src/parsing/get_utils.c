@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 20:25:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/10 20:26:02 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/13 07:30:09 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	skip_space(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] != '\0' && line[i] == ' ')
+	while (line && line[i] != '\0' && line[i] == ' ')
 		i++;
 	return (i);
 }
