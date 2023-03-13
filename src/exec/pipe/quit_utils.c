@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/10 15:54:20 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/13 13:14:01 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,22 @@ void	close_function(t_env *st)
 	}
 }
 
-void	quit_function(t_env *st, int error_code)
+int	quit_function(t_env *st, int error_code)
 {
 	close_function(st);
 	free_pipe(st);
 	if (error_code == 0)
-		exit(ft_printf("Error : %s\n", strerror(errno)));
+		ft_printf("Error : %s\n", strerror(errno));
 	else if (error_code == 1)
-		exit(ft_printf("Error : Fork\n"));
-	exit(EXIT_FAILURE);
+		ft_printf("Error : Fork\n");
+	return (0);
 }
 
-void	error_execve(char **arg_vec, char *path, t_env *st)
+int	error_execve(char **arg_vec, char *path, t_env *st)
 {
 	ft_free_2d_array(arg_vec);
 	free(path);
-	quit_function(st, -1);
+	return (quit_function(st, -1));
 }
 
 void	free_pipe(t_env *st)
@@ -74,5 +74,4 @@ void	free_env_exit(t_env *st, int i)
 		free(st->fd);
 	}
 	free(st);
-	exit(EXIT_FAILURE);
 }

@@ -1,1 +1,13 @@
-11
+total 360
+-rw-r--r-- 1 atro atro      3 Mar 13 13:31  
+drwxrwxr-x 7 atro atro   4096 Mar 13 13:33 .
+drwxrwxr-x 6 atro atro   4096 Mar 10 15:16 ..
+drwxrwxr-x 4 atro atro   4096 Mar 13 13:26 build
+drwxrwxr-x 8 atro atro   4096 Mar 10 15:57 .git
+drwxrwxr-x 2 atro atro   4096 Mar 10 15:20 header
+drwxrwxr-x 5 atro atro   4096 Mar 13 12:46 libft
+-rw-rw-r-- 1 atro atro   1704 Mar 10 15:43 Makefile
+-rwxrwxr-x 1 atro atro 323992 Mar 13 13:33 minishell
+-rw-r--r-- 1 atro atro      0 Mar 13 13:34 outfile
+drwxrwxr-x 4 atro atro   4096 Mar 10 15:20 src
+-rw-rw-r-- 1 atro atro     90 Mar 13 13:20 TODO

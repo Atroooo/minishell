@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 09:05:58 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/10 15:54:29 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/13 12:50:29 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	no_path(t_env *st, char **arg_vec)
 {
 	ft_free_2d_array(arg_vec);
 	free_pipe(st);
-	exit(EXIT_FAILURE);
+	return ;
 }

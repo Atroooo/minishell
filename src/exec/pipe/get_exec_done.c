@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/10 15:34:56 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/13 12:50:21 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	get_exec_done(char **argv, char **env, t_env *st)
 	arg_vec = get_arg_vec(st, argv);
 	path_pos_index = find_path_index(env);
 	if (path_pos_index == -1)
+	{
 		no_path(st, arg_vec);
+		return ;
+	}
 	if (env[path_pos_index])
 		path = get_path(arg_vec[0], env[path_pos_index], st);
 	if (path == NULL)

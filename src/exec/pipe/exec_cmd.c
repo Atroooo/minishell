@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:33:14 by atro              #+#    #+#             */
-/*   Updated: 2023/03/10 15:51:29 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/13 13:09:54 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	exec_cmd(int argc, char **argv, char *env[])
 		return (ft_printf("Error : %s\n", strerror(errno)));
 	if (!open_files(argc, argv, st))
         return (0);
-	set_up_struct(st, argc, argv);
+	if (!set_up_struct(st, argc, argv))
+		return (0);
 	execution(argv, env, st);
 	return (0);
 }
