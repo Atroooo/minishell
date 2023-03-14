@@ -1,4 +1,3 @@
-- Delete node in lst 
 - here_doc : temps que le user n a pas rentrer le delimiter il peut ecrire dans le fichier.
 - redirections a reverif
 - ctrl+\ dois rien afficher : voir avec tcsetattr

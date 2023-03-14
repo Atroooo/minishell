@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/14 13:12:27 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:07:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env);
 void		ft_cd(char **cmd, t_env_main *main_env);
 void		ft_pwd(char **cmd, t_env_main *main_env);
 t_env_var	*ft_export(char **cmd, t_env_var *env_list, t_env_main *main_env);
-void		ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env);
+t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env);
 void		ft_env(char **cmd, t_env_var *env_list, t_env_main *main_env);
 void		ft_exit(char **cmd);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 10:49:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:16:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	signal_action(int sig, siginfo_t *info, void *context)
 			ft_putstr_fd("Error: tcsetattr\n", 2);
 		else
 			ft_putchar_fd(0, 2);
+		return ;
 	}
 	if (sig == SIGINT)
 	{

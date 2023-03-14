@@ -3,57 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 13:48:37 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:12:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static void	delete_var(t_env_var *env_list, t_env_var *prev, t_env_var *next)
+static t_env_var *get_prev(t_env_var *env_list, int i)
 {
-	if (prev)
-		prev->next = next;
-	if (env_list->name)
-		free(env_list->name);
-	if (env_list->value)
-		free(env_list->value);
-	free(env_list);
+	t_env_var	*prev;
+	int			j;
+
+	j = 0;
+	prev = env_list;
+	while (j < i)
+	{
+		if (!prev->next)
+			return (NULL);
+		prev = prev->next;
+		j++;
+	}
+	return (prev);
+}
+static void	delete_node(t_env_var *env_list, int i)
+{
+	t_env_var	*delete;
+	t_env_var	*prev;
+
+	if (i == 0)
+	{
+		delete = env_list;
+		env_list = env_list->next;
+		free(delete);
+		return ;
+	}
+	else
+	{
+		prev = get_prev(env_list, i - 1);
+		if (!prev->next)
+				return ;
+		delete = prev->next;
+		prev->next = delete->next;
+		free(delete);
+	}
 }
 
 static void	find_in_list(char *name, t_env_var *env_list, t_env_main *main_env)
 {
 	t_env_var	*temp;
+	int			i;
 
 	if (!name || !env_list)
 		return ;
 	temp = env_list;
+	i = 0;
 	while (temp)
 	{
-		if (ft_strcmp(temp->name, name) == 0)
+		if (temp && temp->name && ft_strcmp(temp->name, name) == 0)
 		{
-			temp->name = NULL;
-			temp->value = NULL;
+			delete_node(env_list, i);
 			main_env->last_cmd_status = 0;
 		}
+		i++;
 		temp = temp->next;
 	}
 }
 
-void	ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env)
+t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env)
 {
 	int	i;
 
 	if (!cmd)
-		return ;
+		return (env_list);
 	if (ft_strcmp(cmd[0], "unset") != 0)
-		return ;
+		return (env_list);
 	i = 1;
 	while (cmd[i])
 	{
 		find_in_list(cmd[i], env_list, main_env);
 		i++;
 	}
+	return (env_list);
 }
