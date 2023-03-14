@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 15:24:27 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/14 10:07:34 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <termios.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <sys/wait.h>

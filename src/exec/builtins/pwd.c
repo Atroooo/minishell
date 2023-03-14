@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:17:56 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/09 11:19:40 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:47:29 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void	ft_pwd(char **cmd)
 		return ;
 	if (cmd[1])
 	{
-		ft_putstr_fd("pwd: too many arguments\n", 2);
+		ft_printf("pwd: too many arguments\n");
 		return ;
 	}
-	ft_putstr_fd(getcwd(NULL, 0), 2);
-	ft_putchar_fd('\n', 2);
+	ft_printf("%s\n", getcwd(NULL, 0));
 }

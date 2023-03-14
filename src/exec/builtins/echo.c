@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/13 15:01:59 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/14 10:46:09 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 static void	print_env_var(char *str, t_environ *env_list)
 {
 	if (!env_list)
-		ft_putchar_fd('\n', 2);
+		ft_printf("\n");
 	while (env_list)
 	{
 		if (env_list->name && ft_strcmp(str + 1, env_list->name) == 0)
 		{
-			ft_putstr_fd(env_list->value, 2);
+			ft_printf("%s", env_list->value);
 			return ;
 		}
 		env_list = env_list->next;
@@ -46,11 +46,11 @@ void	ft_echo(char **cmd, t_environ *env_list)
 		if (cmd[i][0] == '$')
 			print_env_var(cmd[i], env_list);
 		else
-			ft_putstr_fd(cmd[i], 2);
+			ft_printf("%s", cmd[i]);
 		if (cmd[i + 1])
-			ft_putchar_fd(' ', 2);
+			ft_printf(" ");
 		i++;
 	}
 	if (!n)
-		ft_putchar_fd('\n', 2);
+		ft_printf("\n");
 }
