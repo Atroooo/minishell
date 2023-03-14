@@ -6,11 +6,22 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 12:33:48 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:06:25 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
+
+static void	delete_var(t_env_var *env_list, t_env_var *prev, t_env_var *next)
+{
+	if (prev)
+		prev->next = next;
+	if (env_list->name)
+		free(env_list->name);
+	if (env_list->value)
+		free(env_list->value);
+	free(env_list);
+}
 
 static void	find_in_list(char *name, t_env_var *env_list, t_env_main *main_env)
 {
