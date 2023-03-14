@@ -1,7 +1,5 @@
-- $? = si la derniere commande s est execute correctement : si c est bon doit afficher 0 sinon autre chose
 - here_doc : temps que le user n a pas rentrer le delimiter il peut ecrire dans le fichier.
 - redirections a reverif
 - ctrl+\ dois rien afficher : voir avec tcsetattr
 - historique 
-- modif le fd des prints car cause un mauvais affichage des \n par exemple
 - gestion erreur pipe imparfaite

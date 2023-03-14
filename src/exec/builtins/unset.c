@@ -6,13 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 11:01:26 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:33:48 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static void	find_in_list(char *name, t_env_var *env_list)
+static void	find_in_list(char *name, t_env_var *env_list, t_env_main *main_env)
 {
 	t_env_var	*temp;
 
@@ -25,12 +25,13 @@ static void	find_in_list(char *name, t_env_var *env_list)
 		{
 			temp->name = NULL;
 			temp->value = NULL;
+			main_env->last_cmd_status = 0;
 		}
 		temp = temp->next;
 	}
 }
 
-void	ft_unset(char **cmd, t_env_var *env_list)
+void	ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env)
 {
 	int	i;
 
@@ -41,7 +42,7 @@ void	ft_unset(char **cmd, t_env_var *env_list)
 	i = 1;
 	while (cmd[i])
 	{
-		find_in_list(cmd[i], env_list);
+		find_in_list(cmd[i], env_list, main_env);
 		i++;
 	}
 }

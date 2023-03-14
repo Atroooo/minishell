@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 11:01:26 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:37:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_env_var	*add_env_value(char *str, t_env_var *env_list)
 	return (env_list);
 }
 
-t_env_var	*ft_export(char **cmd, t_env_var *env_list)
+t_env_var	*ft_export(char **cmd, t_env_var *env_list, t_env_main *main_env)
 {
 	int	i;
 
@@ -78,6 +78,7 @@ t_env_var	*ft_export(char **cmd, t_env_var *env_list)
 	if (!cmd[i])
 	{
 		print_list(env_list);
+		main_env->last_cmd_status = 0;
 		return (env_list);
 	}
 	while (cmd[i])
@@ -88,5 +89,6 @@ t_env_var	*ft_export(char **cmd, t_env_var *env_list)
 			setenv(cmd[i], "", 1);
 		i++;
 	}
+	main_env->last_cmd_status = 0;
 	return (env_list);
 }

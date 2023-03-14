@@ -6,13 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 10:44:26 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:38:15 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void	ft_cd(char **cmd)
+void	ft_cd(char **cmd, t_env_main *main_env)
 {
 	char	*path;
 
@@ -25,11 +25,16 @@ void	ft_cd(char **cmd)
 	else
 		path = ft_strdup(cmd[1]);
 	if (path == NULL)
+	{
+		main_env->last_cmd_status = 1;
 		return ;
+	}
 	if (chdir(path) == -1)
 	{
 		ft_printf("bash: cd: %s no such file or directory\n", path);
+		main_env->last_cmd_status = 1;
 		free(path);
 		return ;
 	}
+	main_env->last_cmd_status = 0;
 }

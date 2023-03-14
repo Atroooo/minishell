@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/14 12:22:23 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:32:50 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		redirect_output(char **cmd);
 void		redirect_output_append(char **cmd);
 
 /*Pipe*/
-int			exec_cmd(int argc, char **argv, char *env[]);
+int			exec_cmd(int argc, char **argv, char *env[], t_env_main *main_env);
 int			open_files(int argc, char **argv, t_env_pipe *st);
 int			dup_manager(t_env_pipe *st);
 int			set_up_struct(t_env_pipe *st, int argc, char **argv);
@@ -82,12 +82,12 @@ void		close_function(t_env_pipe *st);
 int			quit_function(t_env_pipe *st, int error_code);
 
 /*Builtins*/
-void		ft_echo(char **cmd, t_env_var *env_list);
-void		ft_cd(char **cmd);
-void		ft_pwd(char **cmd);
-t_env_var	*ft_export(char **cmd, t_env_var *env_list);
-void		ft_unset(char **cmd, t_env_var *env_list);
-void		ft_env(char **cmd, t_env_var *env_list);
+void		ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env);
+void		ft_cd(char **cmd, t_env_main *main_env);
+void		ft_pwd(char **cmd, t_env_main *main_env);
+t_env_var	*ft_export(char **cmd, t_env_var *env_list, t_env_main *main_env);
+void		ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env);
+void		ft_env(char **cmd, t_env_var *env_list, t_env_main *main_env);
 void		ft_exit(char **cmd);
 
 /*Utils lst*/

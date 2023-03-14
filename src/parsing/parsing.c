@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/14 12:15:52 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:43:07 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	parsing(char *line, char *env[], t_env_main *main_env)
     redirect_input(cmd_line);
     redirect_output(cmd_line);
     redirect_output_append(cmd_line);
-    ft_echo(cmd_line, main_env->env_list);
-    ft_cd(cmd_line);
-    ft_pwd(cmd_line);
+    ft_echo(cmd_line, main_env->env_list, main_env);
+    ft_cd(cmd_line, main_env);
+    ft_pwd(cmd_line, main_env);
     if (ft_strcmp(cmd_line[0], "export") == 0)
-    	main_env->env_list = ft_export(cmd_line, main_env->env_list);
-    ft_env(cmd_line, main_env->env_list);
-    ft_unset(cmd_line, main_env->env_list);
+    	main_env->env_list = ft_export(cmd_line, main_env->env_list, main_env);
+    ft_env(cmd_line, main_env->env_list, main_env);
+    ft_unset(cmd_line, main_env->env_list, main_env);
     ft_exit(cmd_line);
     if (ft_strcmp(cmd_line[0], "exec") == 0)
     {
@@ -41,7 +41,7 @@ void	parsing(char *line, char *env[], t_env_main *main_env)
 		strr[2] = "ls -la";
 		strr[3] = " ";
         strr[4] = "outfile";
-        exec_cmd(5, strr, env);
+        exec_cmd(5, strr, env, main_env);
     }
 
 }

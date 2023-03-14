@@ -6,14 +6,19 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 11:01:26 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:41:12 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static void	print_env_var(char *str, t_env_var *env_list)
+static void	print_env_var(char *str, t_env_var *env_list, t_env_main *main_env)
 {
+	if (str[0] == '$' && str[1] == '?')
+	{
+		ft_printf("%d", main_env->last_cmd_status);
+		return ;
+	}
 	if (!env_list)
 		ft_printf("\n");
 	while (env_list)
@@ -27,7 +32,7 @@ static void	print_env_var(char *str, t_env_var *env_list)
 	}
 }
 
-void	ft_echo(char **cmd, t_env_var *env_list)
+void	ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env)
 {
 	int	i;
 	int	n;
@@ -44,7 +49,7 @@ void	ft_echo(char **cmd, t_env_var *env_list)
 	while (cmd[i])
 	{
 		if (cmd[i][0] == '$')
-			print_env_var(cmd[i], env_list);
+			print_env_var(cmd[i], env_list, main_env);
 		else
 			ft_printf("%s", cmd[i]);
 		if (cmd[i + 1])
@@ -53,4 +58,5 @@ void	ft_echo(char **cmd, t_env_var *env_list)
 	}
 	if (!n)
 		ft_printf("\n");
+	main_env->last_cmd_status = 0;
 }
