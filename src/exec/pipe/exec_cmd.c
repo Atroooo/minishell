@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:33:14 by atro              #+#    #+#             */
-/*   Updated: 2023/03/13 13:09:54 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/14 11:03:38 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	exec_cmd(int argc, char **argv, char *env[])
 {
-	t_env	*st;
+	t_env_pipe	*st;
 
 	if (argc < 5)
 		return (ft_printf("Error : not enough arguments\n"));
-	st = malloc(sizeof(t_env));
+	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
 		return (ft_printf("Error : %s\n", strerror(errno)));
 	if (!open_files(argc, argv, st))

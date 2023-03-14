@@ -6,17 +6,17 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:19:23 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/08 16:15:10 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:01:26 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-t_environ	*ft_lstnew_env(char *name, char *value)
+t_env_var	*ft_lstnew_env(char *name, char *value)
 {
-	t_environ	*list;
+	t_env_var	*list;
 
-	list = malloc(sizeof(t_environ));
+	list = malloc(sizeof(t_env_var));
 	if (list == NULL)
 		return (NULL);
 	list->name = ft_strdup(name);
@@ -25,7 +25,7 @@ t_environ	*ft_lstnew_env(char *name, char *value)
 	return (list);
 }
 
-void	ft_lstadd_front_env(t_environ **lst, t_environ *new)
+void	ft_lstadd_front_env(t_env_var **lst, t_env_var *new)
 {
 	if (*lst != NULL)
 	{
@@ -36,7 +36,7 @@ void	ft_lstadd_front_env(t_environ **lst, t_environ *new)
 		*lst = new;
 }
 
-t_environ	*ft_lstlast_env(t_environ *lst)
+t_env_var	*ft_lstlast_env(t_env_var *lst)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -47,7 +47,7 @@ t_environ	*ft_lstlast_env(t_environ *lst)
 	return (lst);
 }
 
-void	ft_lst_addback_env(t_environ **lst, t_environ *new)
+void	ft_lst_addback_env(t_env_var **lst, t_env_var *new)
 {
 	if (*lst == NULL)
 	{	
@@ -57,7 +57,7 @@ void	ft_lst_addback_env(t_environ **lst, t_environ *new)
 	ft_lstlast_env(*lst)->next = new;
 }
 
-int	ft_lstsize_env(t_environ *lst)
+int	ft_lstsize_env(t_env_var *lst)
 {
 	int	i;
 

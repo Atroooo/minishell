@@ -6,13 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 10:46:09 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:01:26 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static void	print_env_var(char *str, t_environ *env_list)
+static void	print_env_var(char *str, t_env_var *env_list)
 {
 	if (!env_list)
 		ft_printf("\n");
@@ -27,7 +27,7 @@ static void	print_env_var(char *str, t_environ *env_list)
 	}
 }
 
-void	ft_echo(char **cmd, t_environ *env_list)
+void	ft_echo(char **cmd, t_env_var *env_list)
 {
 	int	i;
 	int	n;

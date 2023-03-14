@@ -3,49 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/10 15:38:25 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/14 12:24:48 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	init_struct(t_environ *env_list)
+static void	check_param(int argc)
 {
-	env_list = malloc(sizeof(t_environ));
-	if (!env_list)
-		exit(0);
-}
-
-void	init_env(t_environ **env_list)
-{
-	char	**env;
-	int		i;
-
-	env = ft_split(getenv("PATH"), ':');
-	if (!env)
-		exit(0);
-	i = 0;
-	while (env[i])
+	if (argc != 1)
 	{
-		*env_list = add_env_value(env[i], *env_list);
-		i++;
+		ft_printf("Usage: ./minishell\n");
+		exit(0);
 	}
 }
 
-int	main(int argc, char *argv[], char *env[])
+static void	exec_shell(char **env, t_env_main *main_env)
 {
-	t_environ	*env_list;
 	char		*line;
 
-	(void) argv;
-	(void) argc;
-	(void) env;
-	env_list = NULL;
-	init_struct(env_list);
-	init_env(&env_list);
 	signal_handler();
 	line = readline("prompt> ");
 	while (1)
@@ -54,7 +33,7 @@ int	main(int argc, char *argv[], char *env[])
 		while (line != NULL)
 		{
 			add_history(line);
-			parsing(line, env, &env_list);
+			parsing(line, env, main_env);
 			free(line);
 			line = readline("prompt> ");
 		}
@@ -62,5 +41,18 @@ int	main(int argc, char *argv[], char *env[])
 			exit(0);
 		rl_clear_history();
 	}
+}
+
+int	main(int argc, char *argv[], char *env[])
+{
+	t_env_main	*main_env;
+
+	(void) argv;
+	check_param(argc);
+	main_env = malloc(sizeof(t_env_main));
+	if (!main_env)
+		exit(0);
+	init_main_env(main_env);
+	exec_shell(env, main_env);
 	return (0);
 }

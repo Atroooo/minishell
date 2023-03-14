@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 13:12:54 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/14 11:02:52 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static int	fork_declaration(char **argv, char *env[], t_env *st, int i)
+static int	fork_declaration(char **argv, char *env[], t_env_pipe *st, int i)
 {	
 	st->pid[i] = fork();
 	if (st->pid[i] == -1)
@@ -30,7 +30,7 @@ static int	fork_declaration(char **argv, char *env[], t_env *st, int i)
 	return (1);
 }
 
-static void	wait_for_process(t_env *st)
+static void	wait_for_process(t_env_pipe *st)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ static void	wait_for_process(t_env *st)
 	}
 }
 
-static void	end_the_progam(t_env *st)
+static void	end_the_progam(t_env_pipe *st)
 {
 	close(st->infile);
 	close(st->outfile);
@@ -51,7 +51,7 @@ static void	end_the_progam(t_env *st)
 	free_pipe(st);
 }
 
-void	execution(char **argv, char *env[], t_env *st)
+void	execution(char **argv, char *env[], t_env_pipe *st)
 {
 	int	i;
 

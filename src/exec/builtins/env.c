@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:30 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/13 15:03:55 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/14 11:01:26 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static void	print_list(t_environ *env_list)
+static void	print_list(t_env_var *env_list)
 {
 	if (!env_list)
 		return ;
@@ -24,7 +24,7 @@ static void	print_list(t_environ *env_list)
 	}
 }
 
-void	ft_env(char **cmd, t_environ *env_list)
+void	ft_env(char **cmd, t_env_var *env_list)
 {
 	if (!cmd)
 		return ;

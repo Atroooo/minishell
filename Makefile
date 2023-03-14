@@ -8,7 +8,7 @@ HEADER_DIR				= header/
 HEADER_FILE				= minishell.h
 
 DIR						= src/
-SRC			 			= main.c \
+SRC			 			= main.c init.c \
 						  parsing/parsing.c \
 						  exec/redirect/redirect.c \
 						  exec/signal_handler/signal_handler.c \

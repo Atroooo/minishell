@@ -6,13 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/08 13:36:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:02:52 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-int	heredoc_parsing(char **argv, t_env *st)
+int	heredoc_parsing(char **argv, t_env_pipe *st)
 {
 	char	*get_str;
 
@@ -32,7 +32,7 @@ int	heredoc_parsing(char **argv, t_env *st)
 	return (0);
 }
 
-int	heredoc(t_env *st, char **argv)
+int	heredoc(t_env_pipe *st, char **argv)
 {
 	if (ft_strcmp(argv[1], "here_doc") != 0)
 		return (0);

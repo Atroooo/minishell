@@ -6,13 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 10:15:49 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:49:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-//Reste le cas ou on ctrl + c ou ctrl + \\ au tout debut sans rien ecrire
+//Reste le cas ctrl + \ qui doit rien ecrire
 void	signal_action(int sig, siginfo_t *info, void *context)
 {
 	struct termios	term;

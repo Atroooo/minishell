@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 14:25:51 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/14 11:02:52 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void	set_up_pipe(t_env *st)
+void	set_up_pipe(t_env_pipe *st)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ void	set_up_pipe(t_env *st)
 	}
 }
 
-int	set_up_struct(t_env *st, int argc, char **argv)
+int	set_up_struct(t_env_pipe *st, int argc, char **argv)
 {
 	st->nbr_cmd = argc - 3;
 	st->hdoc = heredoc(st, argv);
@@ -56,7 +56,7 @@ int	set_up_struct(t_env *st, int argc, char **argv)
 	return (1);
 }
 
-int	open_files(int argc, char **argv, t_env *st)
+int	open_files(int argc, char **argv, t_env_pipe *st)
 {
 	int	hdoc;
 

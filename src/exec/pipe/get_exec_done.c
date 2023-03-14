@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_exec_done.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 12:50:21 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/14 11:02:52 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-char	**get_arg_vec(t_env *st, char **argv)
+char	**get_arg_vec(t_env_pipe *st, char **argv)
 {
 	char	**arg_vec;
 
@@ -36,7 +36,7 @@ int	find_path_index(char **env)
 	return (-1);
 }
 
-void	get_exec_done(char **argv, char **env, t_env *st)
+void	get_exec_done(char **argv, char **env, t_env_pipe *st)
 {
 	char	**arg_vec;
 	char	*path;
