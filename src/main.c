@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/14 12:24:48 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:42:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static void	exec_shell(char **env, t_env_main *main_env)
 {
 	char		*line;
 
-	signal_handler();
+	signal_handler(main_env);
 	line = readline("prompt> ");
 	while (1)
 	{
-		signal_handler();
+		signal_handler(main_env);
 		while (line != NULL)
 		{
 			add_history(line);

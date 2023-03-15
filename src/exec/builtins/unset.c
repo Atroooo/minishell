@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 22:12:40 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/15 18:01:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static t_env_var *get_prev(t_env_var *env_list, int i)
+static t_env_var	*get_prev(t_env_var *env_list, int i)
 {
 	t_env_var	*prev;
 	int			j;
@@ -28,6 +28,7 @@ static t_env_var *get_prev(t_env_var *env_list, int i)
 	}
 	return (prev);
 }
+
 static void	delete_node(t_env_var *env_list, int i)
 {
 	t_env_var	*delete;
@@ -44,7 +45,7 @@ static void	delete_node(t_env_var *env_list, int i)
 	{
 		prev = get_prev(env_list, i - 1);
 		if (!prev->next)
-				return ;
+			return ;
 		delete = prev->next;
 		prev->next = delete->next;
 		free(delete);

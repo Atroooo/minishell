@@ -1,6 +1,6 @@
+- ctrl+\ dois rien afficher
 - here_doc : temps que le user n a pas rentrer le delimiter il peut ecrire dans le fichier.
 - redirections a reverif
-- ctrl+\ dois rien afficher : voir avec tcsetattr
 - historique 
 - executable a gerer
 - gestion erreur pipe imparfaite

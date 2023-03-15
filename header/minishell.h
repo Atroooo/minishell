@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/14 22:07:00 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/15 17:45:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <termios.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <limits.h>
+# include <unistd.h>
 # include <sys/wait.h>
 # include "../libft/header/libft.h"
 
@@ -57,7 +59,7 @@ void		init_main_env(t_env_main *main_env);
 void		parsing(char *line, char *env[], t_env_main *main_env);
 
 /*Signal*/
-void		signal_handler(void);
+void		signal_handler(t_env_main *env_main);
 
 /*Redirect*/
 void		redirect_input(char **cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chained_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:19:23 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 13:12:23 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/15 18:03:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_env_var	*ft_lstnew_env(char *name, char *value)
 	if (list == NULL)
 		return (NULL);
 	list->name = ft_strdup(name);
-    list->value = ft_strdup(value);
-    list->next = NULL;
+	list->value = ft_strdup(value);
+	list->next = NULL;
 	return (list);
 }
 
