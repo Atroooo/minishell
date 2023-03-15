@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 20:38:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/15 08:43:21 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,54 +32,52 @@ static int	count_split(char *line)
 	return (nbr_split);
 }
 
-static void	set_cmd_struct(char *line, t_line *all_cmd)
+void	set_up_newlst(t_cmd *cmd)
 {
-	int		line_index;
-	char	**line_splitted;
-	int		cmd_index;
-	int		i;
-
-
-
-	i = 0;
-	line_splitted = ft_split(line, '|');
-	line_index = 0;
-	cmd_index = 0;
-	while (line_splitted[i])
-	{
-		line_index = 0;
-		line_index += get_cmd(&line_splitted[i][line_index], &all_cmd->cmd[cmd_index]);
-		line_index += get_flag(&line_splitted[i][line_index], &all_cmd->cmd[cmd_index]);
-		line_index += get_content(&line_splitted[i][line_index], &all_cmd->cmd[cmd_index]);
-		cmd_index += 1;
-		i += 1;
-	}
+	cmd->flag = NULL;
+	cmd->content = NULL;
+	cmd->infile = NULL;
+	cmd->outfile = NULL;
 }
 
-void	print_parsing(t_line *all_cmd)
+void	set_up_arg(char *line, t_cmd *cmd)
 {
 	int	i;
+	int	no_command;
 
+	no_command = TRUE;
 	i = 0;
-	while (i < all_cmd->nbr_cmd)
+	set_up_newlst(cmd);
+	while (line[i] != '\0')
 	{
-		printf("cmd = %s\n", all_cmd->cmd[i].cmd);
-		printf("flag = ");
-		ft_print_2d_array(all_cmd->cmd[i].flag);
-		printf("\n");
-		printf("content = ");
-		ft_print_2d_array(all_cmd->cmd[i].content);
-		printf("\n");
-		i++;
+		i += skip_space(line);
+		if (line[i] == '<' || line[i] == '>')
+			return ;
+		else if (no_command == TRUE)
+			get_cmd(&line[i], &no_command, cmd);
+		else if (line[i] == '-')
+			return ;
+		else
+			return ;
 	}
 }
 
 void	split_line(char *line, t_line *all_cmd)
 {
+	char	**splitted_line;
+	int		i;
+
+	i = 0;
+	splitted_line = ft_split(line, '|');
+	if (splitted_line == NULL)
+		exit (1); //A GERER 
 	all_cmd->nbr_cmd = count_split(line);
 	all_cmd->cmd = malloc(sizeof(t_cmd) * (all_cmd->nbr_cmd));
 	if (all_cmd->cmd == NULL)
 		exit(1); //A GERER
- 	set_cmd_struct(line, all_cmd);
-	print_parsing(all_cmd);
+	while (splitted_line[i] != NULL)
+	{
+		set_up_arg(splitted_line[i], &all_cmd->cmd[i]);
+		i++;
+	}
 }

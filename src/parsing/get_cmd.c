@@ -5,38 +5,77 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 19:47:49 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 20:31:22 by vgonnot          ###   ########.fr       */
+/*   Created: 2023/03/15 07:15:32 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/03/15 09:48:34 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-int	copy_cmd(char *line, t_cmd *cmd)
+
+int	get_size(char *line, int *size)
 {
-	int	i;
-	int	y;
+	int		i;
+	int		nbr_quote;
+
+	i = 0;
+	nbr_quote = 0;
+	while (line[i] != '\0' && line[i] != ' ')
+	{
+		if (line[i] == '\'' || line[i] == '\"')
+			i += count_len(&line[i], line[i], &nbr_quote);
+		else
+			i += 1;
+	}
+	*size = i;
+	return (i - nbr_quote);
+}
+
+void	copy_cmd(int size, char *src, char *dest)
+{
+	int		i;
+	char	del;
+	int		y;
 
 	i = 0;
 	y = 0;
-	while (line[i] != '\0' && line[i] != ' ')
+	del = 0;
+	while (i < size)
 	{
-		cmd->cmd[y] = line[i];
-		i++;
-		y++;
+		if ((src[i] == '\'' || src[i] == '\"') && del == 0)
+		{
+			del = src[i];
+			i += 1;
+		}
+		else if (del != 0 && src[i] == del)
+		{
+			del = 0;
+			i += 1;
+		}
+		else
+		{
+			dest[y] = src[i];
+			y += 1;
+			i += 1;
+		}
 	}
-	cmd->cmd[y] = '\0';
-	return (i);
+	dest[y] = '\0';
+	printf("%s\n", dest);
 }
 
-int	get_cmd(char *line, t_cmd *cmd)
+int	get_cmd(char *line, int *no_command, t_cmd *cmd)
 {
-	int	line_index;
+	char	*cmd_str;
+	int		size;
+	int		size_malloc;
 
-	line_index = skip_space(line);
-	cmd->cmd = malloc(sizeof(char) * (count_len(&line[line_index]) + 1));
-	if (cmd->cmd == NULL)
-		exit(1); //A GERER PLUS TARD
-	line_index += copy_cmd(&line[line_index], cmd);
-	return (line_index);
+	*no_command = FALSE;
+	size = 0;
+	size_malloc = get_size(line, &size);
+	printf("%d\n", size);
+	cmd_str = malloc(sizeof(char) * (size_malloc + 1));
+	if (cmd_str == NULL)
+		exit (1); //A GERER
+	copy_cmd(size, line, cmd_str);
+	return (size);
 }
