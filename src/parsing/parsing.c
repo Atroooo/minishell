@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 09:35:43 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/16 10:41:33 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	parsing(char *line, t_line *all_cmd)
 	if (check_error(line, all_cmd))
 		return ;
 	split_line(line, all_cmd);
+	convert_in_3d_array(all_cmd);
 }

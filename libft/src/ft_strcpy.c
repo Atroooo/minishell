@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 10:31:32 by neoff            ###   ########.fr       */
+/*   Created: 2023/03/16 16:02:01 by neoff             #+#    #+#             */
+/*   Updated: 2023/03/16 16:20:32 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../header/libft.h"
 
-int	main(int argc, char *argv[], char *env[])
+void	ft_strcpy(char *src, char *dest)
 {
-	char	*line;
-	t_line	all_cmd;
+	int	i;
 
-	line = readline("prompt> ");
-	while (line != NULL)
+	i = 0;
+	if (dest == 0)
+		return ;
+	while (dest[i])
 	{
-		add_history(line);
-		parsing(line, &all_cmd);
-		free(line);
-		line = readline("prompt> ");
+		src[i] = dest[i];
+		i++;
 	}
-	//rl_clear_history();
-	return (0);
+	src[i] = '\0';
 }

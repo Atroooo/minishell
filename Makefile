@@ -17,7 +17,8 @@ SRC			 			= main.c \
 						  parsing/get_flag.c \
 						  parsing/get_content.c \
 						  parsing/get_utils.c \
-						  parsing/list_utils.c
+						  parsing/list_utils.c \
+						  parsing/convert_3d_array.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
@@ -27,7 +28,7 @@ LIB_DIR					= libft/
 	
 GCC						= gcc
 CFLAGS					= -Wall -Wextra -g3 #-Werror
-LDLIBS					= -lreadline
+LDLIBS					= -lreadline -L/opt/homebrew/Cellar/readline/8.2.1/lib -I/opt/homebrew/Cellar/readline/8.2.1/include
 SANITIZE				= $(CFLAGS) -fsanitize=address
 
 RM 						= rm -rf

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 07:39:24 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/16 10:42:58 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct t_cmd
 typedef struct t_line
 {
 	t_cmd	*cmd;
+	char	***all_cmd;
 	int		nbr_cmd;
 }t_line;
 
@@ -60,5 +61,6 @@ int		get_size(char *line, int *size);
 void	lst_add_back(t_lst **lst, t_lst *new);
 t_lst	*lst_new(void *content);
 void	print_cmd(int i, t_line all_cmd);
+void	convert_in_3d_array(t_line *all_cmd);
 
 #endif
