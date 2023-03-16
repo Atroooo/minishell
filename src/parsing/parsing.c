@@ -6,11 +6,34 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/15 18:05:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/16 20:25:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
+
+static int	buildin_exec(char **cmd, t_env_main *main_env)
+{
+	if (!cmd)
+		return (0);
+	if (ft_strcmp("cd", cmd[0]) == 0)
+		ft_cd(cmd, main_env);
+	else if (ft_strcmp("echo", cmd[0]) == 0)
+		ft_echo(cmd, main_env->env_list, main_env);
+	else if (ft_strcmp("env", cmd[0]) == 0)
+		ft_env(cmd, main_env->env_list, main_env);
+	else if (ft_strcmp("exit", cmd[0]) == 0)
+		ft_exit(cmd);
+	else if (ft_strcmp("export", cmd[0]) == 0)
+		main_env->env_list = ft_export(cmd, main_env->env_list, main_env);
+	else if (ft_strcmp("pwd", cmd[0]) == 0)
+		ft_pwd(cmd, main_env);
+	else if (ft_strcmp("unset", cmd[0]) == 0)
+		main_env->env_list = ft_unset(cmd, main_env->env_list, main_env);
+	else
+		return (0);
+	return (1);
+}
 
 void	parsing(char *line, char *env[], t_env_main *main_env)
 {
@@ -22,26 +45,22 @@ void	parsing(char *line, char *env[], t_env_main *main_env)
 	cmd_line = ft_split(line, ' ');
 	if (!cmd_line)
 		return ;
+	buildin_exec(cmd_line, main_env);
 	redirect_input(cmd_line);
 	redirect_output(cmd_line);
 	redirect_output_append(cmd_line);
-	ft_echo(cmd_line, main_env->env_list, main_env);
-	ft_cd(cmd_line, main_env);
-	ft_pwd(cmd_line, main_env);
-	if (ft_strcmp(cmd_line[0], "export") == 0)
-		main_env->env_list = ft_export(cmd_line, main_env->env_list, main_env);
-	ft_env(cmd_line, main_env->env_list, main_env);
-	if (ft_strcmp(cmd_line[0], "unset") == 0)
-		main_env->env_list = ft_unset(cmd_line, main_env->env_list, main_env);
-	ft_exit(cmd_line);
 	if (ft_strcmp(cmd_line[0], "exec") == 0)
 	{
 		strr = malloc(sizeof(char *) * 6);
 		strr[0] = " ";
-		strr[1] = "Makefile";
-		strr[2] = "ls -la";
-		strr[3] = " ";
-		strr[4] = "outfile";
-		exec_cmd(5, strr, env, main_env);
+		strr[1] = "here_doc";
+		strr[2] = "cat";
+		strr[3] = "<<";
+		strr[4] = "TEST";
+		strr[5] = "ceci est un test";
+		strr[6] = "j'espère qu'il sera";
+		strr[7] = "concluant";
+		strr[8] = "TEST";
+		exec_cmd(9, strr, env, main_env);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:30 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 12:38:00 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:19:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	print_list(t_env_var *env_list)
 		return ;
 	while (env_list)
 	{
-		if (env_list->name && env_list->value[0] != 0)
+		if (env_list->name && env_list->value && env_list->value[0] != 0)
 			ft_printf("%s=%s\n", env_list->name, env_list->value);
 		env_list = env_list->next;
 	}

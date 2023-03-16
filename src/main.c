@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/15 17:42:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/16 19:14:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char *argv[], char *env[])
 	main_env = malloc(sizeof(t_env_main));
 	if (!main_env)
 		exit(0);
-	init_main_env(main_env);
+	init_main_env(main_env, env);
 	exec_shell(env, main_env);
 	return (0);
 }

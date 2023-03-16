@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/15 17:45:07 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/16 20:04:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_env_pipe
 }	t_env_pipe;
 
 /*Init*/
-void		init_main_env(t_env_main *main_env);
+void		init_main_env(t_env_main *main_env, char **env);
 
 /*Parsing*/
 void		parsing(char *line, char *env[], t_env_main *main_env);
@@ -97,6 +97,5 @@ t_env_var	*ft_lstnew_env(char *name, char *value);
 void		ft_lstadd_front_env(t_env_var **lst, t_env_var *new);
 void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
-t_env_var	*add_env_value(char *str, t_env_var *env_list);
 
 #endif

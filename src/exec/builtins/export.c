@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 12:37:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:04:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	ft_intchr(char *str, char c)
 	return (-1);
 }
 
-t_env_var	*add_env_value(char *str, t_env_var *env_list)
+static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 {
 	char	*name;
 	char	*value;
