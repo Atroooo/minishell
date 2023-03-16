@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 08:24:54 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/01/10 12:53:16 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/15 20:16:33 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 		return ;
 	while (*lst != NULL)
 	{
-		(*del)((*lst)->content);
+		(*del)((*lst)->data);
 		current = *lst;
 		*lst = (*lst)->next;
 		free(current);

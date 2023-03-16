@@ -13,7 +13,11 @@ SRC			 			= main.c \
 						  parsing/input_operator_error.c \
 						  parsing/split_line.c \
 						  parsing/get_cmd.c \
+						  parsing/get_file.c \
+						  parsing/get_flag.c \
+						  parsing/get_content.c \
 						  parsing/get_utils.c \
+						  parsing/list_utils.c
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	

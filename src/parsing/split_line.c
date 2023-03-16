@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/15 08:43:21 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/16 08:06:23 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	count_split(char *line)
 
 void	set_up_newlst(t_cmd *cmd)
 {
+	cmd->cmd = NULL;
 	cmd->flag = NULL;
 	cmd->content = NULL;
 	cmd->infile = NULL;
@@ -50,15 +51,15 @@ void	set_up_arg(char *line, t_cmd *cmd)
 	set_up_newlst(cmd);
 	while (line[i] != '\0')
 	{
-		i += skip_space(line);
+		i += skip_space(&line[i]);
 		if (line[i] == '<' || line[i] == '>')
-			return ;
+			i += get_file(&line[i], cmd);
 		else if (no_command == TRUE)
-			get_cmd(&line[i], &no_command, cmd);
+			i += get_cmd(&line[i], &no_command, cmd);
 		else if (line[i] == '-')
-			return ;
+			i += get_flag(&line[i], cmd);
 		else
-			return ;
+			i += get_content(&line[i], cmd);
 	}
 }
 
@@ -78,6 +79,7 @@ void	split_line(char *line, t_line *all_cmd)
 	while (splitted_line[i] != NULL)
 	{
 		set_up_arg(splitted_line[i], &all_cmd->cmd[i]);
+		print_cmd(i, *all_cmd);
 		i++;
 	}
 }
