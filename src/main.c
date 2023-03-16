@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 19:14:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/16 22:10:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	exec_shell(char **env, t_env_main *main_env)
 	line = readline("prompt> ");
 	while (1)
 	{
-		signal_handler(main_env);
 		while (line != NULL)
 		{
 			add_history(line);
@@ -45,13 +44,15 @@ static void	exec_shell(char **env, t_env_main *main_env)
 
 int	main(int argc, char *argv[], char *env[])
 {
-	t_env_main	*main_env;
+	struct termios	termios_save;
+	t_env_main		*main_env;
 
 	(void) argv;
 	check_param(argc);
 	main_env = malloc(sizeof(t_env_main));
 	if (!main_env)
 		exit(0);
+	main_env->tty = &termios_save;
 	init_main_env(main_env, env);
 	exec_shell(env, main_env);
 	return (0);

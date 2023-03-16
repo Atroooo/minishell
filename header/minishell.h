@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 20:04:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/16 22:12:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_env_main
 	char				**env;
 	int					last_cmd_status;
 	struct s_env_var	*env_list;
+	struct termios		*tty;
 }	t_env_main;
 
 typedef struct s_env_var
@@ -60,6 +61,7 @@ void		parsing(char *line, char *env[], t_env_main *main_env);
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
+void		termios_init(t_env_main *main_env);
 
 /*Redirect*/
 void		redirect_input(char **cmd);

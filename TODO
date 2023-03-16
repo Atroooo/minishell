@@ -1,7 +1,4 @@
-- mauvais env recup a fix
 - here_doc : temps que le user n a pas rentrer le delimiter il peut ecrire dans le fichier.
-- ctrl+\ doit rien afficher
-- redirections a reverif
-- historique 
 - executable a gerer
+- redirections a reverif
 - gestion erreur pipe imparfaite

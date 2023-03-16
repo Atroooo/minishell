@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:09:04 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/16 20:15:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/16 22:11:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ void	init_main_env(t_env_main *main_env, char **env)
 		exit(0);
 	}
 	init_env_list(&main_env->env_list, env);
+	termios_init(main_env);
 }
