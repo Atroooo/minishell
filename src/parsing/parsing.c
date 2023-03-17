@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 20:25:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/17 14:22:58 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	parsing(char *line, char *env[], t_env_main *main_env)
 	redirect_input(cmd_line);
 	redirect_output(cmd_line);
 	redirect_output_append(cmd_line);
+	if (ft_strcmp(cmd_line[0], "here_doc"))
+		exec_cmd(6, strr, env, main_env);
 	if (ft_strcmp(cmd_line[0], "exec") == 0)
 	{
 		strr = malloc(sizeof(char *) * 6);

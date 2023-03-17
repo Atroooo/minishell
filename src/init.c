@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:09:04 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/16 22:11:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/17 14:20:00 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	init_env_list(t_env_var **env_list, char **env)
 {
 	char		**env_split;
 	t_env_var	*new_var;
-	int		i;
+	int			i;
 
 	if (!env)
 		exit(0);
