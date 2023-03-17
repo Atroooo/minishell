@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_flag.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:27:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 07:17:46 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/17 11:31:48 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ int	get_flag(char *line, t_cmd *cmd)
 		exit (1); //A GERER
 	flag_str = copy_cmd(size, line, flag_str);
 	lst_add_back(&cmd->flag, lst_new(flag_str));
-	printf("%s\n", cmd->flag->data);
 	return (size);
 }
