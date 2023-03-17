@@ -28,7 +28,7 @@ LIB_DIR					= libft/
 	
 GCC						= gcc
 CFLAGS					= -Wall -Wextra -g3 #-Werror
-LDLIBS					= -lreadline -L/opt/homebrew/Cellar/readline/8.2.1/lib -I/opt/homebrew/Cellar/readline/8.2.1/include
+LDLIBS					= -lreadline #-L/opt/homebrew/Cellar/readline/8.2.1/lib -I/opt/homebrew/Cellar/readline/8.2.1/include
 SANITIZE				= $(CFLAGS) -fsanitize=address
 
 RM 						= rm -rf

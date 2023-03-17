@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:52:22 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/13 20:37:26 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/17 08:02:15 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	ft_print_2d_array(char **array)
 		printf("%s ", array[i]);
 		i++;
 	}
+	printf("\n");
 }

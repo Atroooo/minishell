@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:02:01 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/16 16:20:32 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/16 20:21:33 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	ft_strcpy(char *src, char *dest)
 	int	i;
 
 	i = 0;
-	if (dest == 0)
+	if (src == NULL)
 		return ;
-	while (dest[i])
+	while (src[i])
 	{
-		src[i] = dest[i];
+		dest[i] = src[i];
 		i++;
 	}
-	src[i] = '\0';
+	dest[i] = '\0';
 }
