@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/17 14:46:14 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/17 15:04:15 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	exec_shell(char **env, t_env_main *main_env)
 		while (line != NULL)
 		{
 			add_history(line);
-			parsing(line, env, main_env);
+			parsing(line, &all_cmd, env, main_env);
 			free(line);
 			line = readline("prompt> ");
 		}
