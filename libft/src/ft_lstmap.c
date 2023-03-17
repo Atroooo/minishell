@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 09:05:59 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/01/10 12:53:16 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/15 20:16:08 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		return (NULL);
 	while (lst != NULL)
 	{	
-		ft_lstadd_back(&result, ft_lstnew((*f)(lst->content)));
+		ft_lstadd_back(&result, ft_lstnew((*f)(lst->data)));
 		if (result == NULL)
 		{
 			ft_lstclear(&result, del);

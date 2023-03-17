@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:14:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/09 08:58:22 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/17 11:20:05 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 # include <string.h>
 # include <fcntl.h>
 # include <stdint.h>
+# include <stdio.h>
 
 typedef struct s_list
 {
-	void			*content;
+	void			*data;
 	struct s_list	*next;
 }	t_list;
 
@@ -87,6 +88,7 @@ void			ft_memset_c(char *b, int c, size_t len);
 void			*ft_memcpy_c(void *dst, const void *src, size_t n);
 size_t			ft_strlen_c(const char *s);
 int				ft_strstart(char *str, char *cmpr);
+char			*ft_strcpy(char *src, char *dest);
 
 # define BUFFER_SIZE 64
 

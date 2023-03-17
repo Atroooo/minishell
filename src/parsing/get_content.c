@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   get_content.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 08:18:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/15 20:16:08 by vgonnot          ###   ########.fr       */
+/*   Created: 2023/03/15 19:44:42 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/03/16 07:17:46 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
+#include "../../header/minishell.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+int	get_content(char *line, t_cmd *cmd)
 {
-	if (lst == NULL || *del == NULL)
-		return ;
-	(*del)(lst->data);
-	free(lst);
+	int		size;
+	int		size_malloc;
+	char	*content_str;
+
+	size = 0;
+	size_malloc = get_size(line, &size);
+	content_str = malloc(sizeof(char) * (size_malloc + 1));
+	if (content_str == NULL)
+		exit (1); //A GERER
+	content_str = copy_cmd(size, line, content_str);
+	lst_add_back(&cmd->content, lst_new(content_str));
+	return (size);
 }

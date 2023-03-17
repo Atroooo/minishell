@@ -18,6 +18,15 @@ SRC			 			= main.c init.c \
 						  exec/pipe/get_exec_done_utils.c exec/pipe/get_path.c exec/pipe/heredoc.c \
 						  exec/pipe/quit_utils.c exec/pipe/utils.c exec/pipe/exec_cmd.c \
 						  exec/utils/chained_list.c
+						  parsing/input_operator_error.c \
+						  parsing/split_line.c \
+						  parsing/get_cmd.c \
+						  parsing/get_file.c \
+						  parsing/get_flag.c \
+						  parsing/get_content.c \
+						  parsing/get_utils.c \
+						  parsing/list_utils.c \
+						  parsing/convert_3d_array.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	

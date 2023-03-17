@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 22:12:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/17 14:43:36 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,48 @@ t_env_var	*ft_lstnew_env(char *name, char *value);
 void		ft_lstadd_front_env(t_env_var **lst, t_env_var *new);
 void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
+
+typedef struct t_lst
+{
+	char			*data;
+	struct t_lst	*next;
+}	t_lst;
+
+typedef struct t_cmd
+{
+	char	*cmd;
+	t_lst	*flag;
+	t_lst	*content;
+	t_lst	*infile;
+	t_lst	*outfile;
+}t_cmd;
+
+typedef struct t_line
+{
+	t_cmd	*cmd;
+	char	***all_cmd;
+	int		nbr_cmd;
+}t_line;
+
+typedef enum t_boolean
+{
+	FALSE = 0,
+	TRUE
+}t_boolean;
+
+void	split_line(char *line, t_line *all_cmd);
+int		input_operator_check(char *cmd);
+int		get_cmd(char *line, int *command, t_cmd *cmd);
+int		get_file(char *line, t_cmd *cmd);
+int		get_flag(char *line, t_cmd *cmd);
+int		get_content(char *line, t_cmd *cmd);
+char	*copy_cmd(int size, char *src, char *dest);
+int		skip_space(char *line);
+int		count_len(char *line, char del, int *nbr_quote);
+int		get_size(char *line, int *size);
+void	lst_add_back(t_lst **lst, t_lst *new);
+t_lst	*lst_new(void *content);
+void	print_cmd(int i, t_line all_cmd);
+void	convert_in_3d_array(t_line *all_cmd);
 
 #endif
