@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/17 14:49:36 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/17 15:05:04 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 
 int	check_error(char *line, t_line *all_cmd)
 {
+	(void) all_cmd;
 	if (input_operator_check(line))
 		return (1);
 	return (0);
@@ -61,8 +62,8 @@ void	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
 	redirect_input(cmd_line);
 	redirect_output(cmd_line);
 	redirect_output_append(cmd_line);
-	if (ft_strcmp(cmd_line[0], "here_doc"))
-		exec_cmd(6, strr, env, main_env);
+//	if (ft_strcmp(cmd_line[0], "here_doc"))
+//		exec_cmd(6, strr, env, main_env);
 	if (ft_strcmp(cmd_line[0], "exec") == 0)
 	{
 		strr = malloc(sizeof(char *) * 6);
