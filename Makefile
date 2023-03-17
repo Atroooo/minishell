@@ -17,7 +17,7 @@ SRC			 			= main.c init.c \
 						  exec/pipe/dup_manager.c exec/pipe/execution.c exec/pipe/get_exec_done.c \
 						  exec/pipe/get_exec_done_utils.c exec/pipe/get_path.c exec/pipe/heredoc.c \
 						  exec/pipe/quit_utils.c exec/pipe/utils.c exec/pipe/exec_cmd.c \
-						  exec/utils/chained_list.c
+						  exec/utils/chained_list.c \
 						  parsing/input_operator_error.c \
 						  parsing/split_line.c \
 						  parsing/get_cmd.c \
