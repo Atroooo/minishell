@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 22:10:48 by marvin           ###   ########.fr       */
-=======
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 10:31:32 by neoff            ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2023/03/17 14:46:14 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +23,13 @@ static void	check_param(int argc)
 
 static void	exec_shell(char **env, t_env_main *main_env)
 {
-<<<<<<< HEAD
-	char		*line;
-=======
 	char	*line;
 	t_line	all_cmd;
->>>>>>> master
 
 	signal_handler(main_env);
 	line = readline("prompt> ");
 	while (1)
 	{
-<<<<<<< HEAD
 		while (line != NULL)
 		{
 			add_history(line);
@@ -68,13 +56,5 @@ int	main(int argc, char *argv[], char *env[])
 	main_env->tty = &termios_save;
 	init_main_env(main_env, env);
 	exec_shell(env, main_env);
-=======
-		add_history(line);
-		parsing(line, &all_cmd);
-		free(line);
-		line = readline("prompt> ");
-	}
-	//rl_clear_history();
->>>>>>> master
 	return (0);
 }

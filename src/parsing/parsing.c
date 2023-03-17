@@ -3,23 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/17 14:22:58 by atro             ###   ########.fr       */
-=======
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 10:41:33 by neoff            ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2023/03/17 14:49:36 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-<<<<<<< HEAD
 static int	buildin_exec(char **cmd, t_env_main *main_env)
 {
 	if (!cmd)
@@ -43,10 +35,22 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 	return (1);
 }
 
-void	parsing(char *line, char *env[], t_env_main *main_env)
+int	check_error(char *line, t_line *all_cmd)
+{
+	if (input_operator_check(line))
+		return (1);
+	return (0);
+}
+
+void	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
 {
 	char		**cmd_line;
 	char		**strr;
+
+	if (check_error(line, all_cmd))
+		return ;
+	split_line(line, all_cmd);
+	convert_in_3d_array(all_cmd);
 
 	if (!line || line[0] == '\0')
 		return ;
@@ -73,19 +77,4 @@ void	parsing(char *line, char *env[], t_env_main *main_env)
 		strr[8] = "TEST";
 		exec_cmd(9, strr, env, main_env);
 	}
-=======
-int	check_error(char *line, t_line *all_cmd)
-{
-	if (input_operator_check(line))
-		return (1);
-	return (0);
-}
-
-void	parsing(char *line, t_line *all_cmd)
-{
-	if (check_error(line, all_cmd))
-		return ;
-	split_line(line, all_cmd);
-	convert_in_3d_array(all_cmd);
->>>>>>> master
 }
