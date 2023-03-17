@@ -1,0 +1,4 @@
+- here_doc : temps que le user n a pas rentrer le delimiter il peut ecrire dans le fichier.
+- executable a gerer
+- redirections a reverif
+- gestion erreur pipe imparfaite
