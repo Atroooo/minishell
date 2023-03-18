@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 16:02:01 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/18 13:17:36 by neoff            ###   ########.fr       */
+/*   Created: 2022/11/09 13:04:58 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/01/10 12:53:16 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 
-char	*ft_strcpy(char *src, char *dest)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	int	i;
 
+	if (s == NULL)
+		return ;
 	i = 0;
-	if (src == NULL)
-		return (NULL);
-	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
-	if (dest == NULL)
-		return (NULL);
-	while (src[i])
+	while (s[i] != '\0')
 	{
-		dest[i] = src[i];
+		(*f)(i, &s[i]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
 }

@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 16:02:01 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/18 13:17:36 by neoff            ###   ########.fr       */
+/*   Created: 2022/11/07 14:56:37 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/01/10 12:53:16 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 
-char	*ft_strcpy(char *src, char *dest)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	char	*str;
+	size_t	i;
 
 	i = 0;
-	if (src == NULL)
-		return (NULL);
-	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
-	if (dest == NULL)
-		return (NULL);
-	while (src[i])
+	str = s;
+	while (i < n)
 	{
-		dest[i] = src[i];
+		str[i] = '\0';
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	s = str;
 }

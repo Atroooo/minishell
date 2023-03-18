@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strstart.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 16:02:01 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/18 13:17:36 by neoff            ###   ########.fr       */
+/*   Created: 2023/02/04 15:45:07 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/02/04 15:52:25 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 
-char	*ft_strcpy(char *src, char *dest)
+int	ft_strstart(char *str, char *cmpr)
 {
 	int	i;
+	int	len;
 
 	i = 0;
-	if (src == NULL)
-		return (NULL);
-	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
-	if (dest == NULL)
-		return (NULL);
-	while (src[i])
-	{
-		dest[i] = src[i];
+	len = ft_strlen(cmpr);
+	while (cmpr[i] && cmpr[i] == str[i])
 		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	if (len == i)
+		return (1);
+	return (0);
 }

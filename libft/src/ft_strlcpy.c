@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 16:02:01 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/18 13:17:36 by neoff            ###   ########.fr       */
+/*   Created: 2022/07/10 09:07:46 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/01/10 12:53:16 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 
-char	*ft_strcpy(char *src, char *dest)
+unsigned int	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	int	i;
+	size_t			i;
+	int				lenght;
 
+	lenght = ft_strlen(src);
+	if (size == 0)
+		return (lenght);
 	i = 0;
-	if (src == NULL)
-		return (NULL);
-	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
-	if (dest == NULL)
-		return (NULL);
-	while (src[i])
+	while (src[i] && size > 1)
 	{
 		dest[i] = src[i];
 		i++;
+		size--;
 	}
 	dest[i] = '\0';
-	return (dest);
+	return (lenght);
 }
