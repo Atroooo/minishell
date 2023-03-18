@@ -6,7 +6,7 @@
 /*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 16:25:53 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/18 13:29:13 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	split_line(char *line, t_line *all_cmd)
 	while (splitted_line[i] != NULL)
 	{
 		set_up_arg(splitted_line[i], &all_cmd->cmd[i]);
-		//print_cmd(i, *all_cmd);
 		i++;
 	}
 }

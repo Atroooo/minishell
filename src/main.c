@@ -6,7 +6,7 @@
 /*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/18 13:17:07 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/18 13:19:29 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	exec_shell(char **env, t_env_main *main_env)
 		}
 		if (!line)
 			exit(0);
-		rl_clear_history();
+		//rl_clear_history();
 	}
 }
 

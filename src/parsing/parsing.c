@@ -6,7 +6,7 @@
 /*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/18 13:17:27 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/18 13:59:55 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,13 @@ void	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
 	split_line(line, all_cmd);
 	convert_in_3d_array(all_cmd);
 
-	if (!line || line[0] == '\0')
-		return ;
-	cmd_line = ft_split(line, ' ');
-	if (!cmd_line)
-		return ;
-	buildin_exec(cmd_line, main_env);
-	redirect_input(cmd_line);
-	redirect_output(cmd_line);
-	redirect_output_append(cmd_line);
-//	if (ft_strcmp(cmd_line[0], "here_doc"))
-//		exec_cmd(6, strr, env, main_env);
-	if (ft_strcmp(cmd_line[0], "exec") == 0)
-	{
-		strr = malloc(sizeof(char *) * 6);
-		strr[0] = " ";
-		strr[1] = "here_doc";
-		strr[2] = "cat";
-		strr[3] = "<<";
-		strr[4] = "TEST";
-		strr[5] = "ceci est un test";
-		strr[6] = "j'espère qu'il sera";
-		strr[7] = "concluant";
-		strr[8] = "TEST";
-		exec_cmd(9, strr, env, main_env);
-	}
+	// if (!line || line[0] == '\0')
+	// 	return ;
+	// cmd_line = ft_split(line, ' ');
+	// if (!cmd_line)
+	// 	return ;
+	//buildin_exec(cmd_line, main_env);
+	//redirect_input(cmd_line);
+	//redirect_output(cmd_line);
+	//redirect_output_append(cmd_line);
 }
