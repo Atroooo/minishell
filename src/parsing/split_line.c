@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/18 13:29:13 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/20 08:55:14 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	set_up_newlst(t_cmd *cmd)
 	cmd->outfile = NULL;
 }
 
-void	set_up_arg(char *line, t_cmd *cmd)
+void	set_up_arg(char *line, t_cmd *cmd, t_line *all_cmd)
 {
 	int	i;
 	int	no_command;
@@ -57,7 +57,7 @@ void	set_up_arg(char *line, t_cmd *cmd)
 		else if (no_command == TRUE)
 			i += get_cmd(&line[i], &no_command, cmd);
 		else if (line[i] == '-')
-			i += get_flag(&line[i], cmd);
+			i += get_flag(&line[i], cmd, all_cmd);
 		else
 			i += get_content(&line[i], cmd);
 	}
@@ -69,16 +69,21 @@ void	split_line(char *line, t_line *all_cmd)
 	int		i;
 
 	i = 0;
+	all_cmd->all_cmd = NULL;
 	splitted_line = ft_split(line, '|');
 	if (splitted_line == NULL)
-		exit (1); //A GERER 
+		exit (1);
 	all_cmd->nbr_cmd = count_split(line);
 	all_cmd->cmd = malloc(sizeof(t_cmd) * (all_cmd->nbr_cmd));
 	if (all_cmd->cmd == NULL)
-		exit(1); //A GERER
+	{
+		ft_free_2d_array(splitted_line);
+		exit(1);
+	}
 	while (splitted_line[i] != NULL)
 	{
-		set_up_arg(splitted_line[i], &all_cmd->cmd[i]);
+		set_up_arg(splitted_line[i], &all_cmd->cmd[i], all_cmd);
 		i++;
 	}
+	ft_free_2d_array(splitted_line);
 }

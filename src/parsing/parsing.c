@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/18 13:59:55 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/20 08:08:06 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,9 @@ void	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
 		return ;
 	split_line(line, all_cmd);
 	convert_in_3d_array(all_cmd);
-
-	// if (!line || line[0] == '\0')
-	// 	return ;
-	// cmd_line = ft_split(line, ' ');
-	// if (!cmd_line)
-	// 	return ;
-	//buildin_exec(cmd_line, main_env);
-	//redirect_input(cmd_line);
-	//redirect_output(cmd_line);
-	//redirect_output_append(cmd_line);
+	free_cmd_struct(all_cmd);
+	// buildin_exec(cmd_line, main_env);
+	// redirect_input(cmd_line);
+	// redirect_output(cmd_line);
+	// redirect_output_append(cmd_line);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/18 13:17:18 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/20 09:27:58 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,6 @@ void	copy_all_arg(char **arg, t_cmd *cmd)
 	int	index;
 
 	index = 0;
-	if (cmd->cmd != NULL)
-	{
-		arg[index] = copy_command(cmd->cmd, &index);
-		index += 1;
-	}
-	while (cmd->flag != NULL)
-	{
-		arg[index] = copy_command(cmd->flag->data, &index);
-		cmd->flag = cmd->flag->next;
-		index += 1;
-	}
 	while (cmd->infile != NULL)
 	{
 		arg[index] = copy_command(cmd->infile->data, &index);
@@ -77,6 +66,17 @@ void	copy_all_arg(char **arg, t_cmd *cmd)
 	{
 		arg[index] = copy_command(cmd->outfile->data, &index);
 		cmd->outfile = cmd->outfile->next;
+		index += 1;
+	}
+	if (cmd->cmd != NULL)
+	{
+		arg[index] = copy_command(cmd->cmd, &index);
+		index += 1;
+	}
+	while (cmd->flag != NULL)
+	{
+		arg[index] = copy_command(cmd->flag->data, &index);
+		cmd->flag = cmd->flag->next;
 		index += 1;
 	}
 	while (cmd->content != NULL)
