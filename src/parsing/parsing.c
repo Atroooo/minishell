@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/17 15:05:04 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/20 09:39:19 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,37 +45,36 @@ int	check_error(char *line, t_line *all_cmd)
 
 void	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
 {
-	char		**cmd_line;
-	char		**strr;
+	char	**strr;
+	int		i;
 
+	i = 0;
 	if (check_error(line, all_cmd))
 		return ;
 	split_line(line, all_cmd);
 	convert_in_3d_array(all_cmd);
-
-	if (!line || line[0] == '\0')
-		return ;
-	cmd_line = ft_split(line, ' ');
-	if (!cmd_line)
-		return ;
-	buildin_exec(cmd_line, main_env);
-	redirect_input(cmd_line);
-	redirect_output(cmd_line);
-	redirect_output_append(cmd_line);
-//	if (ft_strcmp(cmd_line[0], "here_doc"))
-//		exec_cmd(6, strr, env, main_env);
-	if (ft_strcmp(cmd_line[0], "exec") == 0)
+	while (all_cmd->all_cmd[i] != NULL)
 	{
-		strr = malloc(sizeof(char *) * 6);
-		strr[0] = " ";
-		strr[1] = "here_doc";
-		strr[2] = "cat";
-		strr[3] = "<<";
-		strr[4] = "TEST";
-		strr[5] = "ceci est un test";
-		strr[6] = "j'espère qu'il sera";
-		strr[7] = "concluant";
-		strr[8] = "TEST";
-		exec_cmd(9, strr, env, main_env);
+		buildin_exec(all_cmd->all_cmd[i], main_env);
+		redirect_input(all_cmd->all_cmd[i]);
+		redirect_output(all_cmd->all_cmd[i]);
+		redirect_output_append(all_cmd->all_cmd[i]);
+		if (ft_strcmp(all_cmd->all_cmd[i], "here_doc"))
+			exec_cmd(6, strr, env, main_env);
+		if (ft_strcmp(all_cmd->all_cmd[i], "exec") == 0)
+		{
+			strr = malloc(sizeof(char *) * 6);
+			strr[0] = " ";
+			strr[1] = "here_doc";
+			strr[2] = "cat";
+			strr[3] = "<<";
+			strr[4] = "TEST";
+			strr[5] = "ceci est un test";
+			strr[6] = "j'espère qu'il sera";
+			strr[7] = "concluant";
+			strr[8] = "TEST";
+			exec_cmd(9, strr, env, main_env);
+		}
+		i++;
 	}
 }

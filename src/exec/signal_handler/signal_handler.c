@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/16 22:15:16 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/20 09:29:57 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	signal_action(int sig)
 {
 	if (sig == SIGQUIT)
 	{
-		rl_on_new_line();
-		rl_redisplay();
 		g_status = 131;
 		return ;
 	}
@@ -37,6 +35,7 @@ void	signal_handler(t_env_main *main_env)
 {
 	struct sigaction	sa;
 
+	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = signal_action;
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
