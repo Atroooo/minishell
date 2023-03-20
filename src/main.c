@@ -6,7 +6,7 @@
 /*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/18 13:19:29 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/20 15:44:53 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	exec_shell(char **env, t_env_main *main_env)
 	char	*line;
 	t_line	all_cmd;
 
-	signal_handler(main_env);
+	//signal_handler(main_env);
 	line = readline("prompt> ");
 	while (1)
 	{

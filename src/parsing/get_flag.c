@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_flag.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:27:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/20 09:47:57 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/20 15:20:57 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-int	get_flag(char *line, t_cmd *cmd, t_line *all_cmd)
+int	get_flag(char *line, t_cmd *cmd)
 {
 	int		size;
 	int		size_malloc;
@@ -22,7 +22,7 @@ int	get_flag(char *line, t_cmd *cmd, t_line *all_cmd)
 	size_malloc = get_size(line, &size);
 	flag_str = malloc(sizeof(char) * (size_malloc + 1));
 	if (flag_str == NULL)
-		quit_function_parsing(all_cmd);
+		return (-1);
 	flag_str = copy_cmd(size, line, flag_str);
 	lst_add_back(&cmd->flag, lst_new(flag_str));
 	return (size);

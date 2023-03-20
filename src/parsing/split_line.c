@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/20 08:55:14 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/20 16:03:27 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,21 @@ void	set_up_newlst(t_cmd *cmd)
 	cmd->outfile = NULL;
 }
 
-void	set_up_arg(char *line, t_cmd *cmd, t_line *all_cmd)
+int	get_element(int *i, int (*get)(char *, t_cmd *), char *line, t_cmd *cmd)
+{
+	int	temp;
+
+	temp = get(&line[*i], cmd);
+	if (temp == -1)
+		return (-1);
+	*i += temp;
+	return (0);
+}
+
+int	set_up_arg(char *line, t_cmd *cmd, t_line *all_cmd)
 {
 	int	i;
+	int	temp;
 	int	no_command;
 
 	no_command = TRUE;
@@ -53,17 +65,33 @@ void	set_up_arg(char *line, t_cmd *cmd, t_line *all_cmd)
 	{
 		i += skip_space(&line[i]);
 		if (line[i] == '<' || line[i] == '>')
-			i += get_file(&line[i], cmd);
+		{
+			if (get_element(&i, &get_file, &line[i], cmd))
+				return (-1);
+		}
 		else if (no_command == TRUE)
-			i += get_cmd(&line[i], &no_command, cmd);
+		{
+			if (get_element(&i, &get_cmd, &line[i], cmd))
+				return (-1);
+			no_command = 0;
+		}
 		else if (line[i] == '-')
-			i += get_flag(&line[i], cmd, all_cmd);
+		{
+			printf("test");
+			if (get_element(&i, &get_flag, &line[i], cmd))
+				return (-1);
+		}
 		else
-			i += get_content(&line[i], cmd);
+		{
+			if (get_element(&i, &get_content, &line[i], cmd))
+				return (-1);
+		}
+		printf("%c\n", line[i]);
 	}
+	return (0);
 }
 
-void	split_line(char *line, t_line *all_cmd)
+int	split_line(char *line, t_line *all_cmd)
 {
 	char	**splitted_line;
 	int		i;

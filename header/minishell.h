@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/20 09:49:47 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/20 15:49:20 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ void		init_main_env(t_env_main *main_env, char **env);
 
 /*Parsing*/
 void		parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env);
-void		split_line(char *line, t_line *all_cmd);
+int			split_line(char *line, t_line *all_cmd);
 int			input_operator_check(char *cmd);
-int			get_cmd(char *line, int *no_command, t_cmd *cmd, t_line *all_cmd);
-int			get_file(char *line, t_cmd *cmd, t_line *all_cmd);
-int			get_flag(char *line, t_cmd *cmd, t_line *all_cmd);
-int			get_content(char *line, t_cmd *cmd, t_line *all_cmd);
+int			get_cmd(char *line, t_cmd *cmd);
+int			get_file(char *line, t_cmd *cmd);
+int			get_flag(char *line, t_cmd *cmd);
+int			get_content(char *line, t_cmd *cmd);
 char		*copy_cmd(int size, char *src, char *dest);
 int			skip_space(char *line);
 int			count_len(char *line, char del, int *nbr_quote);
