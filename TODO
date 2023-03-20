@@ -1,4 +1,4 @@
-- here_doc : temps que le user n a pas rentrer le delimiter il peut ecrire dans le fichier.
-- executable a gerer
+- single cmd exec / executable a gerer
+- pipe a revoir / here_doc a bien faire
 - redirections a reverif
 - gestion erreur pipe imparfaite

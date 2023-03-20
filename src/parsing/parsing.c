@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/20 09:39:19 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/20 09:45:19 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,6 @@ void	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
 		redirect_output_append(all_cmd->all_cmd[i]);
 		if (ft_strcmp(all_cmd->all_cmd[i], "here_doc"))
 			exec_cmd(6, strr, env, main_env);
-		if (ft_strcmp(all_cmd->all_cmd[i], "exec") == 0)
-		{
-			strr = malloc(sizeof(char *) * 6);
-			strr[0] = " ";
-			strr[1] = "here_doc";
-			strr[2] = "cat";
-			strr[3] = "<<";
-			strr[4] = "TEST";
-			strr[5] = "ceci est un test";
-			strr[6] = "j'espère qu'il sera";
-			strr[7] = "concluant";
-			strr[8] = "TEST";
-			exec_cmd(9, strr, env, main_env);
-		}
 		i++;
 	}
 }
