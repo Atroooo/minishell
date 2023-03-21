@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_exec_done.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/14 11:02:52 by lcompieg         ###   ########.fr       */
-=======
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/18 13:22:29 by neoff            ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2023/03/21 10:35:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +42,7 @@ void	get_exec_done(char **argv, char **env, t_env_pipe *st)
 	char	*path;
 	int		path_pos_index;
 
-<<<<<<< HEAD
-=======
 	path = NULL;
->>>>>>> master
 	arg_vec = get_arg_vec(st, argv);
 	path_pos_index = find_path_index(env);
 	if (path_pos_index == -1)
