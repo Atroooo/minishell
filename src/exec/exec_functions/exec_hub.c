@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/minishell.h"
+#include "../../../header/minishell.h"
 
 static int	buildin_exec(char **cmd, t_env_main *main_env)
 {
@@ -39,7 +39,6 @@ static void	exec_single_cmd(char **cmd, char *env[], t_env_main *main_env)
 {
 	int	pid;
 
-
 	if (buildin_exec(cmd, main_env))
 	{
 		main_env->last_cmd_status = 0;
@@ -57,6 +56,7 @@ static void	exec_single_cmd(char **cmd, char *env[], t_env_main *main_env)
 			}
 		}
 	}
+	main_env->last_cmd_status = 1;
 }
 
 void	exec_hub(t_line *all_cmd, char *env[], t_env_main *main_env)
@@ -65,12 +65,15 @@ void	exec_hub(t_line *all_cmd, char *env[], t_env_main *main_env)
 
 	i = 0;
 	if (all_cmd->nbr_cmd == 1)
+	{
 		exec_single_cmd(all_cmd->all_cmd[0], env, main_env);
+		if (all_cmd->all_cmd)
+			free_cmd(all_cmd);
+	}
 	else
 	{
 		while (all_cmd->all_cmd[i] != NULL)
 		{
-			buildin_exec(all_cmd->all_cmd[i], main_env);
 			// redirect_input(all_cmd->all_cmd[i]);
 			// redirect_output(all_cmd->all_cmd[i]);
 			// redirect_output_append(all_cmd->all_cmd[i]);

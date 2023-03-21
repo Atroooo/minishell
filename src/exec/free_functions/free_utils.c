@@ -19,8 +19,22 @@ void	free_str(char **str)
 	index = 0;
 	while (str[index])
 	{
-		free(str[index]);
+		if (str[index])
+			free(str[index]);
 		index++;
 	}
 	free(str);
+}
+
+void	free_cmd(t_line *all_cmd)
+{
+	int	index;
+
+	index = 0;
+	while (all_cmd->all_cmd[index])
+	{
+		free_str(all_cmd->all_cmd[index]);
+		index++;
+	}
+	free(all_cmd->all_cmd);
 }

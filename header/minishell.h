@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 15:25:00 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 22:22:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,6 @@ int			ft_lstsize_env(t_env_var *lst);
 
 /*Free utils*/
 void		free_str(char **str);
+void		free_cmd(t_line *all_cmd);
 
 #endif
