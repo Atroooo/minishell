@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/17 15:05:04 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/21 08:26:03 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,39 +43,20 @@ int	check_error(char *line, t_line *all_cmd)
 	return (0);
 }
 
-void	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
+int	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
 {
 	char		**cmd_line;
 	char		**strr;
-
+	int			error;
 	if (check_error(line, all_cmd))
-		return ;
-	split_line(line, all_cmd);
-	convert_in_3d_array(all_cmd);
-
-	if (!line || line[0] == '\0')
-		return ;
-	cmd_line = ft_split(line, ' ');
-	if (!cmd_line)
-		return ;
-	buildin_exec(cmd_line, main_env);
-	redirect_input(cmd_line);
-	redirect_output(cmd_line);
-	redirect_output_append(cmd_line);
-//	if (ft_strcmp(cmd_line[0], "here_doc"))
-//		exec_cmd(6, strr, env, main_env);
-	if (ft_strcmp(cmd_line[0], "exec") == 0)
-	{
-		strr = malloc(sizeof(char *) * 6);
-		strr[0] = " ";
-		strr[1] = "here_doc";
-		strr[2] = "cat";
-		strr[3] = "<<";
-		strr[4] = "TEST";
-		strr[5] = "ceci est un test";
-		strr[6] = "j'espère qu'il sera";
-		strr[7] = "concluant";
-		strr[8] = "TEST";
-		exec_cmd(9, strr, env, main_env);
-	}
+		return 1;
+	error = split_line(line, all_cmd);
+	if (error == 0)
+		error = convert_in_3d_array(all_cmd);
+	free_cmd_struct(all_cmd);
+	return (error);
+	// buildin_exec(cmd_line, main_env);
+	// redirect_input(cmd_line);
+	// redirect_output(cmd_line);
+	// redirect_output_append(cmd_line);
 }

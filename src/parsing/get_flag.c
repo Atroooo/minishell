@@ -6,7 +6,7 @@
 /*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:27:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/17 11:31:48 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/20 15:20:57 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_flag(char *line, t_cmd *cmd)
 	size_malloc = get_size(line, &size);
 	flag_str = malloc(sizeof(char) * (size_malloc + 1));
 	if (flag_str == NULL)
-		exit (1); //A GERER
+		return (-1);
 	flag_str = copy_cmd(size, line, flag_str);
 	lst_add_back(&cmd->flag, lst_new(flag_str));
 	return (size);

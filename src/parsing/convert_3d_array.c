@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/17 15:05:31 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/21 09:51:16 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ int	count_nbr_element(t_cmd cmd)
 	return (i);
 }
 
-static char	*copy_command(char *src, int *index)
+static char	*copy_command(char *src)
 {
 	char	*dest;
 
-	(void) index;
 	dest = NULL;
 	dest = ft_strcpy(src, dest);
 	if (dest == NULL)
@@ -51,57 +50,49 @@ static char	*copy_command(char *src, int *index)
 	return (ft_strcpy(src, dest));
 }
 
+static void	get_all_command(t_lst *lst, char **arg, int *index)
+{
+	t_lst	*temp;
+	int		i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		arg[i] = copy_command(lst->data);
+		lst = lst->next;
+		*index += 1;
+		i++;
+	}
+}
+
 void	copy_all_arg(char **arg, t_cmd *cmd)
 {
 	int	index;
 
 	index = 0;
+	get_all_command(cmd->infile, &arg[index], &index);
+	get_all_command(cmd->outfile, &arg[index], &index);
 	if (cmd->cmd != NULL)
-	{
-		arg[index] = copy_command(cmd->cmd, &index);
-		index += 1;
-	}
-	while (cmd->flag != NULL)
-	{
-		arg[index] = copy_command(cmd->flag->data, &index);
-		cmd->flag = cmd->flag->next;
-		index += 1;
-	}
-	while (cmd->infile != NULL)
-	{
-		arg[index] = copy_command(cmd->infile->data, &index);
-		cmd->infile = cmd->infile->next;
-		index += 1;
-	}
-	while (cmd->outfile != NULL)
-	{
-		arg[index] = copy_command(cmd->outfile->data, &index);
-		cmd->outfile = cmd->outfile->next;
-		index += 1;
-	}
-	while (cmd->content != NULL)
-	{
-		arg[index] = copy_command(cmd->content->data, &index);
-		cmd->content = cmd->content->next;
-		index += 1;
-	}
+		arg[index++] = copy_command(cmd->cmd);
+	get_all_command(cmd->flag, &arg[index], &index);
+	get_all_command(cmd->content, &arg[index], &index);
 	arg[index] = NULL;
 	ft_print_2d_array(arg);
 }
 
-void	convert_in_3d_array(t_line *all_cmd)
+int	convert_in_3d_array(t_line *all_cmd)
 {
 	int	i;
 
 	i = 0;
 	all_cmd->all_cmd = malloc(sizeof(char **) * (all_cmd->nbr_cmd + 1));
 	if (all_cmd->all_cmd == NULL)
-		exit (1); //A GERER 
+		return (-1);
 	while (i < all_cmd->nbr_cmd)
 	{
 		all_cmd->all_cmd[i] = malloc(sizeof(char *) * (count_nbr_element(all_cmd->cmd[i]) + 1));
 		if (all_cmd->all_cmd[i] == NULL)
-			exit(1); //A GERER
+			return (-1);
 		copy_all_arg(all_cmd->all_cmd[i], &all_cmd->cmd[i]);
 		i++;
 	}

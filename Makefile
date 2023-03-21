@@ -27,6 +27,7 @@ SRC			 			= main.c init.c \
 						  parsing/get_utils.c \
 						  parsing/list_utils.c \
 						  parsing/convert_3d_array.c \
+						  parsing/free_utils.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
@@ -35,7 +36,7 @@ LIB_DIR					= libft/
 
 	
 GCC						= gcc
-CFLAGS					= -Wall -Wextra -Werror -g3 
+CFLAGS					= -Wall -Wextra -g3 #-Werror
 LDLIBS					= -lreadline
 SANITIZE				= $(CFLAGS) -fsanitize=address
 
