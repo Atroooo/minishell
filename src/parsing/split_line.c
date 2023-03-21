@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 10:38:58 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 10:43:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	set_up_arg(char *line, t_cmd *cmd, t_line *all_cmd)
 	int	error;
 	int	no_command;
 
+	(void) all_cmd;
 	no_command = TRUE;
 	i = 0;
 	set_up_newlst(cmd);
@@ -76,7 +77,7 @@ int	set_up_arg(char *line, t_cmd *cmd, t_line *all_cmd)
 		else
 			error = get_element(&i, &get_content, &line[i], cmd);
 	}
-	return (0);
+	return (error);
 }
 
 int	split_line(char *line, t_line *all_cmd)

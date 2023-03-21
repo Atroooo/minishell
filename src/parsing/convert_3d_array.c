@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/21 10:40:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 10:42:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*copy_command(char *src)
 
 static void	get_all_command(t_lst *lst, char **arg, int *index)
 {
-	t_lst	*temp;
+	// t_lst	*temp;
 	int		i;
 
 	i = 0;
@@ -98,4 +98,5 @@ int	convert_in_3d_array(t_line *all_cmd)
 		i++;
 	}
 	all_cmd->all_cmd[i] = NULL;
+	return (1);
 }

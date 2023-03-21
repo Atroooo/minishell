@@ -37,7 +37,7 @@ LIB_DIR					= libft/
 
 	
 GCC						= gcc
-CFLAGS					= -Wall -Wextra -g3 
+CFLAGS					= -Wall -Wextra -Werror -g3 
 LDLIBS					= -lreadline
 SANITIZE				= $(CFLAGS) -fsanitize=address
 
