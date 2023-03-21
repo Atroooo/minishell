@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 10:18:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 10:31:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	exec_shell(char **env, t_env_main *main_env)
 		while (line != NULL)
 		{
 			add_history(line);
-			error = parsing(line, &all_cmd, env, main_env);
+			error = parsing(line, &all_cmd);
 			if (error == -1)
-				exit (1) // ERROR MALLOC FAUT GERER AUTRE FREE
+				exit (1); // ERROR MALLOC FAUT GERER AUTRE FREE
 			else if (error == 0)
 				exec_cmd(&all_cmd, env, main_env);
 			free(line);
