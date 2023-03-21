@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 10:01:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 10:14:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,21 @@ static void	exec_shell(char **env, t_env_main *main_env)
 {
 	char	*line;
 	t_line	all_cmd;
+	int		error;
 
 	signal_handler(main_env);
+	error = 0;
 	line = readline("prompt> ");
 	while (1)
 	{
 		while (line != NULL)
 		{
 			add_history(line);
-			parsing(line, &all_cmd);
-			exec_cmd(&all_cmd, env, main_env);
+			error = parsing(line, &all_cmd, env, main_env);
+			if (error == -1)
+				exit (1) // ERROR MALLOC FAUT GERER AUTRE FREE
+			else if (error == 0)
+				exec_cmd(&all_cmd, env, main_env);
 			free(line);
 			line = readline("prompt> ");
 		}

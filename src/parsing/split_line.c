@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 16:25:53 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/21 09:15:57 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	count_split(char *line)
 	return (nbr_split);
 }
 
-void	set_up_newlst(t_cmd *cmd)
+static void	set_up_newlst(t_cmd *cmd)
 {
 	cmd->cmd = NULL;
 	cmd->flag = NULL;
@@ -41,9 +41,21 @@ void	set_up_newlst(t_cmd *cmd)
 	cmd->outfile = NULL;
 }
 
-void	set_up_arg(char *line, t_cmd *cmd)
+static int	get_element(int *i, int (*get)(char *, t_cmd *), char *line, t_cmd *cmd)
+{
+	int	temp;
+
+	temp = get(line, cmd);
+	if (temp == -1)
+		return (-1);
+	*i += temp;
+	return (0);
+}
+
+int	set_up_arg(char *line, t_cmd *cmd, t_line *all_cmd)
 {
 	int	i;
+	int	error;
 	int	no_command;
 
 	no_command = TRUE;
@@ -53,33 +65,41 @@ void	set_up_arg(char *line, t_cmd *cmd)
 	{
 		i += skip_space(&line[i]);
 		if (line[i] == '<' || line[i] == '>')
-			i += get_file(&line[i], cmd);
+			error = get_element(&i, &get_file, &line[i], cmd);
 		else if (no_command == TRUE)
-			i += get_cmd(&line[i], &no_command, cmd);
+		{
+			error = get_element(&i, &get_cmd, &line[i], cmd);
+			no_command = 0;
+		}
 		else if (line[i] == '-')
-			i += get_flag(&line[i], cmd);
+			error = get_element(&i, &get_flag, &line[i], cmd);
 		else
-			i += get_content(&line[i], cmd);
+			error = get_element(&i, &get_content, &line[i], cmd);
 	}
+	return (0);
 }
 
-void	split_line(char *line, t_line *all_cmd)
+int	split_line(char *line, t_line *all_cmd)
 {
 	char	**splitted_line;
 	int		i;
+	int		error;
 
+	error = 0;
 	i = 0;
+	all_cmd->all_cmd = NULL;
 	splitted_line = ft_split(line, '|');
 	if (splitted_line == NULL)
-		exit (1); //A GERER 
+		return (-1);
 	all_cmd->nbr_cmd = count_split(line);
 	all_cmd->cmd = malloc(sizeof(t_cmd) * (all_cmd->nbr_cmd));
 	if (all_cmd->cmd == NULL)
-		exit(1); //A GERER
-	while (splitted_line[i] != NULL)
+		error = 1;
+	while (splitted_line[i] != NULL && error == 0)
 	{
-		set_up_arg(splitted_line[i], &all_cmd->cmd[i]);
-		//print_cmd(i, *all_cmd);
+		error = set_up_arg(splitted_line[i], &all_cmd->cmd[i], all_cmd);
 		i++;
 	}
+	ft_free_2d_array(splitted_line);
+	return (error);
 }

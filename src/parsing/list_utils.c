@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:06:19 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/16 08:22:25 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/20 09:51:08 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_lst	*lst_new(void *content)
 
 	list = malloc(sizeof(t_lst));
 	if (list == NULL)
-		return (NULL);
+		return (NULL); //A GERER
 	list->data = content;
 	list->next = NULL;
 	return (list);
