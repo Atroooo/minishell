@@ -16,8 +16,9 @@ SRC			 			= main.c init.c \
 						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c \
 						  exec/pipe/dup_manager.c exec/pipe/execution.c exec/pipe/get_exec_done.c \
 						  exec/pipe/get_exec_done_utils.c exec/pipe/get_path.c exec/pipe/heredoc.c \
-						  exec/pipe/quit_utils.c exec/pipe/utils.c exec/pipe/exec_cmd.c \
+						  exec/pipe/quit_utils.c exec/pipe/utils.c exec/pipe/exec_pipe.c \
 						  exec/utils/chained_list.c \
+						  exec/exec_cmd.c \
 						  parsing/input_operator_error.c \
 						  parsing/split_line.c \
 						  parsing/get_cmd.c \
@@ -36,7 +37,7 @@ LIB_DIR					= libft/
 
 	
 GCC						= gcc
-CFLAGS					= -Wall -Wextra -g3 #-Werror
+CFLAGS					= -Wall -Wextra -Werror -g3 
 LDLIBS					= -lreadline
 SANITIZE				= $(CFLAGS) -fsanitize=address
 
