@@ -18,7 +18,8 @@ SRC			 			= main.c init.c \
 						  exec/pipe/get_exec_done_utils.c exec/pipe/get_path.c exec/pipe/heredoc.c \
 						  exec/pipe/quit_utils.c exec/pipe/utils.c exec/pipe/exec_pipe.c \
 						  exec/utils/chained_list.c \
-						  exec/exec_cmd.c \
+						  exec/exec_hub.c exec/exec_single_cmd.c \
+						  exec/free_functions/free_utils.c \
 						  parsing/input_operator_error.c \
 						  parsing/split_line.c \
 						  parsing/get_cmd.c \

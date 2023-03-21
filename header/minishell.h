@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 10:40:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:25:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ void		signal_handler(t_env_main *env_main);
 void		termios_init(t_env_main *main_env);
 
 /*Exec cmd*/
-void		exec_cmd(t_line *all_cmd, char *env[], t_env_main *main_env);
+void		exec_hub(t_line *all_cmd, char *env[], t_env_main *main_env);
+int			exec_cmd(char **cmd, char *env[]);
 /*Redirect*/
 void		redirect_input(char **cmd);
 void		redirect_output(char **cmd);
@@ -145,5 +146,7 @@ void		ft_lstadd_front_env(t_env_var **lst, t_env_var *new);
 void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
 
+/*Free utils*/
+void		free_str(char **str);
 
 #endif

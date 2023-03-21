@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 10:31:30 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:14:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	exec_shell(char **env, t_env_main *main_env)
 			if (error == -1)
 				exit (1); // ERROR MALLOC FAUT GERER AUTRE FREE
 			else if (error == 0)
-				exec_cmd(&all_cmd, env, main_env);
+				exec_hub(&all_cmd, env, main_env);
 			free(line);
 			line = readline("prompt> ");
 		}
