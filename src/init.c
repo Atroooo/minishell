@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:09:04 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/21 07:43:40 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/21 10:15:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	init_env_list(t_env_var **env_list, char **env)
 	if (!env)
 		exit(0);
 	i = 0;
-	env_list = NULL;
 	while (env[i])
 	{
 		env_split = ft_split(env[i], '=');

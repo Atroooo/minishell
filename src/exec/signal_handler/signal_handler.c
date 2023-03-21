@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/03/20 09:29:57 by lcompieg         ###   ########.fr       */
+=======
 /*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
 /*   Updated: 2023/03/18 13:21:13 by neoff            ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +25,26 @@ void	signal_action(int sig)
 {
 	if (sig == SIGQUIT)
 	{
+<<<<<<< HEAD
+=======
 		// rl_on_new_line();
 		// rl_redisplay();
+>>>>>>> master
 		g_status = 131;
 		return ;
 	}
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
+<<<<<<< HEAD
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+=======
 		// rl_on_new_line();
 		// rl_replace_line("", 0);
 		// rl_redisplay();
+>>>>>>> master
 		g_status = 130;
 	}
 }
@@ -37,7 +53,12 @@ void	signal_handler(t_env_main *main_env)
 {
 	struct sigaction	sa;
 
+<<<<<<< HEAD
+	sigemptyset(&sa.sa_mask);
+	sa.sa_handler = signal_action;
+=======
 	//sa.sa_handler = signal_action;
+>>>>>>> master
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);

@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
+/*   Updated: 2023/03/17 15:05:31 by atro             ###   ########.fr       */
+=======
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
 /*   Updated: 2023/03/21 09:51:16 by vgonnot          ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +50,7 @@ static char	*copy_command(char *src)
 {
 	char	*dest;
 
+	(void) index;
 	dest = NULL;
 	dest = ft_strcpy(src, dest);
 	if (dest == NULL)
