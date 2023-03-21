@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 09:55:15 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/21 10:27:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	exec_shell(char **env, t_env_main *main_env)
 			add_history(line);
 			error = parsing(line, &all_cmd, env, main_env);
 			if (error == -1)
-				exit (1) // ERROR MALLOC FAUT GERER AUTRE FREE
+				exit (1); // ERROR MALLOC FAUT GERER AUTRE FREE
 			//else if (error == 0)
 				//MET TON EXEC ICI
 			free(line);
