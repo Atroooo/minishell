@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/20 15:44:53 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/21 09:55:15 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,21 @@ static void	exec_shell(char **env, t_env_main *main_env)
 {
 	char	*line;
 	t_line	all_cmd;
+	int		error;
 
 	//signal_handler(main_env);
+	error = 0;
 	line = readline("prompt> ");
 	while (1)
 	{
 		while (line != NULL)
 		{
 			add_history(line);
-			parsing(line, &all_cmd, env, main_env);
+			error = parsing(line, &all_cmd, env, main_env);
+			if (error == -1)
+				exit (1) // ERROR MALLOC FAUT GERER AUTRE FREE
+			//else if (error == 0)
+				//MET TON EXEC ICI
 			free(line);
 			line = readline("prompt> ");
 		}
@@ -46,15 +52,12 @@ static void	exec_shell(char **env, t_env_main *main_env)
 int	main(int argc, char *argv[], char *env[])
 {
 	struct termios	termios_save;
-	t_env_main		*main_env;
+	t_env_main		main_env;
 
 	(void) argv;
 	check_param(argc);
-	main_env = malloc(sizeof(t_env_main));
-	if (!main_env)
-		exit(0);
-	main_env->tty = &termios_save;
-	init_main_env(main_env, env);
-	exec_shell(env, main_env);
+	main_env.tty = &termios_save;
+	init_main_env(&main_env, env);
+	exec_shell(env, &main_env);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/20 15:49:20 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/21 08:18:11 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ typedef enum t_boolean
 void		init_main_env(t_env_main *main_env, char **env);
 
 /*Parsing*/
-void		parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env);
+int			parsing(char *line, t_line *all_cmd, char *env[], \
+					t_env_main *main_env);
 int			split_line(char *line, t_line *all_cmd);
 int			input_operator_check(char *cmd);
 int			get_cmd(char *line, t_cmd *cmd);
@@ -99,7 +100,7 @@ int			get_size(char *line, int *size);
 void		lst_add_back(t_lst **lst, t_lst *new);
 t_lst		*lst_new(void *content);
 void		print_cmd(int i, t_line all_cmd);
-void		convert_in_3d_array(t_line *all_cmd);
+int			convert_in_3d_array(t_line *all_cmd);
 void		free_cmd_struct(t_line *all_cmd);
 void		quit_function_parsing(t_line *all_cmd);
 

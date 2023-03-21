@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/20 08:08:06 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/21 08:26:03 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,18 @@ int	check_error(char *line, t_line *all_cmd)
 	return (0);
 }
 
-void	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
+int	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env)
 {
 	char		**cmd_line;
 	char		**strr;
-
+	int			error;
 	if (check_error(line, all_cmd))
-		return ;
-	split_line(line, all_cmd);
-	convert_in_3d_array(all_cmd);
+		return 1;
+	error = split_line(line, all_cmd);
+	if (error == 0)
+		error = convert_in_3d_array(all_cmd);
 	free_cmd_struct(all_cmd);
+	return (error);
 	// buildin_exec(cmd_line, main_env);
 	// redirect_input(cmd_line);
 	// redirect_output(cmd_line);
