@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/17 14:51:09 by atro             ###   ########.fr       */
+/*   Updated: 2023/03/21 10:02:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef enum t_boolean
 void		init_main_env(t_env_main *main_env, char **env);
 
 /*Parsing*/
-void	parsing(char *line, t_line *all_cmd, char *env[], t_env_main *main_env);
+void	parsing(char *line, t_line *all_cmd);
 void	split_line(char *line, t_line *all_cmd);
 int		input_operator_check(char *cmd);
 int		get_cmd(char *line, int *command, t_cmd *cmd);
@@ -105,13 +105,15 @@ void	convert_in_3d_array(t_line *all_cmd);
 void		signal_handler(t_env_main *env_main);
 void		termios_init(t_env_main *main_env);
 
+/*Exec cmd*/
+void		exec_cmd(t_line *all_cmd, char *env[], t_env_main *main_env);
 /*Redirect*/
 void		redirect_input(char **cmd);
 void		redirect_output(char **cmd);
 void		redirect_output_append(char **cmd);
 
 /*Pipe*/
-int			exec_cmd(int argc, char **argv, char *env[], t_env_main *main_env);
+int			exec_pipe(int argc, char **argv, char *env[], t_env_main *main_env);
 int			open_files(int argc, char **argv, t_env_pipe *st);
 int			dup_manager(t_env_pipe *st);
 int			set_up_struct(t_env_pipe *st, int argc, char **argv);

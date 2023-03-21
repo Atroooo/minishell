@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd.c                                         :+:      :+:    :+:   */
+/*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:33:14 by atro              #+#    #+#             */
-/*   Updated: 2023/03/14 12:34:10 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/21 10:03:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-int	exec_cmd(int argc, char **argv, char *env[], t_env_main *main_env)
+int	exec_pipe(int argc, char **argv, char *env[], t_env_main *main_env)
 {
 	t_env_pipe	*st;
 
