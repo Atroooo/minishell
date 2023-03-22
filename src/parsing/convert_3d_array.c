@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/21 10:42:57 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:33:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	copy_all_arg(char **arg, t_cmd *cmd)
 	get_all_command(cmd->flag, &arg[index], &index);
 	get_all_command(cmd->content, &arg[index], &index);
 	arg[index] = NULL;
-	ft_print_2d_array(arg);
+	// ft_print_2d_array(arg);
 }
 
 int	convert_in_3d_array(t_line *all_cmd)

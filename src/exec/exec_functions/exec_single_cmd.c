@@ -68,14 +68,17 @@ static char	*get_path_single(char *cmd, char **env)
 int	exec_cmd(char **cmd, char **env)
 {
 	char	*path;
-
-    // dup2(fd, 1);
-	// dup2(p_fd[0], 0);
+	int		fd[2];
+    
+	if (pipe(fd) == -1)
+		return (0);
+	dup2(fd[1], 0);
+	close(fd[0]);
+	close(fd[1]);
 	path = get_path_single(cmd[0], env);
 	if (execve(path, cmd, env) == -1)
 	{
 		ft_printf("minishell: command not found: %s", cmd[0]);
-		// free_str(cmd_s);
 		return (0);
 	}
 	return (1);

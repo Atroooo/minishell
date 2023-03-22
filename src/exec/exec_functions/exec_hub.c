@@ -61,24 +61,43 @@ static void	exec_single_cmd(char **cmd, char *env[], t_env_main *main_env)
 
 void	exec_hub(t_line *all_cmd, char *env[], t_env_main *main_env)
 {
+	char	**strr;
 	int		i;
+	int		j;
 
 	i = 0;
 	if (all_cmd->nbr_cmd == 1)
 	{
+		if (all_cmd->all_cmd[0][0] && all_cmd->all_cmd[0][1] && all_cmd->all_cmd[0][2])
+			printf("all_cmd->all_cmd[0][0] = %s\nall_cmd->all_cmd[0][1] = %s\nall_cmd->all_cmd[0][2] = %s\n", all_cmd->all_cmd[0][0], all_cmd->all_cmd[0][1], all_cmd->all_cmd[0][2]);
 		exec_single_cmd(all_cmd->all_cmd[0], env, main_env);
 		if (all_cmd->all_cmd)
 			free_cmd(all_cmd);
 	}
 	else
 	{
+		 if (ft_strcmp(all_cmd->all_cmd[0][0], "exec") == 0)
+		{
+			strr = malloc(sizeof(char *) * 5);
+			strr[0] = " ";
+			strr[1] = "Makefile";
+			strr[2] = "ls -la";
+			strr[3] = "wc -l";
+			strr[4] = "ls -la";
+			strr[5] = "outfile";
+			exec_pipe(6, strr, env, main_env);
+		}
 		while (all_cmd->all_cmd[i] != NULL)
 		{
-			// redirect_input(all_cmd->all_cmd[i]);
-			// redirect_output(all_cmd->all_cmd[i]);
-			// redirect_output_append(all_cmd->all_cmd[i]);
-			if (ft_strcmp(all_cmd->all_cmd[i][0], "here_doc"))
-				exec_pipe(6, all_cmd->all_cmd[i], env, main_env);
+			j = 0;
+			while (all_cmd->all_cmd[i][j] != NULL)
+			{
+				printf("all_cmd->all_cmd[%d][%d] = %s\n", i, j, all_cmd->all_cmd[i][j]);
+				j++;
+			}
+			// printf("all_cmd->all_cmd[%d][0] = %s\n", i, all_cmd->all_cmd[i][0]);
+			// if (ft_strcmp(all_cmd->all_cmd[i][0], "here_doc"))
+			// 	exec_pipe(6, all_cmd->all_cmd[i], env, main_env);
 			i++;
 		}
 	}
