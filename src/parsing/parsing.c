@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 10:34:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/22 15:00:24 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int	parsing(char *line, t_line *all_cmd)
 	
 	if (check_error(line, all_cmd))
 		return 1;
-	split_line(line, all_cmd);
-	error = 0;
+	error = split_line(line, all_cmd);
 	if (error == 0)
 		convert_in_3d_array(all_cmd);
 	free_cmd_struct(all_cmd);

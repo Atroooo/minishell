@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 10:48:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:56:30 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	exec_shell(char **env, t_env_main *main_env)
 	t_line	all_cmd;
 	int		error;
 
-	signal_handler(main_env);
+	//signal_handler(main_env);
 	error = 0;
 	line = readline("prompt> ");
 	while (1)
@@ -38,14 +38,14 @@ static void	exec_shell(char **env, t_env_main *main_env)
 			error = parsing(line, &all_cmd);
 			if (error == -1)
 				exit (1); // ERROR MALLOC FAUT GERER AUTRE FREE
-			else if (error == 0)
-				exec_cmd(&all_cmd, env, main_env);
+			// else if (error == 0)
+			// 	exec_cmd(&all_cmd, env, main_env);
 			free(line);
 			line = readline("prompt> ");
 		}
 		if (!line)
 			exit(0);
-		rl_clear_history();
+		//rl_clear_history();
 	}
 }
 
