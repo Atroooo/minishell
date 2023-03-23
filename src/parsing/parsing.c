@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/23 09:10:17 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/23 09:18:24 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	parsing(char *line, t_line *all_cmd)
 {
 	int	error;
 
+	if (line[0] == '\0')
+		return (1);
 	if (check_error(line, all_cmd))
 		return (1);
 	error = split_line(line, all_cmd);
