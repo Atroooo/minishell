@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/23 09:19:40 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:19:35 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	check_param(int argc)
 	}
 }
 
-static void	exec_shell(char **env, t_env_main *main_env)
+static void	exec_shell(t_env_main *main_env)
 {
 	char	*line;
 	t_line	all_cmd;
 	int		error;
 
-	signal_handler(main_env);
 	error = 0;
+	signal_handler(main_env);
 	line = readline("prompt> ");
 	while (1)
 	{
@@ -37,14 +37,14 @@ static void	exec_shell(char **env, t_env_main *main_env)
 			add_history(line);
 			error = parsing(line, &all_cmd);
 			if (error == -1)
-				exit (1); // ERROR MALLOC FAUT GERER AUTRE FREE
+				free_all_exit(main_env);
 			else if (error == 0)
-				exec_hub(&all_cmd, env, main_env);
+				exec_hub(&all_cmd, main_env);
 			free(line);
 			line = readline("prompt> ");
 		}
 		if (!line)
-			exit(0);
+			exit(0); //FAUT FREE
 		rl_clear_history();
 	}
 }
@@ -58,6 +58,6 @@ int	main(int argc, char *argv[], char *env[])
 	check_param(argc);
 	main_env.tty = &termios_save;
 	init_main_env(&main_env, env);
-	exec_shell(env, &main_env);
+	exec_shell(&main_env);
 	return (0);
 }

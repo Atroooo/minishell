@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/23 09:17:27 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:06:41 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 typedef struct s_env_main
 {
-	char				*line;
-	char				**cmd_line;
+	int					input;
+	int					output;
 	char				**env;
 	int					last_cmd_status;
 	struct s_env_var	*env_list;
@@ -107,12 +107,11 @@ void		signal_handler(t_env_main *env_main);
 void		termios_init(t_env_main *main_env);
 
 /*Exec cmd*/
-void		exec_hub(t_line *all_cmd, char *env[], t_env_main *main_env);
+void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			exec_cmd(char **cmd, char *env[]);
+
 /*Redirect*/
-void		redirect_input(char **cmd);
-void		redirect_output(char **cmd);
-void		redirect_output_append(char **cmd);
+void		redirect_hub(t_line *all_cmd, t_env_main *main_env);
 
 /*Pipe*/
 int			exec_pipe(int argc, char **argv, char *env[], t_env_main *main_env);
@@ -138,7 +137,7 @@ void		ft_pwd(char **cmd, t_env_main *main_env);
 t_env_var	*ft_export(char **cmd, t_env_var *env_list, t_env_main *main_env);
 t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env);
 void		ft_env(char **cmd, t_env_var *env_list, t_env_main *main_env);
-void		ft_exit(char **cmd);
+void		ft_exit(char **cmd, t_env_main *main_env);
 
 /*Utils lst*/
 t_env_var	*ft_lstnew_env(char *name, char *value);
@@ -146,8 +145,12 @@ void		ft_lstadd_front_env(t_env_var **lst, t_env_var *new);
 void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
 
+/*Utils*/
+int			cmd_size(char ***cmd);
+
 /*Free utils*/
 void		free_str(char **str);
 void		free_cmd(t_line *all_cmd);
+void		free_all_exit(t_env_main *main_env);
 
 #endif
