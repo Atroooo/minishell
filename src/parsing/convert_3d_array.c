@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/22 14:33:23 by marvin           ###   ########.fr       */
-=======
-/*   Updated: 2023/03/23 07:34:15 by vgonnot          ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2023/03/23 09:20:20 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +95,7 @@ int	copy_all_arg(char **arg, t_cmd *cmd)
 	if (get_all_command(cmd->content, &arg[index], &index))
 		return (-1);
 	arg[index] = NULL;
-	ft_print_2d_array(arg);
+	// ft_print_2d_array(arg);
 	return (0);
 }
 
