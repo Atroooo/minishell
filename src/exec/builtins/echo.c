@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 12:41:12 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:26:17 by neoff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ static void	print_env_var(char *str, t_env_var *env_list, t_env_main *main_env)
 	}
 }
 
+int	check_if_flag(char *str)
+{
+	int	i;
+
+	i = 1;
+	if (str[0] != '-')
+		return (0);
+	while (str[i] && str[i] == 'n')
+		i++;
+	if (i > 1 && str[i] == '\0')
+		return (1);
+	return (0);
+}
+
 void	ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env)
 {
 	int	i;
@@ -41,7 +55,7 @@ void	ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env)
 		return ;
 	i = 1;
 	n = 0;
-	if (cmd[1] && ft_strcmp(cmd[1], "-n") == 0)
+	if (cmd[1] &&  check_if_flag(cmd[1]))
 	{
 		n = 1;
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:29:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/20 15:21:09 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/23 07:49:06 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	get_file(char *line, t_cmd *cmd)
 {
 	int		size;
 	char	*file_str;
+	int		error;
 
 	size = get_size_file(line);
 	file_str = malloc(sizeof(char) * (size + 1));
@@ -44,8 +45,10 @@ int	get_file(char *line, t_cmd *cmd)
 		return (-1);
 	file_str = copy_cmd(size, line, file_str);
 	if (file_str[0] == '<')
-		lst_add_back(&cmd->infile, lst_new(file_str));
+		error = lst_add_back(&cmd->infile, lst_new(file_str));
 	else
-		lst_add_back(&cmd->outfile, lst_new(file_str));
+		error = lst_add_back(&cmd->outfile, lst_new(file_str));
+	if (error)
+		return (-1);
 	return (size);
 }
