@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:06:19 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/20 09:51:08 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/23 07:48:31 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,17 @@ t_lst	*lst_last(t_lst *lst)
 	return (lst);
 }
 
-void	lst_add_back(t_lst **lst, t_lst *new)
+int	lst_add_back(t_lst **lst, t_lst *new)
 {
+	if (new == NULL)
+		return (-1);
 	if (*lst == NULL)
 	{	
 		(*lst) = new;
-		return ;
+		return (0);
 	}
 	lst_last(*lst)->next = new;
+	return (0);
 }
 
 t_lst	*lst_new(void *content)

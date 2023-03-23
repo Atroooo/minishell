@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/22 17:32:42 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/23 07:34:15 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ static int	get_all_command(t_lst *lst, char **arg, int *index)
 	return (0);
 }
 
-static int	get_single_command(char *src, char *dest, int *index)
+static int	get_single_command(char *src, char **dest, int *index)
 {
 	if (src == NULL)
 		return (0);
-	dest = copy_command(src);
-	if (dest == NULL)
+	*dest = copy_command(src);
+	if (*dest == NULL)
 		return (-1);
 	*index += 1;
 	return (0);
@@ -86,13 +86,13 @@ int	copy_all_arg(char **arg, t_cmd *cmd)
 	index = 0;
 	if (get_all_command(cmd->infile, &arg[index], &index))
 		return (-1);
-	else if (get_all_command(cmd->outfile, &arg[index], &index))
+	if (get_all_command(cmd->outfile, &arg[index], &index))
 		return (-1);
-	if (get_single_command(cmd->cmd, arg[index], &index))
+	if (get_single_command(cmd->cmd, &arg[index], &index))
 		return (-1);
 	if (get_all_command(cmd->flag, &arg[index], &index))
 		return (-1);
-	else if (get_all_command(cmd->content, &arg[index], &index))
+	if (get_all_command(cmd->content, &arg[index], &index))
 		return (-1);
 	arg[index] = NULL;
 	ft_print_2d_array(arg);

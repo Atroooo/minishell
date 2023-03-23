@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 10:40:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/23 07:41:28 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char		*copy_cmd(int size, char *src, char *dest);
 int			skip_space(char *line);
 int			count_len(char *line, char del, int *nbr_quote);
 int			get_size(char *line, int *size);
-void		lst_add_back(t_lst **lst, t_lst *new);
+int			lst_add_back(t_lst **lst, t_lst *new);
 t_lst		*lst_new(void *content);
 void		print_cmd(int i, t_line all_cmd);
 int			convert_in_3d_array(t_line *all_cmd);
