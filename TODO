@@ -1,7 +1,6 @@
-- single cmd exec => affichage à faire / executable a gerer
-- pipe a revoir / here_doc a refaire en dehors du pipex
-- gestion erreur pipe imparfaite + readapter parce que tableau 3D
-- redirections a faire : HUB de redirection
+- single cmd exec => affichage à faire + executable a gerer
+- pipe a revoir => foncitonne plus / here_doc a refaire en dehors du pipex
+- redirection close le fichier bizarre
 
 < Makefile ls -la | wc -l > outfile
 < Makefile ls -la | wc -l | wc -l > outfile

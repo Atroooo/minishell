@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/14 11:02:52 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:01:37 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,9 @@ void	set_up_pipe(t_env_pipe *st)
 	}
 }
 
-int	set_up_struct(t_env_pipe *st, int argc, char **argv)
+int	set_up_struct(t_env_pipe *st, int argc)
 {
 	st->nbr_cmd = argc - 3;
-	st->hdoc = heredoc(st, argv);
-	if (st->hdoc == 1 && argc < 6)
-	{
-		ft_printf("Error : not enough arguments\n");
-		return (0);
-	}
 	st->actual_pipe = 0;
 	st->pid = malloc(sizeof(int) * (st->nbr_cmd + 1));
 	if (st->pid == NULL)

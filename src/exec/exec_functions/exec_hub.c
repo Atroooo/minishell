@@ -36,73 +36,79 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 	return (1);
 }
 
+static char	**sgl_cmd_to_send(char **cmd, t_env_main *main_env)
+{
+	char	**s_cmd;
+	int		i;
+	int		j;
+
+	s_cmd = malloc(sizeof(char) * cmd_size(cmd));
+	if (main_env->input != 0 && main_env->output != 1)
+		i = 2;
+	else if (main_env->input != 0 || main_env->output != 1)
+		i = 1;
+	else
+		i = 0;
+	j = 0;
+	while (cmd[i])
+	{
+		s_cmd[j] = ft_strdup(cmd[i]);
+		i++;
+		j++;
+	}
+	s_cmd[j] = NULL;
+	return (s_cmd);
+}
+
+static char	**cmd_to_send(t_line *all_cmd)
+{
+	char	**s_cmd;
+	int		i;
+	int		j;
+	int		k;
+
+	s_cmd = malloc(sizeof(char) * (get_total_cmd(all_cmd) + 1));
+	if (!s_cmd)
+		return (NULL);
+	i = 0;
+	while (all_cmd->all_cmd[i])
+	{
+		j = 0;
+		while (all_cmd->all_cmd[i][j])
+		{
+			printf("oui\n");
+			s_cmd[k] = ft_strdup(all_cmd->all_cmd[i][j]);
+			j++;
+			k++;
+		}
+		i++;
+	}
+	s_cmd[k] = NULL;
+	return (s_cmd);
+}
+
 static void	exec_single_cmd(char **cmd, t_env_main *main_env)
 {
 	char	**s_cmd;
-	int		pid;
 
-	// if (main_env->input != 0 && main_env->output != 1)
-	// 	s_cmd = cmd + 2;
-	// else if (main_env->input != 0 || main_env->output != 1)
-	// 	s_cmd = cmd + 1; A refaire dans une fonction du style cmd to send
-	if (buildin_exec(cmd, main_env))
+	s_cmd = sgl_cmd_to_send(cmd, main_env);
+	if (buildin_exec(s_cmd, main_env))
 		return ;
-	else if (cmd != NULL)
-	{
-		pid = fork();
-		if (pid == -1)
-		{
-			main_env->last_cmd_status = 1;
-			return ;
-		}
-		if (pid == 0)
-		{
-			if (exec_cmd(cmd, main_env->env))
-				return ;
-		}
-	}
-	main_env->last_cmd_status = 1;
+	else if (s_cmd != NULL)
+		exec_pipe(cmd_size(s_cmd), s_cmd, main_env);
+	free_str(s_cmd);
 }
 
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
-	char	**strr;
-	int		i;
-	int		j;
-
-	i = 0;
-	redirect_hub(all_cmd, main_env);
 	if (all_cmd->nbr_cmd == 1)
 	{
-		exec_single_cmd(all_cmd->all_cmd[0], main_env);
+		if (redirect_hub(all_cmd, main_env))
+			exec_single_cmd(all_cmd->all_cmd[0], main_env);
 		if (all_cmd->all_cmd)
 			free_cmd(all_cmd);
 	}
 	else
-	{
-		 if (ft_strcmp(all_cmd->all_cmd[0][0], "exec") == 0)
-		{
-			strr = malloc(sizeof(char *) * 5);
-			strr[0] = " ";
-			strr[1] = "Makefile";
-			strr[2] = "ls -la";
-			strr[3] = "wc -l";
-			strr[4] = "ls -la";
-			strr[5] = "outfile";
-			exec_pipe(6, strr, main_env->env, main_env);
-		}
-		while (all_cmd->all_cmd[i] != NULL)
-		{
-			j = 0;
-			while (all_cmd->all_cmd[i][j] != NULL)
-			{
-				printf("all_cmd->all_cmd[%d][%d] = %s\n", i, j, all_cmd->all_cmd[i][j]);
-				j++;
-			}
-			// printf("all_cmd->all_cmd[%d][0] = %s\n", i, all_cmd->all_cmd[i][0]);
-			// if (ft_strcmp(all_cmd->all_cmd[i][0], "here_doc"))
-			// 	exec_pipe(6, all_cmd->all_cmd[i], env, main_env);
-			i++;
-		}
-	}
+		exec_pipe(get_total_cmd(all_cmd), cmd_to_send(all_cmd), \
+			main_env);
 }

@@ -39,7 +39,8 @@ void	free_cmd(t_line *all_cmd)
 	free(all_cmd->all_cmd);
 }
 
-void	free_all_exit(t_env_main *main_env) //Segfault
+//Segfault
+void	free_all_exit(t_env_main *main_env)
 {
 	while (main_env->env_list)
 	{

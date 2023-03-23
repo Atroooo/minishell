@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/23 13:06:41 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:15:45 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,16 @@ void		termios_init(t_env_main *main_env);
 
 /*Exec cmd*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
-int			exec_cmd(char **cmd, char *env[]);
+int			exec_cmd(char **cmd, t_env_main *main_env);
 
 /*Redirect*/
-void		redirect_hub(t_line *all_cmd, t_env_main *main_env);
+int			redirect_hub(t_line *all_cmd, t_env_main *main_env);
 
 /*Pipe*/
-int			exec_pipe(int argc, char **argv, char *env[], t_env_main *main_env);
+int			exec_pipe(int argc, char **argv, t_env_main *main_env);
 int			open_files(int argc, char **argv, t_env_pipe *st);
 int			dup_manager(t_env_pipe *st);
-int			set_up_struct(t_env_pipe *st, int argc, char **argv);
+int			set_up_struct(t_env_pipe *st, int argc);
 char		*get_path(char *cmd, char *paths, t_env_pipe *st);
 void		no_path(t_env_pipe *st, char **arg_vec);
 void		path_is_null(t_env_pipe *st, char **arg_vec, char **argv);
@@ -146,7 +146,8 @@ void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
 
 /*Utils*/
-int			cmd_size(char ***cmd);
+int			cmd_size(char **cmd);
+int			get_total_cmd(t_line *all_cmd);
 
 /*Free utils*/
 void		free_str(char **str);
