@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/23 09:20:20 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/27 08:00:56 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,11 @@ static char	*copy_command(char *src)
 {
 	char	*dest;
 
-	(void) index;
 	dest = NULL;
 	dest = ft_strcpy(src, dest);
 	if (dest == NULL)
 		return (NULL);
-	return (ft_strcpy(src, dest));
+	return (dest);
 }
 
 static int	get_all_command(t_lst *lst, char **arg, int *index)

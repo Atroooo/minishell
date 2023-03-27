@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/16 20:04:46 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/27 07:51:42 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,67 @@ static int	ft_intchr(char *str, char c)
 	return (-1);
 }
 
+static int	check_if_in_env(t_env_var *lst, char *str)
+{
+	char	*name;
+
+	name = ft_substr(str, 0, ft_intchr(str, '='));
+	if (name == NULL)
+		return (-1);
+	while (lst != NULL)
+	{
+		if (ft_strcmp(lst->name, name) == 0)
+		{
+			free(name);
+			return (1);
+		}
+		lst = lst->next;
+	}
+	return (0);
+}
+
+static void	free_variable_name_and_value(char *name, char *value)
+{
+	if (name)
+		free(name);
+	if (value)
+		free(value);
+}
+
+static int	set_variables_name_and_value(char *str, char **name, char **value)
+{
+	int	dollars;
+
+	dollars = 0;
+	if (str[0] == '$')
+		dollars = 1;
+	*name = ft_substr(str, 0, ft_intchr(str, '=') - dollars);
+	*value = ft_substr(str, ft_intchr(str, '=') + 1, ft_strlen(str));
+	if (name == NULL || value == NULL)
+	{
+		free_variable_name_and_value(*name, *value);
+		return (-1);
+	}
+	return (0);
+}
+
 static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 {
 	char	*name;
 	char	*value;
+	int		in_env;
 
-	if (str[0] == '$' && str[1] == '$')
+	in_env = check_if_in_env(env_list, str);
+	if (set_variables_name_and_value(str, &name, &value))
+		return (NULL);
+	if ((str[0] == '$' && str[1] == '$') || (str[0] == '$' && in_env == 0))
 	{
-		ft_printf("bash: %s not a valid identifier\n");
+		ft_printf("bash: export: %s not a valid identifier\n");
+		free_variable_name_and_value(name, value);
 		return (env_list);
 	}
-	if (str[0] == '$')
-	{
-		name = ft_substr(str, 1, ft_intchr(str, '=') - 1);
-		value = ft_substr(str, ft_intchr(str, '=') + 1, ft_strlen(str));
-	}
-	else
-	{
-		name = ft_substr(str, 0, ft_intchr(str, '='));
-		value = ft_substr(str, ft_intchr(str, '=') + 1, ft_strlen(str));
-	}
 	ft_lst_addback_env(&env_list, ft_lstnew_env(name, value));
-	free(name);
-	free(value);
+	free_variable_name_and_value(name, value);
 	return (env_list);
 }
 

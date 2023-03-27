@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/22 15:26:17 by neoff            ###   ########.fr       */
+/*   Updated: 2023/03/27 17:26:41 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ void	ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env)
 	}
 	while (cmd[i])
 	{
-		if (cmd[i][0] == '$')
-			print_env_var(cmd[i], env_list, main_env);
-		else
-			ft_printf("%s", cmd[i]);
+		ft_printf("%s", cmd[i]);
 		if (cmd[i + 1])
 			ft_printf(" ");
 		i++;
