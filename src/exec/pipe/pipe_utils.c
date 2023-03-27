@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 13:49:02 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:11:51 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	set_up_pipe(t_env_pipe *st)
 
 int	set_up_struct(t_env_pipe *st, int argc)
 {
-	st->nbr_cmd = argc - 3;
+	if (argc > 3)
+		st->nbr_cmd = argc - 3;
+	else
+		st->nbr_cmd = 1;
 	st->actual_pipe = 0;
 	st->pid = malloc(sizeof(int) * (st->nbr_cmd + 1));
 	if (st->pid == NULL)
@@ -50,6 +53,36 @@ int	set_up_struct(t_env_pipe *st, int argc)
 	return (1);
 }
 
+static int	setup_heredoc(int argc, char **argv, t_env_pipe *st)
+{
+	st->infile = open(argv[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (st->infile == -1)
+	{
+		ft_printf("Cannot open file : %s\n", argv[1]);
+		free(st);
+		return (0);
+	}
+	st->outfile = open(argv[argc -1], O_RDWR | O_CREAT | O_APPEND, 0644);
+	if (st->outfile == -1)
+		quit_function(st, 0);
+	return (1);
+}
+
+static int	setup_pipe_files(int argc, char **argv, t_env_pipe *st)
+{
+	st->infile = open(argv[1], O_RDWR);
+	if (st->infile == -1)
+	{
+		ft_printf("Cannot open file : %s\n", argv[1]);
+		free(st);
+		return (0);
+	}
+	st->outfile = open(argv[argc -1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (st->outfile == -1)
+		quit_function(st, 0);
+	return (1);
+}
+
 int	open_files(int argc, char **argv, t_env_pipe *st)
 {
 	int	hdoc;
@@ -62,20 +95,14 @@ int	open_files(int argc, char **argv, t_env_pipe *st)
 	}
 	hdoc = ft_strcmp(argv[1], "<<");
 	if (hdoc == 0)
-		st->infile = open(argv[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	else
-		st->infile = open(argv[1], O_RDWR);
-	if (st->infile == -1)
 	{
-		ft_printf("Cannot open file : %s\n", argv[1]);
-		free(st);
-		return (0);
+		if (!setup_heredoc(argc, argv, st))
+			return (0);
 	}
-	if (hdoc == 0)
-		st->outfile = open(argv[argc -1], O_RDWR | O_CREAT | O_APPEND, 0644);
 	else
-		st->outfile = open(argv[argc -1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (st->outfile == -1)
-		quit_function(st, 0);
+	{
+		if (!setup_pipe_files(argc, argv, st))
+			return (0);
+	}
 	return (1);
 }

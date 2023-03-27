@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_exec_done.c                                    :+:      :+:    :+:   */
+/*   pipe_get_exec_done.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/21 10:35:50 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/27 17:09:04 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ char	**get_arg_vec(t_env_pipe *st, char **argv)
 {
 	char	**arg_vec;
 
-	arg_vec = ft_split(argv[st->actual_pipe + 2 + st->hdoc], ' ');
+	if (st->nbr_cmd == 1)
+		arg_vec = ft_split(argv[0], ' ');
+	else
+		arg_vec = ft_split(argv[st->actual_pipe + 2 + st->hdoc], ' ');
 	if (arg_vec == NULL)
 		quit_function(st, -1);
 	return (arg_vec);

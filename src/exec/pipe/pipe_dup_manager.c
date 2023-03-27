@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 13:22:18 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:54:55 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static int	get_dup_done(t_env_pipe *st)
 
 int	dup_manager(t_env_pipe *st)
 {
-	if (get_dup_single_done(st) == 1)
-		return (1);
-	else
+	if (!get_dup_single_done(st))
+		return (0);
+	if (st->nbr_cmd > 1)
 	{
 		if (st->actual_pipe == 0)
 		{

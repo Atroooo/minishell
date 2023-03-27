@@ -38,7 +38,6 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
-	printf("nbr_cmd = %d", all_cmd->nbr_cmd);
 	if (all_cmd->nbr_cmd == 1)
 	{
 		if (buildin_exec(all_cmd->all_cmd[0], main_env))
