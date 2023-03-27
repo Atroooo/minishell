@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/23 16:01:37 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:49:02 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,13 @@ int	open_files(int argc, char **argv, t_env_pipe *st)
 {
 	int	hdoc;
 
-	hdoc = ft_strcmp(argv[1], "here_doc");
+	if (!argv[1])
+	{
+		st->infile = 0;
+		st->outfile = 1;
+		return (1);
+	}
+	hdoc = ft_strcmp(argv[1], "<<");
 	if (hdoc == 0)
 		st->infile = open(argv[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else

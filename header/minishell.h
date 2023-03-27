@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/23 16:15:45 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:49:50 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void		termios_init(t_env_main *main_env);
 /*Exec cmd*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			exec_cmd(char **cmd, t_env_main *main_env);
+char		**cmd_to_send(t_line *all_cmd);
 
 /*Redirect*/
 int			redirect_hub(t_line *all_cmd, t_env_main *main_env);
@@ -148,6 +149,7 @@ int			ft_lstsize_env(t_env_var *lst);
 /*Utils*/
 int			cmd_size(char **cmd);
 int			get_total_cmd(t_line *all_cmd);
+char		*setup_file(char *raw_file);
 
 /*Free utils*/
 void		free_str(char **str);

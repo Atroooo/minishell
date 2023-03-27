@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:33:14 by atro              #+#    #+#             */
-/*   Updated: 2023/03/23 16:24:15 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:59:15 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ int	exec_pipe(int argc, char **argv, t_env_main *main_env)
 		main_env->last_cmd_status = 1;
 		return (ft_printf("Error : %s\n", strerror(errno)));
 	}
-	if (argc > 3 && !open_files(argc, argv, st))
+	if (!open_files(argc, argv, st))
 	{
 		main_env->last_cmd_status = 1;
 		return (1);
 	}
+	printf("test\n");
 	if (!set_up_struct(st, argc))
 	{
 		main_env->last_cmd_status = 1;
