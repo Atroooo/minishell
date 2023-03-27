@@ -43,12 +43,12 @@ void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 		if (buildin_exec(all_cmd->all_cmd[0], main_env))
 			return ;
 		else
-			exec_pipe(get_total_cmd(all_cmd), cmd_to_send(all_cmd), \
+			exec_pipe(all_cmd->nbr_cmd, cmd_to_send(all_cmd, main_env), \
 				main_env);
 		if (all_cmd->all_cmd)
 			free_cmd(all_cmd);
 	}
 	else
-		exec_pipe(get_total_cmd(all_cmd), cmd_to_send(all_cmd), \
+		exec_pipe(all_cmd->nbr_cmd, cmd_to_send(all_cmd, main_env), \
 			main_env);
 }

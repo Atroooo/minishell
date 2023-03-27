@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 14:49:50 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:07:27 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_env_var
 
 typedef struct s_env_pipe
 {
+	int	input;
+	int	output;
 	int	infile;
 	int	outfile;
 	int	nbr_cmd;
@@ -109,16 +111,16 @@ void		termios_init(t_env_main *main_env);
 /*Exec cmd*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			exec_cmd(char **cmd, t_env_main *main_env);
-char		**cmd_to_send(t_line *all_cmd);
+char		**cmd_to_send(t_line *all_cmd, t_env_main *main_env);
 
 /*Redirect*/
 int			redirect_hub(t_line *all_cmd, t_env_main *main_env);
 
 /*Pipe*/
 int			exec_pipe(int argc, char **argv, t_env_main *main_env);
-int			open_files(int argc, char **argv, t_env_pipe *st);
+int			open_files(char **argv, t_env_pipe *st);
 int			dup_manager(t_env_pipe *st);
-int			set_up_struct(t_env_pipe *st, int argc);
+int			set_up_struct(t_env_pipe *st, int argc, t_env_main *main_env);
 char		*get_path(char *cmd, char *paths, t_env_pipe *st);
 void		no_path(t_env_pipe *st, char **arg_vec);
 void		path_is_null(t_env_pipe *st, char **arg_vec, char **argv);

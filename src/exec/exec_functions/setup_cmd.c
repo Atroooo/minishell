@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:56:28 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/27 16:04:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:05:21 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,16 @@ char	*setup_file(char *raw_file)
 	return (file);
 }
 
-static char	*setup_cmd(char *cmd)
+static char	*setup_cmd(char *cmd, t_env_main *main_env)
 {
 	char	*s_cmd;
 
 	if (ft_strncmp(cmd, "<", 1) == 0 || ft_strncmp(cmd, ">", 1) == 0)
 	{
+		if (ft_strncmp(cmd, "<", 1) == 0)
+			main_env->input = 1;
+		else if (ft_strncmp(cmd, ">", 1) == 0)
+			main_env->output = 1;
 		s_cmd = setup_file(cmd);
 		if (!s_cmd)
 			return (NULL);
@@ -46,7 +50,7 @@ static char	*setup_cmd(char *cmd)
 	return (NULL);
 }
 
-char	**cmd_to_send(t_line *all_cmd)
+char	**cmd_to_send(t_line *all_cmd, t_env_main *main_env)
 {
 	char	**s_cmd;
 	int		i;
@@ -63,7 +67,7 @@ char	**cmd_to_send(t_line *all_cmd)
 		j = 0;
 		while (all_cmd->all_cmd[i][j])
 		{
-			s_cmd[k] = setup_cmd(all_cmd->all_cmd[i][j]);
+			s_cmd[k] = setup_cmd(all_cmd->all_cmd[i][j], main_env);
 			if (!s_cmd[k]) // A FREE
 				return (NULL);
 			j++;

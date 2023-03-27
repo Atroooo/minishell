@@ -1,5 +1,6 @@
-- single cmd exec => affichage à faire + executable a gerer
-- pipe a revoir => foncitonne plus / here_doc a refaire en dehors du pipex
+- Flag + content cmd pas encore gerer si y a pas d input output mais 
+j ai ajoute var dans struct pour le gerer donc a FAIRE
+- here_doc a refaire
 
 < Makefile ls -la | wc -l > outfile
 < Makefile ls -la | wc -l | wc -l > outfile
