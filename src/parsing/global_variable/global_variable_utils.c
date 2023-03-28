@@ -6,11 +6,11 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:47:51 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 18:00:35 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/28 10:32:38 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/minishell.h"
+#include "../../../header/minishell.h"
 
 void	skip_simple_quote(int *index, int *nbr_char, char *line)
 {

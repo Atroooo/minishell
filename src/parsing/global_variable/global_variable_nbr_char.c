@@ -6,11 +6,11 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:35:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 18:01:46 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/28 11:37:04 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/minishell.h"
+#include "../../../header/minishell.h"
 
 static int	get_global_variable(char *line, int *nbr_char, t_env_var *env_list)
 {
@@ -21,7 +21,6 @@ static int	get_global_variable(char *line, int *nbr_char, t_env_var *env_list)
 		exit (1);//A GERER PLUS TARD;
 	while (env_list != NULL)
 	{
-		//printf("%s  %s\n", env_list->name, name);
 		if (ft_strcmp(env_list->name, name) == 0)
 			break ;
 		env_list = env_list->next;

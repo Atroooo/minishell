@@ -64,10 +64,7 @@ static void	exec_single_cmd(char **cmd, char *env[], t_env_main *main_env)
 void	exec_hub(t_line *all_cmd, char *env[], t_env_main *main_env)
 {
 	char	**strr;
-	int		i;
-	int		j;
 
-	i = 0;
 	if (all_cmd->nbr_cmd == 1)
 	{
 		exec_single_cmd(all_cmd->all_cmd[0], env, main_env);

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 18:08:06 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/28 09:23:41 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ int	parsing(char *line, t_line *all_cmd, t_env_var *env_list)
 	if (error == 0)
 		convert_in_3d_array(all_cmd);
 	free_cmd_struct(all_cmd);
-	printf("\n\n\n%s\n\n\n", line);
 	return (error);
 }
