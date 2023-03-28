@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:33:14 by atro              #+#    #+#             */
-/*   Updated: 2023/03/27 18:06:55 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/28 10:36:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,11 @@ int	exec_pipe(int argc, char **argv, t_env_main *main_env)
 
 	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
-	{
-		main_env->last_cmd_status = 1;
 		return (ft_printf("Error : %s\n", strerror(errno)));
-	}
 	if (!open_files(argv, st))
-	{
-		main_env->last_cmd_status = 1;
-		return (1);
-	}
+		return (0);
 	if (!set_up_struct(st, argc, main_env))
-	{
-		main_env->last_cmd_status = 1;
-		return (1);
-	}
+		return (0);
 	execution(argv, main_env->env, st);
-	main_env->last_cmd_status = 0;
-	return (0);
+	return (1);
 }

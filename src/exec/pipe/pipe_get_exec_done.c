@@ -3,19 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_get_exec_done.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 18:01:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/28 10:42:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
+void	print_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("%s\n", tab[i]);
+		i++;
+	}
+}
+
 char	**get_arg_vec(t_env_pipe *st, char **argv)
 {
 	char	**arg_vec;
-
+	
 	if (st->nbr_cmd == 1)
 		arg_vec = ft_split(argv[0], ' ');
 	else
