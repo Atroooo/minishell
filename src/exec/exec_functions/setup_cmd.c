@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:56:28 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/28 11:10:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/28 12:26:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,29 @@ char	*setup_file(char *raw_file)
 	return (file);
 }
 
+static int	check_if_file(char *cmd, t_env_main *main_env)
+{
+	int	fd;
+
+	fd = open(cmd, O_RDONLY);
+	if (fd == -1)
+	{
+		close(fd);
+		return (0);
+	}
+	close(fd);
+	main_env->input = 2;
+	return (1);
+}
+
 static char	*setup_cmd(char *cmd, t_env_main *main_env)
 {
 	char	*s_cmd;
 
 	if (!cmd)
 		return (NULL);
+	if (check_if_file(cmd, main_env))
+		return (cmd);
 	if (ft_strncmp(cmd, "<", 1) == 0 || ft_strncmp(cmd, ">", 1) == 0)
 	{
 		if (ft_strncmp(cmd, "<", 1) == 0)

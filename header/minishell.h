@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 18:07:27 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:19:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int			redirect_hub(t_line *all_cmd, t_env_main *main_env);
 int			exec_pipe(int argc, char **argv, t_env_main *main_env);
 int			open_files(char **argv, t_env_pipe *st);
 int			dup_manager(t_env_pipe *st);
-int			set_up_struct(t_env_pipe *st, int argc, t_env_main *main_env);
+int			set_up_struct(t_env_pipe *st, int argc);
 char		*get_path(char *cmd, char *paths, t_env_pipe *st);
 void		no_path(t_env_pipe *st, char **arg_vec);
 void		path_is_null(t_env_pipe *st, char **arg_vec, char **argv);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/28 10:42:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/28 14:07:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,6 @@ void	print_tab(char **tab)
 		ft_printf("%s\n", tab[i]);
 		i++;
 	}
-}
-
-char	**get_arg_vec(t_env_pipe *st, char **argv)
-{
-	char	**arg_vec;
-	
-	if (st->nbr_cmd == 1)
-		arg_vec = ft_split(argv[0], ' ');
-	else
-		arg_vec = ft_split(argv[st->actual_pipe + 2 + st->hdoc], ' ');
-	if (arg_vec == NULL)
-		quit_function(st, -1);
-	return (arg_vec);
 }
 
 int	find_path_index(char **env)
@@ -53,22 +40,21 @@ int	find_path_index(char **env)
 
 void	get_exec_done(char **argv, char **env, t_env_pipe *st)
 {
-	char	**arg_vec;
 	char	*path;
 	int		path_pos_index;
 
 	path = NULL;
-	arg_vec = get_arg_vec(st, argv);
+	print_tab(argv);
 	path_pos_index = find_path_index(env);
 	if (path_pos_index == -1)
 	{
-		no_path(st, arg_vec);
+		no_path(st, argv);
 		return ;
 	}
 	if (env[path_pos_index])
-		path = get_path(arg_vec[0], env[path_pos_index], st);
+		path = get_path(argv[0], env[path_pos_index], st);
 	if (path == NULL)
-		path_is_null(st, arg_vec, argv);
-	execve(path, arg_vec, env);
-	error_execve(arg_vec, path, st);
+		path_is_null(st, argv, argv);
+	execve(path, argv, env);
+	error_execve(argv, path, st);
 }
