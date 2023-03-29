@@ -1,5 +1,4 @@
-- Flag + content cmd pas encore gerer si y a pas d input output mais 
-j ai ajoute var dans struct pour le gerer donc a FAIRE
+- Pipe a fix
 - here_doc a refaire
 
 < Makefile ls -la | wc -l > outfile

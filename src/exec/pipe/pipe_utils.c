@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/28 14:04:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/29 09:31:32 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static int	setup_pipe_files(char **argv, t_env_pipe *st)
 			ft_printf("Cannot open file : %s\n", argv[1]);
 			return (free(st), 0);
 		}
+		st->outfile = 1;
 		return (1);
 	}
 	else
