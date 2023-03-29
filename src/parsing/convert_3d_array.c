@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/29 17:32:23 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/29 17:43:55 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,6 @@ int	convert_in_3d_array(t_line *all_cmd)
 			return (-1);
 		i++;
 	}
-	print_list_delete(all_cmd->infile);
-	print_list_delete(all_cmd->outfile);
 	all_cmd->all_cmd[i] = NULL;
 	return (1);
 }

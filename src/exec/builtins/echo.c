@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/29 08:20:43 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/29 17:42:39 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
-
-static void	print_env_var(char *str, t_env_var *env_list, t_env_main *main_env)
-{
-	
-}
 
 int	check_if_flag(char *str)
 {

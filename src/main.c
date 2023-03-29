@@ -36,7 +36,6 @@ static void	exec_shell(t_env_main *main_env)
 		{
 			add_history(line);
 			error = parsing(line, &all_cmd, main_env);
-			error = 1;
 			if (error == -1)
 				free_all_exit(main_env);
 			else if (error == 0)
