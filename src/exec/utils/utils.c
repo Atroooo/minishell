@@ -1,42 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pipe.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 15:33:14 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/29 16:43:36 by lcompieg         ###   ########.fr       */
+/*   Created: 2023/03/23 11:07:49 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/03/27 15:51:42 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void	print_tab(char **tab)
+int	cmd_size(char **cmd)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
-	{
-		ft_printf("CMD = %s\n", tab[i]);
+	while (cmd[i])
 		i++;
-	}
+	return (i);
 }
 
-int	exec_pipe(int argc, char **argv, t_env_main *main_env)
+int	get_total_cmd(t_line *all_cmd)
 {
-	t_env_pipe	*st;
+	int	count;
+	int	i;
+	int	j;
 
-	st = malloc(sizeof(t_env_pipe));
-	if (st == NULL)
-		return (ft_printf("Error : %s\n", strerror(errno)));
-	st->input = main_env->input;
-	st->output = main_env->output;
-	if (!open_files(argv, st))
-		return (0);
-	if (!set_up_struct(st, argc, argv))
-		return (0);
-	execution(argv, main_env->env, st);
-	return (1);
+	i = 0;
+	count = 0;
+	while (all_cmd->all_cmd[i])
+	{
+		j = 0;
+		while (all_cmd->all_cmd[i][j])
+		{
+			count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
 }

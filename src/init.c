@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:09:04 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/27 07:58:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/29 17:40:20 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ static void	init_env_list(t_env_var **env_list, char **env)
 
 void	init_main_env(t_env_main *main_env, char **env)
 {
-	// main_env->env_list = malloc(sizeof(t_env_var));
-	// if (!main_env->env_list)
-	// 	exit(1);
+	if (env)
+		main_env->env = env;
+	main_env->input = 0;
+	main_env->output = 0;
 	main_env->env_list = NULL;
 	init_env_list(&main_env->env_list, env);
 	termios_init(main_env);

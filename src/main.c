@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/************************************************************************ */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -21,14 +21,14 @@ static void	check_param(int argc)
 	}
 }
 
-static void	exec_shell(char **env, t_env_main *main_env)
+static void	exec_shell(t_env_main *main_env)
 {
 	char	*line;
 	t_line	all_cmd;
 	int		error;
 
-	signal_handler(main_env);
 	error = 0;
+	signal_handler(main_env);
 	line = readline("prompt> ");
 	while (1)
 	{
@@ -38,16 +38,14 @@ static void	exec_shell(char **env, t_env_main *main_env)
 			error = parsing(line, &all_cmd, main_env);
 			error = 1;
 			if (error == -1)
-				exit (1); // ERROR MALLOC FAUT GERER AUTRE FREE
+				free_all_exit(main_env);
 			else if (error == 0)
-				exec_hub(&all_cmd, env, main_env);
-			// print_list_delete(all_cmd.infile);
-			// print_list_delete(all_cmd.outfile);
+				exec_hub(&all_cmd, main_env);
 			free(line);
 			line = readline("prompt> ");
 		}
 		if (!line)
-			exit(0);
+			exit(0); //FAUT FREE
 		rl_clear_history();
 	}
 }
@@ -61,6 +59,6 @@ int	main(int argc, char *argv[], char *env[])
 	check_param(argc);
 	main_env.tty = &termios_save;
 	init_main_env(&main_env, env);
-	exec_shell(env, &main_env);
+	exec_shell(&main_env);
 	return (0);
 }

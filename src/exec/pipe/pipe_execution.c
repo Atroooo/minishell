@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   pipe_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/14 11:02:52 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:38:20 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
 static int	fork_declaration(char **argv, char *env[], t_env_pipe *st, int i)
-{	
+{
 	st->pid[i] = fork();
 	if (st->pid[i] == -1)
 	{
 		free_env_exit(st, st->nbr_cmd - 1);
 		return (0);
-	}	
+	}
 	if (st->pid[i] < 0)
 		return (quit_function(st, 1));
 	if (st->pid[i] == 0)
@@ -44,8 +44,6 @@ static void	wait_for_process(t_env_pipe *st)
 
 static void	end_the_progam(t_env_pipe *st)
 {
-	close(st->infile);
-	close(st->outfile);
 	close_function(st);
 	wait_for_process(st);
 	free_pipe(st);
