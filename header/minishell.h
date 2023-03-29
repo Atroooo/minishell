@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 17:40:53 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:52:06 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void		incrementation(int *index, int *nbr_char, char c);
 int			check_if_not_special_case(char *line, int *i_line, \
 			char *final_line, t_env_main *main_env);
 
-
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
 void		termios_init(t_env_main *main_env);
@@ -148,7 +147,7 @@ int			setup_heredoc(char **argv, t_env_pipe *st);
 int			heredoc(t_env_pipe *st, char **argv);
 
 /*Builtins*/
-void		ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env);
+void		ft_echo(char **cmd, t_env_main *main_env);
 void		ft_cd(char **cmd, t_env_main *main_env);
 void		ft_pwd(char **cmd, t_env_main *main_env);
 t_env_var	*ft_export(char **cmd, t_env_var *env_list, t_env_main *main_env);
@@ -173,6 +172,6 @@ void		free_cmd(t_line *all_cmd);
 void		free_all_exit(t_env_main *main_env);
 
 void		print_tab(char **tab);
-
 void		print_list_delete(t_lst *lst);//A DELETE
+
 #endif

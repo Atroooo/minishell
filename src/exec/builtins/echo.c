@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/29 17:42:39 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:51:36 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_if_flag(char *str)
 	return (0);
 }
 
-void	ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env)
+void	ft_echo(char **cmd, t_env_main *main_env)
 {
 	int	i;
 	int	n;
@@ -35,7 +35,7 @@ void	ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env)
 		return ;
 	i = 1;
 	n = 0;
-	if (cmd[1] &&  check_if_flag(cmd[1]))
+	if (cmd[1] && check_if_flag(cmd[1]))
 	{
 		n = 1;
 		i++;

@@ -19,7 +19,7 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 	if (ft_strcmp("cd", cmd[0]) == 0)
 		ft_cd(cmd, main_env);
 	else if (ft_strcmp("echo", cmd[0]) == 0)
-		ft_echo(cmd, main_env->env_list, main_env);
+		ft_echo(cmd, main_env);
 	else if (ft_strcmp("env", cmd[0]) == 0)
 		ft_env(cmd, main_env->env_list, main_env);
 	else if (ft_strcmp("exit", cmd[0]) == 0)
