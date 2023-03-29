@@ -6,12 +6,11 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 13:53:23 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:43:44 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
-
 
 static int	find_path_index(char **env)
 {
@@ -25,6 +24,30 @@ static int	find_path_index(char **env)
 		i++;
 	}
 	return (-1);
+}
+
+static char	**get_cmd_hdoc(char **argv)
+{
+	char	**cmd;
+	int		i;
+	int		j;
+
+	cmd = malloc(sizeof(char *) * (cmd_size(argv) + 1));
+	if (!cmd)
+		return (NULL);
+	i = 1;
+	j = 0;
+	while (argv[i])
+	{
+		cmd[j] = ft_strdup(argv[i]);
+		if (!cmd[j])
+			return (NULL);
+		i++;
+		j++;
+	}
+	cmd[j] = "heredoc";
+	cmd[j + 1] = NULL;
+	return (cmd);
 }
 
 static int	get_index(t_env_pipe *st)
@@ -73,7 +96,9 @@ void	get_exec_done(char **argv, char **env, t_env_pipe *st)
 
 	path = NULL;
 	path_pos_index = find_path_index(env);
-	if (st->infile != 0 && st->outfile == 1)
+	if (st->hdoc == 1)
+		cmd = get_cmd_hdoc(argv);
+	else if (st->infile != 0 && st->outfile == 1)
 		cmd = argv;
 	else
 		cmd = parse_cmd(argv, st);

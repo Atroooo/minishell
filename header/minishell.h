@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/28 12:19:35 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/29 16:33:00 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,10 @@ int			redirect_hub(t_line *all_cmd, t_env_main *main_env);
 int			exec_pipe(int argc, char **argv, t_env_main *main_env);
 int			open_files(char **argv, t_env_pipe *st);
 int			dup_manager(t_env_pipe *st);
-int			set_up_struct(t_env_pipe *st, int argc);
+int			set_up_struct(t_env_pipe *st, int argc, char **argv);
 char		*get_path(char *cmd, char *paths, t_env_pipe *st);
 void		no_path(t_env_pipe *st, char **arg_vec);
 void		path_is_null(t_env_pipe *st, char **arg_vec, char **argv);
-int			heredoc(t_env_pipe *st, char **argv);
 void		get_exec_done(char **argv, char **env, t_env_pipe *st);
 void		execution(char **argv, char *env[], t_env_pipe *st);
 int			error_execve(char **arg_vec, char *path, t_env_pipe *st);
@@ -132,6 +131,10 @@ void		free_env_exit(t_env_pipe *st, int i);
 void		free_pipe(t_env_pipe *st);
 void		close_function(t_env_pipe *st);
 int			quit_function(t_env_pipe *st, int error_code);
+
+/*Heredoc*/
+int			setup_heredoc(char **argv, t_env_pipe *st);
+int			heredoc(t_env_pipe *st, char **argv);
 
 /*Builtins*/
 void		ft_echo(char **cmd, t_env_var *env_list, t_env_main *main_env);
@@ -157,5 +160,7 @@ char		*setup_file(char *raw_file);
 void		free_str(char **str);
 void		free_cmd(t_line *all_cmd);
 void		free_all_exit(t_env_main *main_env);
+
+void		print_tab(char **tab);
 
 #endif

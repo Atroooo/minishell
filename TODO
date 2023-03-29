@@ -4,3 +4,7 @@
 < Makefile ls -la | wc -l > outfile
 < Makefile ls -la | wc -l | wc -l > outfile
 < Makefile ls > outfile
+
+cat << EOF
+echo test << EOF
+...

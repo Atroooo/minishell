@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:28:02 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/27 14:49:28 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 15:53:48 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	redirect_output_append(char **cmd, int *pipe_fd, \
 	i = 0;
 	while (cmd[i])
 	{
-		if (ft_strncmp(cmd[i], ">>", 2) == 0)
+		if (ft_strnstr(cmd[i], ">>", 2) == 0)
 		{
 			file = setup_file(cmd[i]);
 			fd = open(file, O_APPEND, 0777);

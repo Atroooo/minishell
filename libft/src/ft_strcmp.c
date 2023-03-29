@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:40:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/02/09 15:11:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/29 15:48:54 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_strcmp(const char *s1, const char *s2)
 	unsigned char	*str1;
 	unsigned char	*str2;
 
+	if (s1 == NULL || s2 == NULL)
+		return (0);
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;
 	i = 0;

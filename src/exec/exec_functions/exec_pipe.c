@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:33:14 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/29 14:02:59 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:43:36 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	exec_pipe(int argc, char **argv, t_env_main *main_env)
 {
 	t_env_pipe	*st;
 
-	// print_tab(argv);
 	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
 		return (ft_printf("Error : %s\n", strerror(errno)));
@@ -36,7 +35,7 @@ int	exec_pipe(int argc, char **argv, t_env_main *main_env)
 	st->output = main_env->output;
 	if (!open_files(argv, st))
 		return (0);
-	if (!set_up_struct(st, argc))
+	if (!set_up_struct(st, argc, argv))
 		return (0);
 	execution(argv, main_env->env, st);
 	return (1);

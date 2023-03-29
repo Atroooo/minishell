@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 09:31:32 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:37:54 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ void	set_up_pipe(t_env_pipe *st)
 	}
 }
 
-int	set_up_struct(t_env_pipe *st, int argc)
+int	set_up_struct(t_env_pipe *st, int argc, char **argv)
 {
 	st->nbr_cmd = argc;
+	st->hdoc = heredoc(st, argv);
 	st->actual_pipe = 0;
 	st->pid = malloc(sizeof(int) * (st->nbr_cmd + 1));
 	if (st->pid == NULL)
@@ -47,21 +48,6 @@ int	set_up_struct(t_env_pipe *st, int argc)
 		return (0);
 	}
 	set_up_pipe(st);
-	return (1);
-}
-
-static int	setup_heredoc(char **argv, t_env_pipe *st)
-{
-	st->infile = open(argv[0], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (st->infile == -1)
-	{
-		ft_printf("Cannot open file : %s\n", argv[1]);
-		free(st);
-		return (0);
-	}
-	st->outfile = open(argv[1], O_RDWR | O_CREAT | O_APPEND, 0644);
-	if (st->outfile == -1)
-		quit_function(st, 0);
 	return (1);
 }
 
@@ -95,16 +81,13 @@ static int	setup_pipe_files(char **argv, t_env_pipe *st)
 
 int	open_files(char **argv, t_env_pipe *st)
 {
-	int	hdoc;
-
 	if (st->input == 0 && st->output == 0)
 	{
 		st->infile = 0;
 		st->outfile = 1;
 		return (1);
 	}
-	hdoc = ft_strcmp(argv[0], "<<");
-	if (hdoc == 0)
+	if (ft_strnstr(argv[0], "<<", 2) != 0)
 	{
 		if (!setup_heredoc(argv, st))
 			return (0);
