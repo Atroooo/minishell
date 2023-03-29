@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 16:56:02 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 13:47:48 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static void	wait_for_process(t_env_pipe *st)
 
 static void	end_the_progam(t_env_pipe *st)
 {
-	// close(st->infile);
-	// close(st->outfile); A ajouter a la fin du prog probalement
 	close_function(st);
 	wait_for_process(st);
 	free_pipe(st);

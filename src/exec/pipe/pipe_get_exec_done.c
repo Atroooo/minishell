@@ -6,23 +6,12 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 09:57:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 13:53:23 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void	print_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_printf("CMD = %s\n", tab[i]);
-		i++;
-	}
-}
 
 static int	find_path_index(char **env)
 {

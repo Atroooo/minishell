@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/14 11:02:52 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 14:01:08 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	heredoc_parsing(char **argv, t_env_pipe *st)
 
 int	heredoc(t_env_pipe *st, char **argv)
 {
-	if (ft_strcmp(argv[1], "here_doc") != 0)
+	if (ft_strcmp(argv[0], "<<") != 0)
 		return (0);
 	st->nbr_cmd -= 1;
 	while (1)

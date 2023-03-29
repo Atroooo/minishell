@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:56:28 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/29 09:32:00 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 13:47:22 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ static int	check_if_file(char *cmd, t_env_main *main_env)
 
 	fd = open(cmd, O_RDONLY);
 	if (fd == -1)
-	{
-		close(fd);
 		return (0);
-	}
 	close(fd);
 	main_env->input = 2;
 	return (1);
