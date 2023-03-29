@@ -1,5 +1,5 @@
 - Pipe a fix
-- here_doc a refaire
+- here_doc a modif
 
 < Makefile ls -la | wc -l > outfile
 < Makefile ls -la | wc -l | wc -l > outfile

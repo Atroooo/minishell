@@ -6,32 +6,29 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 16:53:15 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:25:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
 /*Need protect*/
-/*Utiliser des pipes et dup2 pour rediriger l'entrée et 
-la sortie standard et ensuite afficher en un seul bloque la cmd*/
+/*Ajouter toute la chaine au fur et a mesure avec les \n*/
 int	setup_heredoc(char **argv, t_env_pipe *st)
 {
-	st->infile = open("heredoc", O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (st->infile == -1)
-	{
-		ft_printf("Cannot open file : %s\n", argv[1]);
-		free(st);
-		return (0);
-	}
+	int	temp_pipe[2];
+
+	pipe(temp_pipe);
+	st->infile = temp_pipe[0];
 	if (st->output == 0)
 		st->outfile = 1;
 	else
 	{
-		st->outfile = open("outfile", O_RDWR | O_CREAT | O_APPEND, 0644);
+		st->outfile = open(argv[1], O_RDWR | O_CREAT | O_APPEND, 0644);
 		if (st->outfile == -1)
 			quit_function(st, 0);
 	}
+	close(temp_pipe[1]);
 	return (1);
 }
 
@@ -78,7 +75,5 @@ int	heredoc(t_env_pipe *st, char **argv)
 		if (heredoc_parsing(argv, st) == 1)
 			break ;
 	}
-	close(st->infile);
-	st->infile = open("heredoc", O_RDWR);
 	return (1);
 }

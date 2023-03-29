@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 16:43:44 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:27:45 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ static char	**get_cmd_hdoc(char **argv)
 		i++;
 		j++;
 	}
-	cmd[j] = "heredoc";
-	cmd[j + 1] = NULL;
+	cmd[j] = NULL;
 	return (cmd);
 }
 
