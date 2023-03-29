@@ -33,6 +33,7 @@ SRC			 			= main.c init.c \
 						  parsing/global_variable/global_variable.c \
 						  parsing/global_variable/global_variable_nbr_char.c \
 						  parsing/global_variable/global_variable_utils.c \
+						  parsing/global_variable/global_variable_special_case.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	

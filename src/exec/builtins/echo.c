@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/27 17:26:41 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/29 08:20:43 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,7 @@
 
 static void	print_env_var(char *str, t_env_var *env_list, t_env_main *main_env)
 {
-	if (str[0] == '$' && str[1] == '?')
-	{
-		ft_printf("%d", main_env->last_cmd_status);
-		return ;
-	}
-	if (!env_list)
-		ft_printf("\n");
-	while (env_list)
-	{
-		if (env_list->name && ft_strcmp(str + 1, env_list->name) == 0)
-		{
-			ft_printf("%s", env_list->value);
-			return ;
-		}
-		env_list = env_list->next;
-	}
+	
 }
 
 int	check_if_flag(char *str)

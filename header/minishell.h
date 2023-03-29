@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 14:26:52 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/29 16:46:06 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct t_line
 	t_cmd	*cmd;
 	char	***all_cmd;
 	int		nbr_cmd;
+	t_lst	*infile;
+	t_lst	*outfile;
 }	t_line;
 
 typedef enum t_boolean
@@ -85,7 +87,7 @@ typedef enum t_boolean
 void		init_main_env(t_env_main *main_env, char **env);
 
 /*Parsing*/
-int			parsing(char *line, t_line *all_cmd, t_env_var *env_list);
+int			parsing(char *line, t_line *all_cmd, t_env_main *main_env);
 int			split_line(char *line, t_line *all_cmd);
 int			input_operator_check(char *cmd);
 int			get_cmd(char *line, t_cmd *cmd);
@@ -101,12 +103,15 @@ t_lst		*lst_new(void *content);
 void		print_cmd(int i, t_line all_cmd);
 int			convert_in_3d_array(t_line *all_cmd);
 void		free_cmd_struct(t_line *all_cmd);
-char		*replace_global_variable(char *line, t_env_var *env_list);
+char		*replace_global_variable(char *line, t_env_main *main_env);
 int			count_nbr_char(char *line, t_env_var *env_list);
 void		skip_simple_quote(int *index, int *nbr_char, char *line);
 int			count_alpha(char *line);
 void		skip_gobal_variable(int *index, char *line);
 void		incrementation(int *index, int *nbr_char, char c);
+int			check_if_not_special_case(char *line, int *i_line, \
+			char *final_line, t_env_main *main_env);
+
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
@@ -156,4 +161,5 @@ int			ft_lstsize_env(t_env_var *lst);
 void		free_str(char **str);
 void		free_cmd(t_line *all_cmd);
 
+void		print_list_delete(t_lst *lst);//A DELETE
 #endif

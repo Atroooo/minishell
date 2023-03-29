@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/27 15:54:25 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/29 17:09:34 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ static void	exec_shell(char **env, t_env_main *main_env)
 		while (line != NULL)
 		{
 			add_history(line);
-			error = parsing(line, &all_cmd, main_env->env_list);
+			error = parsing(line, &all_cmd, main_env);
+			error = 1;
 			if (error == -1)
 				exit (1); // ERROR MALLOC FAUT GERER AUTRE FREE
 			else if (error == 0)
 				exec_hub(&all_cmd, env, main_env);
+			// print_list_delete(all_cmd.infile);
+			// print_list_delete(all_cmd.outfile);
 			free(line);
 			line = readline("prompt> ");
 		}

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:06:19 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/23 07:48:31 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/29 17:14:25 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_lst	*lst_new(void *content)
 	return (list);
 }
 
-void	print_list(t_lst *lst)
+void	print_list_delete(t_lst *lst)
 {
 	while (lst != NULL)
 	{
@@ -66,11 +66,11 @@ void	print_cmd(int i, t_line all_cmd)
 	else
 		printf("%s\n", all_cmd.cmd[i].cmd);
 	printf("flag = ");
-	print_list(all_cmd.cmd[i].flag);
+	print_list_delete(all_cmd.cmd[i].flag);
 	printf("content = ");
-	print_list(all_cmd.cmd[i].content);
+	print_list_delete(all_cmd.cmd[i].content);
 	printf("infile = ");
-	print_list(all_cmd.cmd[i].infile);
+	print_list_delete(all_cmd.cmd[i].infile);
 	printf("outfile = ");
-	print_list(all_cmd.cmd[i].outfile);
+	print_list_delete(all_cmd.cmd[i].outfile);
 }
