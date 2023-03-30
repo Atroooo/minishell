@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 14:13:00 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:04:34 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,7 @@ static int	find_path_index(char **env)
 	}
 	return (-1);
 }
-
-static char	**get_cmd_hdoc(char **argv)
-{
-	char	**cmd;
-	int		i;
-	int		j;
-
-	cmd = malloc(sizeof(char *) * (cmd_size(argv) + 1));
-	if (!cmd)
-		return (NULL);
-	i = 1;
-	j = 0;
-	while (argv[i])
-	{
-		cmd[j] = ft_strdup(argv[i]);
-		if (!cmd[j])
-			return (NULL);
-		i++;
-		j++;
-	}
-	cmd[j] = NULL;
-	return (cmd);
-}
-
-
+/*Envoyer cmd une par une du con*/
 void	get_exec_done(char **argv, char **env, t_env_pipe *st)
 {
 	char	**cmd;
@@ -58,10 +34,8 @@ void	get_exec_done(char **argv, char **env, t_env_pipe *st)
 
 	path = NULL;
 	path_pos_index = find_path_index(env);
-	if (st->hdoc == 1)
-		cmd = get_cmd_hdoc(argv);
-	else
-		cmd = argv;
+	cmd = argv;
+	print_tab(cmd);
 	if (path_pos_index == -1)
 	{
 		no_path(st, cmd);

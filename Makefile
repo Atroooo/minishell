@@ -10,14 +10,13 @@ HEADER_FILE				= minishell.h
 DIR						= src/
 SRC			 			= main.c init.c \
 						  parsing/parsing.c \
-						  exec/redirect/redirect.c \
 						  exec/signal_handler/signal_handler.c \
 						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/pwd.c exec/builtins/export.c \
 						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c \
 						  exec/pipe/pipe_dup_manager.c exec/pipe/pipe_execution.c exec/pipe/pipe_get_exec_done.c \
 						  exec/pipe/pipe_get_exec_done_utils.c exec/pipe/pipe_get_path.c \
 						  exec/pipe/pipe_quit_utils.c exec/pipe/pipe_utils.c exec/exec_functions/exec_pipe.c \
-						  exec/pipe/heredoc.c \
+						  exec/pipe/heredoc.c exec/pipe/pipe_setup.c \
 						  exec/utils/chained_list.c exec/utils/utils.c \
 						  exec/exec_functions/exec_hub.c exec/exec_functions/setup_cmd.c \
 						  exec/free_functions/free_utils.c \

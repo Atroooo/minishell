@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:33:14 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/30 14:11:21 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:51:54 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	exec_pipe(int argc, char **argv, \
 {
 	t_env_pipe	*st;
 
-	print_tab(argv);
+	// print_tab(argv);
 	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
 		return (ft_printf("Error : %s\n", strerror(errno)));

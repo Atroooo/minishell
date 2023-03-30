@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/14 12:38:15 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:03:56 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_cd(char **cmd, t_env_main *main_env)
 	}
 	if (chdir(path) == -1)
 	{
-		ft_printf("bash: cd: %s no such file or directory\n", path);
+		ft_printf("minishell: cd: %s no such file or directory\n", path);
 		main_env->last_cmd_status = 1;
 		free(path);
 		return ;
