@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:09:04 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/29 17:40:20 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/30 13:25:04 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	init_main_env(t_env_main *main_env, char **env)
 {
 	if (env)
 		main_env->env = env;
-	main_env->input = 0;
-	main_env->output = 0;
 	main_env->env_list = NULL;
 	init_env_list(&main_env->env_list, env);
 	termios_init(main_env);
