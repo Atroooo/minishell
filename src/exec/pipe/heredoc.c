@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 17:25:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/30 14:13:24 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*Need protect*/
 /*Ajouter toute la chaine au fur et a mesure avec les \n*/
-int	setup_heredoc(char **argv, t_env_pipe *st)
+int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 {
 	int	temp_pipe[2];
 
@@ -24,7 +24,8 @@ int	setup_heredoc(char **argv, t_env_pipe *st)
 		st->outfile = 1;
 	else
 	{
-		st->outfile = open(argv[1], O_RDWR | O_CREAT | O_APPEND, 0644);
+		st->outfile = open(lst_last(all_cmd->outfile)->data, \
+			O_RDWR | O_CREAT | O_APPEND, 0644);
 		if (st->outfile == -1)
 			quit_function(st, 0);
 	}
@@ -42,12 +43,12 @@ static char	*get_delimiter(char *str)
 	return (delimiter);
 }
 
-static int	heredoc_parsing(char **argv, t_env_pipe *st)
+static int	heredoc_parsing(t_env_pipe *st, t_line *all_cmd)
 {
 	char	*delimiter;
 	char	*get_str;
 
-	delimiter = get_delimiter(argv[0]);
+	delimiter = get_delimiter(lst_last(all_cmd->infile)->data);
 	get_str = get_next_line(0);
 	if (get_str == NULL)
 	{
@@ -64,15 +65,17 @@ static int	heredoc_parsing(char **argv, t_env_pipe *st)
 	return (0);
 }
 
-int	heredoc(t_env_pipe *st, char **argv)
+int	heredoc(t_env_pipe *st, t_line *all_cmd)
 {
-	if (ft_strnstr(argv[0], "<<", 2) == 0)
+	if (!all_cmd->infile)
+		return (0);
+	if (ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) == 0)
 		return (0);
 	st->nbr_cmd = 1;
 	while (1)
 	{
 		ft_printf("heredoc> ");
-		if (heredoc_parsing(argv, st) == 1)
+		if (heredoc_parsing(st, all_cmd) == 1)
 			break ;
 	}
 	return (1);

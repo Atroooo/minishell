@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:33:14 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/29 16:43:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/30 14:11:21 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,31 @@ void	print_tab(char **tab)
 	}
 }
 
-int	exec_pipe(int argc, char **argv, t_env_main *main_env)
+static void	check_inout(t_env_pipe *st, t_line *all_cmd)
+{
+	if (all_cmd->infile != NULL)
+		st->input = 1;
+	else
+		st->input = 0;
+	if (all_cmd->outfile != NULL)
+		st->output = 1;
+	else
+		st->output = 0;
+}
+
+int	exec_pipe(int argc, char **argv, \
+	t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
+	print_tab(argv);
 	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
 		return (ft_printf("Error : %s\n", strerror(errno)));
-	st->input = main_env->input;
-	st->output = main_env->output;
-	if (!open_files(argv, st))
+	check_inout(st, all_cmd);
+	if (!open_files(st, all_cmd))
 		return (0);
-	if (!set_up_struct(st, argc, argv))
+	if (!set_up_struct(st, all_cmd, argc))
 		return (0);
 	execution(argv, main_env->env, st);
 	return (1);
