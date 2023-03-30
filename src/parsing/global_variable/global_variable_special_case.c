@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 08:37:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 14:32:06 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/30 17:48:04 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_if_not_between_quote(char before, char after)
 	return (0);
 }
 
-int	interrogation_case(char **final_line, int lst_cmd_status)
+static int	interrogation_case(char **final_line, int lst_cmd_status)
 {
 	char	*nbr;
 	int		size;
@@ -33,6 +33,12 @@ int	interrogation_case(char **final_line, int lst_cmd_status)
 	return (size);
 }
 
+static int	dollar_case(int *i_line)
+{
+	*i_line += 2;
+	return (-2);
+}
+
 int	check_if_not_special_case(char *line, int *i_line, char *final_line, t_env_main *main_env)
 {
 	int	index;
@@ -40,11 +46,14 @@ int	check_if_not_special_case(char *line, int *i_line, char *final_line, t_env_m
 	index = 0;
 	if (*i_line > 0 && check_if_not_between_quote(line[*i_line - 1], line[*i_line + 1]))
 		return (-2);
+	else if (line[*i_line + 1] == '$')
+		return (dollar_case(i_line));
 	else if (line[*i_line + 1] == '?')
 	{
 		skip_gobal_variable(i_line, line);
 		index = interrogation_case(&final_line, main_env->last_cmd_status);
+		if (index < 0)
+			return (-1);
 	}
-	skip_gobal_variable(i_line, line);
 	return (index);
 }

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 14:28:01 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/30 17:48:19 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_env_var	*find_elem_in_list(char *name, t_env_var *env_list)
 {
 	while (env_list != NULL)
 	{
-		if (ft_strcmp(env_list->name, name) == 0)
+		if (ft_strncmp(env_list->name, name, ft_strlen(name)) == 0)
 			break ;
 		env_list = env_list->next;
 	}
@@ -41,7 +41,10 @@ static int	copy_variable(char *line, int *index, t_env_var *env_list, char *fina
 	char	*name;
 	int		nbr_char;
 
-	name = ft_substr(line, 0, count_alpha(line));
+	if (ft_isdigit(line[0]) || line[0] == '*')
+		name = ft_substr(line, 0, 1);
+	else
+		name = ft_substr(line, 0, count_alpha(line));
 	if (name == NULL)
 		return (-1);
 	env_list = find_elem_in_list(name, env_list);
@@ -71,7 +74,7 @@ static int	check_if_quote(char c, int *del)
 	return (0);
 }
 
-int	get_global_variable(char *line, char *final_line, \
+int	get_gbl_var(char *line, char *final_line, \
 						int *i_line, t_env_main *main_env)
 {
 	int	index;
@@ -81,12 +84,28 @@ int	get_global_variable(char *line, char *final_line, \
 	temp = check_if_not_special_case(line, i_line, &final_line[index], main_env);
 	if (temp == -1)
 		return (INT_MIN);
-	index += temp;
+	if (temp > 0)
+		index += temp;
 	if (temp == 0)
 	{
 		if (copy_variable(&line[*i_line + 1], &index, main_env->env_list, &final_line[0]))
 			return (INT_MIN);
 		skip_gobal_variable(i_line, line);
+	}
+	return (index);
+}
+
+int	gbl_var_check(char *line, char *final_line, \
+						int *i_line, t_env_main *main_env)
+{
+	int	index;
+
+	index = 0;
+	while (line[*i_line] == '$')
+	{
+		index += get_gbl_var(&line[0], &final_line[index], i_line, main_env);
+		if (index < 0)
+			return (INT_MIN);
 	}
 	return (index);
 }
@@ -104,12 +123,9 @@ int	get_final_line(char *line, t_env_main *main_env, char *final_line)
 	{
 		if (check_if_quote(line[i_line], &del))
 			copy_simple_quote(&i_line, &index, line, final_line);
-		if (line[i_line] == '$')
-		{
-			index += get_global_variable(&line[0], &final_line[index], &i_line, main_env);
-			if (index < 0)
-				return (-1);
-		}
+		index += gbl_var_check(&line[0], &final_line[index], &i_line, main_env);
+		if (index < 0)
+			return (-1);
 		final_line[index] = line[i_line];
 		incrementation(&i_line, &index, line[i_line]);
 	}
@@ -126,6 +142,5 @@ char	*replace_global_variable(char *line, t_env_main *main_env)
 		return (NULL);
 	if (get_final_line(line, main_env, &final_line[0]))
 		return (NULL);
-	//printf("%s\n", final_line);
 	return (final_line);
 }
