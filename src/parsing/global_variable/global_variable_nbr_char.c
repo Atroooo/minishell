@@ -6,11 +6,32 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:35:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/28 11:37:04 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/30 17:03:39 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
+
+static int	check_if_not_between_quote(char before, char after)
+{
+	if (before == '\"' && after == '\"')
+		return (1);
+	return (0);
+}
+
+static int	special_case_count(char *line, int *index, int *nbr_char)
+{
+	if (*index > 0 && check_if_not_between_quote(line[*index - 1], line[*index + 1]))
+		return (1);
+	else if (line[*index + 1] == '?')
+	{
+		nbr_char += 3;
+		return (1);
+	}
+	else if (ft_isalnum(line[*index + 1]) == 0)
+		return (1);
+	return (0);
+}
 
 static int	get_global_variable(char *line, int *nbr_char, t_env_var *env_list)
 {
@@ -18,7 +39,7 @@ static int	get_global_variable(char *line, int *nbr_char, t_env_var *env_list)
 
 	name = ft_substr(line, 0, count_alpha(line));
 	if (name == NULL)
-		exit (1);//A GERER PLUS TARD;
+		return (-1);
 	while (env_list != NULL)
 	{
 		if (ft_strcmp(env_list->name, name) == 0)
@@ -32,7 +53,7 @@ static int	get_global_variable(char *line, int *nbr_char, t_env_var *env_list)
 	return (0);
 }
 
-int	count_nbr_char(char *line, t_env_var *env_list)
+int	count_nbr_char(char *line, t_env_var *env_list) //A AMELIORER
 {
 	int	index;
 	int	nbr_char;
@@ -43,9 +64,10 @@ int	count_nbr_char(char *line, t_env_var *env_list)
 	{
 		if (line[index] == '\'')
 			skip_simple_quote(&index, &nbr_char, line);
-		if (line[index] == '$')
+		while (line[index] == '$')
 		{
-			get_global_variable(&line[index + 1], &nbr_char, env_list);
+			if (special_case_count(line, &index, &nbr_char) == 0)
+				get_global_variable(&line[index + 1], &nbr_char, env_list);
 			skip_gobal_variable(&index, line);
 		}
 		incrementation(&index, &nbr_char, line[index]);
