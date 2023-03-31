@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 13:40:39 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/03/31 21:07:55 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ int	check_if_exec_needed(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] && (line[i] == '\n' || line[i] == ' ' || line[i] == '	'))
+	while (line[i] && (line[i] == '\n' || line[i] == ' ' || line[i] == '	' \
+			|| line[i] == ':' || line[i] == '!'))
+	{
+		if ((line[i] == ':' || line[i] == '!') \
+			&& (line[i + 1] == ':' || line[i + 1] == '!'))
+			return (0);
 		i++;
+	}
 	if (line[i] == '\0')
 		return (1);
 	return (0);
