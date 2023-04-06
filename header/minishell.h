@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 14:07:17 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/06 22:48:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,9 @@ int			dup_manager(t_env_pipe *st);
 int			set_up_struct(t_env_pipe *st, t_line *all_cmd, int argc);
 char		*get_path(char *cmd, char *paths, t_env_pipe *st);
 void		no_path(t_env_pipe *st, char **arg_vec);
-void		path_is_null(t_env_pipe *st, char **arg_vec, char **argv);
-void		get_exec_done(char **argv, char **env, t_env_pipe *st);
+void		path_is_null(t_env_pipe *st, char **arg_vec, char *argv);
 void		execution(char **argv, char *env[], t_env_pipe *st);
+void		get_exec_done(char *argv, char **env, t_env_pipe *st);
 int			error_execve(char **arg_vec, char *path, t_env_pipe *st);
 void		free_env_exit(t_env_pipe *st, int i);
 void		free_pipe(t_env_pipe *st);

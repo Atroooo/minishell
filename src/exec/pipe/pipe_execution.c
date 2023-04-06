@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 16:10:46 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/06 22:45:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	fork_declaration(char **argv, char *env[], t_env_pipe *st, int i)
 	if (st->pid[i] == 0)
 	{
 		dup_manager(st);
-		get_exec_done(argv, env, st);
+		get_exec_done(argv[i], env, st);
 	}
 	return (1);
 }
