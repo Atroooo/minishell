@@ -6,13 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 17:45:23 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:14:01 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-/*Need protect*/
+/*Need protect + check si avec un fork pour heredoc mieux*/
 int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 {
 	char	*outfile;
