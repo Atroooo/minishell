@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/06 22:48:24 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/07 23:00:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	find_path_index(char **env)
 	return (-1);
 }
 
-void	get_exec_done(char *argv, char **env, t_env_pipe *st)
+int	get_exec_done(char *argv, char **env, t_env_pipe *st)
 {
 	char	**cmd;
 	char	*path;
@@ -36,17 +36,21 @@ void	get_exec_done(char *argv, char **env, t_env_pipe *st)
 	path_pos_index = find_path_index(env);
 	cmd = ft_split(argv, ' ');
 	if (!cmd)
-		return ;
+		return (quit_function(st, 1));
 	print_tab(cmd);
 	if (path_pos_index == -1)
 	{
 		no_path(st, cmd);
-		return ;
+		return (0);
 	}
 	if (env[path_pos_index])
-		path = get_path(cmd[0], env[path_pos_index], st);
+		path = get_path(cmd[0], env[path_pos_index]);
 	if (path == NULL)
+	{
 		path_is_null(st, cmd, argv);
+		return (0);
+	}
 	execve(path, cmd, env);
 	error_execve(cmd, path, st);
+	return (0);
 }

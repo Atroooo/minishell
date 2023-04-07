@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 17:26:05 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/07 23:01:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	setup_inout(t_env_pipe *st, char *file_raw, int s)
 	{
 		st->outfile = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 		if (st->outfile == -1)
-			return (quit_function(st, 0));
+			return (free(st), 0);
 		free(file_name);
 		return (1);
 	}
@@ -78,7 +78,7 @@ int	open_files(t_env_pipe *st, t_line *all_cmd)
 		st->outfile = 1;
 		return (1);
 	}
-	else if (all_cmd->infile != NULL && \
+	else if (all_cmd->infile != NULL && lst_last(all_cmd->infile)->data && \
 		ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) != 0)
 	{
 		if (!setup_heredoc(st, all_cmd))

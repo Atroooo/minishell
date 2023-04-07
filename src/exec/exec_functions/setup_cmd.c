@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:56:28 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/06 22:44:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/07 22:29:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,6 @@ static char	*setup_cmd(char **cmd)
 	if (!s_cmd)
 		return (NULL);
 	concat_cmd(cmd, s_cmd);
-	// i = 0;
-	// while (cmd[i])
-	// {
-	// 	ft_strcpy(s_cmd + ft_strlen(s_cmd), cmd[i]);
-	// 	if (cmd[i + 1])
-	// 		ft_strcpy(s_cmd + ft_strlen(s_cmd), " ");
-	// 	i++;
-	// }
 	return (s_cmd);
 }
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 18:14:01 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/07 22:43:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-/*Need protect + check si avec un fork pour heredoc mieux*/
+/*check si avec un fork pour heredoc mieux*/
 int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 {
 	char	*outfile;
@@ -25,9 +25,11 @@ int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 	else
 	{
 		outfile = setup_file(lst_last(all_cmd->outfile)->data);
+		if (!outfile)
+			return (0);
 		st->outfile = open(outfile, O_RDWR | O_CREAT | O_APPEND, 0644);
 		if (st->outfile == -1)
-			quit_function(st, 0);
+			return (free(st), 0);
 		free(outfile);
 	}
 	close(temp_pipe[1]);
@@ -99,9 +101,8 @@ int	heredoc(t_env_pipe *st, t_line *all_cmd)
 	char	*tmp_str;
 
 	str_print = NULL;
-	if (!all_cmd->infile)
-		return (0);
-	if (ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) == 0)
+	if (!all_cmd->infile || !lst_last(all_cmd->infile)->data || \
+		ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) == 0)
 		return (0);
 	st->nbr_cmd = 1;
 	while (1)
@@ -113,6 +114,8 @@ int	heredoc(t_env_pipe *st, t_line *all_cmd)
 		else
 		{
 			str_print = ft_strnjoin(str_print, tmp_str, ft_strlen(tmp_str));
+			if (!str_print)
+				return (free(st), -1);
 			free(tmp_str);
 		}
 	}

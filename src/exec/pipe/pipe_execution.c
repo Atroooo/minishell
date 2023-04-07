@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/06 22:45:41 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/07 22:54:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@ static int	fork_declaration(char **argv, char *env[], t_env_pipe *st, int i)
 {
 	st->pid[i] = fork();
 	if (st->pid[i] == -1)
-	{
-		free_env_exit(st, st->nbr_cmd - 1);
-		return (0);
-	}
+		return (quit_function(st, 1));
 	if (st->pid[i] < 0)
 		return (quit_function(st, 1));
 	if (st->pid[i] == 0)
 	{
-		dup_manager(st);
-		get_exec_done(argv[i], env, st);
+		if (!dup_manager(st))
+			return (0);
+		if (!get_exec_done(argv[i], env, st))
+			return (0);
 	}
 	return (1);
 }
@@ -49,7 +48,7 @@ static void	end_the_progam(t_env_pipe *st)
 	free_pipe(st);
 }
 
-void	execution(char **argv, char *env[], t_env_pipe *st)
+int	execution(char **argv, char *env[], t_env_pipe *st)
 {
 	int	i;
 
@@ -57,12 +56,10 @@ void	execution(char **argv, char *env[], t_env_pipe *st)
 	while (i < st->nbr_cmd)
 	{
 		if (!fork_declaration(argv, env, st, i))
-		{
-			quit_function(st, 0);
-			return ;
-		}	
+			return (0);
 		st->actual_pipe += 1;
 		i++;
 	}
 	end_the_progam(st);
+	return (1);
 }

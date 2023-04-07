@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:33:14 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/06 22:50:14 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/07 22:47:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	exec_pipe(int argc, char **argv, \
 		return (0);
 	if (!set_up_struct(st, all_cmd, argc))
 		return (0);
-	execution(argv, main_env->env, st);
+	if (!execution(argv, main_env->env, st))
+		return (0);
 	return (1);
 }

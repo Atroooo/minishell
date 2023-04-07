@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_quit_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 16:12:07 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/07 22:51:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	quit_function(t_env_pipe *st, int error_code)
 {
 	close_function(st);
 	free_pipe(st);
+	free(st);
 	if (error_code == 0)
 		ft_printf("Error : %s\n", strerror(errno));
 	else if (error_code == 1)
@@ -64,7 +65,7 @@ void	free_pipe(t_env_pipe *st)
 		free(st);
 }
 
-void	free_env_exit(t_env_pipe *st, int i)
+void	free_env(t_env_pipe *st, int i)
 {
 	if (i >= 0)
 	{
