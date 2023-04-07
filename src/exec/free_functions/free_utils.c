@@ -39,6 +39,19 @@ void	free_cmd(t_line *all_cmd)
 	free(all_cmd->all_cmd);
 }
 
+void	free_inout_list(t_lst *lst)
+{
+	t_list *tmp;
+	
+	while (lst != NULL)
+	{
+		tmp = lst->next;
+		free(lst->content);
+		free(lst);
+		lst = tmp;
+	}
+}
+
 //Segfault
 void	free_all_exit(t_env_main *main_env)
 {

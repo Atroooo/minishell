@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/07 23:01:07 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/07 23:05:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ char		*setup_file(char *raw_file);
 void		free_str(char **str);
 void		free_cmd(t_line *all_cmd);
 void		free_all_exit(t_env_main *main_env);
+void		free_inout_list(t_list *list);
 
 void		print_tab(char **tab);
 void		print_list_delete(t_lst *lst);//A DELETE

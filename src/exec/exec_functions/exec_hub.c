@@ -47,4 +47,6 @@ void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 	else
 		main_env->last_cmd_status = 1;
 	free_cmd(all_cmd);
+	free_inout_list(all_cmd->infile);
+	free_inout_list(all_cmd->outfile);
 }
