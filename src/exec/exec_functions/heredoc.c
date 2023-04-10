@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/07 22:43:40 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/10 11:38:06 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,6 @@ int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 	return (1);
 }
 
-static char	*get_delimiter(char *str)
-{
-	char	*delimiter;
-
-	delimiter = ft_strtrim(str, "< ");
-	if (!delimiter)
-		return (NULL);
-	return (delimiter);
-}
-
 static char	*heredoc_parsing(t_line *all_cmd)
 {
 	char	*delimiter;
@@ -67,44 +57,12 @@ static char	*heredoc_parsing(t_line *all_cmd)
 	return (get_str);
 }
 
-static char	*ft_strnjoin(char *old_dst, char *src, size_t len)
-{
-	char	*dst;
-	size_t	index;
-	size_t	j;
-
-	if (src == NULL)
-		return (NULL);
-	dst = malloc(sizeof(char) * (ft_strlen(old_dst) + ft_strlen(src) + 1));
-	if (!dst)
-		return (free(old_dst), NULL);
-	index = 0;
-	j = 0;
-	while (old_dst && old_dst[index])
-	{
-		dst[index] = old_dst[index];
-		index++;
-	}
-	while (src[j] && j < len)
-	{
-		dst[index] = src[j];
-		j++;
-		index++;
-	}
-	dst[index] = '\0';
-	return (dst);
-}
-
-int	heredoc(t_env_pipe *st, t_line *all_cmd)
+static void	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 {
 	char	*str_print;
 	char	*tmp_str;
 
 	str_print = NULL;
-	if (!all_cmd->infile || !lst_last(all_cmd->infile)->data || \
-		ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) == 0)
-		return (0);
-	st->nbr_cmd = 1;
 	while (1)
 	{
 		ft_printf("heredoc> ");
@@ -121,5 +79,15 @@ int	heredoc(t_env_pipe *st, t_line *all_cmd)
 	}
 	write(st->infile, str_print, ft_strlen(str_print));
 	free(str_print);
+}
+
+int	heredoc(t_env_pipe *st, t_line *all_cmd)
+{
+	if (!all_cmd->infile || !lst_last(all_cmd->infile)->data || \
+		ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) == 0)
+		return (0);
+	st->nbr_cmd = 1;
+	//fork ici
+	heredoc_loop(st, all_cmd);
 	return (1);
 }

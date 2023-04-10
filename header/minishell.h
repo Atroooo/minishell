@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 10:54:25 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:35:23 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,6 @@ void		termios_init(t_env_main *main_env);
 /*Exec cmd*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 char		**cmd_to_send(t_line *all_cmd);
-
-/*Redirect*/
-int			redirect_hub(t_line *all_cmd, t_env_main *main_env);
-
-/*Pipe*/
 int			open_files(t_env_pipe *st, t_line *all_cmd);
 int			dup_manager(t_env_pipe *st);
 int			set_up_struct(t_env_pipe *st, t_line *all_cmd, int nb_cmd);
@@ -142,6 +137,8 @@ int			quit_function(t_env_pipe *st, int error_code);
 /*Heredoc*/
 int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
 int			heredoc(t_env_pipe *st, t_line *all_cmd);
+char		*ft_strnjoin(char *old_dst, char *src, size_t len);
+char		*get_delimiter(char *str);
 
 /*Builtins*/
 void		ft_echo(char **cmd, t_env_main *main_env);

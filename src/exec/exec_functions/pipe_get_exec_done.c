@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 10:55:50 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:36:44 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	get_exec_done(char *cmd, char **env, t_env_pipe *st)
 	cmd_s = ft_split(cmd, ' ');
 	if (!cmd_s)
 		return (quit_function(st, 1));
-	print_tab(cmd_s);
 	if (path_pos_index == -1)
 	{
 		no_path(st, cmd_s);
