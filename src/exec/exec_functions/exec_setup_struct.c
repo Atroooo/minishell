@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_setup.c                                       :+:      :+:    :+:   */
+/*   pipe_setup_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:17:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/10 10:56:11 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:16:22 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static int	set_up_pipe(t_env_pipe *st)
+static int	setup_pipe(t_env_pipe *st)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ static int	set_up_pipe(t_env_pipe *st)
 	return (1);
 }
 
-int	set_up_struct(t_env_pipe *st, t_line *all_cmd, int nb_cmd)
+int	setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, int nb_cmd)
 {
 	st->nbr_cmd = nb_cmd;
 	st->hdoc = heredoc(st, all_cmd);
@@ -50,7 +50,7 @@ int	set_up_struct(t_env_pipe *st, t_line *all_cmd, int nb_cmd)
 		free_env(st, -1);
 		return (0);
 	}
-	if (!set_up_pipe(st))
+	if (!setup_pipe(st))
 		return (0);
 	return (1);
 }

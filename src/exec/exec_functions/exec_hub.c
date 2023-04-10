@@ -47,7 +47,7 @@ static int	exec_cmd(int nb_cmd, char **cmd, \
 	check_inout(st, all_cmd);
 	if (!open_files(st, all_cmd))
 		return (0);
-	if (!set_up_struct(st, all_cmd, nb_cmd))
+	if (!setup_struct_cmd(st, all_cmd, nb_cmd))
 		return (0);
 	if (!execution(cmd, main_env->env, st, main_env))
 		return (0);

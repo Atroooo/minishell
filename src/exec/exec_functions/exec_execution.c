@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 10:52:25 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:41:03 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,14 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 		main_env->env_list = ft_unset(cmd, main_env->env_list, main_env);
 	else
 		return (0);
-	if (main_env->env_list == NULL)
-		return (-1); //MALLOC ERREUR A GERER
+	if (main_env->env_list == NULL) /*Malloc a gerer*/
+		return (-1);
 	return (1);
 }
 
 static int	fork_declaration(char **cmd, char *env[], t_env_pipe *st, int i)
 {
 	st->pid[i] = fork();
-	if (st->pid[i] == -1)
-		return (quit_function(st, 1));
 	if (st->pid[i] < 0)
 		return (quit_function(st, 1));
 	if (st->pid[i] == 0)

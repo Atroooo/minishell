@@ -6,13 +6,12 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 11:38:06 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:29:09 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-/*check si avec un fork pour heredoc mieux*/
 int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 {
 	char	*outfile;
@@ -33,6 +32,7 @@ int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 		free(outfile);
 	}
 	close(temp_pipe[1]);
+	st->nbr_cmd = 1;
 	return (1);
 }
 
@@ -42,6 +42,8 @@ static char	*heredoc_parsing(t_line *all_cmd)
 	char	*get_str;
 
 	delimiter = get_delimiter(lst_last(all_cmd->infile)->data);
+	if (!delimiter)
+		return (NULL);
 	get_str = get_next_line(0);
 	if (get_str == NULL)
 	{
@@ -57,7 +59,7 @@ static char	*heredoc_parsing(t_line *all_cmd)
 	return (get_str);
 }
 
-static void	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
+static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 {
 	char	*str_print;
 	char	*tmp_str;
@@ -77,17 +79,22 @@ static void	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 			free(tmp_str);
 		}
 	}
+	if (!str_print)
+		return (-1);
 	write(st->infile, str_print, ft_strlen(str_print));
 	free(str_print);
+	return (1);
 }
 
 int	heredoc(t_env_pipe *st, t_line *all_cmd)
 {
+	int		return_value;
+
 	if (!all_cmd->infile || !lst_last(all_cmd->infile)->data || \
 		ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) == 0)
 		return (0);
-	st->nbr_cmd = 1;
-	//fork ici
-	heredoc_loop(st, all_cmd);
-	return (1);
+	return_value = heredoc_loop(st, all_cmd);
+	if (return_value == -1)
+		return (-1);
+	return (return_value);
 }

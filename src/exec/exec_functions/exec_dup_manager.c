@@ -6,13 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 11:08:08 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:21:31 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static int	get_dup_single_done(t_env_pipe *st)
+int	get_dup_single_done(t_env_pipe *st)
 {
 	if (st->nbr_cmd == 1)
 	{
