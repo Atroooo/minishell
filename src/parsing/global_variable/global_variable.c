@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 17:48:19 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/10 15:53:33 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,6 @@ char	*replace_global_variable(char *line, t_env_main *main_env)
 		return (NULL);
 	if (get_final_line(line, main_env, &final_line[0]))
 		return (NULL);
+	//free(line); DOESNT WORK
 	return (final_line);
 }

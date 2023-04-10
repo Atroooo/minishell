@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 14:07:17 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:59:31 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		init_main_env(t_env_main *main_env, char **env);
 int			parsing(char *line, t_line *all_cmd, t_env_main *main_env);
 int			split_line(char *line, t_line *all_cmd);
 int			input_operator_check(char *cmd);
+char		*check_if_pipe_error(char *line);
 int			get_cmd(char *line, t_cmd *cmd);
 int			get_file(char *line, t_cmd *cmd);
 int			get_flag(char *line, t_cmd *cmd);
@@ -111,6 +112,8 @@ void		skip_gobal_variable(int *index, char *line);
 void		incrementation(int *index, int *nbr_char, char c);
 int			check_if_not_special_case(char *line, int *i_line, \
 			char *final_line, t_env_main *main_env);
+int			skip_char(char *line, char c);
+char		**split_skip_quote(char *str);
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);

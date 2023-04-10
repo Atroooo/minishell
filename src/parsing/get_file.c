@@ -6,13 +6,13 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:29:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 17:07:42 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/10 13:29:45 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-static int	skip_char(char *line, char c)
+int	skip_char(char *line, char c)
 {
 	int	i;
 

@@ -3,33 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   split_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neoff <neoff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/22 14:59:51 by neoff            ###   ########.fr       */
+/*   Updated: 2023/04/10 14:36:09 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-static int	count_split(char *line)
+static int	count_split(char **line)
 {
 	int	i;
-	int	nbr_split;
 
-	nbr_split = 1;
 	i = 0;
-	while (line[i] != 0)
+	while (line[i] != NULL)
 	{
-		if (line[i] == '|')
-		{
-			nbr_split += 1;
-			if (line[i] == line[i + 1])
-				i++;
-		}
 		i++;
 	}
-	return (nbr_split);
+	return (i);
 }
 
 static void	set_up_newlst(t_cmd *cmd)
@@ -41,7 +33,8 @@ static void	set_up_newlst(t_cmd *cmd)
 	cmd->outfile = NULL;
 }
 
-static int	get_element(int *i, int (*get)(char *, t_cmd *), char *line, t_cmd *cmd)
+static int	get_element(int *i, \
+			int (*get)(char *, t_cmd *), char *line, t_cmd *cmd)
 {
 	int	temp;
 
@@ -80,6 +73,18 @@ int	set_up_arg(char *line, t_cmd *cmd)
 	return (error);
 }
 
+int	initialize_value(t_line *all_cmd, char **splitted_line, char *line)
+{
+	all_cmd->all_cmd = NULL;
+	all_cmd->nbr_cmd = 0;
+	all_cmd->cmd = NULL;
+	all_cmd->nbr_cmd = count_split(splitted_line);
+	all_cmd->cmd = malloc(sizeof(t_cmd) * (all_cmd->nbr_cmd));
+	if (all_cmd->cmd == NULL)
+		return (-1);
+	return (0);
+}
+
 int	split_line(char *line, t_line *all_cmd)
 {
 	char	**splitted_line;
@@ -88,14 +93,10 @@ int	split_line(char *line, t_line *all_cmd)
 
 	error = 0;
 	i = 0;
-	all_cmd->all_cmd = NULL;
-	splitted_line = ft_split(line, '|');
+	splitted_line = split_skip_quote(line);
 	if (splitted_line == NULL)
 		return (-1);
-	all_cmd->nbr_cmd = count_split(line);
-	all_cmd->cmd = malloc(sizeof(t_cmd) * (all_cmd->nbr_cmd));
-	if (all_cmd->cmd == NULL)
-		error = 1;
+	error = initialize_value(all_cmd, splitted_line, line);
 	while (splitted_line[i] != NULL && error == 0)
 	{
 		error = set_up_arg(splitted_line[i], &all_cmd->cmd[i]);
