@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 16:12:07 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:04:57 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ int	quit_function(t_env_pipe *st, int error_code)
 	return (0);
 }
 
-int	error_execve(char **arg_vec, char *path, t_env_pipe *st)
+int	error_execve(char **cmd, char *path, t_env_pipe *st)
 {
-	ft_free_2d_array(arg_vec);
-	free(path);
+	ft_free_2d_array(cmd);
+	if (path)
+		free(path);
 	return (quit_function(st, -1));
 }
 
@@ -64,7 +65,7 @@ void	free_pipe(t_env_pipe *st)
 		free(st);
 }
 
-void	free_env_exit(t_env_pipe *st, int i)
+void	free_env(t_env_pipe *st, int i)
 {
 	if (i >= 0)
 	{

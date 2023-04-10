@@ -1,11 +1,5 @@
-- Pipe a fix
-- here_doc a modif
+- bien close les fds + >> a faire + creer si plusieurs outfile
+- heredoc : cat le contenu du heredoc (reste des cmds ok) (voir exemple)
 - ./ a faire
 
-< Makefile ls -la | wc -l > outfile
-< Makefile ls -la | wc -l | wc -l > outfile
-< Makefile ls > outfile
-
 cat << EOF
-echo test << EOF
-...

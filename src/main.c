@@ -27,6 +27,7 @@ static void	exec_shell(t_env_main *main_env)
 	t_line	all_cmd;
 	int		error;
 
+	line = NULL;
 	error = 0;
 	signal_handler(main_env);
 	line = readline("prompt> ");
@@ -44,7 +45,7 @@ static void	exec_shell(t_env_main *main_env)
 			line = readline("prompt> ");
 		}
 		if (!line)
-			exit(0); //FAUT FREE
+			free_all_exit(main_env);
 		rl_clear_history();
 	}
 }

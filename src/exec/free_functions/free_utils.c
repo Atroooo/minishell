@@ -16,11 +16,12 @@ void	free_str(char **str)
 {
 	int	index;
 
+	if (!str || !str[0])
+		return ;
 	index = 0;
 	while (str[index])
 	{
-		if (str[index])
-			free(str[index]);
+		free(str[index]);
 		index++;
 	}
 	free(str);
@@ -39,16 +40,34 @@ void	free_cmd(t_line *all_cmd)
 	free(all_cmd->all_cmd);
 }
 
-//Segfault
+void	free_inout_list(t_lst *lst)
+{
+	t_lst	*tmp;
+
+	while (lst)
+	{
+		tmp = lst->next;
+		if (lst->data)
+			free(lst->data);
+		free(lst);
+		lst = tmp;
+	}
+}
+
 void	free_all_exit(t_env_main *main_env)
 {
+	t_env_var	*tmp;
+
 	while (main_env->env_list)
 	{
-		if (main_env->env_list)
+		tmp = main_env->env_list->next;
+		if (main_env->env_list->name != NULL)
+			free(main_env->env_list->name);
+		if (main_env->env_list->value != NULL)
+			free(main_env->env_list->value);
+		if (main_env->env_list != NULL)
 			free(main_env->env_list);
-		main_env->env_list = main_env->env_list->next;
+		main_env->env_list = tmp;
 	}
-	free_str(main_env->env);
-	free(main_env->tty);
 	exit(0);
 }

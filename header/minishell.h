@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 16:59:31 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:00:21 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,25 +121,19 @@ void		termios_init(t_env_main *main_env);
 
 /*Exec cmd*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
-int			exec_cmd(char **cmd, t_env_main *main_env);
 char		**cmd_to_send(t_line *all_cmd);
-
-/*Redirect*/
-int			redirect_hub(t_line *all_cmd, t_env_main *main_env);
-
-/*Pipe*/
-int			exec_pipe(int argc, char **argv, \
-				t_env_main *main_env, t_line *all_cmd);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
+int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, int nb_cmd);
 int			dup_manager(t_env_pipe *st);
-int			set_up_struct(t_env_pipe *st, t_line *all_cmd, int argc);
-char		*get_path(char *cmd, char *paths, t_env_pipe *st);
-void		no_path(t_env_pipe *st, char **arg_vec);
-void		path_is_null(t_env_pipe *st, char **arg_vec, char **argv);
-void		get_exec_done(char **argv, char **env, t_env_pipe *st);
-void		execution(char **argv, char *env[], t_env_pipe *st);
-int			error_execve(char **arg_vec, char *path, t_env_pipe *st);
-void		free_env_exit(t_env_pipe *st, int i);
+int			get_dup_single_done(t_env_pipe *st);
+char		*get_path(char *cmd, char *paths);
+void		no_path(t_env_pipe *st, char **cmd);
+void		path_is_null(t_env_pipe *st, char **cmd, char *str);
+int			execution(char **cmd, char *env[], t_env_pipe *st, \
+				t_env_main *main_env);
+int			get_exec_done(char *cmd, char **env, t_env_pipe *st);
+int			error_execve(char **cmd, char *path, t_env_pipe *st);
+void		free_env(t_env_pipe *st, int i);
 void		free_pipe(t_env_pipe *st);
 void		close_function(t_env_pipe *st);
 int			quit_function(t_env_pipe *st, int error_code);
@@ -147,6 +141,8 @@ int			quit_function(t_env_pipe *st, int error_code);
 /*Heredoc*/
 int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
 int			heredoc(t_env_pipe *st, t_line *all_cmd);
+char		*ft_strnjoin(char *old_dst, char *src, size_t len);
+char		*get_delimiter(char *str);
 
 /*Builtins*/
 void		ft_echo(char **cmd, t_env_main *main_env);
@@ -173,8 +169,10 @@ char		*setup_file(char *raw_file);
 void		free_str(char **str);
 void		free_cmd(t_line *all_cmd);
 void		free_all_exit(t_env_main *main_env);
+void		free_inout_list(t_lst *lst);
 
+/*A DELETE*/
 void		print_tab(char **tab);
-void		print_list_delete(t_lst *lst);//A DELETE
+void		print_list_delete(t_lst *lst);
 
 #endif

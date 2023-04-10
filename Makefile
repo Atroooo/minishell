@@ -13,12 +13,13 @@ SRC			 			= main.c init.c \
 						  exec/signal_handler/signal_handler.c \
 						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/pwd.c exec/builtins/export.c \
 						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c \
-						  exec/pipe/pipe_dup_manager.c exec/pipe/pipe_execution.c exec/pipe/pipe_get_exec_done.c \
-						  exec/pipe/pipe_get_exec_done_utils.c exec/pipe/pipe_get_path.c \
-						  exec/pipe/pipe_quit_utils.c exec/pipe/pipe_utils.c exec/exec_functions/exec_pipe.c \
-						  exec/pipe/heredoc.c exec/pipe/pipe_setup.c \
-						  exec/utils/chained_list.c exec/utils/utils.c \
-						  exec/exec_functions/exec_hub.c exec/exec_functions/setup_cmd.c \
+						  exec/utils/chained_list.c exec/utils/utils.c exec/utils/setup_cmd.c \
+						  exec/exec_functions/exec_hub.c exec/exec_functions/exec_setup_struct.c \
+						  exec/exec_functions/exec_setup_files.c exec/exec_functions/exec_dup_manager.c \
+						  exec/exec_functions/exec_path_utils.c exec/exec_functions/exec_get_path.c \
+						  exec/exec_functions/exec_execution.c exec/exec_functions/exec_execution_utils.c \
+						  exec/heredoc/heredoc.c exec/heredoc/heredoc_utils.c \
+						  exec/exec_functions/exec_quit_utils.c \
 						  exec/free_functions/free_utils.c \
 						  parsing/input_operator_error.c \
 						  parsing/pipe_error.c \
