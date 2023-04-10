@@ -22,6 +22,7 @@ SRC			 			= main.c init.c \
 						  exec/exec_functions/exec_hub.c exec/exec_functions/setup_cmd.c \
 						  exec/free_functions/free_utils.c \
 						  parsing/input_operator_error.c \
+						  parsing/pipe_error.c \
 						  parsing/split_line.c \
 						  parsing/get_cmd.c \
 						  parsing/get_file.c \
@@ -30,11 +31,12 @@ SRC			 			= main.c init.c \
 						  parsing/get_utils.c \
 						  parsing/list_utils.c \
 						  parsing/convert_3d_array.c \
-						  parsing/free_utils.c \
+						  parsing/free_utils_parsing.c \
 						  parsing/global_variable/global_variable.c \
 						  parsing/global_variable/global_variable_nbr_char.c \
 						  parsing/global_variable/global_variable_utils.c \
 						  parsing/global_variable/global_variable_special_case.c \
+						  parsing/split_skip_quote.c \
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	
