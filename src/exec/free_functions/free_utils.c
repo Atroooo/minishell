@@ -41,12 +41,12 @@ void	free_cmd(t_line *all_cmd)
 
 void	free_inout_list(t_lst *lst)
 {
-	t_list *tmp;
-	
-	while (lst != NULL)
+	t_lst	*tmp;
+
+	while (lst)
 	{
 		tmp = lst->next;
-		free(lst->content);
+		free(lst->data);
 		free(lst);
 		lst = tmp;
 	}

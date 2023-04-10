@@ -1,4 +1,4 @@
-- Pipe a fix
+- bien close les fds + >> a faire + creer si plusieurs outfile
 - here_doc a modif
 - ./ a faire
 

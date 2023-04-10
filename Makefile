@@ -15,7 +15,7 @@ SRC			 			= main.c init.c \
 						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c \
 						  exec/pipe/pipe_dup_manager.c exec/pipe/pipe_execution.c exec/pipe/pipe_get_exec_done.c \
 						  exec/pipe/pipe_get_exec_done_utils.c exec/pipe/pipe_get_path.c \
-						  exec/pipe/pipe_quit_utils.c exec/pipe/pipe_utils.c exec/exec_functions/exec_pipe.c \
+						  exec/pipe/pipe_quit_utils.c exec/pipe/pipe_utils.c \
 						  exec/pipe/heredoc.c exec/pipe/pipe_setup.c \
 						  exec/utils/chained_list.c exec/utils/utils.c \
 						  exec/exec_functions/exec_hub.c exec/exec_functions/setup_cmd.c \

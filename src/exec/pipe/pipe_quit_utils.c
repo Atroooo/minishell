@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_quit_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/07 22:51:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/10 11:04:57 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	quit_function(t_env_pipe *st, int error_code)
 {
 	close_function(st);
 	free_pipe(st);
-	free(st);
 	if (error_code == 0)
 		ft_printf("Error : %s\n", strerror(errno));
 	else if (error_code == 1)
@@ -39,10 +38,11 @@ int	quit_function(t_env_pipe *st, int error_code)
 	return (0);
 }
 
-int	error_execve(char **arg_vec, char *path, t_env_pipe *st)
+int	error_execve(char **cmd, char *path, t_env_pipe *st)
 {
-	ft_free_2d_array(arg_vec);
-	free(path);
+	ft_free_2d_array(cmd);
+	if (path)
+		free(path);
 	return (quit_function(st, -1));
 }
 

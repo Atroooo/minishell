@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_setup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:17:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/07 23:01:51 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/10 10:56:11 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	set_up_pipe(t_env_pipe *st)
 	return (1);
 }
 
-int	set_up_struct(t_env_pipe *st, t_line *all_cmd, int argc)
+int	set_up_struct(t_env_pipe *st, t_line *all_cmd, int nb_cmd)
 {
-	st->nbr_cmd = argc;
+	st->nbr_cmd = nb_cmd;
 	st->hdoc = heredoc(st, all_cmd);
 	if (st->hdoc == -1)
 		return (0);
