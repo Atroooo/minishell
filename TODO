@@ -1,7 +1,5 @@
 - bien close les fds + >> a faire + creer si plusieurs outfile
-- here_doc : cat le contenu du heredoc (reste des cmds ok)
+- heredoc : cat le contenu du heredoc (reste des cmds ok)
 - ./ a faire
 
 cat << EOF
-echo test << EOF
-...

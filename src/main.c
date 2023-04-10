@@ -45,7 +45,7 @@ static void	exec_shell(t_env_main *main_env)
 			line = readline("prompt> ");
 		}
 		if (!line)
-			exit(0); //FAUT FREE
+			free_all_exit(main_env);
 		rl_clear_history();
 	}
 }

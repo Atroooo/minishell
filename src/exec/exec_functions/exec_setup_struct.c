@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_setup_struct.c                                :+:      :+:    :+:   */
+/*   exec_setup_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:17:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/10 14:16:22 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:40:07 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	setup_pipe(t_env_pipe *st)
 	int	i;
 
 	i = 0;
+	if (st->hdoc == 1)
+		return (1);
 	while (i < st->nbr_cmd)
 	{
 		st->fd[i] = malloc(sizeof(int) * 2);

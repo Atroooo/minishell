@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_dup_manager.c                                 :+:      :+:    :+:   */
+/*   exec_dup_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 14:21:31 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:45:32 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	get_dup_single_done(t_env_pipe *st)
 			return (quit_function(st, 0));
 		if (dup2(st->outfile, STDOUT_FILENO) == -1)
 			return (quit_function(st, 0));
+		if (st->infile != 0)
+			close(st->infile);
 		return (1);
 	}
 	return (1);
