@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 16:54:11 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/10 17:04:01 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ char	*check_if_pipe_error(char *line) //A CHANGER NE MARCHE PLUS
 	int	consecutive_pipe;
 	int	only_space;
 	int	i;
-	int	len;
 
 	pipe = 0;
 	consecutive_pipe = 0;
@@ -85,6 +84,5 @@ char	*check_if_pipe_error(char *line) //A CHANGER NE MARCHE PLUS
 		else if (pipe == 1 && only_space == 1)
 			return (error_case("|"));
 	}
-	printf("\n%s\n", line);
 	return (line);
 }
