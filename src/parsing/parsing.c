@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 15:54:20 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/12 14:19:21 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_error(char **line, t_line *all_cmd, t_env_main *main_env)
 	*line = replace_global_variable(*line, main_env);
 	if (*line == NULL)
 		return (-1);
-	*line = check_if_pipe_error(*line);
+	// *line = check_if_pipe_error(*line);
 	if (*line == NULL)
 		return (-1);
 	if (input_operator_check(*line)) // A OPTIMISER AVEC UNE SEULE ITERATION

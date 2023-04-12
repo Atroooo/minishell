@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 17:00:21 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:46:38 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void		termios_init(t_env_main *main_env);
 /*Exec cmd*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 char		**cmd_to_send(t_line *all_cmd);
+int			create_outfiles(t_lst *outfile);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
 int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, int nb_cmd);
 int			dup_manager(t_env_pipe *st);
@@ -141,7 +142,6 @@ int			quit_function(t_env_pipe *st, int error_code);
 /*Heredoc*/
 int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
 int			heredoc(t_env_pipe *st, t_line *all_cmd);
-char		*ft_strnjoin(char *old_dst, char *src, size_t len);
 char		*get_delimiter(char *str);
 
 /*Builtins*/
@@ -159,6 +159,7 @@ void		ft_lstadd_front_env(t_env_var **lst, t_env_var *new);
 void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
 t_lst		*lst_last(t_lst *lst);
+int			ft_lstsize_file(t_lst *lst);
 
 /*Utils*/
 int			cmd_size(char **cmd);

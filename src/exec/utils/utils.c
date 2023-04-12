@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 11:07:49 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/27 15:51:42 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:43:19 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,17 @@ int	get_total_cmd(t_line *all_cmd)
 		i++;
 	}
 	return (count);
+}
+
+int	ft_lstsize_file(t_lst *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
 }

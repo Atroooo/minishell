@@ -19,7 +19,7 @@ void	print_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_printf("CMD = %s\n", tab[i]);
+		ft_printf("CMD = |%s|\n", tab[i]);
 		i++;
 	}
 }
@@ -41,6 +41,7 @@ static int	exec_cmd(int nb_cmd, char **cmd, \
 {
 	t_env_pipe	*st;
 
+	print_tab(cmd);
 	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
 		return (ft_printf("Error : %s\n", strerror(errno)));
