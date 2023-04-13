@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 13:04:17 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:52:36 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,14 +128,12 @@ int			skip_in_between(char *str, char c);
 int			lst_add_back(t_lst **lst, t_lst *new);
 t_lst		*lst_new(void *content);
 
-
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
 void		termios_init(t_env_main *main_env);
 
 /*Exec cmd*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
-char		**cmd_to_send(t_line *all_cmd);
 int			create_outfiles(t_lst *outfile);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
 int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd);
@@ -145,7 +143,8 @@ char		*get_path(char *cmd, char *paths);
 void		no_path(t_env_pipe *st, char **cmd);
 void		path_is_null(t_env_pipe *st, char **cmd, char *str);
 int			execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env);
-int			get_exec_done(char **cmd, t_env_pipe *st, t_env_main *main_env);
+int			get_exec_done(t_line *all_cmd, char **cmd, \
+				t_env_pipe *st, t_env_main *main_env);
 int			error_execve(char **cmd, char *path, t_env_pipe *st);
 void		free_env(t_env_pipe *st, int i);
 void		free_pipe(t_env_pipe *st);
@@ -161,9 +160,12 @@ char		*get_delimiter(char *str);
 void		ft_echo(char **cmd, t_env_main *main_env);
 void		ft_cd(char **cmd, t_env_main *main_env);
 void		ft_pwd(char **cmd, t_env_main *main_env);
-t_env_var	*ft_export(char **cmd, t_env_var *env_list, t_env_main *main_env);
+t_env_var	*ft_export(char **cmd, t_env_main *main_env);
+int			check_if_in_env(t_env_var *lst, char *str);
+void		free_variable_name_and_value(char *name, char *value);
+int			set_variables_name_and_value(char *str, char **name, char **value);
 t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env);
-void		ft_env(char **cmd, t_env_var *env_list, t_env_main *main_env);
+void		ft_env(char **cmd, t_env_main *main_env);
 void		ft_exit(char **cmd, t_env_main *main_env);
 
 /*Utils lst*/

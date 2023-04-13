@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 12:34:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:46:24 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 {
 	char	*outfile;
-	int		temp_pipe[2];
 
-	pipe(temp_pipe);
-	st->infile = temp_pipe[0];
 	if (st->output == 0)
 		st->outfile = 1;
 	else
@@ -31,8 +28,7 @@ int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 			return (free(st), 0);
 		free(outfile);
 	}
-	close(temp_pipe[1]);
-	st->nbr_cmd = 1; // Valeur remplacer apres donc faudra la print dans setup struct
+	st->nbr_cmd = 1;
 	return (1);
 }
 
@@ -64,7 +60,10 @@ static char	*heredoc_parsing(t_line *all_cmd)
 static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 {
 	char	*tmp_str;
+	int		temp_pipe[2];
 
+	pipe(temp_pipe);
+	st->infile = temp_pipe[0];
 	while (1)
 	{
 		ft_printf("heredoc> ");
@@ -73,10 +72,11 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 			break ;
 		else
 		{
-			write(st->infile, tmp_str, ft_strlen(tmp_str));
+			write(temp_pipe[1], tmp_str, ft_strlen(tmp_str));
 			free(tmp_str);
 		}
 	}
+	close(temp_pipe[1]);
 	return (1);
 }
 

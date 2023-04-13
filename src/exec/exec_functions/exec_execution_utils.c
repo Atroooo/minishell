@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 12:59:40 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:53:12 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 	else if (ft_strcmp("echo", cmd[0]) == 0)
 		ft_echo(cmd, main_env);
 	else if (ft_strcmp("env", cmd[0]) == 0)
-		ft_env(cmd, main_env->env_list, main_env);
+		ft_env(cmd, main_env);
 	else if (ft_strcmp("exit", cmd[0]) == 0)
-		ft_exit(cmd, main_env);
+		return (1);
 	else if (ft_strcmp("export", cmd[0]) == 0)
-		main_env->env_list = ft_export(cmd, main_env->env_list, main_env);
+		main_env->env_list = ft_export(cmd, main_env);
 	else if (ft_strcmp("pwd", cmd[0]) == 0)
 		ft_pwd(cmd, main_env);
 	else if (ft_strcmp("unset", cmd[0]) == 0)
@@ -70,15 +70,18 @@ static char	*set_path(char **env, char **cmd, t_env_pipe *st)
 	return (NULL);
 }
 
-int	get_exec_done(char **cmd, t_env_pipe *st, t_env_main *main_env)
+int	get_exec_done(t_line *all_cmd, char **cmd, \
+	t_env_pipe *st, t_env_main *main_env)
 {
 	char	*path;
 
 	path = NULL;
 	if (buildin_exec(cmd, main_env))
 	{
+		free_all_exit(main_env);
+		free_cmd(all_cmd);
 		quit_function(st, 2);
-		exit(0);
+		exit(1);
 	}
 	if (!cmd)
 		return (quit_function(st, 1));

@@ -11,9 +11,9 @@ DIR						= src/
 SRC			 			= main.c init.c \
 						  parsing/parsing.c \
 						  exec/signal_handler/signal_handler.c \
-						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/pwd.c exec/builtins/export.c \
-						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c \
-						  exec/utils/chained_list.c exec/utils/utils.c exec/utils/setup_cmd.c \
+						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/export.c exec/builtins/export_utils.c \
+						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c exec/builtins/pwd.c \
+						  exec/utils/chained_list.c exec/utils/utils.c \
 						  exec/exec_functions/exec_hub.c exec/exec_functions/exec_setup_struct.c \
 						  exec/exec_functions/exec_setup_files.c exec/exec_functions/exec_setup_files_utils.c exec/exec_functions/exec_dup_manager.c \
 						  exec/exec_functions/exec_path_utils.c exec/exec_functions/exec_path.c \
