@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_quit_utils.c                                  :+:      :+:    :+:   */
+/*   exec_quit_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 11:04:57 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:22:45 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ void	close_function(t_env_pipe *st)
 	i = 0;
 	while (i < st->nbr_cmd - 1)
 	{
-		if (st->fd[i][0] != -1)
-			close(st->fd[i][0]);
-		if (st->fd[i][1] != -1)
-			close(st->fd[i][1]);
+		close(st->fd[i][0]);
+		close(st->fd[i][1]);
 		i++;
 	}
+	if (st->infile != 0)
+		close(st->infile);
+	if (st->outfile != 1)
+		close(st->outfile);
 }
 
 int	quit_function(t_env_pipe *st, int error_code)
@@ -35,6 +37,8 @@ int	quit_function(t_env_pipe *st, int error_code)
 		ft_printf("Error : %s\n", strerror(errno));
 	else if (error_code == 1)
 		ft_printf("Error : Fork\n");
+	else if (error_code == 2)
+		return (1);
 	return (0);
 }
 

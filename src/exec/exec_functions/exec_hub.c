@@ -19,7 +19,7 @@ void	print_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_printf("CMD = %s\n", tab[i]);
+		ft_printf("CMD = |%s|\n", tab[i]);
 		i++;
 	}
 }
@@ -36,8 +36,7 @@ static void	check_inout(t_env_pipe *st, t_line *all_cmd)
 		st->output = 0;
 }
 
-static int	exec_cmd(int nb_cmd, char **cmd, \
-	t_env_main *main_env, t_line *all_cmd)
+static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
@@ -47,25 +46,19 @@ static int	exec_cmd(int nb_cmd, char **cmd, \
 	check_inout(st, all_cmd);
 	if (!open_files(st, all_cmd))
 		return (0);
-	if (!setup_struct_cmd(st, all_cmd, nb_cmd))
+	if (!setup_struct_cmd(st, all_cmd))
 		return (0);
-	if (!execution(cmd, main_env->env, st, main_env))
+	if (!execution(all_cmd, st, main_env))
 		return (0);
 	return (1);
 }
 
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
-	char	**cmd;
-
-	cmd = cmd_to_send(all_cmd);
-	if (!cmd)
-		return ;
-	if (exec_cmd(all_cmd->nbr_cmd, cmd, main_env, all_cmd))
+	if (exec_cmd(main_env, all_cmd))
 		main_env->last_cmd_status = 0;
 	else
 		main_env->last_cmd_status = 1;
-	free_str(cmd);
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);

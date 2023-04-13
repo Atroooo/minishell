@@ -1,5 +1,5 @@
-- bien close les fds + >> a faire + creer si plusieurs outfile
 - heredoc : cat le contenu du heredoc (reste des cmds ok) (voir exemple)
-- ./ a faire
-
 cat << EOF
+
+- leaks
+- fds a close

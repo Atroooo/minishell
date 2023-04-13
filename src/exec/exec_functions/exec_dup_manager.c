@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 15:45:32 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:59:38 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	get_dup_single_done(t_env_pipe *st)
 			return (quit_function(st, 0));
 		if (dup2(st->outfile, STDOUT_FILENO) == -1)
 			return (quit_function(st, 0));
-		if (st->infile != 0)
-			close(st->infile);
 		return (1);
 	}
 	return (1);
@@ -33,8 +31,6 @@ static int	get_first_dup_done(t_env_pipe *st)
 		return (quit_function(st, 0));
 	if (dup2(st->fd[st->actual_pipe][1], STDOUT_FILENO) == -1)
 		return (quit_function(st, 0));
-	if (st->infile != 0)
-		close(st->infile);
 	return (1);
 }
 
@@ -44,8 +40,6 @@ static int	get_last_dup_done(t_env_pipe *st)
 		return (quit_function(st, 0));
 	if (dup2(st->outfile, STDOUT_FILENO) == -1)
 		return (quit_function(st, 0));
-	if (st->outfile != 1)
-		close(st->outfile);
 	return (1);
 }
 

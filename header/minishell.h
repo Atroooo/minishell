@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 10:32:43 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/13 13:04:17 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_env_pipe
 	int	hdoc;
 	int	*pid;
 	int	**fd;
+	int	i;
 }	t_env_pipe;
 
 typedef struct t_lst
@@ -135,16 +136,16 @@ void		termios_init(t_env_main *main_env);
 /*Exec cmd*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 char		**cmd_to_send(t_line *all_cmd);
+int			create_outfiles(t_lst *outfile);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
-int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, int nb_cmd);
+int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd);
 int			dup_manager(t_env_pipe *st);
 int			get_dup_single_done(t_env_pipe *st);
 char		*get_path(char *cmd, char *paths);
 void		no_path(t_env_pipe *st, char **cmd);
 void		path_is_null(t_env_pipe *st, char **cmd, char *str);
-int			execution(char **cmd, char *env[], t_env_pipe *st, \
-				t_env_main *main_env);
-int			get_exec_done(char *cmd, char **env, t_env_pipe *st);
+int			execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env);
+int			get_exec_done(char **cmd, t_env_pipe *st, t_env_main *main_env);
 int			error_execve(char **cmd, char *path, t_env_pipe *st);
 void		free_env(t_env_pipe *st, int i);
 void		free_pipe(t_env_pipe *st);
@@ -154,7 +155,6 @@ int			quit_function(t_env_pipe *st, int error_code);
 /*Heredoc*/
 int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
 int			heredoc(t_env_pipe *st, t_line *all_cmd);
-char		*ft_strnjoin(char *old_dst, char *src, size_t len);
 char		*get_delimiter(char *str);
 
 /*Builtins*/
@@ -172,6 +172,7 @@ void		ft_lstadd_front_env(t_env_var **lst, t_env_var *new);
 void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
 t_lst		*lst_last(t_lst *lst);
+int			ft_lstsize_file(t_lst *lst);
 
 /*Utils*/
 int			cmd_size(char **cmd);

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 15:48:54 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:34:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 		free(outfile);
 	}
 	close(temp_pipe[1]);
-	st->nbr_cmd = 1;
+	st->nbr_cmd = 1; // Valeur remplacer apres donc faudra la print dans setup struct
 	return (1);
 }
 
@@ -63,10 +63,8 @@ static char	*heredoc_parsing(t_line *all_cmd)
 
 static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 {
-	char	*str_print;
 	char	*tmp_str;
 
-	str_print = NULL;
 	while (1)
 	{
 		ft_printf("heredoc> ");
@@ -75,16 +73,10 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 			break ;
 		else
 		{
-			str_print = ft_strnjoin(str_print, tmp_str, ft_strlen(tmp_str));
-			if (!str_print)
-				return (free(st), -1);
+			write(st->infile, tmp_str, ft_strlen(tmp_str));
 			free(tmp_str);
 		}
 	}
-	if (!str_print)
-		return (-1);
-	write(st->infile, str_print, ft_strlen(str_print));
-	free(str_print);
 	return (1);
 }
 

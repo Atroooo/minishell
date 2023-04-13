@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_get_exec_done_utils.c                         :+:      :+:    :+:   */
+/*   exec_path_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 09:05:58 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 10:56:59 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:29:34 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	path_is_null(t_env_pipe *st, char **cmd, char *cmd_s)
 	}
 	ft_free_2d_array(cmd);
 	quit_function(st, -1);
+	exit(0);
 }
 
 void	no_path(t_env_pipe *st, char **cmd)
