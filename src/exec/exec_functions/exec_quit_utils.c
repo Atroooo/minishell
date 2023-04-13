@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/12 16:46:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:22:45 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	quit_function(t_env_pipe *st, int error_code)
 		ft_printf("Error : %s\n", strerror(errno));
 	else if (error_code == 1)
 		ft_printf("Error : Fork\n");
+	else if (error_code == 2)
+		return (1);
 	return (0);
 }
 

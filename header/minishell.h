@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/12 15:46:38 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:52:48 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_env_pipe
 	int	hdoc;
 	int	*pid;
 	int	**fd;
+	int	i;
 }	t_env_pipe;
 
 typedef struct t_lst
@@ -124,15 +125,14 @@ void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 char		**cmd_to_send(t_line *all_cmd);
 int			create_outfiles(t_lst *outfile);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
-int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, int nb_cmd);
+int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd);
 int			dup_manager(t_env_pipe *st);
 int			get_dup_single_done(t_env_pipe *st);
 char		*get_path(char *cmd, char *paths);
 void		no_path(t_env_pipe *st, char **cmd);
 void		path_is_null(t_env_pipe *st, char **cmd, char *str);
-int			execution(char **cmd, char *env[], t_env_pipe *st, \
-				t_env_main *main_env);
-int			get_exec_done(char *cmd, char **env, t_env_pipe *st);
+int			execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env);
+int			get_exec_done(char **cmd, t_env_pipe *st, t_env_main *main_env);
 int			error_execve(char **cmd, char *path, t_env_pipe *st);
 void		free_env(t_env_pipe *st, int i);
 void		free_pipe(t_env_pipe *st);

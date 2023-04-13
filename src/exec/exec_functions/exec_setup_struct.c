@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:17:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/12 09:53:09 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:34:38 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static int	setup_pipe(t_env_pipe *st)
 	return (1);
 }
 
-int	setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, int nb_cmd)
+int	setup_struct_cmd(t_env_pipe *st, t_line *all_cmd)
 {
-	st->nbr_cmd = nb_cmd;
+	st->nbr_cmd = all_cmd->nbr_cmd;
 	st->hdoc = heredoc(st, all_cmd);
 	if (st->hdoc == -1)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/12 16:58:43 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:34:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 		free(outfile);
 	}
 	close(temp_pipe[1]);
-	st->nbr_cmd = 1;
+	st->nbr_cmd = 1; // Valeur remplacer apres donc faudra la print dans setup struct
 	return (1);
 }
 
