@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 13:05:44 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:07:41 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	set_up_arg(char *line, t_cmd *cmd)
 
 int	initialize_value(t_line *all_cmd, char **splitted_line)
 {
-	(void) line;
 	all_cmd->all_cmd = NULL;
 	all_cmd->nbr_cmd = 0;
 	all_cmd->cmd = NULL;
