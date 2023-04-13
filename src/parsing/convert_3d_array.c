@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/03/29 17:43:55 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:00:27 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	get_all_command(t_lst *lst, char **arg, int *index)
 	int		i;
 
 	i = 0;
-	while (lst != NULL)
+	while (lst != NULL && lst->data[0] != '\0')
 	{
 		arg[i] = copy_command(lst->data);
 		if (arg[i] == NULL)

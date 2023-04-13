@@ -24,11 +24,11 @@ SRC			 			= main.c init.c \
 						  parsing/input_operator_error.c \
 						  parsing/pipe_error.c \
 						  parsing/split_line.c \
-						  parsing/get_cmd.c \
-						  parsing/get_file.c \
-						  parsing/get_flag.c \
-						  parsing/get_content.c \
-						  parsing/get_utils.c \
+						  parsing/get_all_cmd/get_cmd.c \
+						  parsing/get_all_cmd/get_file.c \
+						  parsing/get_all_cmd/get_flag.c \
+						  parsing/get_all_cmd/get_content.c \
+						  parsing/get_all_cmd/get_utils.c \
 						  parsing/list_utils.c \
 						  parsing/convert_3d_array.c \
 						  parsing/free_utils_parsing.c \

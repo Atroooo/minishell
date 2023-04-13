@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:31:27 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/31 22:07:04 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/13 10:44:50 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,18 @@ int	input_operator_check(char *line)
 	i = 0;
 	while (line[i] != '\0')
 	{
-		if (line[i] == '<' || line[i] == '>')
+		if (line[i] == '\'' || line[i] == '\"')
+			i += skip_in_between(&line[i], line[i]);
+		else if (line[i] == '<' || line[i] == '>')
 		{
 			if (simple_operator_error(&line[i]))
 				return (1);
 			else if (double_operator_error(&line[i]))
 				return (1);
+			i++;
 		}
-		i++;
+		else
+			i++;
 	}
 	return (0);
 }

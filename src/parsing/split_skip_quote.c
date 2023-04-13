@@ -6,13 +6,13 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 07:58:46 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 13:32:45 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/13 10:42:07 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-static int	skip_in_between(char *str, char c)
+int	skip_in_between(char *str, char c)
 {
 	int	i;
 
@@ -82,10 +82,8 @@ static void	*malloc_error(char **result, int result_index)
 
 static int	split_execution(char *str, char **result)
 {
-	int	i;
 	int	len;
 
-	i = 0;
 	len = get_len_split(str);
 	*result = malloc((len + 1) * sizeof(char));
 	if (*result == NULL)

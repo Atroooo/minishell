@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/29 17:51:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:16:14 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	ft_echo(char **cmd, t_env_main *main_env)
 
 	if (!cmd)
 		return ;
+	printf("TEST");
+	//ft_print_2d_array(cmd);
 	i = 1;
 	n = 0;
 	if (cmd[1] && check_if_flag(cmd[1]))

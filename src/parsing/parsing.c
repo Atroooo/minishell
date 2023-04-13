@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 15:54:20 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/12 16:46:17 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,19 @@ int	check_if_exec_needed(char *line)
 
 int	check_error(char **line, t_line *all_cmd, t_env_main *main_env)
 {
+	int	error;
+
 	(void) all_cmd;
+	error = 0;
 	*line = replace_global_variable(*line, main_env);
 	if (*line == NULL)
 		return (-1);
-	*line = check_if_pipe_error(*line);
+	*line = check_if_pipe_error(*line, main_env, &error);
+	if (error)
+		return (error);
 	if (*line == NULL)
 		return (-1);
-	if (input_operator_check(*line)) // A OPTIMISER AVEC UNE SEULE ITERATION
+	if (input_operator_check(*line))
 		return (1);
 	else if (check_if_exec_needed(*line))
 		return (1);

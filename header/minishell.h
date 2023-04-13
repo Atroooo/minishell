@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 17:00:21 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:32:43 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,30 +90,43 @@ void		init_main_env(t_env_main *main_env, char **env);
 int			parsing(char *line, t_line *all_cmd, t_env_main *main_env);
 int			split_line(char *line, t_line *all_cmd);
 int			input_operator_check(char *cmd);
-char		*check_if_pipe_error(char *line);
+char		*check_if_pipe_error(char *line, t_env_main *main_env, int *error);
+void		skip_gobal_variable(int *index, char *line);
+char		*replace_global_variable(char *line, t_env_main *main_env);
+char		**split_skip_quote(char *str);
+int			check_if_not_special_case(char *line, int *i_line, \
+			char *final_line, t_env_main *main_env);
+void		incrementation(int *index, int *nbr_char, char c);
+char		*copy_cmd(int size, char *src, char *dest);
+int			get_element(int *i, \
+			int (*get)(char *, t_cmd *), char *line, t_cmd *cmd);
+
+/*BUILTIN Parsing*/
+int			check_if_echo(char *line, t_cmd *cmd, int *error);
+
+/*Get all cmd*/
 int			get_cmd(char *line, t_cmd *cmd);
 int			get_file(char *line, t_cmd *cmd);
 int			get_flag(char *line, t_cmd *cmd);
 int			get_content(char *line, t_cmd *cmd);
-char		*copy_cmd(int size, char *src, char *dest);
+
+/*utils*/
 int			skip_space(char *line);
 int			count_len(char *line, char del, int *nbr_quote);
 int			get_size(char *line, int *size);
-int			lst_add_back(t_lst **lst, t_lst *new);
-t_lst		*lst_new(void *content);
 void		print_cmd(int i, t_line all_cmd);
 int			convert_in_3d_array(t_line *all_cmd);
 void		free_cmd_struct(t_line *all_cmd);
-char		*replace_global_variable(char *line, t_env_main *main_env);
 int			count_nbr_char(char *line, t_env_var *env_list);
 void		skip_simple_quote(int *index, int *nbr_char, char *line);
 int			count_alpha(char *line);
-void		skip_gobal_variable(int *index, char *line);
-void		incrementation(int *index, int *nbr_char, char c);
-int			check_if_not_special_case(char *line, int *i_line, \
-			char *final_line, t_env_main *main_env);
 int			skip_char(char *line, char c);
-char		**split_skip_quote(char *str);
+int			skip_in_between(char *str, char c);
+
+/*list utils*/
+int			lst_add_back(t_lst **lst, t_lst *new);
+t_lst		*lst_new(void *content);
+
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
