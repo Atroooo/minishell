@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 13:07:41 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:32:18 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ int	set_up_arg(char *line, t_cmd *cmd)
 		i += skip_space(&line[i]);
 		if (line[i] == '<' || line[i] == '>')
 			error = get_element(&i, &get_file, &line[i], cmd);
-		else if (no_command == TRUE && error == 0)
+		else if (line[i] != '\0' && no_command == TRUE && error == 0)
 		{
 			error = get_element(&i, &get_cmd, &line[i], cmd);
 			no_command = FALSE;
 		}
 		else if (line[i] == '-' && error == 0 && is_echo == FALSE)
 			error = get_element(&i, &get_flag, &line[i], cmd);
-		else if (error == 0)
+		else if (line[i] != '\0' && error == 0)
 		{
 			error = get_element(&i, &get_content, &line[i], cmd);
 			if (ft_strncmp(cmd->cmd, "echo", ft_strlen(cmd->content->data)) == 0)

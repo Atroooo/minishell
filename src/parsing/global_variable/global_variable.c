@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/12 13:50:32 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/13 18:02:54 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int	gbl_var_check(char *line, char *final_line, \
 	index = 0;
 	while (line[*i_line] == '$')
 	{
+		if (line[*i_line + 1] == ' ' || line[*i_line + 1] == '\0' || ft_isalnum(line[*i_line + 1]) == 0)
+			return (index);
 		index += get_gbl_var(&line[0], &final_line[index], i_line, main_env);
 		if (index < 0)
 			return (INT_MIN);

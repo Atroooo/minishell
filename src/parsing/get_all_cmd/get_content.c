@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:44:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 11:11:22 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/13 15:53:37 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int	get_content(char *line, t_cmd *cmd)
 		return (-1);
 	content_str = copy_cmd(size, line, content_str);
 	if (lst_add_back(&cmd->content, lst_new(content_str)))
+	{
+		free(content_str);
 		return (-1);
+	}
 	return (size);
 }

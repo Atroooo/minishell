@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:06:19 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 13:29:01 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:25:38 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_lst	*lst_new(void *content)
 
 	list = malloc(sizeof(t_lst));
 	if (list == NULL)
-		return (NULL); //A GERER
+		return (NULL);
 	list->data = content;
 	list->next = NULL;
 	return (list);

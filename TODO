@@ -1,5 +1,0 @@
-- heredoc : cat le contenu du heredoc (reste des cmds ok) (voir exemple)
-cat << EOF
-
-- leaks
-- fds a close

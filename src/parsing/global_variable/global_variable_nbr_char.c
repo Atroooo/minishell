@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:35:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/30 17:03:39 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/13 18:03:56 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	get_global_variable(char *line, int *nbr_char, t_env_var *env_list)
 	return (0);
 }
 
-int	count_nbr_char(char *line, t_env_var *env_list) //A AMELIORER
+int	count_nbr_char(char *line, t_env_var *env_list)
 {
 	int	index;
 	int	nbr_char;
