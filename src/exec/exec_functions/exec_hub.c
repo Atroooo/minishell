@@ -40,6 +40,9 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
+	if (ft_strcmp("exit", all_cmd->all_cmd[0][0]) == 0 && \
+		all_cmd->nbr_cmd == 1)
+		ft_exit(all_cmd->all_cmd[0], main_env);
 	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
 		return (ft_printf("Error : %s\n", strerror(errno)));
