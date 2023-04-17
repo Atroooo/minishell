@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 13:05:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/17 14:17:06 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static int	check_if_error(char *line, int *error)
 			i += check_if_pipe(&line[i], &consecutive_pipe);
 			if ((consecutive_pipe == 2 && only_space == 1) || consecutive_pipe > 3)
 				return (error_case("||", error));
-			else if ((pipe == 1 && only_space == 1) || consecutive_pipe == 3)
+			else if ((pipe == 1 && only_space == 1) || consecutive_pipe == 3 \
+					|| (consecutive_pipe == 2 && line[i - 2] == ' '))
 				return (error_case("|", error));	
 		}
 	}
@@ -99,6 +100,8 @@ static char	*last_char_pipe(char *line, int *error)
 
 char	*check_if_pipe_error(char *line, t_env_main *main_env, int *error)
 {
+	char	*new_line;
+
 	if (check_if_error(line, error))
 		return (line);
 	if (line[ft_strlen(line) - 1] == '|')
@@ -108,11 +111,13 @@ char	*check_if_pipe_error(char *line, t_env_main *main_env, int *error)
 			return (NULL);
 		if (error)
 			return (line);
-		line = replace_global_variable(line, main_env);
-		if (line == NULL)
+		new_line = replace_global_variable(line, main_env);
+		free(line);
+		if (new_line == NULL)
 			return (NULL);
 		if (check_if_error(line, error))
 			return (line);
+		return (new_line);
 	}
 	return (line);
 }

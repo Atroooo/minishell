@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 13:05:16 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/17 14:17:57 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 	if (error == 0)
 		convert_in_3d_array(all_cmd);
 	free_cmd_struct(all_cmd);
+	free(line);
 	return (error);
 }
