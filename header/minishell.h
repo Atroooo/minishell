@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 16:52:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/17 13:59:55 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ void		free_all_exit(t_env_main *main_env);
 void		free_inout_list(t_lst *lst);
 
 /*A DELETE*/
+void		print_all_cmd(char ***all_cmd);
 void		print_tab(char **tab);
 void		print_list_delete(t_lst *lst);
 
