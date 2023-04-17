@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/17 14:31:56 by atro             ###   ########.fr       */
+/*   Updated: 2023/04/17 15:15:57 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void		free_variable_name_and_value(char *name, char *value);
 int			set_variables_name_and_value(char *str, char **name, char **value);
 t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env);
 void		ft_env(char **cmd, t_env_main *main_env);
-void		ft_exit(char **cmd, t_env_main *main_env);
+void		ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd);
 
 /*Utils lst*/
 t_env_var	*ft_lstnew_env(char *name, char *value);

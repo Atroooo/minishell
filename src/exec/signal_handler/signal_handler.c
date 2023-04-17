@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/17 14:57:17 by atro             ###   ########.fr       */
+/*   Updated: 2023/04/17 15:03:13 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	signal_action_hdoc(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		return ;
+		exit(0);
 	}
 }
 

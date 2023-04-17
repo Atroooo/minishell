@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/17 14:57:23 by atro             ###   ########.fr       */
+/*   Updated: 2023/04/17 15:05:21 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 	signal_handler_hdoc();
 	while (1)
 	{
-		//ft_printf("heredoc> ");
+		ft_printf("heredoc> ");
 		tmp_str = heredoc_parsing(all_cmd);
 		if (!tmp_str)
 			break ;

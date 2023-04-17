@@ -17,7 +17,7 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 	if (!all_cmd->all_cmd[0])
 		return (0);
 	if (ft_strcmp("exit", all_cmd->all_cmd[0][0]) == 0)
-		ft_exit(all_cmd->all_cmd[0], main_env);
+		ft_exit(all_cmd->all_cmd[0], main_env, all_cmd);
 	else if (all_cmd->outfile == NULL && \
 	ft_strcmp("export", all_cmd->all_cmd[0][0]) == 0)
 		main_env->env_list = ft_export(all_cmd->all_cmd[0], main_env);
@@ -47,7 +47,6 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
-	print_all_cmd(all_cmd->all_cmd);
 	if (all_cmd->nbr_cmd == 1)
 	{
 		if (buildin_exec(all_cmd, main_env))
