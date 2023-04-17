@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/17 13:59:55 by atro             ###   ########.fr       */
+/*   Updated: 2023/04/17 14:31:56 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ t_lst		*lst_new(void *content);
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
+void		signal_handler_hdoc(void);
 void		termios_init(t_env_main *main_env);
 
 /*Exec cmd*/

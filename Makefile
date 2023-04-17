@@ -10,7 +10,7 @@ HEADER_FILE				= minishell.h
 DIR						= src/
 SRC			 			= main.c init.c \
 						  parsing/parsing.c \
-						  exec/signal_handler/signal_handler.c \
+						  exec/signal_handler/signal_handler.c exec/signal_handler/term_handler.c \
 						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/export.c exec/builtins/export_utils.c \
 						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c exec/builtins/pwd.c \
 						  exec/utils/chained_list.c exec/utils/utils.c \

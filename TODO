@@ -1,3 +1,5 @@
+- cancel hdoc avec Ctrl + C
+- finir tty
 - redirections "locales" pour les pipes : ls > outfile | cat outfile par exemple, a faire 
 (et du coup idem pour ls > outfile | ls > outfile2 | cat outfile)
 
