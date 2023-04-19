@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/19 14:41:00 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 16:51:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_echo(char **cmd, t_env_main *main_env)
 	while (cmd[i])
 	{
 		if (ft_strcmp("$?", cmd[i]) == 0)
-			printf("%d", main_env->last_cmd_status);
+			printf("%d", main_env->exit_status);
 		else
 			printf("%s", cmd[i]);
 		if (cmd[i + 1])
@@ -52,5 +52,5 @@ void	ft_echo(char **cmd, t_env_main *main_env)
 	}
 	if (!n)
 		printf("\n");
-	main_env->last_cmd_status = 0;
+	main_env->exit_status = 0;
 }

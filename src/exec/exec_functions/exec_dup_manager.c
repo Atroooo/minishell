@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 14:44:01 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:22:44 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	get_last_dup_done(t_env_pipe *st, t_line *all_cmd)
 		return (quit_function(st, 0));
 	if (st->output == 1)
 	{
-		printf("oui\n");
 		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data))
 			return (quit_function(st, 0));
 	}

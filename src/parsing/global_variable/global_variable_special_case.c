@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable_special_case.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 08:37:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 18:16:22 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 16:51:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_if_not_special_case(char *line, int *i_line, char *final_line, t_env_m
 	else if (line[*i_line + 1] == '?')
 	{
 		skip_gobal_variable(i_line, line);
-		index = interrogation_case(&final_line, main_env->last_cmd_status);
+		index = interrogation_case(&final_line, main_env->exit_status);
 		if (index < 0)
 			return (-1);
 	}

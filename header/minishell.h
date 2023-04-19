@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/19 15:31:35 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:59:36 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 typedef struct s_env_main
 {
 	char				**env;
-	int					last_cmd_status;
+	unsigned char		exit_status;
 	struct s_env_var	*env_list;
 	struct termios		*tty;
 }	t_env_main;
@@ -147,16 +147,14 @@ int			check_spe_outfile(t_env_pipe *st, t_line *all_cmd);
 int			open_outfile(t_env_pipe *st, t_line *all_cmd);
 int			setup_infile(t_env_pipe *st, char *file_raw);
 
-/*Exececution*/
+/*Execution*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd);
 char		*get_path(char *cmd, char *paths);
 void		no_path(t_env_pipe *st, char **cmd);
-void		path_is_null(t_env_pipe *st, char **cmd, char *str);
 int			execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env);
 int			get_exec_done(t_line *all_cmd, char **cmd, \
 				t_env_pipe *st, t_env_main *main_env);
-int			error_execve(char **cmd, char *path, t_env_pipe *st);
 
 /*Heredoc*/
 int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
@@ -194,6 +192,8 @@ void		free_inout_list(t_lst *lst);
 void		free_env(t_env_pipe *st, int i);
 void		free_pipe(t_env_pipe *st);
 int			quit_function(t_env_pipe *st, int error_code);
+void		free_cmd_exec(t_line *all_cmd, t_env_pipe *st, \
+				t_env_main *main_env);
 
 /*A DELETE*/
 void		print_all_cmd(char ***all_cmd);
