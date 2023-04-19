@@ -54,7 +54,7 @@ void	free_inout_list(t_lst *lst)
 	}
 }
 
-void	free_all_exit(t_env_main *main_env)
+void	free_main_env(t_env_main *main_env)
 {
 	t_env_var	*tmp;
 
@@ -69,5 +69,5 @@ void	free_all_exit(t_env_main *main_env)
 			free(main_env->env_list);
 		main_env->env_list = tmp;
 	}
-	exit(0);
+	exit(main_env->last_cmd_status);
 }

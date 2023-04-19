@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 09:49:44 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:26:28 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	setup_outfile(t_env_pipe *st, char *file_raw)
 	return (0);
 }
 
-static int	setup_infile(t_env_pipe *st, char *file_raw)
+int	setup_infile(t_env_pipe *st, char *file_raw)
 {
 	char	*file_name;
 

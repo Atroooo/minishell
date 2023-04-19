@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:06:19 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 15:25:38 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 14:48:45 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_list_delete(t_lst *lst)
 {
 	while (lst != NULL)
 	{
-		printf("%s -> ", lst->data);
+		printf("idx %d %s -> ", lst->index, lst->data);
 		lst = lst->next;
 	}
 	printf("NULL\n");

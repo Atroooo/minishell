@@ -38,13 +38,13 @@ static void	exec_shell(t_env_main *main_env)
 			add_history(line);
 			error = parsing(line, &all_cmd, main_env);
 			if (error == -1)
-				free_all_exit(main_env);
+				free_main_env(main_env);
 			else if (error == 0)
 				exec_hub(&all_cmd, main_env);
 			line = readline("prompt> ");
 		}
 		if (!line)
-			free_all_exit(main_env);
+			free_main_env(main_env);
 		rl_clear_history();
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/19 09:49:56 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:25:00 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,9 @@ int			dup_manager(t_env_pipe *st, t_line *all_cmd);
 int			get_dup_single_done(t_env_pipe *st);
 void		close_function(t_env_pipe *st);
 int			setup_outfile(t_env_pipe *st, char *file_raw);
+int			check_spe_outfile(t_env_pipe *st, t_line *all_cmd);
+int			open_outfile(t_env_pipe *st, t_line *all_cmd);
+int			setup_infile(t_env_pipe *st, char *file_raw);
 
 /*Exececution*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
@@ -185,7 +188,7 @@ int			ft_lstsize_file(t_lst *lst);
 /*Free utils*/
 void		free_str(char **str);
 void		free_cmd(t_line *all_cmd);
-void		free_all_exit(t_env_main *main_env);
+void		free_main_env(t_env_main *main_env);
 void		free_inout_list(t_lst *lst);
 void		free_env(t_env_pipe *st, int i);
 void		free_pipe(t_env_pipe *st);
