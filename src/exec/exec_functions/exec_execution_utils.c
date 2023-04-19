@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 16:53:12 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:16:36 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,11 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	path = NULL;
 	if (buildin_exec(cmd, main_env))
 	{
-		free_all_exit(main_env);
 		free_cmd(all_cmd);
+		free_inout_list(all_cmd->infile);
+		free_inout_list(all_cmd->outfile);
 		quit_function(st, 2);
+		free_all_exit(main_env);
 		exit(1);
 	}
 	if (!cmd)

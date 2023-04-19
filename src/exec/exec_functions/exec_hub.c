@@ -12,16 +12,23 @@
 
 #include "../../../header/minishell.h"
 
-void	print_tab(char **tab)
+static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_printf("CMD = |%s|\n", tab[i]);
-		i++;
-	}
+	if (!all_cmd->all_cmd[0])
+		return (0);
+	if (ft_strcmp("exit", all_cmd->all_cmd[0][0]) == 0)
+		ft_exit(all_cmd->all_cmd[0], main_env, all_cmd);
+	else if (all_cmd->outfile == NULL && \
+	ft_strcmp("export", all_cmd->all_cmd[0][0]) == 0)
+		main_env->env_list = ft_export(all_cmd->all_cmd[0], main_env);
+	else if (ft_strcmp("unset", all_cmd->all_cmd[0][0]) == 0)
+		main_env->env_list = ft_unset(all_cmd->all_cmd[0], \
+			main_env->env_list, main_env);
+	else
+		return (0);
+	if (main_env->env_list == NULL)
+		return (-1);
+	return (1);
 }
 
 static void	check_inout(t_env_pipe *st, t_line *all_cmd)
@@ -40,9 +47,12 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
-	if (ft_strcmp("exit", all_cmd->all_cmd[0][0]) == 0 && \
-		all_cmd->nbr_cmd == 1)
-		ft_exit(all_cmd->all_cmd[0], main_env);
+	print_all_cmd(all_cmd->all_cmd);
+	if (all_cmd->nbr_cmd == 1)
+	{
+		if (buildin_exec(all_cmd, main_env))
+			return (1);
+	}
 	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
 		return (ft_printf("Error : %s\n", strerror(errno)));
