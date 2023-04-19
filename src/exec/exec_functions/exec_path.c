@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:55:29 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/12 17:02:22 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:59:06 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,11 @@ char	*get_path(char *cmd, char *paths)
 		return (NULL);
 	set_path(path_split, cmd);
 	return (check_if_cmd_exist(path_split, temp));
+}
+
+void	no_path(t_env_pipe *st, char **cmd)
+{
+	ft_free_2d_array(cmd);
+	quit_function(st, 0);
+	return ;
 }

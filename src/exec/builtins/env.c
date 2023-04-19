@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:30 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/13 16:50:23 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:51:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	ft_env(char **cmd, t_env_main *main_env)
 	if (ft_strcmp(cmd[0], "env") != 0)
 		return ;
 	print_list(main_env->env_list);
-	main_env->last_cmd_status = 0;
+	main_env->exit_status = 0;
 }

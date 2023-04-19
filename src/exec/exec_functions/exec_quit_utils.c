@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 14:33:51 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:20:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,19 @@ int	quit_function(t_env_pipe *st, int error_code)
 	return (0);
 }
 
-int	error_execve(char **cmd, char *path, t_env_pipe *st)
-{
-	ft_free_2d_array(cmd);
-	if (path)
-		free(path);
-	return (quit_function(st, -1));
-}
-
 void	free_pipe(t_env_pipe *st)
 {
 	int	i;
 
 	i = 0;
-	while (i < st->nbr_cmd - 1 && st->fd && st->fd[i])
+	while (i < st->nbr_cmd)
 	{
-		if (st->fd[i] != NULL)
-			free(st->fd[i]);
+		free(st->fd[i]);
 		i++;
 	}
-	if (st->pid != NULL)
-		free(st->pid);
-	if (st->fd != NULL)
-		free(st->fd);
-	if (st != NULL)
-		free(st);
+	free(st->pid);
+	free(st->fd);
+	free(st);
 }
 
 void	free_env(t_env_pipe *st, int i)

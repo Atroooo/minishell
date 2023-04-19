@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/30 16:03:56 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:51:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	ft_cd(char **cmd, t_env_main *main_env)
 		path = ft_strdup(cmd[1]);
 	if (path == NULL)
 	{
-		main_env->last_cmd_status = 1;
+		main_env->exit_status = 1;
 		return ;
 	}
 	if (chdir(path) == -1)
 	{
 		ft_printf("minishell: cd: %s no such file or directory\n", path);
-		main_env->last_cmd_status = 1;
+		main_env->exit_status = 1;
 		free(path);
 		return ;
 	}
-	main_env->last_cmd_status = 0;
+	main_env->exit_status = 0;
 }

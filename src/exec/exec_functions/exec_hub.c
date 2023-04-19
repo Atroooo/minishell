@@ -48,7 +48,6 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
-	print_list_delete(all_cmd->outfile);
 	if (all_cmd->nbr_cmd == 1)
 	{
 		if (buildin_exec(all_cmd, main_env))
@@ -63,16 +62,19 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 	if (!setup_struct_cmd(st, all_cmd))
 		return (0);
 	if (!execution(all_cmd, st, main_env))
+	{
+		free_cmd_exec(all_cmd, st, main_env);
 		return (0);
+	}
 	return (1);
 }
 
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
 	if (exec_cmd(main_env, all_cmd))
-		main_env->last_cmd_status = 0;
+		main_env->exit_status = 0;
 	else
-		main_env->last_cmd_status = 1;
+		main_env->exit_status = 1;
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);

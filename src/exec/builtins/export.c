@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/17 13:59:58 by atro             ###   ########.fr       */
+/*   Updated: 2023/04/19 16:51:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_env_var	*ft_export(char **cmd, t_env_main *main_env)
 	if (!cmd[i])
 	{
 		print_list(main_env->env_list);
-		main_env->last_cmd_status = 0;
+		main_env->exit_status = 0;
 		return (main_env->env_list);
 	}
 	while (cmd[i])
@@ -70,6 +70,6 @@ t_env_var	*ft_export(char **cmd, t_env_main *main_env)
 			setenv(cmd[i], "", 1);
 		i++;
 	}
-	main_env->last_cmd_status = 0;
+	main_env->exit_status = 0;
 	return (main_env->env_list);
 }

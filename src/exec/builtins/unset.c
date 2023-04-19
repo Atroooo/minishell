@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/15 18:01:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/19 16:51:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	find_in_list(char *name, t_env_var *env_list, t_env_main *main_env)
 		if (temp && temp->name && ft_strcmp(temp->name, name) == 0)
 		{
 			delete_node(env_list, i);
-			main_env->last_cmd_status = 0;
+			main_env->exit_status = 0;
 		}
 		i++;
 		temp = temp->next;

@@ -17,7 +17,7 @@ SRC			 			= main.c init.c \
 						  exec/exec_functions/exec_hub.c exec/exec_functions/exec_setup_struct.c \
 						  exec/exec_functions/exec_setup_files.c exec/exec_functions/exec_setup_files_utils.c \
 						  exec/exec_functions/exec_dup_manager.c exec/exec_functions/exec_dup_manager_utils.c \
-						  exec/exec_functions/exec_path_utils.c exec/exec_functions/exec_path.c \
+						  exec/exec_functions/exec_path.c \
 						  exec/exec_functions/exec_execution.c exec/exec_functions/exec_execution_utils.c \
 						  exec/heredoc/heredoc.c exec/heredoc/heredoc_utils.c \
 						  exec/exec_functions/exec_quit_utils.c \

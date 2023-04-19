@@ -21,10 +21,12 @@ void	free_str(char **str)
 	index = 0;
 	while (str[index])
 	{
-		free(str[index]);
+		if (str[index])
+			free(str[index]);
 		index++;
 	}
-	free(str);
+	if (str)
+		free(str);
 }
 
 void	free_cmd(t_line *all_cmd)
@@ -54,6 +56,15 @@ void	free_inout_list(t_lst *lst)
 	}
 }
 
+void	free_cmd_exec(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env)
+{
+	free_cmd(all_cmd);
+	free_inout_list(all_cmd->infile);
+	free_inout_list(all_cmd->outfile);
+	quit_function(st, 2);
+	free_main_env(main_env);
+}
+
 void	free_main_env(t_env_main *main_env)
 {
 	t_env_var	*tmp;
@@ -69,5 +80,5 @@ void	free_main_env(t_env_main *main_env)
 			free(main_env->env_list);
 		main_env->env_list = tmp;
 	}
-	exit(main_env->last_cmd_status);
+	exit(main_env->exit_status);
 }
