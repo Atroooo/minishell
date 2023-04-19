@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/17 15:11:18 by atro             ###   ########.fr       */
+/*   Created: 2023/04/17 14:05:32 by atro              #+#    #+#             */
+/*   Updated: 2023/04/17 14:05:44 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../header/minishell.h"
+#include "../../header/minishell.h"
 
-void	ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd)
+void	print_all_cmd(char ***all_cmd)
 {
-	if (!cmd)
-		return ;
-	if (ft_strcmp(cmd[0], "exit") != 0)
-		return ;
-	free_cmd(all_cmd);
-	free_inout_list(all_cmd->infile);
-	free_inout_list(all_cmd->outfile);
-	free_all_exit(main_env);
+	int	i;
+
+	i = 0;
+	while (all_cmd[i])
+	{
+		printf("CMD %d\n", i);
+		print_tab(all_cmd[i]);
+		i++;
+	}
+}
+
+void	print_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("CMD = |%s|\n", tab[i]);
+		i++;
+	}
 }

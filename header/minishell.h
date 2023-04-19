@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 07:54:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 16:52:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:15:57 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ t_lst		*lst_new(void *content);
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
+void		signal_handler_hdoc(void);
 void		termios_init(t_env_main *main_env);
 
 /*Exec cmd*/
@@ -166,7 +167,7 @@ void		free_variable_name_and_value(char *name, char *value);
 int			set_variables_name_and_value(char *str, char **name, char **value);
 t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env);
 void		ft_env(char **cmd, t_env_main *main_env);
-void		ft_exit(char **cmd, t_env_main *main_env);
+void		ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd);
 
 /*Utils lst*/
 t_env_var	*ft_lstnew_env(char *name, char *value);
@@ -188,6 +189,7 @@ void		free_all_exit(t_env_main *main_env);
 void		free_inout_list(t_lst *lst);
 
 /*A DELETE*/
+void		print_all_cmd(char ***all_cmd);
 void		print_tab(char **tab);
 void		print_list_delete(t_lst *lst);
 

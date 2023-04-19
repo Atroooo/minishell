@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/13 18:18:50 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/17 13:28:29 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	ft_echo(char **cmd, t_env_main *main_env)
 	}
 	while (cmd[i])
 	{
-		printf("%s", cmd[i]);
+		if (ft_strcmp("$?", cmd[i]) == 0)
+			printf("%d", main_env->last_cmd_status);
+		else
+			printf("%s", cmd[i]);
 		if (cmd[i + 1])
 			printf(" ");
 		i++;
