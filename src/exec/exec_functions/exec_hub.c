@@ -37,7 +37,8 @@ static void	check_inout(t_env_pipe *st, t_line *all_cmd)
 		st->input = 1;
 	else
 		st->input = 0;
-	if (all_cmd->outfile != NULL)
+	if (all_cmd->outfile != NULL && \
+		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1)
 		st->output = 1;
 	else
 		st->output = 0;
@@ -47,6 +48,7 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
+	print_list_delete(all_cmd->outfile);
 	if (all_cmd->nbr_cmd == 1)
 	{
 		if (buildin_exec(all_cmd, main_env))
