@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 17:46:17 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 09:53:07 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	get_first_dup_done(t_env_pipe *st)
 {
 	if (dup2(st->infile, STDIN_FILENO) == -1)
 		return (quit_function(st, 0));
+	//Balade dans la liste outfile, si index de la liste == st->i alors rediriger outfile
 	if (dup2(st->fd[st->actual_pipe][1], STDOUT_FILENO) == -1)
 		return (quit_function(st, 0));
 	return (1);
@@ -52,7 +53,7 @@ static int	get_dup_done(t_env_pipe *st)
 	return (1);
 }
 
-int	dup_manager(t_env_pipe *st)
+int	dup_manager(t_env_pipe *st, t_line *all_cmd)
 {
 	if (!get_dup_single_done(st))
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 09:32:09 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 09:43:49 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	get_gbl_var(char *line, char *final_line, \
 		index += temp;
 	if (temp == 0)
 	{
-		printf("VARIABLE = %s", &line[*i_line + 1]);
 		if (copy_variable(&line[*i_line + 1], &index, main_env->env_list, &final_line[0]))
 			return (INT_MIN);
 		skip_gobal_variable(i_line, line);
