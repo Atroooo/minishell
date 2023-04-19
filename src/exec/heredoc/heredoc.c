@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 17:43:01 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 20:32:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 	{
 		ft_printf("heredoc> ");
 		tmp_str = heredoc_parsing(all_cmd);
-		if (!tmp_str || main_env->exit_status == 255)
+		if (!tmp_str)
 			break ;
 		else
 		{

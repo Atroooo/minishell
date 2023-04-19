@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/12 15:53:20 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 20:38:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,36 @@ int	create_outfiles(t_lst *outfile)
 		outfile = outfile->next;
 	}
 	return (1);
+}
+
+int	check_spe_outfile(t_env_pipe *st, t_line *all_cmd)
+{
+	t_lst	*tmp;
+
+	tmp = all_cmd->outfile;
+	while (tmp)
+	{
+		if (tmp->index == st->i)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int	open_outfile(t_env_pipe *st, t_line *all_cmd)
+{
+	t_lst	*tmp;
+
+	tmp = all_cmd->outfile;
+	while (tmp)
+	{
+		if (tmp->index == st->i)
+		{
+			if (!setup_outfile(st, tmp->data))
+				return (0);
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
 }
