@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/17 14:17:57 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 17:00:12 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,8 @@ int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 		convert_in_3d_array(all_cmd);
 	free_cmd_struct(all_cmd);
 	free(line);
+	if (all_cmd->all_cmd[0] == NULL \
+	|| all_cmd->all_cmd[0][0] == NULL || all_cmd->all_cmd[0][0][0] == '\0')
+		return (1);
 	return (error);
 }

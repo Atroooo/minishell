@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/04/19 15:28:11 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 16:55:08 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,5 @@ int	convert_in_3d_array(t_line *all_cmd)
 		i++;
 	}
 	all_cmd->all_cmd[i] = NULL;
-	print_list_delete(all_cmd->infile);
 	return (1);
 }

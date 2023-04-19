@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 15:32:37 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:20:31 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,24 @@ int	get_gbl_var(char *line, char *final_line, \
 	return (index);
 }
 
+int	not_between_quote(char *line, int i_line)
+{
+	if (i_line < 1)
+		return (1);
+	if (line[i_line - 1] == '"' && line[i_line + 1] == '"')
+		return (0);
+	if (line[i_line - 1] == '\'' && line[i_line + 1] == '\'')
+		return (0);
+	return (1);
+}
+
 int	gbl_var_check(char *line, char *final_line, \
 						int *i_line, t_env_main *main_env)
 {
 	int	index;
 
 	index = 0;
-	while (line[*i_line] == '$')
+	while (line[*i_line] == '$' && not_between_quote(line, *i_line))
 	{
 		if (line[*i_line + 1] == ' ' || line[*i_line + 1] == '\0' || ft_isalnum(line[*i_line + 1]) == 0)
 			if (line[*i_line + 1] != '*' && line[*i_line + 1] != '"' && line[*i_line + 1] != '\'')

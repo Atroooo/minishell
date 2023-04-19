@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 08:09:13 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 16:42:51 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,12 @@ static char	*last_char_pipe(char *line, int *error)
 char	*check_if_pipe_error(char *line, t_env_main *main_env, int *error)
 {
 	char	*new_line;
+	int		len;
 
 	if (check_if_error(line, error))
 		return (line);
-	if (line[ft_strlen(line) - 1] == '|')
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '|')
 	{
 		line = last_char_pipe(line, error);
 		if (line == NULL)
