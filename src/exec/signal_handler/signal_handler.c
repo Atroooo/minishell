@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/19 16:51:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:42:39 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ void	signal_action_hdoc(int sig)
 		return ;
 	if (sig == SIGINT)
 	{
+		g_status = 255;
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		exit(0);
 	}
 }
 
-void	signal_handler_hdoc(void)
+void	signal_handler_hdoc(t_env_main *main_env)
 {
 	struct sigaction	sa;
 
@@ -66,4 +66,5 @@ void	signal_handler_hdoc(void)
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
+	main_env->exit_status = g_status;
 }

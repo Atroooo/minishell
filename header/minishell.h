@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/19 16:59:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:39:23 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char		*copy_cmd(int size, char *src, char *dest);
 int			get_element(int *i, \
 			int (*get)(char *, t_cmd *), char *line, t_cmd *cmd);
 
-/*BUILTIN Parsing*/
+/*Builtins Parsing*/
 int			check_if_echo(char *line, t_cmd *cmd, int *error);
 
 /*Get all cmd*/
@@ -113,7 +113,7 @@ int			get_file(char *line, t_cmd *cmd);
 int			get_flag(char *line, t_cmd *cmd);
 int			get_content(char *line, t_cmd *cmd);
 
-/*utils*/
+/*Utils Parsing*/
 int			skip_space(char *line);
 int			count_len(char *line, char del, int *nbr_quote);
 int			get_size(char *line, int *size);
@@ -126,14 +126,14 @@ int			count_alpha(char *line);
 int			skip_char(char *line, char c);
 int			skip_in_between(char *str, char c);
 
-/*list utils*/
+/*List utils*/
 int			lst_add_back(t_lst **lst, t_lst *new);
 t_lst		*lst_new(void *content);
 t_lst		*lst_new_index(void *content, int index);
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
-void		signal_handler_hdoc(void);
+void		signal_handler_hdoc(t_env_main *env_main);
 void		termios_init(t_env_main *main_env);
 
 /*Manage files*/
@@ -149,7 +149,8 @@ int			setup_infile(t_env_pipe *st, char *file_raw);
 
 /*Execution*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
-int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd);
+int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, \
+				t_env_main *main_env);
 char		*get_path(char *cmd, char *paths);
 void		no_path(t_env_pipe *st, char **cmd);
 int			execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env);
@@ -158,7 +159,7 @@ int			get_exec_done(t_line *all_cmd, char **cmd, \
 
 /*Heredoc*/
 int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
-int			heredoc(t_env_pipe *st, t_line *all_cmd);
+int			heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
 char		*get_delimiter(char *str);
 
 /*Builtins*/
