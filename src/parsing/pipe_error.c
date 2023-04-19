@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/17 14:17:06 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 08:09:13 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_if_pipe(char *line, int *consecutive_pipe)
 	int	i;
 
 	i = 0;
-	while (line[i] == '|')
+	while (line && line[i] == '|')
 	{
 		*consecutive_pipe += 1;
 		i++;
@@ -39,6 +39,8 @@ int	check_char(char c, int *pipe, int *consecutive_pipe, int *only_space)
 		*pipe = 1;
 		*consecutive_pipe += 1;
 	}
+	else if (c == '\0')
+		return (0);
 	else
 	{
 		*only_space = 0;
@@ -58,7 +60,7 @@ static int	check_if_error(char *line, int *error)
 	consecutive_pipe = 0;
 	only_space = 1;
 	i = 0;
-	while (line[i] != '\0')
+	while (line && line[i] != '\0')
 	{
 		i += skip_space(&line[i]);
 		if (line[i] == '\'' || line[i] == '\"')

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 18:02:54 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 09:32:09 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,21 @@ static void	copy_simple_quote(int *i_line, int *index, char *line, char *final_l
 
 t_env_var	*find_elem_in_list(char *name, t_env_var *env_list)
 {
+	int	len_name;
+	int	len_env;
+
+	len_name = ft_strlen(name);
 	while (env_list != NULL)
 	{
-		if (ft_strncmp(env_list->name, name, ft_strlen(name)) == 0)
-			break ;
+		len_env = ft_strlen(env_list->name);
+		if (len_name > len_env)
+		{
+			if (ft_strncmp(env_list->name, name, len_name) == 0)
+				break ;
+		}
+		else
+			if (ft_strncmp(env_list->name, name, len_env) == 0)
+				break ;
 		env_list = env_list->next;
 	}
 	return (env_list);
@@ -50,7 +61,9 @@ static int	copy_variable(char *line, int *index, t_env_var *env_list, char *fina
 	env_list = find_elem_in_list(name, env_list);
 	free(name);
 	if (env_list == NULL)
+	{
 		return (0);
+	}
 	nbr_char = ft_strlen(env_list->value);
 	ft_strlcpy(final_line, env_list->value, nbr_char + 1);
 	*index += nbr_char;
@@ -88,6 +101,7 @@ int	get_gbl_var(char *line, char *final_line, \
 		index += temp;
 	if (temp == 0)
 	{
+		printf("VARIABLE = %s", &line[*i_line + 1]);
 		if (copy_variable(&line[*i_line + 1], &index, main_env->env_list, &final_line[0]))
 			return (INT_MIN);
 		skip_gobal_variable(i_line, line);
@@ -104,7 +118,8 @@ int	gbl_var_check(char *line, char *final_line, \
 	while (line[*i_line] == '$')
 	{
 		if (line[*i_line + 1] == ' ' || line[*i_line + 1] == '\0' || ft_isalnum(line[*i_line + 1]) == 0)
-			return (index);
+			if (line[*i_line + 1] != '*')
+				return (index);
 		index += get_gbl_var(&line[0], &final_line[index], i_line, main_env);
 		if (index < 0)
 			return (INT_MIN);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   free_utils_parsing.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 07:19:28 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/10 13:46:37 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/17 14:51:51 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	free_cmd_struct(t_line *all_cmd)
 	i = 0;
 	while (i < all_cmd->nbr_cmd)
 	{
-		free_single_cmd(&all_cmd->cmd[i]);
+		 free_single_cmd(&all_cmd->cmd[i]);
 		i++;
 	}
 	if (all_cmd->cmd)
