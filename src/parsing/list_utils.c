@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:06:19 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 15:25:38 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 15:26:53 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,24 @@ t_lst	*lst_new(void *content)
 	return (list);
 }
 
+t_lst	*lst_new_index(void *content, int index)
+{
+	t_lst	*list;
+
+	list = malloc(sizeof(t_lst));
+	if (list == NULL)
+		return (NULL);
+	list->data = content;
+	list->index = index;
+	list->next = NULL;
+	return (list);
+}
+
 void	print_list_delete(t_lst *lst)
 {
 	while (lst != NULL)
 	{
-		printf("%s -> ", lst->data);
+		printf("%d %s -> ",lst->index, lst->data);
 		lst = lst->next;
 	}
 	printf("NULL\n");

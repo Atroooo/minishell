@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 09:32:09 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 14:45:07 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	get_gbl_var(char *line, char *final_line, \
 		index += temp;
 	if (temp == 0)
 	{
-		printf("VARIABLE = %s", &line[*i_line + 1]);
 		if (copy_variable(&line[*i_line + 1], &index, main_env->env_list, &final_line[0]))
 			return (INT_MIN);
 		skip_gobal_variable(i_line, line);
@@ -118,7 +117,7 @@ int	gbl_var_check(char *line, char *final_line, \
 	while (line[*i_line] == '$')
 	{
 		if (line[*i_line + 1] == ' ' || line[*i_line + 1] == '\0' || ft_isalnum(line[*i_line + 1]) == 0)
-			if (line[*i_line + 1] != '*')
+			if (line[*i_line + 1] != '*' && line[*i_line + 1] != '"' && line[*i_line + 1] != '\'')
 				return (index);
 		index += get_gbl_var(&line[0], &final_line[index], i_line, main_env);
 		if (index < 0)

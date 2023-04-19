@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/19 09:37:24 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 15:27:37 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int			skip_in_between(char *str, char c);
 /*list utils*/
 int			lst_add_back(t_lst **lst, t_lst *new);
 t_lst		*lst_new(void *content);
+t_lst		*lst_new_index(void *content, int index);
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);

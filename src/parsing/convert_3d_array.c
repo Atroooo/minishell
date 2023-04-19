@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/04/19 07:50:05 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 15:28:11 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,18 @@ static int	get_all_command(t_lst *lst, char **arg, int *index)
 	t_lst	*temp;
 
 	i = 0;
-	while (lst != NULL && lst->data[0] != '\0')
+	while (lst != NULL)
 	{
+		if (lst->data != NULL || lst->data[0] == '\0')
+		{
+			arg[i] = copy_command(lst->data);
+			if (arg[i] == NULL)
+				return (-1);
+			*index += 1;
+			i++;
+		}
 		temp = lst->next;
-		arg[i] = copy_command(lst->data);
-		if (arg[i] == NULL)
-			return (-1);
 		lst = temp;
-		*index += 1;
-		i++;
 	}
 	return (0);
 }
@@ -78,14 +81,14 @@ static int	get_single_command(char *src, char **dest, int *index)
 	return (0);
 }
 
-int	list_copy(t_lst **dest, t_lst *src)
+int	list_copy(t_lst **dest, t_lst *src, int index)
 {
 	char	*str;
 
 	str = ft_strdup(src->data);
 	if (str == NULL)
 		return (1);
-	if (lst_add_back(dest, lst_new(str)))
+	if (lst_add_back(dest, lst_new_index(str, index)))
 		return (1);
 	return (0);
 }
@@ -105,17 +108,15 @@ int	get_all_files(t_cmd *cmd, t_line *all_cmd, int index)
 {
 	while (cmd->infile != NULL)
 	{
-		if (list_copy(&all_cmd->infile, cmd->infile))
+		if (list_copy(&all_cmd->infile, cmd->infile, index))
 			return (1);
 		cmd->infile = free_and_get_next(cmd->infile);
-		all_cmd->infile->index = index;
 	}
 	while (cmd->outfile != NULL)
 	{
-		if (list_copy(&all_cmd->outfile, cmd->outfile))
+		if (list_copy(&all_cmd->outfile, cmd->outfile, index))
 			return (1);
 		cmd->outfile = free_and_get_next(cmd->outfile);
-		all_cmd->outfile->index = index;
 	}
 	return (0);
 }
@@ -157,5 +158,6 @@ int	convert_in_3d_array(t_line *all_cmd)
 		i++;
 	}
 	all_cmd->all_cmd[i] = NULL;
+	print_list_delete(all_cmd->infile);
 	return (1);
 }
