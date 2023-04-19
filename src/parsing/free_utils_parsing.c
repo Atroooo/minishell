@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 07:19:28 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/17 14:51:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/19 18:00:38 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	free_list(t_lst *lst)
 	{
 		precedent = lst;
 		lst = lst->next;
+		free(precedent->data);
 		free(precedent);
 	}
 }
@@ -60,7 +61,7 @@ void	free_cmd_struct(t_line *all_cmd)
 	i = 0;
 	while (i < all_cmd->nbr_cmd)
 	{
-		 free_single_cmd(&all_cmd->cmd[i]);
+		free_single_cmd(&all_cmd->cmd[i]);
 		i++;
 	}
 	if (all_cmd->cmd)
