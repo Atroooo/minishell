@@ -1,4 +1,5 @@
-- cancel hdoc avec Ctrl + C
+- ls | rien : si on ctrl + D : un leak a fix
+- ls | rien : si on ctrl + C : ne cancel pas
 - finir tty
 
 - fds a close

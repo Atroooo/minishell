@@ -48,12 +48,14 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
+	main_env->all_cmd = all_cmd;
 	if (all_cmd->nbr_cmd == 1)
 	{
 		if (buildin_exec(all_cmd, main_env))
 			return (1);
 	}
 	st = malloc(sizeof(t_env_pipe));
+	main_env->st = st;
 	if (st == NULL)
 		return (ft_printf("Error : %s\n", strerror(errno)));
 	check_inout(st, all_cmd);

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/19 17:39:23 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:15:00 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_env_main
 	unsigned char		exit_status;
 	struct s_env_var	*env_list;
 	struct termios		*tty;
+	struct s_env_pipe	*st;
+	struct t_line		*all_cmd;
 }	t_env_main;
 
 typedef struct s_env_var
@@ -86,6 +88,8 @@ typedef enum t_boolean
 	TRUE
 }	t_boolean;
 
+extern t_env_main	g_main_env;
+
 /*Init*/
 void		init_main_env(t_env_main *main_env, char **env);
 
@@ -132,8 +136,8 @@ t_lst		*lst_new(void *content);
 t_lst		*lst_new_index(void *content, int index);
 
 /*Signal*/
-void		signal_handler(t_env_main *env_main);
-void		signal_handler_hdoc(t_env_main *env_main);
+void		signal_handler(void);
+void		signal_handler_hdoc(void);
 void		termios_init(t_env_main *main_env);
 
 /*Manage files*/
@@ -159,8 +163,10 @@ int			get_exec_done(t_line *all_cmd, char **cmd, \
 
 /*Heredoc*/
 int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
-int			heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
+int			heredoc(t_line *all_cmd);
 char		*get_delimiter(char *str);
+int			heredoc_loop(t_env_pipe *st, t_line *all_cmd);
+
 
 /*Builtins*/
 void		ft_echo(char **cmd, t_env_main *main_env);
