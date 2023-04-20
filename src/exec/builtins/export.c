@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/20 16:22:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/20 17:41:54 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 	in_env = check_if_in_env(env_list, str);
 	if (set_variables_name_and_value(str, &name, &value))
 		return (NULL);
+	printf("%s", str);
 	if ((str[0] == '$' && str[1] == '$') || (str[0] == '$' && in_env == 0))
 	{
-		ft_printf("bash: export: %s not a valid identifier\n");
+		//printf("bash: export: %s not a valid identifier\n", str);
 		free_variable_name_and_value(name, value);
 		return (env_list);
 	}
@@ -47,7 +48,7 @@ static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 	return (env_list);
 }
 
-static int	check_export_error(char *cmd) //ERREUR AVEC $?
+static int	check_export_error(char *cmd) //ERREUR AVEC $? A CAUSE DE ADD ENV VALUE
 {
 	if (cmd[0] == '$' || cmd[0] == '#')
 		return (0);
