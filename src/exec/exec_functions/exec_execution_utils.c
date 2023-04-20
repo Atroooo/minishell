@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 17:25:20 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:34:40 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,11 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 
 	path = NULL;
 	if (buildin_exec(cmd, main_env))
+	{
+		close(st->infile);
+		close(st->outfile);
 		free_cmd_exec(all_cmd, st, main_env);
+	}
 	if (!cmd)
 		return (quit_function(st, 1));
 	path = set_path(main_env->env, cmd, st);

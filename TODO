@@ -1,4 +1,5 @@
 - finir tty
+- Check erreur cat pas de \n ????
 
-- fds a close
+- reste un fd ouvert dans le cas ou un seul outfile FUCK !!!!!!!!!!!
 - ls | rien : si on ctrl + C : ne cancel pas : A VOIR
