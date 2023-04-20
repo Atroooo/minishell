@@ -1,5 +1,6 @@
 - ls | rien : si on ctrl + D : un leak a fix
 - ls | rien : si on ctrl + C : ne cancel pas
+- hdoc : faire remplacement des variables globales + affichage ctrl + c
 - finir tty
 
 - fds a close

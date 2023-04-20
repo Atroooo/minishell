@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 16:42:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/20 14:57:20 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*last_char_pipe(char *line, int *error)
 	char	*str;
 	char	*new_line;
 
-	str = readline("> ");
+	str = readline("> "); //dans le cas ou on ctrl + D : str = NULL : donc a fix
 	if (str == NULL)
 		return (NULL);
 	while (str[ft_strlen(str) - 1] == '|' && check_if_error(str, error) == 0)
