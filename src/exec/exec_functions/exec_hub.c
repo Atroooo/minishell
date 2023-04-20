@@ -80,4 +80,5 @@ void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);
+	main_env->st = NULL;
 }
