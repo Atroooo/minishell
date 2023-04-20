@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 17:16:56 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:45:09 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 	else if (ft_strcmp("echo", cmd[0]) == 0)
 		ft_echo(cmd, main_env);
 	else if (ft_strcmp("env", cmd[0]) == 0)
-		ft_env(cmd, main_env);
+	{
+		cmd = ft_env(cmd, main_env);
+		if (main_env->exit_status == 2)
+			return (main_env->exit_status = 0, 0);
+	}
 	else if (ft_strcmp("exit", cmd[0]) == 0)
 		return (1);
 	else if (ft_strcmp("export", cmd[0]) == 0)
@@ -83,7 +87,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	path = set_path(main_env->env, cmd, st);
 	if (path == NULL)
 	{
-		printf("%s: command not found", cmd[0]);
+		printf("%s: command not found\n", cmd[0]);
 		free_cmd_exec(all_cmd, st, main_env);
 		exit(main_env->exit_status);
 		return (0);

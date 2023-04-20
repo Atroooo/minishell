@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 16:42:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/20 15:58:35 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,29 @@ static int	check_if_error(char *line, int *error)
 	return (0);
 }
 
+static int	check_if_last_char_pipe(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str) - 1;
+	while (len >= 0 && (str[len] == ' '))
+		len--;
+	if (str[len] == '|')
+		return (1);
+	return (0);
+}
+
 static char	*last_char_pipe(char *line, int *error)
 {
 	char	*str;
 	char	*new_line;
+	int		last_char_pipe;
 
 	str = readline("> ");
 	if (str == NULL)
-		return (NULL);
-	while (str[ft_strlen(str) - 1] == '|' && check_if_error(str, error) == 0)
+		return (free(line), NULL);
+	last_char_pipe = check_if_last_char_pipe(str);
+	while (last_char_pipe && check_if_error(str, error) == 0)
 	{
 		free(str);
 		str = readline("> ");
@@ -108,7 +122,7 @@ char	*check_if_pipe_error(char *line, t_env_main *main_env, int *error)
 	if (check_if_error(line, error))
 		return (line);
 	len = ft_strlen(line);
-	if (len > 0 && line[len - 1] == '|')
+	if (len > 0 && check_if_last_char_pipe(line))
 	{
 		line = last_char_pipe(line, error);
 		if (line == NULL)

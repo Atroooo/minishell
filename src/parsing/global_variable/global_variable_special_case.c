@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable_special_case.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 08:37:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 16:51:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:17:41 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

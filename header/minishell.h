@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/19 16:59:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:23:34 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ int			check_if_in_env(t_env_var *lst, char *str);
 void		free_variable_name_and_value(char *name, char *value);
 int			set_variables_name_and_value(char *str, char **name, char **value);
 t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env);
-void		ft_env(char **cmd, t_env_main *main_env);
+char		**ft_env(char **cmd, t_env_main *main_env);
 void		ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd);
 
 /*Utils*/

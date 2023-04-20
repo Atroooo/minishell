@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:31:27 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/17 14:11:55 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/20 15:38:41 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,25 @@ static int	double_operator_error(char *line, int original_index)
 	return (0);
 }
 
+static int operator_with_pipe(char *line)
+{
+	int	i;
+
+	i = 1;
+	i += skip_space(&line[i]);
+	if (line[i] == '|')
+	{
+		printf("syntax error near unexpected token `|'\n");
+		return (1);
+	}
+	else if (line[i] == '\0')
+	{
+		printf("syntax error near unexpected token 'newline'\n");
+		return (1);
+	}
+	return (0);
+}
+
 int	input_operator_check(char *line)
 {
 	int	i;
@@ -94,6 +113,8 @@ int	input_operator_check(char *line)
 			if (simple_operator_error(&line[i]))
 				return (1);
 			else if (double_operator_error(&line[i], i))
+				return (1);
+			else if (operator_with_pipe(&line[i]))
 				return (1);
 			i++;
 		}

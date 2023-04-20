@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:35:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 08:21:09 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/20 17:18:58 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	special_case_count(char *line, int *index, int *nbr_char)
 		return (1);
 	else if (line[*index + 1] == '?')
 	{
-		nbr_char += 3;
+		*nbr_char += 3;
 		return (1);
 	}
 	else if (ft_isalnum(line[*index + 1]) == 0)
