@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 14:26:37 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:13:04 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ static char	*heredoc_parsing(t_line *all_cmd)
 	return (get_str);
 }
 
-int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
+int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
 	char	*tmp_str;
+	char	*global_var;
 	int		temp_pipe[2];
 
 	pipe(temp_pipe);
@@ -73,7 +74,9 @@ int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 			break ;
 		else
 		{
-			write(temp_pipe[1], tmp_str, ft_strlen(tmp_str));
+			global_var = replace_global_variable(tmp_str, main_env);
+			write(temp_pipe[1], global_var, ft_strlen(global_var));
+			free(global_var);
 			free(tmp_str);
 		}
 	}

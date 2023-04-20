@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 14:15:27 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:09:44 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	fork_declaration(t_line *all_cmd, char **cmd, \
 	if (st->pid[st->i] == 0)
 	{
 		if (st->hdoc == 1)
-			if (heredoc_loop(st, all_cmd) != 1)
+			if (heredoc_loop(st, all_cmd, main_env) != 1)
 				return (0);
 		if (!dup_manager(st, all_cmd))
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/20 14:15:00 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:08:32 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int			get_exec_done(t_line *all_cmd, char **cmd, \
 int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
 int			heredoc(t_line *all_cmd);
 char		*get_delimiter(char *str);
-int			heredoc_loop(t_env_pipe *st, t_line *all_cmd);
+int			heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
 
 
 /*Builtins*/
