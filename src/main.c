@@ -12,6 +12,8 @@
 
 #include "../header/minishell.h"
 
+t_env_main	g_main_env;
+
 static void	check_param(int argc)
 {
 	if (argc != 1)
@@ -29,7 +31,7 @@ static void	exec_shell(t_env_main *main_env)
 
 	line = NULL;
 	error = 0;
-	signal_handler(main_env);
+	signal_handler();
 	line = readline("prompt> ");
 	while (1)
 	{
@@ -54,12 +56,11 @@ static void	exec_shell(t_env_main *main_env)
 int	main(int argc, char *argv[], char *env[])
 {
 	struct termios	termios_save;
-	t_env_main		main_env;
 
 	(void) argv;
 	check_param(argc);
-	main_env.tty = &termios_save;
-	init_main_env(&main_env, env);
-	exec_shell(&main_env);
+	g_main_env.tty = &termios_save;
+	init_main_env(&g_main_env, env);
+	exec_shell(&g_main_env);
 	return (0);
 }

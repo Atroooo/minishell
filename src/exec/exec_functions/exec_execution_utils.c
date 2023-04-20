@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 15:45:09 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/20 17:25:20 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	{
 		printf("%s: command not found\n", cmd[0]);
 		free_cmd_exec(all_cmd, st, main_env);
-		exit(main_env->exit_status);
 		return (0);
 	}
 	execve(path, cmd, main_env->env);

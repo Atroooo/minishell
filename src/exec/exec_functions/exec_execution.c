@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 09:43:58 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:25:21 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static int	fork_declaration(t_line *all_cmd, char **cmd, \
 		return (quit_function(st, 1));
 	if (st->pid[st->i] == 0)
 	{
+		if (st->hdoc == 1)
+			if (heredoc_loop(st, all_cmd, main_env) != 1)
+				return (0);
 		if (!dup_manager(st, all_cmd))
 			return (0);
 		if (!get_exec_done(all_cmd, cmd, st, main_env))
@@ -42,9 +45,15 @@ static void	wait_for_process(t_env_pipe *st)
 
 static void	end_the_progam(t_env_pipe *st)
 {
-	close_function(st);
 	wait_for_process(st);
-	free_pipe(st);
+	close_function(st);
+	if (st->hdoc != 1)
+		free_pipe(st);
+	else
+	{
+		free(st->pid);
+		free(st);
+	}
 }
 
 int	execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env)

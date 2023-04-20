@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/17 15:05:21 by atro             ###   ########.fr       */
+/*   Updated: 2023/04/20 16:13:04 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static char	*heredoc_parsing(t_line *all_cmd)
 	char	*delimiter;
 	char	*get_str;
 
+	get_str = get_next_line(0);
 	delimiter = get_delimiter(lst_last(all_cmd->infile)->data);
 	if (!delimiter)
 		return (NULL);
-	get_str = get_next_line(0);
 	if (get_str == NULL)
 	{
 		ft_printf("End of file : the delimiter was %s\n", delimiter);
@@ -57,9 +57,10 @@ static char	*heredoc_parsing(t_line *all_cmd)
 	return (get_str);
 }
 
-static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
+int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
 	char	*tmp_str;
+	char	*global_var;
 	int		temp_pipe[2];
 
 	pipe(temp_pipe);
@@ -73,7 +74,9 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 			break ;
 		else
 		{
-			write(temp_pipe[1], tmp_str, ft_strlen(tmp_str));
+			global_var = replace_global_variable(tmp_str, main_env);
+			write(temp_pipe[1], global_var, ft_strlen(global_var));
+			free(global_var);
 			free(tmp_str);
 		}
 	}
@@ -81,15 +84,11 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd)
 	return (1);
 }
 
-int	heredoc(t_env_pipe *st, t_line *all_cmd)
+int	heredoc(t_line *all_cmd)
 {
-	int		return_value;
-
 	if (!all_cmd->infile || !lst_last(all_cmd->infile)->data || \
 		ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) == 0)
 		return (0);
-	return_value = heredoc_loop(st, all_cmd);
-	if (return_value == -1)
-		return (-1);
-	return (return_value);
+	else
+		return (1);
 }
