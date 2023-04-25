@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/20 17:24:58 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:48:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,7 @@ int			setup_infile(t_env_pipe *st, char *file_raw);
 
 /*Execution*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
-int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, \
-				t_env_main *main_env);
+int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd);
 char		*get_path(char *cmd, char *paths);
 void		no_path(t_env_pipe *st, char **cmd);
 int			execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:17:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/20 14:15:02 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:48:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ static int	setup_pipe(t_env_pipe *st)
 	return (1);
 }
 
-int	setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
+int	setup_struct_cmd(t_env_pipe *st, t_line *all_cmd)
 {
-	(void) main_env;
 	st->nbr_cmd = all_cmd->nbr_cmd;
 	st->hdoc = heredoc(all_cmd);
 	st->actual_pipe = 0;

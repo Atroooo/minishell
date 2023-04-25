@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 17:25:21 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:48:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,7 @@ static void	end_the_progam(t_env_pipe *st)
 {
 	wait_for_process(st);
 	close_function(st);
-	if (st->hdoc != 1)
-		free_pipe(st);
-	else
-	{
-		free(st->pid);
-		free(st);
-	}
+	free_pipe(st);
 }
 
 int	execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env)

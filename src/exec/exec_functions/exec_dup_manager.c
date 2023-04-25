@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_dup_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 17:58:46 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/24 17:47:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ int	get_dup_single_done(t_env_pipe *st)
 {
 	if (st->nbr_cmd == 1)
 	{
-		if (dup2(st->infile, STDIN_FILENO) == -1)
-			return (quit_function(st, 0));
-		if (dup2(st->outfile, STDOUT_FILENO) == -1)
-			return (quit_function(st, 0));
+		if (st->infile != 0)
+			if (dup2(st->infile, STDIN_FILENO) == -1)
+				return (quit_function(st, 0));
+		if (st->outfile != 1)
+			if (dup2(st->outfile, STDOUT_FILENO) == -1)
+				return (quit_function(st, 0));
 		return (1);
 	}
 	return (1);

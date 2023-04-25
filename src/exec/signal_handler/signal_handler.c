@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/20 17:15:17 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/24 16:10:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	signal_action(int sig)
 	}
 	if (sig == SIGINT)
 	{
-		write(1, "\n", 1);
+		write(1, "\n", STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		if (!g_main_env.st || (g_main_env.st && g_main_env.st->hdoc == 0))

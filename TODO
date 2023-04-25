@@ -1,5 +1,6 @@
 - finir tty
 - Check erreur cat pas de \n ????
+- env | grep PATH : waitpid infini sur grep ?
+- reste un fd ouvert dans le cas ou un seul outfile
 
-- reste un fd ouvert dans le cas ou un seul outfile FUCK !!!!!!!!!!!
 - ls | rien : si on ctrl + C : ne cancel pas : A VOIR
