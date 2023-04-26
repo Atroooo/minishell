@@ -6,11 +6,21 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 14:43:39 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:11:58 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
+
+char	*get_delimiter(char *str)
+{
+	char	*delimiter;
+
+	delimiter = ft_strtrim(str, "< ");
+	if (!delimiter)
+		return (NULL);
+	return (delimiter);
+}
 
 int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 {

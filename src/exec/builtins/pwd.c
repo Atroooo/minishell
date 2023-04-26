@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:17:56 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 17:18:19 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:04:28 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@ void	ft_pwd(char **cmd, t_env_main *main_env)
 
 	if (!cmd)
 		return ;
-	if (ft_strcmp(cmd[0], "pwd") != 0)
-		return ;
 	if (cmd[1])
 	{
 		main_env->exit_status = 1;
 		if (cmd[1][0] == '-')
 		{
-			printf("pwd: -p: invalid option\n");
+			ft_putendl_fd("pwd: -p: invalid option", 2);
 			return ;
 		}
-		printf("pwd: too many argument\n");
+		ft_putendl_fd("pwd: too many argument", 2);
 		return ;
 	}
 	main_env->exit_status = 0;

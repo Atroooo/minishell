@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_operator_error.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:31:27 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 15:38:41 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:25:08 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	simple_operator_error(char *line)
 {
 	if (line[1] == '\0')
 	{
-		printf("bash: syntax error near unexpected token 'newline'\n");
+		ft_putendl_fd("bash: syntax error near unexpected token 'newline'", 2);
 		return (1);
 	}
 	return (0);
@@ -30,7 +30,10 @@ static int	first_case_error(char *line, int *i)
 	*i += skip_space(&line[*i +1]) + 1;
 	if (line[*i] == '\0')
 	{
-		printf("bash: syntax error near unexpected token `%c'\n", operator);
+		ft_putstr_fd("bash: syntax error near unexpected token ", 2);
+		ft_putchar_fd('`', 2);
+		ft_putchar_fd(operator, 2);
+		ft_putendl_fd("`", 2);
 		return (1);
 	}
 	return (0);
@@ -40,14 +43,26 @@ static int	second_case_error(char *line, int *i, char operator)
 {
 	*i += skip_space(&line[*i + 1]) + 1;
 	if (line[*i] == '\0' && line[*i])
-		return (printf("bash: syntax error near unexpected token 'newline'\n"));
+		return (ft_putendl_fd("bash: syntax error near \
+			unexpected token 'newline'", 2), 1);
 	if (line[*i] == '<' || line[*i] == '>')
 	{
 		*i += skip_space(&line[*i + 1]) + 1;
 		if (line[*i] == '<' || line[*i] == '>')
-			printf("bash: syntax error near unexpected token `%c%c'\n", operator, operator);
+		{
+			ft_putendl_fd("bash: syntax error near unexpected token ", 2);
+			ft_putchar_fd('`', 2);
+			ft_putchar_fd(operator, 2);
+			ft_putchar_fd(operator, 2);
+			ft_putendl_fd("`", 2);
+		}
 		else
-			printf("bash: syntax error near unexpected token `%c'\n", operator);
+		{
+			ft_putendl_fd("bash: syntax error near unexpected token ", 2);
+			ft_putchar_fd('`', 2);
+			ft_putchar_fd(operator, 2);
+			ft_putendl_fd("`", 2);
+		}
 		return (1);
 	}
 	return (0);
@@ -88,12 +103,12 @@ static int operator_with_pipe(char *line)
 	i += skip_space(&line[i]);
 	if (line[i] == '|')
 	{
-		printf("syntax error near unexpected token `|'\n");
+		ft_putendl_fd("syntax error near unexpected token `|'", 2);
 		return (1);
 	}
 	else if (line[i] == '\0')
 	{
-		printf("syntax error near unexpected token 'newline'\n");
+		ft_putendl_fd("syntax error near unexpected token 'newline'", 2);
 		return (1);
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable_special_case.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 08:37:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 17:52:24 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:14:13 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ static int	dollar_case(int *i_line)
 	return (-2);
 }
 
-int	check_if_not_special_case(char *line, int *i_line, char *final_line, t_env_main *main_env)
+int	check_if_not_special_case(char *line, int *i_line, char *final_line, \
+		t_env_main *main_env)
 {
 	int	index;
 
 	index = 0;
-	if (*i_line > 0 && check_if_not_between_quote(line[*i_line - 1], line[*i_line + 1]))
+	if (*i_line > 0 && check_if_not_between_quote(line[*i_line - 1], \
+			line[*i_line + 1]))
 		return (-2);
 	else if (line[*i_line + 1] == '$')
 		return (dollar_case(i_line));

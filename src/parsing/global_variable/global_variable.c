@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/24 08:49:59 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:14:46 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static void	copy_simple_quote(int *i_line, int *index, char *line, char *final_line)
+static void	copy_simple_quote(int *i_line, int *index, \
+	char *line, char *final_line)
 {
 	final_line[*index] = line[*i_line];
 	*i_line += 1;
@@ -47,7 +48,8 @@ t_env_var	*find_elem_in_list(char *name, t_env_var *env_list)
 	return (env_list);
 }
 
-static int	copy_variable(char *line, int *index, t_env_var *env_list, char *final_line)
+static int	copy_variable(char *line, int *index, \
+	t_env_var *env_list, char *final_line)
 {
 	char	*name;
 	int		nbr_char;
@@ -94,14 +96,16 @@ int	get_gbl_var(char *line, char *final_line, \
 	int	temp;
 
 	index = 0;
-	temp = check_if_not_special_case(line, i_line, &final_line[index], main_env);
+	temp = check_if_not_special_case(line, i_line, \
+		&final_line[index], main_env);
 	if (temp == -1)
 		return (INT_MIN);
 	if (temp > 0)
 		index += temp;
 	if (temp == 0)
 	{
-		if (copy_variable(&line[*i_line + 1], &index, main_env->env_list, &final_line[0]))
+		if (copy_variable(&line[*i_line + 1], &index, \
+				main_env->env_list, &final_line[0]))
 			return (INT_MIN);
 		skip_gobal_variable(i_line, line);
 	}

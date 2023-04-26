@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 17:11:05 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:11:21 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,12 @@ int	setup_infile(t_env_pipe *st, char *file_raw)
 		return (0);
 	st->infile = open(file_name, O_RDWR);
 	if (st->infile == -1)
-		return (ft_printf("Cannot open file : %s\n", file_name), \
-			free(st), 0);
+	{
+		ft_putstr_fd("Cannot open file : ", 2);
+		ft_putendl_fd(file_name, 2);
+		free(st);
+		return (0);
+	}
 	free(file_name);
 	return (1);
 }

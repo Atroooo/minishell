@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 17:45:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:04:22 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,35 +50,47 @@ static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 	return (env_list);
 }
 
+static void	print_export_error(char *cmd, int s)
+{
+	if (s == 0)
+	{
+		ft_putstr_fd("export: `", 2);
+		ft_putstr_fd(cmd, 2);
+		ft_putendl_fd("': not a valid identifier", 2);
+		return ;
+	}
+	if (s == 1)
+	{
+		ft_putstr_fd(cmd, 2);
+		ft_putendl_fd(": event not found", 2);
+		return ;
+	}
+}
+
 static int	check_export_error(char *cmd)
 {
 	int	i;
 
 	i = 0;
 	if (cmd[0] == '-')
-	{
-		ft_putstr_fd("export: `-", 2);
-		ft_putchar_fd(cmd[1], 2);
-		ft_putendl_fd("': not a valid identifier", 2);
-		return (1);
-	}
+		return (print_export_error(cmd, 0), 1);
 	if (ft_isdigit(cmd[0]) || cmd[0] == '=' || cmd[0] == '\0')
-		return (printf("export: `%s': not a valid identifier\n", cmd));
+		return (print_export_error(cmd, 0), 1);
 	while (cmd[i] != '\0' && cmd[i] != '=')
 	{	
 		if (cmd[i] == '!')
-			return (printf("%s: event not found\n", &cmd[i]));
+			return (print_export_error(&cmd[i], 1), 1);
 		if (cmd[i] == '@' || cmd[i] == '%' || cmd[i] == '?' \
 		|| cmd[i] == '*' || cmd[i] == '\\' || cmd[i] == '~' \
 		|| cmd[i] == '-' || cmd[i] == '.' || cmd[i] == '{' \
 		|| cmd[i] == '}' || cmd[i] == '#' || cmd[i] == '+')
-			return (printf("export: `%s': not a valid identifier\n", cmd));
+			return (print_export_error(cmd, 0), 1);
 		i++;
 	}
 	while (cmd[i])
 	{
 		if (cmd[i] == '!')
-			return (printf("%s: event not found\n", &cmd[i]));
+			return (print_export_error(&cmd[i], 1), 1);
 		i++;
 	}
 	return (0);
@@ -89,8 +101,6 @@ t_env_var	*ft_export(char **cmd, t_env_main *main_env)
 	int	i;
 
 	if (!cmd)
-		return (NULL);
-	if (ft_strcmp(cmd[0], "export") != 0)
 		return (NULL);
 	i = 1;
 	if (!cmd[i])

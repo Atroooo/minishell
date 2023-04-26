@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 16:11:16 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:04:34 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ int	check_unset_error(char *cmd)
 
 	i = 0;
 	if (cmd[0] == '-')
-		return (printf("export: `-%c': not a valid identifier\n", cmd[1]));
+		return (print_unset_error(cmd, 0), 1);
 	if (ft_isdigit(cmd[0]) || cmd[0] == '=' || cmd[0] == '\0')
-		return (printf("export: `%s': not a valid identifier\n", cmd));
+		return (print_unset_error(cmd, 0), 1);
 	while (cmd[i] != '\0')
 	{	
 		if (cmd[i] == '!')
-			return (printf("%s: event not found\n", &cmd[i]));
+			return (print_unset_error(&cmd[i], 1), 1);
 		if (cmd[i] == '@' || cmd[i] == '%' || cmd[i] == '?' \
 		|| cmd[i] == '*' || cmd[i] == '\\' || cmd[i] == '~' \
 		|| cmd[i] == '-' || cmd[i] == '.' || cmd[i] == '{' \
 		|| cmd[i] == '}' || cmd[i] == '#' || cmd[i] == '+' \
 		|| cmd[i] == '=' || cmd[i] == '^')
-			return (printf("export: `%s': not a valid identifier\n", cmd));
+			return (print_unset_error(cmd, 0), 1);
 		i++;
 	}
 	return (0);
@@ -107,8 +107,6 @@ t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env)
 	int	i;
 
 	if (!cmd)
-		return (env_list);
-	if (ft_strcmp(cmd[0], "unset") != 0)
 		return (env_list);
 	i = 1;
 	while (cmd[i])

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 17:28:56 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:03:32 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,11 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 		close_function(st);
 		free_cmd_exec(all_cmd, st, main_env);
 	}
-	if (!cmd)
-		return (quit_function(st, 1));
 	path = set_path(main_env->env, cmd, st);
 	if (path == NULL)
 	{
-		printf("%s: command not found\n", cmd[0]);
+		ft_putstr_fd(cmd[0], 2);
+		ft_putendl_fd(": command not found", 2);
 		free_cmd_exec(all_cmd, st, main_env);
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/26 17:28:48 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:02:47 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
 t_lst		*lst_last(t_lst *lst);
 int			ft_lstsize_file(t_lst *lst);
+void		print_unset_error(char *cmd, int s);
 
 /*Free utils*/
 void		free_str(char **str);

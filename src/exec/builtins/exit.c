@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 17:43:37 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:04:06 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static int	exit_one_cmd(char **cmd, t_env_main *main_env, t_line *all_cmd)
 void	ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd)
 {
 	if (!cmd)
-		return ;
-	if (ft_strcmp(cmd[0], "exit") != 0)
 		return ;
 	if (cmd_size(cmd) > 1)
 	{
