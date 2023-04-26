@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 17:57:52 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/24 08:49:59 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	check_if_need_to_skip_global_variable(char *line, int *i_line)
 		if (line[*i_line + 1] != '*' && line[*i_line + 1] != '"' \
 			&& line[*i_line + 1] != '\'' \
 			&& line[*i_line + 1] != '?')
-				return (1);
+			return (1);
 	return (0);
 }
 
@@ -139,10 +139,10 @@ int	gbl_var_check(char *line, char *final_line, \
 	while (line[*i_line] == '$' && not_between_quote(line, *i_line))
 	{
 		if (check_if_need_to_skip_global_variable(line, i_line))
-			return (1);
+			return (0);
 		index += get_gbl_var(&line[0], &final_line[index], i_line, main_env);
 		if (index < 0)
-			return (INT_MIN); //PROBLEM WHEN ECHO $ NEED TO FIX
+			return (INT_MIN);
 	}
 	return (index);
 }

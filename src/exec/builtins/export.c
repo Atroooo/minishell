@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/20 17:41:54 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:24:06 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,45 @@ static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 	in_env = check_if_in_env(env_list, str);
 	if (set_variables_name_and_value(str, &name, &value))
 		return (NULL);
-	printf("%s", str);
 	if ((str[0] == '$' && str[1] == '$') || (str[0] == '$' && in_env == 0))
 	{
-		//printf("bash: export: %s not a valid identifier\n", str);
 		free_variable_name_and_value(name, value);
 		return (env_list);
 	}
+	if (in_env == 1 && value == NULL)
+		return (env_list);
+	else if (in_env == 1)
+		env_list = remove_similar_variable(name, env_list);
 	ft_lst_addback_env(&env_list, ft_lstnew_env(name, value));
 	free_variable_name_and_value(name, value);
 	return (env_list);
 }
 
-static int	check_export_error(char *cmd) //ERREUR AVEC $? A CAUSE DE ADD ENV VALUE
+static int	check_export_error(char *cmd)
 {
-	if (cmd[0] == '$' || cmd[0] == '#')
-		return (0);
-	if (ft_isalpha(cmd[0]) == 0)
+	int	i;
+
+	i = 0;
+	if (cmd[0] == '-')
+		return (printf("export: `-%c': not a valid identifier\n", cmd[1]));
+	if (ft_isdigit(cmd[0]) || cmd[0] == '=' || cmd[0] == '\0')
+		return (printf("export: `%s': not a valid identifier\n", cmd));
+	while (cmd[i] != '\0' && cmd[i] != '=')
+	{	
+		if (cmd[i] == '!')
+			return (printf("%s: event not found\n", &cmd[i]));
+		if (cmd[i] == '@' || cmd[i] == '%' || cmd[i] == '?' \
+		|| cmd[i] == '*' || cmd[i] == '\\' || cmd[i] == '~' \
+		|| cmd[i] == '-' || cmd[i] == '.' || cmd[i] == '{' \
+		|| cmd[i] == '}' || cmd[i] == '#' || cmd[i] == '+')
+			return (printf("export: `%s': not a valid identifier\n", cmd));
+		i++;
+	}
+	while (cmd[i])
 	{
-		printf("export: `%c': not a valid identifier\n", cmd[0]);
-		return (1);
+		if (cmd[i] == '!')
+			return (printf("%s: event not found\n", &cmd[i]));
+		i++;
 	}
 	return (0);
 }
@@ -76,9 +95,8 @@ t_env_var	*ft_export(char **cmd, t_env_main *main_env)
 	}
 	while (cmd[i])
 	{
-		if (check_export_error(cmd[i]))
-			return (main_env->env_list);
-		main_env->env_list = add_env_value(cmd[i], main_env->env_list);
+		if (check_export_error(cmd[i]) == 0)
+			main_env->env_list = add_env_value(cmd[i], main_env->env_list);
 		i++;
 	}
 	return (main_env->env_list);

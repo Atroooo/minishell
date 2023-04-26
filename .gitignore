@@ -1,2 +1,5 @@
 *.json
 *.o
+*.a
+minishell
+TODO
