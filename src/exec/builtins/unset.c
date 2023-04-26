@@ -6,11 +6,35 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 13:29:24 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:11:16 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
+
+int	check_unset_error(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (cmd[0] == '-')
+		return (printf("export: `-%c': not a valid identifier\n", cmd[1]));
+	if (ft_isdigit(cmd[0]) || cmd[0] == '=' || cmd[0] == '\0')
+		return (printf("export: `%s': not a valid identifier\n", cmd));
+	while (cmd[i] != '\0')
+	{	
+		if (cmd[i] == '!')
+			return (printf("%s: event not found\n", &cmd[i]));
+		if (cmd[i] == '@' || cmd[i] == '%' || cmd[i] == '?' \
+		|| cmd[i] == '*' || cmd[i] == '\\' || cmd[i] == '~' \
+		|| cmd[i] == '-' || cmd[i] == '.' || cmd[i] == '{' \
+		|| cmd[i] == '}' || cmd[i] == '#' || cmd[i] == '+' \
+		|| cmd[i] == '=' || cmd[i] == '^')
+			return (printf("export: `%s': not a valid identifier\n", cmd));
+		i++;
+	}
+	return (0);
+}
 
 static t_env_var	*get_prev(t_env_var *env_list, int i)
 {
@@ -38,6 +62,8 @@ static void	delete_node(t_env_var *env_list, int i)
 	{
 		delete = env_list;
 		env_list = env_list->next;
+		free(delete->name);
+		free(delete->value);
 		free(delete);
 		return ;
 	}
@@ -48,6 +74,8 @@ static void	delete_node(t_env_var *env_list, int i)
 			return ;
 		delete = prev->next;
 		prev->next = delete->next;
+		free(delete->name);
+		free(delete->value);
 		free(delete);
 	}
 }
@@ -67,6 +95,7 @@ static void	find_in_list(char *name, t_env_var *env_list, t_env_main *main_env)
 		{
 			delete_node(env_list, i);
 			main_env->exit_status = 0;
+			return ;
 		}
 		i++;
 		temp = temp->next;
@@ -84,7 +113,8 @@ t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env)
 	i = 1;
 	while (cmd[i])
 	{
-		find_in_list(cmd[i], env_list, main_env);
+		if (check_unset_error(cmd[i]) == 0)
+			find_in_list(cmd[i], env_list, main_env);
 		i++;
 	}
 	return (env_list);

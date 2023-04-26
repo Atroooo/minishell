@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chained_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:19:23 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/21 10:36:28 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/24 14:18:20 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_env_var	*ft_lstlast_env(t_env_var *lst)
 
 void	ft_lst_addback_env(t_env_var **lst, t_env_var *new)
 {
+	if (new == NULL)
+		return ;
 	if (*lst == NULL)
 	{	
 		(*lst) = new;
