@@ -6,9 +6,11 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/19 17:21:35 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:26:55 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../../header/minishell.h"
 
 #include "../../../header/minishell.h"
 

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 16:13:04 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:43:39 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*heredoc_parsing(t_line *all_cmd)
 	return (get_str);
 }
 
-int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
+static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
 	char	*tmp_str;
 	char	*global_var;
@@ -77,18 +77,21 @@ int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 			global_var = replace_global_variable(tmp_str, main_env);
 			write(temp_pipe[1], global_var, ft_strlen(global_var));
 			free(global_var);
-			free(tmp_str);
 		}
 	}
 	close(temp_pipe[1]);
 	return (1);
 }
 
-int	heredoc(t_line *all_cmd)
+int	heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
+	int		return_value;
+
 	if (!all_cmd->infile || !lst_last(all_cmd->infile)->data || \
 		ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) == 0)
 		return (0);
-	else
-		return (1);
+	return_value = heredoc_loop(st, all_cmd, main_env);
+	if (return_value == -1)
+		return (-1);
+	return (return_value);
 }

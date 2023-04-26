@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:17:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/24 15:48:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/26 14:11:18 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ static int	setup_pipe(t_env_pipe *st)
 	return (1);
 }
 
-int	setup_struct_cmd(t_env_pipe *st, t_line *all_cmd)
+int	setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
 	st->nbr_cmd = all_cmd->nbr_cmd;
-	st->hdoc = heredoc(all_cmd);
+	st->hdoc = heredoc(st, all_cmd, main_env);
+	if (st->hdoc == -1)
+		return (0);
 	st->actual_pipe = 0;
 	st->pid = malloc(sizeof(int) * (st->nbr_cmd + 1));
 	if (st->pid == NULL)

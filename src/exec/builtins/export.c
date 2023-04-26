@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/20 16:22:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/26 13:29:08 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	print_list(t_env_var *env_list)
 	while (env_list)
 	{
 		printf("declare -x ");
-		if (env_list->name && env_list->value && env_list->value[0] != 0)
-			printf("%s=\"%s\"\n", env_list->name, env_list->value);
-		else
-			printf("%s\n", env_list->name);
+		if (env_list->name && env_list->value)
+			printf("%s=%s\n", env_list->name, env_list->value);
+		else if (env_list->name && !env_list->value)
+			printf("%s=\n", env_list->name);
 		env_list = env_list->next;
 	}
 }
@@ -47,18 +47,6 @@ static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 	return (env_list);
 }
 
-static int	check_export_error(char *cmd) //ERREUR AVEC $?
-{
-	if (cmd[0] == '$' || cmd[0] == '#')
-		return (0);
-	if (ft_isalpha(cmd[0]) == 0)
-	{
-		printf("export: `%c': not a valid identifier\n", cmd[0]);
-		return (1);
-	}
-	return (0);
-}
-
 t_env_var	*ft_export(char **cmd, t_env_main *main_env)
 {
 	int	i;
@@ -68,17 +56,20 @@ t_env_var	*ft_export(char **cmd, t_env_main *main_env)
 	if (ft_strcmp(cmd[0], "export") != 0)
 		return (NULL);
 	i = 1;
-	if (cmd[1] == NULL)
+	if (!cmd[i])
 	{
 		print_list(main_env->env_list);
+		main_env->exit_status = 0;
 		return (main_env->env_list);
 	}
 	while (cmd[i])
 	{
-		if (check_export_error(cmd[i]))
-			return (main_env->env_list);
-		main_env->env_list = add_env_value(cmd[i], main_env->env_list);
+		if (ft_strchr(cmd[i], '='))
+			main_env->env_list = add_env_value(cmd[i], main_env->env_list);
+		else
+			setenv(cmd[i], "", 1);
 		i++;
 	}
+	main_env->exit_status = 0;
 	return (main_env->env_list);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_quit_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/24 14:34:42 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/26 14:50:23 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	close_function(t_env_pipe *st)
 	int	i;
 
 	i = 0;
+	if (st->infile != 0)
+		close(st->infile);
+	if (st->outfile != 1)
+		close(st->outfile);
 	if (st->hdoc == 1)
 		return ;
 	while (i < st->nbr_cmd)
@@ -25,10 +29,6 @@ void	close_function(t_env_pipe *st)
 		close(st->fd[i][1]);
 		i++;
 	}
-	if (st->infile != 0)
-		close(st->infile);
-	if (st->outfile != 1)
-		close(st->outfile);
 }
 
 int	quit_function(t_env_pipe *st, int error_code)

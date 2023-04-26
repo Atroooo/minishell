@@ -1,6 +1,7 @@
+- redirections "locales" pour les pipes : ls > outfile | cat outfile par exemple, a faire 
+(et du coup idem pour ls > outfile | ls > outfile2 | cat outfile)
+- hdoc avec Ctrl + C
 - finir tty
-- Check erreur cat pas de \n ????
-- env | grep PATH : waitpid infini sur grep ?
-- reste un fd ouvert dans le cas ou un seul outfile
 
-- ls | rien : si on ctrl + C : ne cancel pas : A VOIR
+- leaks
+- fds a close

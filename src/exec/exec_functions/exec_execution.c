@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/24 17:48:43 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/26 14:31:09 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ static int	fork_declaration(t_line *all_cmd, char **cmd, \
 		return (quit_function(st, 1));
 	if (st->pid[st->i] == 0)
 	{
-		if (st->hdoc == 1)
-			if (heredoc_loop(st, all_cmd, main_env) != 1)
-				return (0);
 		if (!dup_manager(st, all_cmd))
 			return (0);
 		if (!get_exec_done(all_cmd, cmd, st, main_env))
@@ -45,8 +42,8 @@ static void	wait_for_process(t_env_pipe *st)
 
 static void	end_the_progam(t_env_pipe *st)
 {
-	wait_for_process(st);
 	close_function(st);
+	wait_for_process(st);
 	free_pipe(st);
 }
 

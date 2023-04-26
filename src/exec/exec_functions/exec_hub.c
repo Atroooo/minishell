@@ -44,24 +44,27 @@ static void	check_inout(t_env_pipe *st, t_line *all_cmd)
 		st->output = 0;
 }
 
+// char	**env_lst_to_char(t_env_main *main_env)
+// {
+// 	//Convertir lst en char **
+// }
+
 static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
-	main_env->all_cmd = all_cmd;
 	if (all_cmd->nbr_cmd == 1)
 	{
 		if (buildin_exec(all_cmd, main_env))
 			return (1);
 	}
 	st = malloc(sizeof(t_env_pipe));
-	main_env->st = st;
 	if (st == NULL)
 		return (ft_printf("Error : %s\n", strerror(errno)));
 	check_inout(st, all_cmd);
 	if (!open_files(st, all_cmd))
 		return (0);
-	if (!setup_struct_cmd(st, all_cmd))
+	if (!setup_struct_cmd(st, all_cmd, main_env))
 		return (0);
 	if (!execution(all_cmd, st, main_env))
 	{
@@ -80,5 +83,4 @@ void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);
-	main_env->st = NULL;
 }
