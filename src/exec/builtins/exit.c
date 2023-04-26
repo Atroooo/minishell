@@ -6,11 +6,9 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 13:26:55 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:04:10 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../../header/minishell.h"
 
 #include "../../../header/minishell.h"
 
@@ -55,10 +53,29 @@ static long long	ft_atoll(const char *str)
 
 static void	free_exit_builtin(t_env_main *main_env, t_line *all_cmd)
 {
+	if (main_env->env)
+		free_str(main_env->env);
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);
 	free_main_env(main_env);
+}
+
+static int	exit_one_cmd(char **cmd, t_env_main *main_env, t_line *all_cmd)
+{
+	if (cmd_size(cmd) == 2 && ft_strcmp(cmd[1], "-1") == 0)
+	{
+		main_env->exit_status = (unsigned char)ft_atoll(cmd[1]);
+		free_exit_builtin(main_env, all_cmd);
+	}
+	if ((cmd[1][0] != '-' && cmd[1][0] != '+' && !ft_isdigit(cmd[1][0])) \
+		|| ft_atoll(cmd[1]) == -1)
+	{
+		ft_printf("exit: %s: numeric argument required\n", cmd[1]);
+		main_env->exit_status = 2;
+		return (1);
+	}
+	return (0);
 }
 
 void	ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd)
@@ -69,13 +86,8 @@ void	ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd)
 		return ;
 	if (cmd_size(cmd) > 1)
 	{
-		if ((cmd[1][0] != '-' && cmd[1][0] != '+' && !ft_isdigit(cmd[1][0])) \
-			|| ft_atoll(cmd[1]) == -1)
-		{
-			ft_printf("exit: %s: numeric argument required\n", cmd[1]);
-			main_env->exit_status = 2;
+		if (exit_one_cmd(cmd, main_env, all_cmd))
 			return ;
-		}
 	}
 	if (cmd_size(cmd) > 2)
 	{

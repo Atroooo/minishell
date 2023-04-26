@@ -58,6 +58,8 @@ void	free_inout_list(t_lst *lst)
 
 void	free_cmd_exec(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env)
 {
+	if (main_env->env)
+		free_str(main_env->env);
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);

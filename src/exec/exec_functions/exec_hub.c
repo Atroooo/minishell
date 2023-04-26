@@ -31,28 +31,55 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 	return (1);
 }
 
-static void	check_inout(t_env_pipe *st, t_line *all_cmd)
+static char	*setup_str_env(t_env_var *node)
 {
-	if (all_cmd->infile != NULL)
-		st->input = 1;
+	char		*str_name;
+	char		*str;
+
+	if (!node->name)
+		return (NULL);
+	str_name = ft_strjoin(node->name, "=");
+	if (!str_name)
+		return (0);
+	if (node->value == NULL)
+		return (str_name);
 	else
-		st->input = 0;
-	if (all_cmd->outfile != NULL && \
-		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1)
-		st->output = 1;
-	else
-		st->output = 0;
+		str = ft_strjoin(str_name, node->value);
+	if (!str)
+		return (0);
+	free(str_name);
+	return (str);
 }
 
-// char	**env_lst_to_char(t_env_main *main_env)
-// {
-// 	//Convertir lst en char **
-// }
+static int	env_lst_to_char(t_env_main *main_env)
+{
+	t_env_var	*tmp;
+	int			i;
+
+	main_env->env = malloc(sizeof(char *) * \
+		(ft_lstsize_env(main_env->env_list) + 1));
+	if (main_env->env == NULL)
+		return (0);
+	tmp = main_env->env_list;
+	i = 0;
+	while (tmp)
+	{
+		main_env->env[i] = setup_str_env(tmp);
+		if (!main_env->env[i])
+			return (0);
+		tmp = tmp->next;
+		i++;
+	}
+	main_env->env[i] = NULL;
+	return (1);
+}
 
 static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
 
+	if (!env_lst_to_char(main_env))
+		return (0);
 	if (all_cmd->nbr_cmd == 1)
 	{
 		if (buildin_exec(all_cmd, main_env))
@@ -83,4 +110,5 @@ void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);
+	free_str(main_env->env);
 }

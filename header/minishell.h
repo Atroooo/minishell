@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/26 14:11:02 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:16:26 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void		signal_handler_hdoc(void);
 void		termios_init(t_env_main *main_env);
 
 /*Manage files*/
+void		check_inout(t_env_pipe *st, t_line *all_cmd);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
 int			create_outfiles(t_lst *outfile);
 int			dup_manager(t_env_pipe *st, t_line *all_cmd);

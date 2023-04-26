@@ -1,7 +1,6 @@
-- redirections "locales" pour les pipes : ls > outfile | cat outfile par exemple, a faire 
-(et du coup idem pour ls > outfile | ls > outfile2 | cat outfile)
 - hdoc avec Ctrl + C
 - finir tty
 
-- leaks
-- fds a close
+- fds a close pour les cas echo test | echo test ... (prob fd builtins)
+
+- Ctrl+c dans le cas ou ls | ...
