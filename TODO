@@ -1,6 +1,6 @@
 - hdoc avec Ctrl + C
 - finir tty
+- message d erreurs a mettre sur la sortie 2
+- code d'erreur
 
 - fds a close pour les cas echo test | echo test ... (prob fd builtins)
-
-- Ctrl+c dans le cas ou ls | ...

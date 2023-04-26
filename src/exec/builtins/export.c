@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 16:10:41 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:45:36 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ static int	check_export_error(char *cmd)
 
 	i = 0;
 	if (cmd[0] == '-')
-		return (printf("export: `-%c': not a valid identifier\n", cmd[1]));
+	{
+		ft_putstr_fd("export: `-", 2);
+		ft_putchar_fd(cmd[1], 2);
+		ft_putendl_fd("': not a valid identifier", 2);
+		return (1);
+	}
 	if (ft_isdigit(cmd[0]) || cmd[0] == '=' || cmd[0] == '\0')
 		return (printf("export: `%s': not a valid identifier\n", cmd));
 	while (cmd[i] != '\0' && cmd[i] != '=')
