@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:17:56 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 09:51:38 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/26 14:51:13 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_pwd(char **cmd, t_env_main *main_env)
 {
-	char	*pwd;
+	char	cwd[4096];
 
 	if (!cmd)
 		return ;
@@ -24,11 +24,14 @@ void	ft_pwd(char **cmd, t_env_main *main_env)
 	{
 		main_env->exit_status = 1;
 		if (cmd[1][0] == '-')
+		{
 			printf("pwd: -p: invalid option\n");
+			return ;
+		}
+		printf("pwd: too many argument\n");
 		return ;
 	}
 	main_env->exit_status = 0;
-	pwd = getcwd(NULL, 0);
-	ft_printf("%s\n", pwd);
-	free(pwd);
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		ft_printf("%s\n", cwd);
 }

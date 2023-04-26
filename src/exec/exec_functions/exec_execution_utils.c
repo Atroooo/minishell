@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 17:25:20 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 14:54:28 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 	if (!cmd)
 		return (0);
 	if (ft_strcmp("cd", cmd[0]) == 0)
-		ft_cd(cmd, main_env);
+		return (1);
 	else if (ft_strcmp("echo", cmd[0]) == 0)
 		ft_echo(cmd, main_env);
 	else if (ft_strcmp("env", cmd[0]) == 0)
