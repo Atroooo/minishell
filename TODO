@@ -1,3 +1,4 @@
+- unset PATH : bon comportement mais erreurs
 - finir tty
 
 - fds a close pour les cas echo test | echo test ... (prob fd builtins)

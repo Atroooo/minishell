@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/27 13:21:09 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:28:01 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef enum t_boolean
 	TRUE
 }	t_boolean;
 
-extern int	g_status;
+extern unsigned char	g_status;
 
 /*Init*/
 void		init_main_env(t_env_main *main_env, char **env);

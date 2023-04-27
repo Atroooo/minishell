@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:31:27 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 18:25:08 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:54:49 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	second_case_error(char *line, int *i, char operator)
 		*i += skip_space(&line[*i + 1]) + 1;
 		if (line[*i] == '<' || line[*i] == '>')
 		{
-			ft_putendl_fd("bash: syntax error near unexpected token ", 2);
+			ft_putstr_fd("bash: syntax error near unexpected token ", 2);
 			ft_putchar_fd('`', 2);
 			ft_putchar_fd(operator, 2);
 			ft_putchar_fd(operator, 2);
@@ -58,7 +58,7 @@ static int	second_case_error(char *line, int *i, char operator)
 		}
 		else
 		{
-			ft_putendl_fd("bash: syntax error near unexpected token ", 2);
+			ft_putstr_fd("bash: syntax error near unexpected token ", 2);
 			ft_putchar_fd('`', 2);
 			ft_putchar_fd(operator, 2);
 			ft_putendl_fd("`", 2);

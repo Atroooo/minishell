@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 13:12:18 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:34:49 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,21 @@ static char	*set_path(char **env, char **cmd, t_env_pipe *st)
 	return (NULL);
 }
 
+static void	print_msg(t_env_main *main_env, char **cmd)
+{
+	ft_putstr_fd(cmd[0], 2);
+	if (ft_strncmp(cmd[0], "./", 2) == 0)
+	{
+		ft_putendl_fd(": command not found", 2);
+		main_env->exit_status = 126;
+	}
+	else
+	{
+		ft_putendl_fd(": Permission denied", 2);
+		main_env->exit_status = 127;
+	}
+}
+
 int	get_exec_done(t_line *all_cmd, char **cmd, \
 	t_env_pipe *st, t_env_main *main_env)
 {
@@ -88,9 +103,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	path = set_path(main_env->env, cmd, st);
 	if (path == NULL)
 	{
-		ft_putstr_fd(cmd[0], 2);
-		ft_putendl_fd(": command not found", 2);
-		main_env->exit_status = 127;
+		print_msg(main_env, cmd);
 		free_cmd_exec(all_cmd, st, main_env);
 		return (0);
 	}

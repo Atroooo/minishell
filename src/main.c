@@ -12,7 +12,7 @@
 
 #include "../header/minishell.h"
 
-int	g_status = 0;
+unsigned char	g_status = 0;
 
 static void	check_param(int argc)
 {
