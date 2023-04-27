@@ -107,10 +107,7 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
-	if (exec_cmd(main_env, all_cmd))
-		main_env->exit_status = 0;
-	else
-		main_env->exit_status = 1;
+	exec_cmd(main_env, all_cmd);
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);

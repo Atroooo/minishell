@@ -6,13 +6,11 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 18:13:03 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:30:29 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
-
-int	g_status = 0;
 
 void	signal_action(int sig)
 {
@@ -41,28 +39,4 @@ void	signal_handler(t_env_main *main_env)
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 	main_env->exit_status = g_status;
-}
-
-void	signal_action_hdoc(int sig)
-{
-	if (sig == SIGQUIT)
-		return ;
-	if (sig == SIGINT)
-	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
-
-void	signal_handler_hdoc(void)
-{
-	struct sigaction	sa;
-
-	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = signal_action_hdoc;
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
 }

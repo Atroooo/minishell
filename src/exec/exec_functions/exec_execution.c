@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 17:31:32 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:18:55 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,28 @@ static int	fork_declaration(t_line *all_cmd, char **cmd, \
 	return (1);
 }
 
-static void	wait_for_process(t_env_pipe *st)
+static void	wait_for_process(t_env_pipe *st, t_env_main *main_env)
 {
+	int	status;
 	int	i;
 
 	i = 0;
 	while (i < st->nbr_cmd)
 	{
-		waitpid(st->pid[i], NULL, 0);
+		waitpid(st->pid[i], &status, 0);
 		i++;
+	}
+	if (WIFEXITED(status))
+	{
+		main_env->exit_status = WEXITSTATUS(status);
+		g_status = main_env->exit_status;
 	}
 }
 
-static void	end_the_progam(t_env_pipe *st)
+static void	end_the_progam(t_env_pipe *st, t_env_main *main_env)
 {
 	close_function(st);
-	wait_for_process(st);
+	wait_for_process(st, main_env);
 	free_pipe(st);
 }
 
@@ -57,6 +63,6 @@ int	execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env)
 		st->actual_pipe += 1;
 		st->i++;
 	}
-	end_the_progam(st);
+	end_the_progam(st, main_env);
 	return (1);
 }

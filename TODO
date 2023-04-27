@@ -1,5 +1,3 @@
-- hdoc avec Ctrl + C
 - finir tty
-- code d'erreur
 
 - fds a close pour les cas echo test | echo test ... (prob fd builtins)

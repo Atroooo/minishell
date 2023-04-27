@@ -12,6 +12,8 @@
 
 #include "../header/minishell.h"
 
+int	g_status = 0;
+
 static void	check_param(int argc)
 {
 	if (argc != 1)
@@ -21,14 +23,25 @@ static void	check_param(int argc)
 	}
 }
 
-static void	exec_shell(t_env_main *main_env)
+static void	exec_core(char *line, t_env_main *main_env)
 {
-	char	*line;
 	t_line	all_cmd;
 	int		error;
 
-	line = NULL;
 	error = 0;
+	error = parsing(line, &all_cmd, main_env);
+	main_env->exit_status = g_status;
+	if (error == -1)
+		free_main_env(main_env);
+	else if (error == 0)
+		exec_hub(&all_cmd, main_env);
+}
+
+static void	exec_shell(t_env_main *main_env)
+{
+	char	*line;
+
+	line = NULL;
 	signal_handler(main_env);
 	line = readline("prompt> ");
 	while (1)
@@ -36,15 +49,14 @@ static void	exec_shell(t_env_main *main_env)
 		while (line != NULL)
 		{
 			add_history(line);
-			error = parsing(line, &all_cmd, main_env);
-			if (error == -1)
-				free_main_env(main_env);
-			else if (error == 0)
-				exec_hub(&all_cmd, main_env);
+			exec_core(line, main_env);
 			line = readline("prompt> ");
 		}
 		if (!line)
+		{
+			main_env->exit_status = 131;
 			free_main_env(main_env);
+		}
 		rl_clear_history();
 	}
 }

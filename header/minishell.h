@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/26 18:02:47 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:21:09 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef enum t_boolean
 	TRUE
 }	t_boolean;
 
+extern int	g_status;
+
 /*Init*/
 void		init_main_env(t_env_main *main_env, char **env);
 
@@ -133,7 +135,6 @@ t_lst		*lst_new_index(void *content, int index);
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
-void		signal_handler_hdoc(void);
 void		termios_init(t_env_main *main_env);
 
 /*Manage files*/

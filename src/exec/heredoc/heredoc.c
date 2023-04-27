@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 18:11:58 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:40:43 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*heredoc_parsing(t_line *all_cmd)
 	char	*delimiter;
 	char	*get_str;
 
-	get_str = get_next_line(0);
+	get_str = readline("heredoc> ");
 	delimiter = get_delimiter(lst_last(all_cmd->infile)->data);
 	if (!delimiter)
 		return (NULL);
@@ -64,7 +64,9 @@ static char	*heredoc_parsing(t_line *all_cmd)
 		return (NULL);
 	}
 	free(delimiter);
-	return (get_str);
+	if (get_str[0] == '\0')
+		return (ft_strdup("\n"));
+	return (ft_strjoin(get_str, "\n"));
 }
 
 static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
@@ -75,10 +77,8 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 
 	pipe(temp_pipe);
 	st->infile = temp_pipe[0];
-	signal_handler_hdoc();
 	while (1)
 	{
-		ft_printf("heredoc> ");
 		tmp_str = heredoc_parsing(all_cmd);
 		if (!tmp_str)
 			break ;
