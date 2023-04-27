@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/04/27 13:52:20 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:48:07 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,8 @@ int	convert_in_3d_array(t_line *all_cmd)
 	all_cmd->outfile = NULL;
 	while (i < all_cmd->nbr_cmd)
 	{
-		all_cmd->all_cmd[i] = malloc(sizeof(char *) * (count_nbr_element(all_cmd->cmd[i]) + 1));
+		all_cmd->all_cmd[i] = malloc(sizeof(char *) * \
+			(count_nbr_element(all_cmd->cmd[i]) + 1));
 		if (all_cmd->all_cmd[i] == NULL)
 			return (-1);
 		if (copy_all_arg(all_cmd->all_cmd[i], &all_cmd->cmd[i]))

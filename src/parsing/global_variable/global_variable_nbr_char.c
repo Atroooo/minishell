@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable_nbr_char.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:35:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 10:32:06 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:48:47 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int	check_if_not_between_quote(char before, char after)
 
 static int	special_case_count(char *line, int *index, int *nbr_char)
 {
-	if (*index > 0 && check_if_not_between_quote(line[*index - 1], line[*index + 1]))
+	if (*index > 0 && check_if_not_between_quote(line[*index - 1], \
+		line[*index + 1]))
 		return (1);
 	else if (line[*index + 1] == '?')
 	{

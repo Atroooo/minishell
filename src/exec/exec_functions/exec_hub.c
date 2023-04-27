@@ -83,13 +83,15 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 	if (!env_lst_to_char(main_env))
 		return (0);
 	if (all_cmd->nbr_cmd == 1)
-	{
 		if (buildin_exec(all_cmd, main_env))
 			return (1);
-	}
 	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
-		return (ft_printf("Error : %s\n", strerror(errno)));
+	{
+		ft_putstr_fd("Error : ", 2);
+		ft_putendl_fd(strerror(errno), 2);
+		return (0);
+	}
 	check_inout(st, all_cmd);
 	if (!open_files(st, all_cmd))
 		return (0);
@@ -105,10 +107,7 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
-	if (exec_cmd(main_env, all_cmd))
-		main_env->exit_status = 0;
-	else
-		main_env->exit_status = 1;
+	exec_cmd(main_env, all_cmd);
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);

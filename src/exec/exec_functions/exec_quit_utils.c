@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 14:50:23 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:38:43 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ int	quit_function(t_env_pipe *st, int error_code)
 	close_function(st);
 	free_pipe(st);
 	if (error_code == 0)
-		ft_printf("Error : %s\n", strerror(errno));
+	{
+		ft_putstr_fd("Error : ", 2);
+		ft_putendl_fd(strerror(errno), 2);
+	}
 	else if (error_code == 1)
-		ft_printf("Error : Fork\n");
+		ft_putendl_fd("Error : Fork", 2);
 	else if (error_code == 2)
 		return (1);
 	return (0);

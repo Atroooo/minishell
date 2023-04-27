@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/27 13:00:43 by vgonnot          ###   ########.fr       */
+/*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/04/27 14:46:48 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -86,6 +85,8 @@ typedef enum t_boolean
 	TRUE
 }	t_boolean;
 
+extern unsigned char	g_status;
+
 /*Init*/
 void		init_main_env(t_env_main *main_env, char **env);
 
@@ -134,7 +135,6 @@ t_lst		*lst_new_index(void *content, int index);
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
-void		signal_handler_hdoc(void);
 void		termios_init(t_env_main *main_env);
 
 /*Manage files*/
@@ -188,6 +188,7 @@ void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
 t_lst		*lst_last(t_lst *lst);
 int			ft_lstsize_file(t_lst *lst);
+void		print_unset_error(char *cmd, int s);
 
 /*Free utils*/
 void		free_str(char **str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 13:54:42 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:48:32 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static int	error_case(char *s, int *error)
 {
-	printf("syntax error near unexpected token `%s'\n", s);
+	ft_putstr_fd("syntax error near unexpected token ", 2);
+	ft_putchar_fd('`', 2);
+	ft_putstr_fd(s, 2);
+	ft_putendl_fd("`", 2);
 	*error = 1;
 	return (1);
 }
@@ -69,11 +72,12 @@ static int	check_if_error(char *line, int *error)
 		{
 			i += check_char(line[i], &pipe, &consecutive_pipe, &only_space);
 			i += check_if_pipe(&line[i], &consecutive_pipe);
-			if ((consecutive_pipe == 2 && only_space == 1) || consecutive_pipe > 3)
+			if ((consecutive_pipe == 2 && only_space == 1) \
+				|| consecutive_pipe > 3)
 				return (error_case("||", error));
 			else if ((pipe == 1 && only_space == 1) || consecutive_pipe == 3 \
 					|| (consecutive_pipe == 2 && line[i - 2] == ' '))
-				return (error_case("|", error));	
+				return (error_case("|", error));
 		}
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/27 09:54:02 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:48:13 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*get_path_cd(char **cmd, t_env_main *main_env)
 	}
 	else if (cmd[2] != NULL)
 	{
-		printf("minishell: cd: too many arguments\n");
+		ft_putendl_fd("minishell: cd: too many arguments\n", 2);
 		return (NULL);
 	}
 	else
@@ -68,7 +68,9 @@ void	ft_cd(char **cmd, t_env_main *main_env)
 		return ;
 	if (chdir(path) == -1)
 	{
-		ft_printf("minishell: cd: %s no such file or directory\n", path);
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putendl_fd(": No such file or directory\n", 2);
 		main_env->exit_status = 1;
 		free(path);
 		return ;

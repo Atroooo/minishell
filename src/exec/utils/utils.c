@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 11:07:49 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/12 15:43:19 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:02:36 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,21 @@ int	ft_lstsize_file(t_lst *lst)
 		lst = lst->next;
 	}
 	return (i);
+}
+
+void	print_unset_error(char *cmd, int s)
+{
+	if (s == 0)
+	{
+		ft_putstr_fd("export: `", 2);
+		ft_putstr_fd(cmd, 2);
+		ft_putendl_fd("': not a valid identifier", 2);
+		return ;
+	}
+	if (s == 1)
+	{
+		ft_putstr_fd(cmd, 2);
+		ft_putendl_fd(": event not found", 2);
+		return ;
+	}
 }
