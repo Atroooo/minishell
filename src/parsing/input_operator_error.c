@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_operator_error.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:31:27 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 13:54:49 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:33:05 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,23 @@
 
 static int	simple_operator_error(char *line)
 {
+	int	i;
+	int	space;
+
+	i = 1;
 	if (line[1] == '\0')
 	{
 		ft_putendl_fd("bash: syntax error near unexpected token 'newline'", 2);
+		return (1);
+	}
+	space = skip_space(&line[i]);
+	i += space;
+	if ((line[i] == '<' || line[i] == '>') && space)
+	{
+		ft_putstr_fd("bash: syntax error near unexpected token ", 2);
+		ft_putchar_fd('`', 2);
+		ft_putchar_fd(line[i], 2);
+		ft_putendl_fd("'", 2);
 		return (1);
 	}
 	return (0);
@@ -33,7 +47,7 @@ static int	first_case_error(char *line, int *i)
 		ft_putstr_fd("bash: syntax error near unexpected token ", 2);
 		ft_putchar_fd('`', 2);
 		ft_putchar_fd(operator, 2);
-		ft_putendl_fd("`", 2);
+		ft_putendl_fd("'", 2);
 		return (1);
 	}
 	return (0);
@@ -99,7 +113,7 @@ static int operator_with_pipe(char *line)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	i += skip_space(&line[i]);
 	if (line[i] == '|')
 	{

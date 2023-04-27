@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 14:48:41 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:31:11 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	get_gbl_var(char *line, char *final_line, \
 
 	index = 0;
 	temp = check_if_not_special_case(line, i_line, \
-		&final_line[index], main_env);
+		&final_line[index]);
 	if (temp == -1)
 		return (INT_MIN);
 	if (temp > 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable_special_case.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 08:37:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 18:14:13 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:29:34 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static int	check_if_not_between_quote(char before, char after)
 	return (0);
 }
 
-static int	interrogation_case(char **final_line, int lst_cmd_status)
+static int	interrogation_case(char **final_line)
 {
 	char	*nbr;
 	int		size;
 
-	nbr = ft_itoa(lst_cmd_status);
+	nbr = ft_itoa(g_status);
 	if (nbr == NULL)
 		return (INT_MIN);
 	size = ft_strlen(nbr);
@@ -39,8 +39,7 @@ static int	dollar_case(int *i_line)
 	return (-2);
 }
 
-int	check_if_not_special_case(char *line, int *i_line, char *final_line, \
-		t_env_main *main_env)
+int	check_if_not_special_case(char *line, int *i_line, char *final_line)
 {
 	int	index;
 
@@ -53,7 +52,7 @@ int	check_if_not_special_case(char *line, int *i_line, char *final_line, \
 	else if (line[*i_line + 1] == '?')
 	{
 		skip_gobal_variable(i_line, line);
-		index = interrogation_case(&final_line, main_env->exit_status);
+		index = interrogation_case(&final_line);
 		if (index < 0)
 			return (-1);
 	}

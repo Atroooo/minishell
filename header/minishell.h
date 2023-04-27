@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/27 14:46:48 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:29:56 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void		skip_gobal_variable(int *index, char *line);
 char		*replace_global_variable(char *line, t_env_main *main_env);
 char		**split_skip_quote(char *str);
 int			check_if_not_special_case(char *line, int *i_line, \
-			char *final_line, t_env_main *main_env);
+			char *final_line);
 void		incrementation(int *index, int *nbr_char, char c);
 char		*copy_cmd(int size, char *src, char *dest);
 int			get_element(int *i, \
