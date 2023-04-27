@@ -73,6 +73,7 @@ static int	env_lst_to_char(t_env_main *main_env)
 		i++;
 	}
 	main_env->env[i] = NULL;
+	free(tmp);
 	return (1);
 }
 

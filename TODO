@@ -1,4 +1,6 @@
+- fds a close pour les cas echo test | echo test ... (prob fd builtins)
+- si pas de cmd, les fichiers doivent quand meme etre crees
+- delete contenu files qui n est pas le final outfile : a verif 
+mais dans le cas d un >> on ne delete pas le contenu du outfile qui n est pas le final
 - unset PATH : bon comportement mais erreurs
 - finir tty
-
-- fds a close pour les cas echo test | echo test ... (prob fd builtins)
