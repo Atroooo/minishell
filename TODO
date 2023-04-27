@@ -1,6 +1,0 @@
-- hdoc avec Ctrl + C
-- finir tty
-
-- fds a close pour les cas echo test | echo test ... (prob fd builtins)
-
-- Ctrl+c dans le cas ou ls | ...

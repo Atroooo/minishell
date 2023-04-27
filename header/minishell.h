@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/26 16:10:01 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:00:43 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void		skip_simple_quote(int *index, int *nbr_char, char *line);
 int			count_alpha(char *line);
 int			skip_char(char *line, char c);
 int			skip_in_between(char *str, char c);
+void		free_single_cmd(t_cmd *cmd);
 
 /*List utils*/
 int			lst_add_back(t_lst **lst, t_lst *new);

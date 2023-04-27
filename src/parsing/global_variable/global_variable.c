@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/24 08:49:59 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 13:47:45 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,8 @@ char	*replace_global_variable(char *line, t_env_main *main_env)
 	int		len;
 
 	len = count_nbr_char(line, main_env->env_list);
+	if (len == -1)
+		return (NULL);
 	final_line = malloc(sizeof(char) * (len + 1));
 	if (final_line == NULL)
 		return (NULL);

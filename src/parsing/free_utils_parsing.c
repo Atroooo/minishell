@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 07:19:28 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/19 18:00:38 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 13:34:34 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,24 @@ static void	free_list(t_lst *lst)
 		lst = lst->next;
 		free(precedent->data);
 		free(precedent);
+		precedent = NULL;
 	}
 }
 
-static void	free_single_cmd(t_cmd *cmd)
+void	free_single_cmd(t_cmd *cmd)
 {
-	if (cmd->cmd)
-		free(cmd->cmd);
-	free_list(cmd->flag);
-	free_list(cmd->content);
-	free_list(cmd->infile);
-	free_list(cmd->outfile);
+	if (cmd)
+	{
+		if (cmd->cmd)
+		{
+			free(cmd->cmd);
+			cmd->cmd = NULL;
+		}
+		free_list(cmd->flag);
+		free_list(cmd->content);
+		free_list(cmd->infile);
+		free_list(cmd->outfile);
+	}
 }
 
 static void	free_3d_array(char ***array)
@@ -59,18 +66,23 @@ void	free_cmd_struct(t_line *all_cmd)
 	int	i;
 
 	i = 0;
-	while (i < all_cmd->nbr_cmd)
+	if (all_cmd)
 	{
-		free_single_cmd(&all_cmd->cmd[i]);
+		while (i < all_cmd->nbr_cmd)
+		{
+			free_single_cmd(&all_cmd->cmd[i]);
+			i++;
+		}
+		if (all_cmd->cmd)
+			free(all_cmd->cmd);
 		i++;
 	}
-	if (all_cmd->cmd)
-		free(all_cmd->cmd);
 }
 
 void	quit_function_parsing(t_line *all_cmd)
 {
-	free_cmd_struct(all_cmd);
+	if (all_cmd != NULL)
+		free_cmd_struct(all_cmd);
 	if (all_cmd->all_cmd != NULL)
 		free_3d_array(all_cmd->all_cmd);
 	perror(strerror(errno));

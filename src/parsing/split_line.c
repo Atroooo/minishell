@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/13 15:32:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 13:49:56 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,34 @@ int	set_up_arg(char *line, t_cmd *cmd)
 		else if (line[i] != '\0' && error == 0)
 		{
 			error = get_element(&i, &get_content, &line[i], cmd);
-			if (ft_strncmp(cmd->cmd, "echo", ft_strlen(cmd->content->data)) == 0)
+			if (error == 0 \
+			&& ft_strncmp(cmd->cmd, "echo", ft_strlen(cmd->content->data)) == 0)
 				is_echo = TRUE;
 		}
 	}
+	if (error == -1)
+		free_single_cmd(cmd);
 	return (error);
 }
 
 int	initialize_value(t_line *all_cmd, char **splitted_line)
 {
-	all_cmd->all_cmd = NULL;
-	all_cmd->nbr_cmd = 0;
-	all_cmd->cmd = NULL;
+	int	i;
+
+	i = 0;
 	all_cmd->nbr_cmd = count_split(splitted_line);
 	all_cmd->cmd = malloc(sizeof(t_cmd) * (all_cmd->nbr_cmd));
+	while (i < all_cmd->nbr_cmd)
+	{
+		all_cmd->cmd[i].cmd = NULL;
+		all_cmd->cmd[i].content = NULL;
+		all_cmd->cmd[i].flag = NULL;
+		all_cmd->cmd[i].infile = NULL;
+		all_cmd->cmd[i].outfile = NULL;
+		i++;
+	}
+	all_cmd->infile = NULL;
+	all_cmd->outfile = NULL;
 	if (all_cmd->cmd == NULL)
 		return (-1);
 	return (0);
@@ -105,15 +119,22 @@ int	split_line(char *line, t_line *all_cmd)
 
 	error = 0;
 	i = 0;
+	all_cmd->all_cmd = NULL;
+	all_cmd->nbr_cmd = 0;
+	all_cmd->cmd = NULL;
+	(void)line;
 	splitted_line = split_skip_quote(line);
 	if (splitted_line == NULL)
 		return (-1);
 	error = initialize_value(all_cmd, splitted_line);
-	while (splitted_line[i] != NULL && error == 0)
+	while (error == 0 && splitted_line[i] != NULL)
 	{
 		error = set_up_arg(splitted_line[i], &all_cmd->cmd[i]);
 		i++;
 	}
+	if (error)
+		while (--i >= 0)
+			free_single_cmd(&all_cmd->cmd[i]);
 	ft_free_2d_array(splitted_line);
 	return (error);
 }

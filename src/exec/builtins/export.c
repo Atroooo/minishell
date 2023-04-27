@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 16:10:41 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:44:38 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	print_list(t_env_var *env_list)
 	while (env_list)
 	{
 		printf("declare -x ");
-		if (env_list->name && env_list->value)
-			printf("%s=%s\n", env_list->name, env_list->value);
-		else if (env_list->name && !env_list->value)
-			printf("%s=\n", env_list->name);
+		if (env_list->name && env_list->value && env_list->value[0] != 0)
+			printf("%s=\"%s\"\n", env_list->name, env_list->value);
+		else
+			printf("%s\n", env_list->name);
 		env_list = env_list->next;
 	}
 }
@@ -88,10 +88,9 @@ t_env_var	*ft_export(char **cmd, t_env_main *main_env)
 	if (ft_strcmp(cmd[0], "export") != 0)
 		return (NULL);
 	i = 1;
-	if (!cmd[i])
+	if (cmd[1] == NULL)
 	{
 		print_list(main_env->env_list);
-		main_env->exit_status = 0;
 		return (main_env->env_list);
 	}
 	while (cmd[i])
@@ -100,6 +99,5 @@ t_env_var	*ft_export(char **cmd, t_env_main *main_env)
 			main_env->env_list = add_env_value(cmd[i], main_env->env_list);
 		i++;
 	}
-	main_env->exit_status = 0;
 	return (main_env->env_list);
 }

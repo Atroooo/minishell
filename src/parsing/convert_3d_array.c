@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/04/20 17:52:06 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 13:52:20 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,15 @@ static int	get_single_command(char *src, char **dest, int *index)
 int	list_copy(t_lst **dest, t_lst *src, int index)
 {
 	char	*str;
-
+	(void)src;
 	str = ft_strdup(src->data);
 	if (str == NULL)
 		return (1);
 	if (lst_add_back(dest, lst_new_index(str, index)))
+	{
+		free(str);
 		return (1);
+	}
 	return (0);
 }
 
@@ -158,5 +161,5 @@ int	convert_in_3d_array(t_line *all_cmd)
 		i++;
 	}
 	all_cmd->all_cmd[i] = NULL;
-	return (1);
+	return (0);
 }

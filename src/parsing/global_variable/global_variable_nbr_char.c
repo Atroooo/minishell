@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:35:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/20 17:18:58 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 10:32:06 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int	count_nbr_char(char *line, t_env_var *env_list)
 		while (line[index] == '$')
 		{
 			if (special_case_count(line, &index, &nbr_char) == 0)
-				get_global_variable(&line[index + 1], &nbr_char, env_list);
+				if (get_global_variable(&line[index + 1], &nbr_char, env_list))
+					return (-1);
 			skip_gobal_variable(&index, line);
 		}
 		incrementation(&index, &nbr_char, line[index]);
