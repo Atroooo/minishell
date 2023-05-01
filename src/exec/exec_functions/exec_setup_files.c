@@ -6,11 +6,23 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 18:11:21 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 12:39:22 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
+
+char	*setup_file(char *raw_file)
+{
+	char	*file;
+
+	if (!raw_file)
+		return (NULL);
+	file = ft_strtrim(raw_file, "<> ");
+	if (!file)
+		return (NULL);
+	return (file);
+}
 
 int	setup_outfile(t_env_pipe *st, char *file_raw)
 {
@@ -31,7 +43,7 @@ int	setup_outfile(t_env_pipe *st, char *file_raw)
 	}
 	else if (ft_strnstr(file_raw, ">", 1) != NULL)
 	{
-		st->outfile = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
+		st->outfile = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (st->outfile == -1)
 			return (free(st), 0);
 		free(file_name);
@@ -52,8 +64,9 @@ int	setup_infile(t_env_pipe *st, char *file_raw)
 	st->infile = open(file_name, O_RDWR);
 	if (st->infile == -1)
 	{
-		ft_putstr_fd("Cannot open file : ", 2);
-		ft_putendl_fd(file_name, 2);
+		ft_putstr_fd(file_name, 2);
+		ft_putendl_fd(": No such file or directory", 2);
+		free(file_name);
 		free(st);
 		return (0);
 	}
@@ -97,27 +110,9 @@ int	open_files(t_env_pipe *st, t_line *all_cmd)
 	}
 	else
 	{
-		if (ft_lstsize_file(all_cmd->outfile) > 1)
-		{
-			if (!create_outfiles(all_cmd->outfile))
-				return (0);
-		}
 		if (!setup_pipe_files(all_cmd, st))
 			return (0);
 		return (1);
 	}
 	return (0);
-}
-
-void	check_inout(t_env_pipe *st, t_line *all_cmd)
-{
-	if (all_cmd->infile != NULL)
-		st->input = 1;
-	else
-		st->input = 0;
-	if (all_cmd->outfile != NULL && \
-		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1)
-		st->output = 1;
-	else
-		st->output = 0;
 }

@@ -1,4 +1,2 @@
-- unset PATH : bon comportement mais erreurs
+- add history seulement si y a quelque chose sur la ligne
 - finir tty
-
-- fds a close pour les cas echo test | echo test ... (prob fd builtins)

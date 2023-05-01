@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 14:34:49 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 10:33:10 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 	if (!cmd)
 		return (0);
 	if (ft_strcmp("cd", cmd[0]) == 0)
-		return (1);
+		ft_cd(cmd, main_env);
 	else if (ft_strcmp("echo", cmd[0]) == 0)
 		ft_echo(cmd, main_env);
 	else if (ft_strcmp("env", cmd[0]) == 0)
@@ -63,7 +63,7 @@ static char	*set_path(char **env, char **cmd, t_env_pipe *st)
 	path_pos_index = find_path_index(env);
 	if (path_pos_index == -1)
 	{
-		no_path(st, cmd);
+		st->error_msg = 1;
 		return (NULL);
 	}
 	if (env[path_pos_index])
@@ -74,17 +74,22 @@ static char	*set_path(char **env, char **cmd, t_env_pipe *st)
 	return (NULL);
 }
 
-static void	print_msg(t_env_main *main_env, char **cmd)
+static void	print_msg(t_env_main *main_env, char **cmd, t_env_pipe *st)
 {
 	ft_putstr_fd(cmd[0], 2);
 	if (ft_strncmp(cmd[0], "./", 2) == 0)
 	{
-		ft_putendl_fd(": command not found", 2);
+		ft_putendl_fd(": Permission denied", 2);
 		main_env->exit_status = 126;
+	}
+	else if (st->error_msg == 1)
+	{
+		ft_putendl_fd(": No such file or directory", 2);
+		main_env->exit_status = 1;
 	}
 	else
 	{
-		ft_putendl_fd(": Permission denied", 2);
+		ft_putendl_fd(": command not found", 2);
 		main_env->exit_status = 127;
 	}
 }
@@ -97,17 +102,20 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	path = NULL;
 	if (buildin_exec(cmd, main_env))
 	{
+		close(0);
+		close(1);
 		close_function(st);
 		free_cmd_exec(all_cmd, st, main_env);
 	}
 	path = set_path(main_env->env, cmd, st);
 	if (path == NULL)
 	{
-		print_msg(main_env, cmd);
+		close(0);
+		close(1);
+		print_msg(main_env, cmd, st);
 		free_cmd_exec(all_cmd, st, main_env);
 		return (0);
 	}
 	execve(path, cmd, main_env->env);
 	return (0);
 }
-

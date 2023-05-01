@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 17:38:43 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 10:00:56 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,16 @@ void	close_function(t_env_pipe *st)
 {
 	int	i;
 
-	i = 0;
 	if (st->infile != 0)
 		close(st->infile);
 	if (st->outfile != 1)
 		close(st->outfile);
 	if (st->hdoc == 1)
 		return ;
-	while (i < st->nbr_cmd)
+	i = 3;
+	while (i < 1024)
 	{
-		close(st->fd[i][0]);
-		close(st->fd[i][1]);
+		close(i);
 		i++;
 	}
 }

@@ -16,8 +16,6 @@ void	free_str(char **str)
 {
 	int	index;
 
-	if (!str || !str[0])
-		return ;
 	index = 0;
 	while (str[index])
 	{
@@ -25,8 +23,7 @@ void	free_str(char **str)
 			free(str[index]);
 		index++;
 	}
-	if (str)
-		free(str);
+	free(str);
 }
 
 void	free_cmd(t_line *all_cmd)
