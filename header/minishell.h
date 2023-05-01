@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 14:59:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/01 15:26:25 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void		check_inout(t_env_pipe *st, t_line *all_cmd);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
 int			check_infile(t_line *all_cmd);
 int			setup_infile(t_env_pipe *st, char *file_raw);
-int			create_outfiles(t_lst *outfile);
+int			create_outfiles(t_line *all_cmd);
 int			open_outfile(t_env_pipe *st, t_line *all_cmd);
 int			check_spe_outfile(t_env_pipe *st, t_line *all_cmd);
 int			setup_outfile(t_env_pipe *st, char *file_raw);
@@ -155,6 +155,7 @@ int			get_dup_single_done(t_env_pipe *st);
 void		close_function(t_env_pipe *st);
 
 /*Execution*/
+int			env_lst_to_char(t_env_main *main_env);
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, \
 				t_env_main *main_env);
