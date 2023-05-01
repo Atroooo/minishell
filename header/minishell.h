@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/27 14:46:48 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 10:31:49 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_env_pipe
 	int	*pid;
 	int	**fd;
 	int	i;
+	int	error_msg;
 }	t_env_pipe;
 
 typedef struct t_lst
@@ -154,7 +155,6 @@ void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, \
 				t_env_main *main_env);
 char		*get_path(char *cmd, char *paths);
-void		no_path(t_env_pipe *st, char **cmd);
 int			execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env);
 int			get_exec_done(t_line *all_cmd, char **cmd, \
 				t_env_pipe *st, t_env_main *main_env);

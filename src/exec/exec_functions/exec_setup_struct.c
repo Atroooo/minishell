@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:17:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 14:11:18 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 10:32:22 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	setup_pipe(t_env_pipe *st)
 
 int	setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
+	st->error_msg = 0;
 	st->nbr_cmd = all_cmd->nbr_cmd;
 	st->hdoc = heredoc(st, all_cmd, main_env);
 	if (st->hdoc == -1)

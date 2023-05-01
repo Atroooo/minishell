@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 13:51:08 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 11:01:15 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	create_outfiles(t_lst *outfile)
 	while (outfile->next != NULL)
 	{
 		file_name = setup_file(outfile->data);
-		c_outfile = open(file_name, O_CREAT, 0644);
+		if (ft_strnstr(outfile->data, ">>", 2) != NULL)
+			c_outfile = open(file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
+		else if (ft_strnstr(outfile->data, ">", 1) != NULL)
+			c_outfile = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (c_outfile == -1)
 			return (0);
 		close(c_outfile);

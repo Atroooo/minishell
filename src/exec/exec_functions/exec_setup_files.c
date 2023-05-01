@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/26 18:11:21 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 10:51:34 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	setup_outfile(t_env_pipe *st, char *file_raw)
 	}
 	else if (ft_strnstr(file_raw, ">", 1) != NULL)
 	{
-		st->outfile = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
+		st->outfile = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (st->outfile == -1)
 			return (free(st), 0);
 		free(file_name);
