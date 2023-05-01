@@ -71,7 +71,7 @@ static void	redirection_hub(t_line *all_cmd)
 		if (!create_outfiles(all_cmd))
 			return ;
 	}
-	else if (all_cmd->infile)
+	if (all_cmd->infile)
 		check_infile(all_cmd);
 }
 
