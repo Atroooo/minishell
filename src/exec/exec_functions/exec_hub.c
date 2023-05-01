@@ -35,6 +35,19 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 	return (1);
 }
 
+void	check_inout(t_env_pipe *st, t_line *all_cmd)
+{
+	if (all_cmd->infile != NULL)
+		st->input = 1;
+	else
+		st->input = 0;
+	if (all_cmd->outfile != NULL && \
+		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1)
+		st->output = 1;
+	else
+		st->output = 0;
+}
+
 static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 {
 	t_env_pipe	*st;
