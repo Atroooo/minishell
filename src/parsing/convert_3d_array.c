@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/04/27 14:48:07 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 13:49:20 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ static int	get_single_command(char *src, char **dest, int *index)
 	return (0);
 }
 
-int	list_copy(t_lst **dest, t_lst *src, int index)
+int	list_copy(t_lst **dest, t_lst *src, int index, int index_inline)
 {
 	char	*str;
 	(void)src;
 	str = ft_strdup(src->data);
 	if (str == NULL)
 		return (1);
-	if (lst_add_back(dest, lst_new_index(str, index)))
+	if (lst_add_back(dest, lst_new_double_index(str, index, index_inline)))
 	{
 		free(str);
 		return (1);
@@ -111,13 +111,13 @@ int	get_all_files(t_cmd *cmd, t_line *all_cmd, int index)
 {
 	while (cmd->infile != NULL)
 	{
-		if (list_copy(&all_cmd->infile, cmd->infile, index))
+		if (list_copy(&all_cmd->infile, cmd->infile, index, cmd->infile->index))
 			return (1);
 		cmd->infile = free_and_get_next(cmd->infile);
 	}
 	while (cmd->outfile != NULL)
 	{
-		if (list_copy(&all_cmd->outfile, cmd->outfile, index))
+		if (list_copy(&all_cmd->outfile, cmd->outfile, index, cmd->outfile->index))
 			return (1);
 		cmd->outfile = free_and_get_next(cmd->outfile);
 	}

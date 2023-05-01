@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/01 12:38:32 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/01 14:28:48 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ static int	check_if_error(char *line, int *error)
 				|| consecutive_pipe > 3)
 				return (error_case("||", error));
 			else if ((pipe == 1 && only_space == 1 && quote == 0) \
-						|| consecutive_pipe == 3 \
-						|| (consecutive_pipe == 2 && line[i - 2] == ' '))
+				|| consecutive_pipe == 3 \
+				|| (consecutive_pipe == 2 && line[i - 2] == ' ' && quote == 0))
 				return (error_case("|", error));
 		}
 	}

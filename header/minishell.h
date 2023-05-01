@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 12:46:53 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:59:18 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct t_lst
 {
 	char			*data;
 	int				index;
+	int				index_inline;
 	struct t_lst	*next;
 }	t_lst;
 
@@ -111,7 +112,8 @@ int			check_if_echo(char *line, t_cmd *cmd, int *error);
 
 /*Get all cmd*/
 int			get_cmd(char *line, t_cmd *cmd);
-int			get_file(char *line, t_cmd *cmd);
+int			get_file(char *line, t_cmd *cmd, int index);
+int			get_element_file(int *i, char *line, t_cmd *cmd, int index);
 int			get_flag(char *line, t_cmd *cmd);
 int			get_content(char *line, t_cmd *cmd);
 
@@ -133,6 +135,7 @@ void		free_single_cmd(t_cmd *cmd);
 int			lst_add_back(t_lst **lst, t_lst *new);
 t_lst		*lst_new(void *content);
 t_lst		*lst_new_index(void *content, int index);
+t_lst		*lst_new_double_index(void *content, int index, int index_inline);
 
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
@@ -168,8 +171,8 @@ char		*get_delimiter(char *str);
 
 /*Builtins*/
 void		ft_echo(char **cmd, t_env_main *main_env);
-void		ft_cd(char **cmd, t_env_main *main_env);
-void		ft_pwd(char **cmd, t_env_main *main_env);
+t_env_var	*ft_cd(char **cmd, t_env_main *main_env);
+void		ft_pwd(char **cmd);
 t_env_var	*ft_export(char **cmd, t_env_main *main_env);
 int			check_if_in_env(t_env_var *lst, char *str);
 void		free_variable_name_and_value(char *name, char *value);
@@ -199,7 +202,7 @@ void		free_inout_list(t_lst *lst);
 void		free_env(t_env_pipe *st, int i);
 void		free_pipe(t_env_pipe *st);
 int			quit_function(t_env_pipe *st, int error_code);
-void		free_cmd_exec(t_line *all_cmd, t_env_pipe *st,\
+void		free_cmd_exec(t_line *all_cmd, t_env_pipe *st, \
 				t_env_main *main_env);
 
 /*A DELETE*/

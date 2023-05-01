@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:06:19 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 14:48:24 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 13:40:39 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,20 @@ t_lst	*lst_new_index(void *content, int index)
 		return (NULL);
 	list->data = content;
 	list->index = index;
+	list->next = NULL;
+	return (list);
+}
+
+t_lst	*lst_new_double_index(void *content, int index, int index_inline)
+{
+	t_lst	*list;
+
+	list = malloc(sizeof(t_lst));
+	if (list == NULL)
+		return (NULL);
+	list->data = content;
+	list->index = index;
+	list->index_inline = index_inline;
 	list->next = NULL;
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 13:49:56 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/01 13:35:26 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,18 @@ int	set_up_arg(char *line, t_cmd *cmd)
 	int	error;
 	int	no_command;
 	int	is_echo;
+	int	y;
 
+	y = 0;
 	i = initialize_variable(cmd, &error, &no_command, &is_echo);
 	while (line[i] != '\0' && error == 0)
 	{
 		i += skip_space(&line[i]);
 		if (line[i] == '<' || line[i] == '>')
-			error = get_element(&i, &get_file, &line[i], cmd);
+		{
+			error = get_element_file(&i, &line[i], cmd, y);
+			y++;
+		}
 		else if (line[i] != '\0' && no_command == TRUE && error == 0)
 		{
 			error = get_element(&i, &get_cmd, &line[i], cmd);

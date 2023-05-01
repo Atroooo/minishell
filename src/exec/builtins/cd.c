@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 12:47:42 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:01:41 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,23 @@ static char	*get_oldpwd(void)
 	return (oldpwd);
 }
 
-static void	change_pwds(t_env_var *list, char *which_pwd, char *path)
+static t_env_var	*change_pwds(t_env_var *list, char *which_pwd, char *path)
 {
 	while (list && ft_strcmp(list->name, which_pwd))
 	{
 		list = list->next;
 	}
 	if (list == NULL)
+	{
 		ft_lst_addback_env(&list, ft_lstnew_env(which_pwd, path));
+		free(path);
+	}
 	else
 	{
 		free(list->value);
 		list->value = path;
 	}
+	return (list);
 }
 
 static char	*get_final_pwd(char *oldpwd, char *pwd)
@@ -102,7 +106,7 @@ static char	*get_final_pwd(char *oldpwd, char *pwd)
 	return (final_pwd);
 }
 
-static void	change_pwd(char *pwd, char *oldpwd, t_env_main *main_env)
+static t_env_var	*change_pwd(char *pwd, char *oldpwd, t_env_main *main_env)
 {
 	char	*final_pwd;
 
@@ -110,19 +114,20 @@ static void	change_pwd(char *pwd, char *oldpwd, t_env_main *main_env)
 	{
 		final_pwd = ft_strdup(pwd);
 		if (final_pwd == NULL)
-			return ;
+			return (NULL);
 	}
 	else
 	{
 		final_pwd = get_final_pwd(oldpwd, pwd);
 		if (final_pwd == NULL)
-			return ;
+			return (NULL);
 	}
-	change_pwds(main_env->env_list, "OLDPWD", oldpwd);
-	change_pwds(main_env->env_list, "PWD", final_pwd);
+	main_env->env_list = change_pwds(main_env->env_list, "OLDPWD", oldpwd);
+	main_env->env_list = change_pwds(main_env->env_list, "PWD", final_pwd);
+	return (main_env->env_list);
 }
 
-static void	manage_error(char *path, char *oldpwd) 
+static void	*manage_error(char *path, char *oldpwd) 
 {
 	ft_putstr_fd("minishell: cd: ", 2);
 	ft_putstr_fd(path, 2);
@@ -130,22 +135,22 @@ static void	manage_error(char *path, char *oldpwd)
 	g_status = 1;
 	free(oldpwd);
 	free(path);
-	return ;
+	return (NULL);
 }
 
-void	ft_cd(char **cmd, t_env_main *main_env)
+t_env_var	*ft_cd(char **cmd, t_env_main *main_env)
 {
 	char	*path;
 	char	*oldpwd;
 
 	path = get_path_cd(cmd, main_env);
 	if (path == NULL)
-		return ;
+		return (NULL);
 	oldpwd = get_oldpwd();
 	if (oldpwd == NULL)
 	{
 		free(path);
-		return ;
+		return (NULL);
 	}
 	if (chdir(path) == -1)
 		return (manage_error(path, oldpwd));
@@ -153,4 +158,5 @@ void	ft_cd(char **cmd, t_env_main *main_env)
 		change_pwd(path, oldpwd, main_env);
 	free(path);
 	main_env->exit_status = 0;
+	return (main_env->env_list);
 }

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:29:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 13:46:25 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/01 13:35:11 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	get_size_file(char *line)
 	return (i);
 }
 
-int	get_file(char *line, t_cmd *cmd)
+int	get_file(char *line, t_cmd *cmd, int index)
 {
 	int		size;
 	char	*file_str;
@@ -49,10 +49,21 @@ int	get_file(char *line, t_cmd *cmd)
 		return (-1);
 	file_str = copy_cmd(size, line, file_str);
 	if (file_str[0] == '<')
-		error = lst_add_back(&cmd->infile, lst_new(file_str));
+		error = lst_add_back(&cmd->infile, lst_new_index(file_str, index));
 	else
-		error = lst_add_back(&cmd->outfile, lst_new(file_str));
+		error = lst_add_back(&cmd->outfile, lst_new_index(file_str, index));
 	if (error)
 		return (-1);
 	return (size);
+}
+
+int	get_element_file(int *i, char *line, t_cmd *cmd, int index)
+{
+	int	temp;
+
+	temp = get_file(line, cmd, index);
+	if (temp == -1)
+		return (-1);
+	*i += temp;
+	return (0);
 }
