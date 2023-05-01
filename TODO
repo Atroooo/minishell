@@ -1,2 +1,2 @@
-- si pas de cmd, les fichiers doivent quand meme etre crees
+- add history seulement si y a quelque chose sur la ligne
 - finir tty

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 10:31:49 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 12:41:31 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,16 +141,17 @@ void		termios_init(t_env_main *main_env);
 /*Manage files*/
 void		check_inout(t_env_pipe *st, t_line *all_cmd);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
+int			check_infile(t_line *all_cmd);
+int			setup_infile(t_env_pipe *st, char *file_raw);
 int			create_outfiles(t_lst *outfile);
+int			open_outfile(t_env_pipe *st, t_line *all_cmd);
+int			check_spe_outfile(t_env_pipe *st, t_line *all_cmd);
+int			setup_outfile(t_env_pipe *st, char *file_raw);
 int			dup_manager(t_env_pipe *st, t_line *all_cmd);
 int			get_dup_single_done(t_env_pipe *st);
 void		close_function(t_env_pipe *st);
-int			setup_outfile(t_env_pipe *st, char *file_raw);
-int			check_spe_outfile(t_env_pipe *st, t_line *all_cmd);
-int			open_outfile(t_env_pipe *st, t_line *all_cmd);
-int			setup_infile(t_env_pipe *st, char *file_raw);
 
-/*Exececution*/
+/*Execution*/
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, \
 				t_env_main *main_env);

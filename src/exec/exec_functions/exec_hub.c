@@ -108,9 +108,18 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
-	exec_cmd(main_env, all_cmd);
+	if (ft_lstsize_file(all_cmd->outfile) > 0)
+		if (!create_outfiles(all_cmd->outfile))
+			return ;
+	if (all_cmd->all_cmd[0] && all_cmd->all_cmd[0][0] \
+		&& all_cmd->all_cmd[0][0][0] != '\0')
+	{
+		exec_cmd(main_env, all_cmd);
+		free_str(main_env->env);
+	}
+	else if (all_cmd->infile)
+		check_infile(all_cmd);
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);
-	free_str(main_env->env);
 }
