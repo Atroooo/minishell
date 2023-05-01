@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:17:56 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 08:43:44 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:47:34 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_pwd(char **cmd, t_env_main *main_env)
 {
 	char	cwd[4096];
 
-
+	if (!cmd)
+		return ;
 	if (cmd[1])
 	{
 		main_env->exit_status = 1;

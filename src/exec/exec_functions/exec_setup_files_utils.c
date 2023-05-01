@@ -6,23 +6,22 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 12:40:53 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:35:49 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void	check_inout(t_env_pipe *st, t_line *all_cmd)
+char	*setup_file(char *raw_file)
 {
-	if (all_cmd->infile != NULL)
-		st->input = 1;
-	else
-		st->input = 0;
-	if (all_cmd->outfile != NULL && \
-		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1)
-		st->output = 1;
-	else
-		st->output = 0;
+	char	*file;
+
+	if (!raw_file)
+		return (NULL);
+	file = ft_strtrim(raw_file, "<> ");
+	if (!file)
+		return (NULL);
+	return (file);
 }
 
 int	check_infile(t_line *all_cmd)
@@ -46,20 +45,6 @@ int	check_infile(t_line *all_cmd)
 	return (1);
 }
 
-int	check_spe_outfile(t_env_pipe *st, t_line *all_cmd)
-{
-	t_lst	*tmp;
-
-	tmp = all_cmd->outfile;
-	while (tmp)
-	{
-		if (tmp->index == st->i)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
 int	create_outfiles(t_lst *outfile)
 {
 	char	*file_name;
@@ -79,6 +64,20 @@ int	create_outfiles(t_lst *outfile)
 		outfile = outfile->next;
 	}
 	return (1);
+}
+
+int	check_spe_outfile(t_env_pipe *st, t_line *all_cmd)
+{
+	t_lst	*tmp;
+
+	tmp = all_cmd->outfile;
+	while (tmp)
+	{
+		if (tmp->index == st->i)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 int	open_outfile(t_env_pipe *st, t_line *all_cmd)

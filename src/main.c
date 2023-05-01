@@ -32,14 +32,9 @@ static void	exec_core(char *line, t_env_main *main_env)
 	error = parsing(line, &all_cmd, main_env);
 	main_env->exit_status = g_status;
 	if (error == -1)
-	{
-		g_status = -1;
 		free_main_env(main_env);
-	}
 	else if (error == 0)
 		exec_hub(&all_cmd, main_env);
-	else
-		g_status = 2;
 }
 
 static void	exec_shell(t_env_main *main_env)

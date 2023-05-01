@@ -68,6 +68,7 @@ void	free_main_env(t_env_main *main_env)
 {
 	t_env_var	*tmp;
 
+	rl_clear_history();
 	while (main_env->env_list)
 	{
 		tmp = main_env->env_list->next;
