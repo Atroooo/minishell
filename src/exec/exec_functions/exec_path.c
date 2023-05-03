@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:55:29 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 16:26:19 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/03 17:21:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static char	*get_path(char *cmd, char *paths)
 	char	*temp;
 
 	temp = NULL;
+	if (!cmd)
+		return (NULL);
 	if (access(cmd, X_OK) != -1)
 		return (ft_strjoin(temp, cmd));
 	path_split = ft_split(paths, ':');

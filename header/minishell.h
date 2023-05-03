@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/03 17:06:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/03 17:52:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ int			error_execve(char **cmd, char *path, t_env_pipe *st);
 /*Heredoc*/
 int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
 int			heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
+int			heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
 char		*get_delimiter(char *str);
 
 /*Builtins*/

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 17:06:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/03 17:34:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	find_path_index(char **env)
 
 static int	buildin_exec(char **cmd, t_env_main *main_env)
 {
-	if (!cmd)
-		return (0);
 	if (ft_strcmp("cd", cmd[0]) == 0)
 		main_env->env_list = ft_cd(cmd, main_env->env_list);
 	else if (ft_strcmp("echo", cmd[0]) == 0)
@@ -57,8 +55,10 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 
 static void	print_msg(t_env_main *main_env, char **cmd, t_env_pipe *st)
 {
+	if (st->hdoc == 1)
+		return ;
 	ft_putstr_fd(cmd[0], 2);
-	if (ft_strncmp(cmd[0], "./", 2) == 0)
+	if (cmd && ft_strncmp(cmd[0], "./", 2) == 0)
 	{
 		ft_putendl_fd(": Permission denied", 2);
 		main_env->exit_status = 126;
@@ -90,13 +90,14 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	char	*path;
 
 	path = NULL;
-	if (is_executable(cmd) == 1 && buildin_exec(cmd, main_env))
-	{
-		close(0);
-		close(1);
-		close_function(st);
-		free_cmd_exec(all_cmd, st, main_env);
-	}
+	if (is_executable(cmd) == 1)
+		if (buildin_exec(cmd, main_env))
+		{
+			close(0);
+			close(1);
+			close_function(st);
+			free_cmd_exec(all_cmd, st, main_env);
+		}
 	path = return_path(main_env->env, cmd, st);
 	if (path == NULL)
 	{
