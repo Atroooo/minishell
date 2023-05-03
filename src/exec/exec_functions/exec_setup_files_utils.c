@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 17:29:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/03 14:23:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	check_infile(t_line *all_cmd)
 	char	*file_name;
 	int		fd;
 
+	if (ft_strnstr(all_cmd->infile->data, "<<", 2) != NULL)
+		return (0);
 	file_name = setup_file(all_cmd->infile->data);
 	if (!file_name)
 		return (0);
