@@ -14,7 +14,8 @@
 
 static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 {
-	if (!all_cmd->all_cmd[0])
+	if (!all_cmd->all_cmd[0] || !all_cmd->all_cmd[0][0] \
+		|| all_cmd->all_cmd[0][0][0] == '\0')
 		return (0);
 	if (ft_strcmp("exit", all_cmd->all_cmd[0][0]) == 0)
 		ft_exit(all_cmd->all_cmd[0], main_env, all_cmd);
@@ -91,12 +92,8 @@ static void	redirection_hub(t_line *all_cmd)
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
 	redirection_hub(all_cmd);
-	if (all_cmd->all_cmd[0] && all_cmd->all_cmd[0][0] \
-		&& all_cmd->all_cmd[0][0][0] != '\0')
-	{
-		exec_cmd(main_env, all_cmd);
-		free_str(main_env->env);
-	}
+	exec_cmd(main_env, all_cmd);
+	free_str(main_env->env);
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);

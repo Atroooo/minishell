@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:55:29 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/01 10:28:24 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:26:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*check_if_cmd_exist(char **path_split, char *temp)
 	return (NULL);
 }
 
-char	*get_path(char *cmd, char *paths)
+static char	*get_path(char *cmd, char *paths)
 {
 	char	**path_split;
 	char	*temp;
@@ -75,4 +75,23 @@ char	*get_path(char *cmd, char *paths)
 		return (NULL);
 	set_path(path_split, cmd);
 	return (check_if_cmd_exist(path_split, temp));
+}
+
+char	*return_path(char **env, char **cmd, t_env_pipe *st)
+{
+	char	*path;
+	int		path_pos_index;
+
+	path_pos_index = find_path_index(env);
+	if (path_pos_index == -1)
+	{
+		st->error_msg = 1;
+		return (NULL);
+	}
+	if (env[path_pos_index])
+	{
+		path = get_path(cmd[0], env[path_pos_index]);
+		return (path);
+	}
+	return (NULL);
 }

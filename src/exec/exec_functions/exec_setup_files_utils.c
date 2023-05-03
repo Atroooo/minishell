@@ -6,13 +6,12 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/03 14:23:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/03 16:11:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-//si probleme avec les files c'est la dernière chose modif cette fonction et check_infile
 static int	special_case_redirect(t_line *all_cmd)
 {
 	char	*file_name;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 15:26:25 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:26:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_env_main
 {
 	char				**env;
 	int					exit_status;
+	int					to_execute;
 	struct s_env_var	*env_list;
 	struct termios		*tty;
 }	t_env_main;
@@ -159,7 +160,8 @@ int			env_lst_to_char(t_env_main *main_env);
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, \
 				t_env_main *main_env);
-char		*get_path(char *cmd, char *paths);
+int			find_path_index(char **env);
+char		*return_path(char **env, char **cmd, t_env_pipe *st);
 int			execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env);
 int			get_exec_done(t_line *all_cmd, char **cmd, \
 				t_env_pipe *st, t_env_main *main_env);
