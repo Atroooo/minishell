@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 13:18:55 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:19:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	fork_declaration(t_line *all_cmd, char **cmd, \
 	t_env_pipe *st, t_env_main *main_env)
 {
+	g_status = 255;
 	st->pid[st->i] = fork();
 	if (st->pid[st->i] < 0)
 		return (quit_function(st, 1));

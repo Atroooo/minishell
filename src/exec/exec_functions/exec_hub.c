@@ -14,7 +14,8 @@
 
 static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 {
-	if (!all_cmd->all_cmd[0])
+	if (!all_cmd->all_cmd[0] || !all_cmd->all_cmd[0][0] \
+		|| all_cmd->all_cmd[0][0][0] == '\0')
 		return (0);
 	if (ft_strcmp("exit", all_cmd->all_cmd[0][0]) == 0)
 		ft_exit(all_cmd->all_cmd[0], main_env, all_cmd);
@@ -35,48 +36,17 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 	return (1);
 }
 
-static char	*setup_str_env(t_env_var *node)
+void	check_inout(t_env_pipe *st, t_line *all_cmd)
 {
-	char		*str_name;
-	char		*str;
-
-	if (!node->name)
-		return (NULL);
-	str_name = ft_strjoin(node->name, "=");
-	if (!str_name)
-		return (0);
-	if (node->value == NULL)
-		return (str_name);
+	if (all_cmd->infile != NULL)
+		st->input = 1;
 	else
-		str = ft_strjoin(str_name, node->value);
-	if (!str)
-		return (0);
-	free(str_name);
-	return (str);
-}
-
-static int	env_lst_to_char(t_env_main *main_env)
-{
-	t_env_var	*tmp;
-	int			i;
-
-	main_env->env = malloc(sizeof(char *) * \
-		(ft_lstsize_env(main_env->env_list) + 1));
-	if (main_env->env == NULL)
-		return (0);
-	tmp = main_env->env_list;
-	i = 0;
-	while (tmp)
-	{
-		main_env->env[i] = setup_str_env(tmp);
-		if (!main_env->env[i])
-			return (0);
-		tmp = tmp->next;
-		i++;
-	}
-	main_env->env[i] = NULL;
-	free(tmp);
-	return (1);
+		st->input = 0;
+	if (all_cmd->outfile != NULL && \
+		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1)
+		st->output = 1;
+	else
+		st->output = 0;
 }
 
 static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
@@ -108,19 +78,22 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 	return (1);
 }
 
-void	exec_hub(t_line *all_cmd, t_env_main *main_env)
+static void	redirection_hub(t_line *all_cmd)
 {
 	if (ft_lstsize_file(all_cmd->outfile) > 0)
-		if (!create_outfiles(all_cmd->outfile))
-			return ;
-	if (all_cmd->all_cmd[0] && all_cmd->all_cmd[0][0] \
-		&& all_cmd->all_cmd[0][0][0] != '\0')
 	{
-		exec_cmd(main_env, all_cmd);
-		free_str(main_env->env);
+		if (!create_outfiles(all_cmd))
+			return ;
 	}
-	else if (all_cmd->infile)
+	if (all_cmd->infile)
 		check_infile(all_cmd);
+}
+
+void	exec_hub(t_line *all_cmd, t_env_main *main_env)
+{
+	redirection_hub(all_cmd);
+	exec_cmd(main_env, all_cmd);
+	free_str(main_env->env);
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);

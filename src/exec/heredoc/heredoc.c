@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 12:40:43 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:13:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	setup_heredoc(t_env_pipe *st, t_line *all_cmd)
 			return (free(st), 0);
 		free(outfile);
 	}
-	st->nbr_cmd = 1;
 	return (1);
 }
 

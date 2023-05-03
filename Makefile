@@ -14,7 +14,8 @@ SRC			 			= main.c init.c \
 						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/export.c exec/builtins/export_utils.c exec/builtins/export_similar_variable.c  \
 						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c exec/builtins/pwd.c \
 						  exec/utils/chained_list.c exec/utils/utils.c \
-						  exec/exec_functions/exec_hub.c exec/exec_functions/exec_setup_struct.c \
+						  exec/exec_functions/exec_hub.c exec/exec_functions/exec_setup_env.c \
+						  exec/exec_functions/exec_setup_struct.c \
 						  exec/exec_functions/exec_setup_files.c exec/exec_functions/exec_setup_files_utils.c \
 						  exec/exec_functions/exec_dup_manager.c exec/exec_functions/exec_path.c \
 						  exec/exec_functions/exec_execution.c exec/exec_functions/exec_execution_utils.c \

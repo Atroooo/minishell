@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/01 10:51:34 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:07:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
+
+char	*setup_file(char *raw_file)
+{
+	char	*file;
+
+	if (!raw_file)
+		return (NULL);
+	file = ft_strtrim(raw_file, "<> ");
+	if (!file)
+		return (NULL);
+	return (file);
+}
 
 int	setup_outfile(t_env_pipe *st, char *file_raw)
 {
@@ -54,6 +66,7 @@ int	setup_infile(t_env_pipe *st, char *file_raw)
 	{
 		ft_putstr_fd("Cannot open file : ", 2);
 		ft_putendl_fd(file_name, 2);
+		free(file_name);
 		free(st);
 		return (0);
 	}
@@ -97,27 +110,9 @@ int	open_files(t_env_pipe *st, t_line *all_cmd)
 	}
 	else
 	{
-		if (ft_lstsize_file(all_cmd->outfile) > 1)
-		{
-			if (!create_outfiles(all_cmd->outfile))
-				return (0);
-		}
 		if (!setup_pipe_files(all_cmd, st))
 			return (0);
 		return (1);
 	}
 	return (0);
-}
-
-void	check_inout(t_env_pipe *st, t_line *all_cmd)
-{
-	if (all_cmd->infile != NULL)
-		st->input = 1;
-	else
-		st->input = 0;
-	if (all_cmd->outfile != NULL && \
-		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1)
-		st->output = 1;
-	else
-		st->output = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:05:32 by atro              #+#    #+#             */
-/*   Updated: 2023/04/26 18:25:40 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:16:34 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_list_delete(t_lst *lst)
 {
 	while (lst != NULL)
 	{
-		printf("idx %d %s -> ", lst->index, lst->data);
+		printf("idx %d idx in line %d %s -> ", lst->index, lst->index_inline, lst->data);
 		lst = lst->next;
 	}
 	printf("NULL\n");
