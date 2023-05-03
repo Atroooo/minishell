@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 15:07:54 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:55:33 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-static char	*check_in_env(char *name, t_env_main *main_env)
+static char	*check_in_env(char *name, t_env_var *env_list)
 {
-	while (main_env->env_list != NULL)
+	while (env_list != NULL)
 	{
-		if (ft_strcmp(name, main_env->env_list->name) == 0)
+		if (ft_strcmp(name, env_list->name) == 0)
 		{
-			if (main_env->env_list->value \
-				&& main_env->env_list->value[0] == '\0')
+			if (env_list->value \
+				&& env_list->value[0] == '\0')
 			{
 				printf("minishell: cd: %s not set\n", name);
 				return (NULL);
 			}
-			return (ft_strdup(main_env->env_list->value));
+			return (ft_strdup(env_list->value));
 		}
-		main_env->env_list = main_env->env_list->next;
+		env_list = env_list->next;
 	}
 	return (NULL);
 }
 
-static char	*get_path_cd(char **cmd, t_env_main *main_env)
+static char	*get_path_cd(char **cmd, t_env_var *env_list)
 {
 	char	*path;
 
 	if (cmd[1] == NULL || (cmd[1][0] == '~' && cmd[1][1] == '\0') \
 	|| (cmd[1][0] == '-' && cmd[1][1] == '-' && cmd[1][2] == '\0'))
-		path = check_in_env("HOME", main_env);
+		path = check_in_env("HOME", env_list);
 	else if (cmd[1][0] == '-' && cmd[1][1] == '\0')
-		path = check_in_env("OLDPWD", main_env);
+		path = check_in_env("OLDPWD", env_list);
 	else if (cmd[1][0] == '-')
 	{
 		printf("minishell: cd: %s invalid option\n", &cmd[1][1]);
@@ -54,7 +54,7 @@ static char	*get_path_cd(char **cmd, t_env_main *main_env)
 		path = ft_strdup(cmd[1]);
 	if (path == NULL)
 	{
-		main_env->exit_status = 1;
+		g_status = 1;
 		return (NULL);
 	}
 	return (path);
@@ -74,6 +74,9 @@ static char	*get_oldpwd(void)
 
 static t_env_var	*change_pwds(t_env_var *list, char *which_pwd, char *path)
 {
+	t_env_var	*save;
+
+	save = list;
 	while (list && ft_strcmp(list->name, which_pwd))
 	{
 		list = list->next;
@@ -88,7 +91,7 @@ static t_env_var	*change_pwds(t_env_var *list, char *which_pwd, char *path)
 		free(list->value);
 		list->value = path;
 	}
-	return (list);
+	return (save);
 }
 
 static char	*get_final_pwd(char *oldpwd, char *pwd)
@@ -106,7 +109,7 @@ static char	*get_final_pwd(char *oldpwd, char *pwd)
 	return (final_pwd);
 }
 
-static t_env_var	*change_pwd(char *pwd, char *oldpwd, t_env_main *main_env)
+static t_env_var	*change_pwd(char *pwd, char *oldpwd, t_env_var *env_list)
 {
 	char	*final_pwd;
 
@@ -122,9 +125,10 @@ static t_env_var	*change_pwd(char *pwd, char *oldpwd, t_env_main *main_env)
 		if (final_pwd == NULL)
 			return (NULL);
 	}
-	main_env->env_list = change_pwds(main_env->env_list, "OLDPWD", oldpwd);
-	main_env->env_list = change_pwds(main_env->env_list, "PWD", final_pwd);
-	return (main_env->env_list);
+	env_list = change_pwds(env_list, "OLDPWD", oldpwd);
+	env_list = change_pwds(env_list, "PWD", final_pwd);
+	free(pwd);
+	return (env_list);
 }
 
 static void	*manage_error(char *path, char *oldpwd) 
@@ -138,14 +142,15 @@ static void	*manage_error(char *path, char *oldpwd)
 	return (NULL);
 }
 
-t_env_var	*ft_cd(char **cmd, t_env_main *main_env)
+t_env_var	*ft_cd(char **cmd, t_env_var *env_list)
 {
 	char	*path;
 	char	*oldpwd;
 
-	path = get_path_cd(cmd, main_env);
+	path = get_path_cd(cmd, env_list);
 	if (path == NULL)
 		return (NULL);
+	oldpwd = NULL;
 	oldpwd = get_oldpwd();
 	if (oldpwd == NULL)
 	{
@@ -155,8 +160,7 @@ t_env_var	*ft_cd(char **cmd, t_env_main *main_env)
 	if (chdir(path) == -1)
 		return (manage_error(path, oldpwd));
 	else
-		change_pwd(path, oldpwd, main_env);
-	free(path);
-	main_env->exit_status = 0;
-	return (main_env->env_list);
+		env_list = change_pwd(path, oldpwd, env_list);
+	g_status = 0;
+	return (env_list);
 }

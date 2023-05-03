@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/01 14:59:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:21:54 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	buildin_exec(char **cmd, t_env_main *main_env)
 	if (!cmd)
 		return (0);
 	if (ft_strcmp("cd", cmd[0]) == 0)
-		main_env->env_list = ft_cd(cmd, main_env);
+		main_env->env_list = ft_cd(cmd, main_env->env_list);
 	else if (ft_strcmp("echo", cmd[0]) == 0)
 		ft_echo(cmd, main_env);
 	else if (ft_strcmp("env", cmd[0]) == 0)

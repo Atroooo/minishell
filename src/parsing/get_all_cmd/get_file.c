@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:29:57 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/01 13:35:11 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/03 15:12:54 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static int	get_size_file(char *line)
 	{
 		if (line[i] == '\'' || line[i] == '\"')
 			i += skip_in_between(&line[i], line[i]);
-		i++;
+		if (line[i])
+			i++;
 	}
 	return (i);
 }

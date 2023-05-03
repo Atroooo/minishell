@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/01 13:57:38 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/03 16:10:27 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,36 @@ int	check_error(char **line, t_line *all_cmd, t_env_main *main_env)
 	return (0);
 }
 
+char	*remove_tabs(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'' || line[i] == '"')
+			i += skip_in_between(&line[i], line[i]);
+		else if (line[i] == 9)
+			line[i] = ' ';
+		else
+			i++;
+	}
+	return (line);
+}
+
 int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 {
 	int	error;
 
 	if (line[0] == '\0')
 		return (1);
+	line = remove_tabs(line);
 	error = check_error(&line, all_cmd, main_env);
 	if (error)
+	{
+		free(line);
 		return (error);
+	}
 	error = split_line(line, all_cmd);
 	if (error == 0)
 		error = convert_in_3d_array(all_cmd);

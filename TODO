@@ -1,3 +1,2 @@
-- si >outfile <infile_existe_pas >outfile1, outfile1 garde son contenu mais pas outfile
-- ne pas mettre a jour l history si ligne vide
-- finir tty
+export ""
+<< k

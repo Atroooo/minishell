@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 14:59:18 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:20:12 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ char		*get_delimiter(char *str);
 
 /*Builtins*/
 void		ft_echo(char **cmd, t_env_main *main_env);
-t_env_var	*ft_cd(char **cmd, t_env_main *main_env);
+t_env_var	*ft_cd(char **cmd, t_env_var *env_list);
 void		ft_pwd(char **cmd);
 t_env_var	*ft_export(char **cmd, t_env_main *main_env);
 int			check_if_in_env(t_env_var *lst, char *str);

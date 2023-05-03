@@ -25,7 +25,7 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 		main_env->env_list = ft_unset(all_cmd->all_cmd[0], \
 			main_env->env_list, main_env);
 	else if (ft_strcmp("cd", all_cmd->all_cmd[0][0]) == 0)
-		main_env->env_list = ft_cd(all_cmd->all_cmd[0], main_env);
+		main_env->env_list = ft_cd(all_cmd->all_cmd[0], main_env->env_list);
 	else if (ft_strcmp("pwd", all_cmd->all_cmd[0][0]) == 0)
 		ft_pwd(all_cmd->all_cmd[0]);
 	else

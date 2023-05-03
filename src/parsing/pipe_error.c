@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/01 14:28:48 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/03 10:41:40 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	check_if_last_char_pipe(char *str)
 	int	len;
 
 	len = ft_strlen(str) - 1;
-	while (len >= 0 && (str[len] == ' '))
+	while (len > 0 && (str[len] == ' '))
 		len--;
 	if (str[len] == '|')
 		return (1);
