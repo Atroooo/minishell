@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 14:22:29 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:07:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	setup_infile(t_env_pipe *st, char *file_raw)
 	{
 		ft_putstr_fd("Cannot open file : ", 2);
 		ft_putendl_fd(file_name, 2);
+		free(file_name);
 		free(st);
 		return (0);
 	}

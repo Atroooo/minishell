@@ -1,9 +1,3 @@
 - ne pas mettre a jour l history si ligne vide
 - finir tty
-
-CAS DE CON 
-$> echo hola > bonjour
-$> echo hey > hello
-$> <bonjour >hello
-$> cat bonjour 
-$> cat hello
+- hdoc : cas ou hdoc pas le dernier infile à gérer
