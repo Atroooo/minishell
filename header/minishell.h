@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/04 15:17:49 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/04 21:30:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ t_lst		*lst_new_double_index(void *content, int index, int index_inline);
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
 void		termios_init(t_env_main *main_env);
+void		reset_terminal(t_env_main *main_env);
 
 /*Manage files*/
 void		check_inout(t_env_pipe *st, t_line *all_cmd);

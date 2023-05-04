@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 15:20:10 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/04 21:13:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	setup_infile(t_env_pipe *st, char *file_raw)
 		return (0);
 	}
 	else if (st->infile == -1 && st->hdoc == 1)
-		st->error_msg = -1;
+		st->error_msg = -1;	
 	free(file_name);
 	return (1);
 }

@@ -54,6 +54,7 @@ static void	exec_shell(t_env_main *main_env)
 		if (!line)
 		{
 			main_env->exit_status = 131;
+			reset_terminal(main_env);
 			free_main_env(main_env);
 		}
 		rl_clear_history();
