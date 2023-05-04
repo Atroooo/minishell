@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/04 15:28:25 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/04 21:39:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_if_flag(char *str)
 	return (0);
 }
 
-void	ft_echo(char **cmd)
+void	ft_echo(char **cmd, t_env_main *main_env, t_env_pipe *st)
 {
 	int	i;
 	int	n;
@@ -40,12 +40,12 @@ void	ft_echo(char **cmd)
 	}
 	while (cmd[i])
 	{
-		ft_printf("%s", cmd[i]);
+		ft_putstr_fd(cmd[i], st->outfile);
 		if (cmd[i + 1])
-			ft_printf(" ");
+			write(st->outfile, " ", 1);
 		i++;
 	}
 	if (!n)
-		ft_printf("\n");
-	g_status = 0;
+		write(st->outfile, "\n", 1);
+	main_env->exit_status = 0;
 }

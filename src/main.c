@@ -48,13 +48,13 @@ static void	exec_shell(t_env_main *main_env)
 	{
 		while (line != NULL)
 		{
-			add_history(line);
 			exec_core(line, main_env);
 			line = readline("prompt> ");
 		}
 		if (!line)
 		{
 			main_env->exit_status = 131;
+			reset_terminal(main_env);
 			free_main_env(main_env);
 		}
 		rl_clear_history();

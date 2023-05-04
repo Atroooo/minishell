@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 15:07:21 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/04 21:13:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ int	setup_infile(t_env_pipe *st, char *file_raw)
 
 	if (!file_raw)
 		return (0);
+	if (ft_strnstr(file_raw, "<<", 2) != NULL)
+		return (1);
 	file_name = setup_file(file_raw);
 	if (!file_name)
 		return (0);
 	st->infile = open(file_name, O_RDWR);
-	if (st->infile == -1)
+	if (st->infile == -1 && st->hdoc == 0)
 	{
 		ft_putstr_fd("Cannot open file : ", 2);
 		ft_putendl_fd(file_name, 2);
@@ -70,6 +72,8 @@ int	setup_infile(t_env_pipe *st, char *file_raw)
 		free(st);
 		return (0);
 	}
+	else if (st->infile == -1 && st->hdoc == 1)
+		st->error_msg = -1;	
 	free(file_name);
 	return (1);
 }
@@ -99,13 +103,6 @@ int	open_files(t_env_pipe *st, t_line *all_cmd)
 	{
 		st->infile = 0;
 		st->outfile = 1;
-		return (1);
-	}
-	else if (all_cmd->infile != NULL && lst_last(all_cmd->infile)->data && \
-		ft_strnstr(lst_last(all_cmd->infile)->data, "<<", 2) != 0)
-	{
-		if (!setup_heredoc(st, all_cmd))
-			return (0);
 		return (1);
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 17:28:32 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/04 21:39:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 		return (1);
 	line = remove_tabs(line);
 	error = check_error(&line, all_cmd, main_env);
+	add_history(line);
 	if (error)
 	{
 		free(line);
@@ -86,7 +87,5 @@ int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 		error = convert_in_3d_array(all_cmd);
 	free_cmd_struct(all_cmd);
 	free(line);
-	if (error == -1)
-		return (error);
 	return (error);
 }

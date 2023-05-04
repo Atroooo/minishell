@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 15:29:46 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/04 21:38:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ t_lst		*lst_new_double_index(void *content, int index, int index_inline);
 /*Signal*/
 void		signal_handler(t_env_main *env_main);
 void		termios_init(t_env_main *main_env);
+void		reset_terminal(t_env_main *main_env);
 
 /*Manage files*/
 void		check_inout(t_env_pipe *st, t_line *all_cmd);
@@ -178,6 +179,7 @@ int			get_dup_single_done(t_env_pipe *st);
 void		close_function(t_env_pipe *st);
 
 /*Execution*/
+int			is_executable(char **cmd);
 int			env_lst_to_char(t_env_main *main_env);
 void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, \
@@ -190,12 +192,13 @@ int			get_exec_done(t_line *all_cmd, char **cmd, \
 int			error_execve(char **cmd, char *path, t_env_pipe *st);
 
 /*Heredoc*/
-int			setup_heredoc(t_env_pipe *st, t_line *all_cmd);
+int			check_hdoc(t_line *all_cmd);
 int			heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
+int			heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
 char		*get_delimiter(char *str);
 
 /*Builtins*/
-void		ft_echo(char **cmd);
+void		ft_echo(char **cmd, t_env_main *main_env, t_env_pipe *st);
 t_env_var	*ft_cd(char **cmd, t_env_var *env_list);
 t_env_var	*change_pwd(char *pwd, char *oldpwd, t_env_var *env_list);
 void		ft_pwd(char **cmd);

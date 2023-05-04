@@ -38,6 +38,7 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 
 void	check_inout(t_env_pipe *st, t_line *all_cmd)
 {
+	st->hdoc = check_hdoc(all_cmd);
 	if (all_cmd->infile != NULL)
 		st->input = 1;
 	else
@@ -65,6 +66,7 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 		ft_putendl_fd(strerror(errno), 2);
 		return (0);
 	}
+	st->error_msg = 0;
 	check_inout(st, all_cmd);
 	if (!open_files(st, all_cmd))
 		return (0);
@@ -92,8 +94,11 @@ static void	redirection_hub(t_line *all_cmd)
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
 	redirection_hub(all_cmd);
-	exec_cmd(main_env, all_cmd);
-	free_str(main_env->env);
+	if (all_cmd->all_cmd[0][0] != NULL && all_cmd->nbr_cmd > 0)
+	{
+		exec_cmd(main_env, all_cmd);
+		free_str(main_env->env);
+	}
 	free_cmd(all_cmd);
 	free_inout_list(all_cmd->infile);
 	free_inout_list(all_cmd->outfile);
