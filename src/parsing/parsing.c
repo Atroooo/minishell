@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 12:46:27 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:53:15 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 		return (1);
 	line = remove_tabs(line);
 	error = check_error(&line, all_cmd, main_env);
+	add_history(line);
 	if (error)
 	{
 		free(line);
@@ -83,10 +84,7 @@ int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 	}
 	error = split_line(line, all_cmd);
 	if (error == 0)
-	{
-		add_history(line);
 		error = convert_in_3d_array(all_cmd);
-	}
 	free_cmd_struct(all_cmd);
 	free(line);
 	return (error);
