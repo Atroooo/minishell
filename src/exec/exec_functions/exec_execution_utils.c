@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 13:41:01 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:01:47 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	buildin_exec(char **cmd, t_env_main *main_env, t_env_pipe *st)
 static void	print_msg(t_env_main *main_env, char **cmd, t_env_pipe *st)
 {
 	if (st->hdoc == 1)
+		return ;
+	if (cmd[0] == NULL)
 		return ;
 	ft_putstr_fd(cmd[0], 2);
 	if (cmd && ft_strncmp(cmd[0], "./", 2) == 0)

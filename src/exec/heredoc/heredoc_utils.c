@@ -22,13 +22,28 @@ char	*get_delimiter(char *str)
 	return (delimiter);
 }
 
+static char	*get_last_hdoc(t_line *all_cmd)
+{
+	t_lst	*last_hdoc;
+	char	*hdoc;
+
+	last_hdoc = all_cmd->infile;
+	while (last_hdoc)
+	{
+		if (ft_strnstr(last_hdoc->data, "<<", 2) != NULL)
+			hdoc = last_hdoc->data;
+		last_hdoc = last_hdoc->next;
+	}
+	return (hdoc);
+}
+
 static char	*heredoc_parsing(t_line *all_cmd)
 {
 	char	*delimiter;
 	char	*get_str;
 
 	get_str = readline("heredoc> ");
-	delimiter = get_delimiter(lst_last(all_cmd->infile)->data);
+	delimiter = get_delimiter(get_last_hdoc(all_cmd));
 	if (!delimiter)
 		return (NULL);
 	if (get_str == NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/03 16:11:56 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/04 14:48:56 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	special_case_redirect(t_line *all_cmd)
 {
 	char	*file_name;
 	int		fd;
-	
+
 	if (ft_strnstr(all_cmd->outfile->data, ">", 1) != NULL)
 	{
 		file_name = setup_file(all_cmd->outfile->data);
@@ -28,6 +28,7 @@ static int	special_case_redirect(t_line *all_cmd)
 	}
 	return (1);
 }
+
 int	check_infile(t_line *all_cmd)
 {
 	char	*file_name;

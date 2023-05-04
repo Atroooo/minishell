@@ -38,6 +38,7 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 
 void	check_inout(t_env_pipe *st, t_line *all_cmd)
 {
+	st->hdoc = check_hdoc(all_cmd);
 	if (all_cmd->infile != NULL)
 		st->input = 1;
 	else
