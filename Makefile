@@ -11,7 +11,7 @@ DIR						= src/
 SRC			 			= main.c init.c \
 						  parsing/parsing.c \
 						  exec/signal_handler/signal_handler.c exec/signal_handler/term_handler.c \
-						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/export.c exec/builtins/export_utils.c exec/builtins/export_similar_variable.c  \
+						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/cd_utils.c exec/builtins/export.c exec/builtins/export_utils.c exec/builtins/export_similar_variable.c  \
 						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c exec/builtins/pwd.c \
 						  exec/utils/chained_list.c exec/utils/utils.c \
 						  exec/exec_functions/exec_hub.c exec/exec_functions/exec_setup_env.c \
@@ -23,8 +23,11 @@ SRC			 			= main.c init.c \
 						  exec/exec_functions/exec_quit_utils.c \
 						  exec/free_functions/free_utils.c \
 						  parsing/input_operator_error.c \
+						  parsing/input_operator_error_utils.c \
 						  parsing/pipe_error.c \
+						  parsing/pipe_error_utils.c \
 						  parsing/split_line.c \
+						  parsing/split_line_utils.c \
 						  parsing/get_all_cmd/get_cmd.c \
 						  parsing/get_all_cmd/get_file.c \
 						  parsing/get_all_cmd/get_flag.c \
@@ -32,12 +35,15 @@ SRC			 			= main.c init.c \
 						  parsing/get_all_cmd/get_utils.c \
 						  parsing/list_utils.c \
 						  parsing/convert_3d_array.c \
+						  parsing/convert_3d_array_utils.c \
 						  parsing/free_utils_parsing.c \
 						  parsing/global_variable/global_variable.c \
 						  parsing/global_variable/global_variable_nbr_char.c \
 						  parsing/global_variable/global_variable_utils.c \
+						  parsing/global_variable/global_variable_utils_bis.c \
 						  parsing/global_variable/global_variable_special_case.c \
 						  parsing/split_skip_quote.c \
+						  parsing/split_skip_quote_utils.c \
 						  exec/delete.c
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)

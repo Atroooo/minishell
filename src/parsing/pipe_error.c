@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 10:41:40 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/04 15:30:32 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,6 @@ static int	error_case(char *s, int *error)
 	return (1);
 }
 
-int	check_if_pipe(char *line, int *consecutive_pipe, int *quote)
-{
-	int	i;
-
-	i = 0;
-	while (line && line[i] == '|')
-	{
-		*quote = 0;
-		*consecutive_pipe += 1;
-		i++;
-	}
-	return (i);
-}
-
-int	check_char(char c, int *pipe, int *consecutive_pipe, int *only_space)
-{
-	if (c == '|')
-	{
-		*pipe = 1;
-		*consecutive_pipe += 1;
-	}
-	else if (c == '\0')
-		return (0);
-	else
-	{
-		*only_space = 0;
-		*consecutive_pipe = 0;
-	}
-	return (1);
-}
-
 static int	check_if_error(char *line, int *error)
 {
 	int	pipe;
@@ -61,25 +30,17 @@ static int	check_if_error(char *line, int *error)
 	int	i;
 	int	quote;
 
-	quote = 0;
-	pipe = 0;
-	consecutive_pipe = 0;
-	only_space = 1;
-	i = 0;
+	pipe = var_init(&quote, &consecutive_pipe, &only_space, &i);
 	while (line && line[i] != '\0')
 	{
 		i += skip_space(&line[i]);
-		if (line[i] == '\'' || line[i] == '\"')
-		{
-			quote = 1;
+		if (check_if_quote_increment(line[i], &quote))
 			i += skip_in_between(&line[i], line[i]);
-		}
 		else
 		{
 			i += check_char(line[i], &pipe, &consecutive_pipe, &only_space);
 			i += check_if_pipe(&line[i], &consecutive_pipe, &quote);
-			if ((consecutive_pipe == 2 && only_space == 1 && quote == 0) \
-				|| consecutive_pipe > 3)
+			if (first_error_case(consecutive_pipe, only_space, quote))
 				return (error_case("||", error));
 			else if ((pipe == 1 && only_space == 1 && quote == 0) \
 				|| consecutive_pipe == 3 \

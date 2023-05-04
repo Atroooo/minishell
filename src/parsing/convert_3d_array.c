@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:35:51 by neoff             #+#    #+#             */
-/*   Updated: 2023/05/01 13:49:20 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/04 15:31:11 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,65 +37,6 @@ int	count_nbr_element(t_cmd cmd)
 	return (i);
 }
 
-static char	*copy_command(char *src)
-{
-	char	*dest;
-
-	dest = NULL;
-	dest = ft_strcpy(src, dest);
-	if (dest == NULL)
-		return (NULL);
-	return (dest);
-}
-
-static int	get_all_command(t_lst *lst, char **arg, int *index)
-{
-	int		i;
-	t_lst	*temp;
-
-	i = 0;
-	while (lst != NULL)
-	{
-		if (lst->data != NULL || lst->data[0] == '\0')
-		{
-			arg[i] = copy_command(lst->data);
-			if (arg[i] == NULL)
-				return (-1);
-			*index += 1;
-			i++;
-		}
-		temp = lst->next;
-		lst = temp;
-	}
-	return (0);
-}
-
-static int	get_single_command(char *src, char **dest, int *index)
-{
-	if (src == NULL)
-		return (0);
-	*dest = copy_command(src);
-	if (*dest == NULL)
-		return (-1);
-	*index += 1;
-	return (0);
-}
-
-int	list_copy(t_lst **dest, t_lst *src, int index, int index_inline)
-{
-	char	*str;
-	(void)src;
-	str = ft_strdup(src->data);
-	if (str == NULL)
-		return (1);
-	if (lst_add_back(dest, lst_new_double_index(str, index, index_inline)))
-	{
-		free(str);
-		return (1);
-	}
-	return (0);
-}
-
 t_lst	*free_and_get_next(t_lst *lst)
 {
 	t_lst	*prec;
@@ -117,25 +58,11 @@ int	get_all_files(t_cmd *cmd, t_line *all_cmd, int index)
 	}
 	while (cmd->outfile != NULL)
 	{
-		if (list_copy(&all_cmd->outfile, cmd->outfile, index, cmd->outfile->index))
+		if (list_copy(&all_cmd->outfile, cmd->outfile, index, \
+					cmd->outfile->index))
 			return (1);
 		cmd->outfile = free_and_get_next(cmd->outfile);
 	}
-	return (0);
-}
-
-int	copy_all_arg(char **arg, t_cmd *cmd)
-{
-	int	index;
-
-	index = 0;
-	if (get_single_command(cmd->cmd, &arg[index], &index))
-		return (-1);
-	if (get_all_command(cmd->flag, &arg[index], &index))
-		return (-1);
-	if (get_all_command(cmd->content, &arg[index], &index))
-		return (-1);
-	arg[index] = NULL;
 	return (0);
 }
 

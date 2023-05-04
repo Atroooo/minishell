@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 17:06:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/04 15:29:11 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	find_path_index(char **env)
 	return (-1);
 }
 
-static int	buildin_exec(char **cmd, t_env_main *main_env)
+static int	buildin_exec(char **cmd, t_env_main *main_env, t_env_pipe *st)
 {
 	if (!cmd)
 		return (0);
 	if (ft_strcmp("cd", cmd[0]) == 0)
 		main_env->env_list = ft_cd(cmd, main_env->env_list);
 	else if (ft_strcmp("echo", cmd[0]) == 0)
-		ft_echo(cmd, main_env);
+		ft_echo(cmd);
 	else if (ft_strcmp("env", cmd[0]) == 0)
 	{
 		cmd = ft_env(cmd, main_env);
@@ -90,12 +90,15 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	char	*path;
 
 	path = NULL;
-	if (is_executable(cmd) == 1 && buildin_exec(cmd, main_env))
+	if (is_executable(cmd) == 1)
 	{
-		close(0);
-		close(1);
-		close_function(st);
-		free_cmd_exec(all_cmd, st, main_env);
+		if (buildin_exec(cmd, main_env, st))
+		{
+			close(0);
+			close(1);
+			close_function(st);
+			free_cmd_exec(all_cmd, st, main_env);
+		}
 	}
 	path = return_path(main_env->env, cmd, st);
 	if (path == NULL)

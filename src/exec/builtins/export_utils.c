@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:54:14 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/03 16:20:54 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/04 13:19:19 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ int	set_variables_name_and_value(char *str, char **name, char **value)
 		free_variable_name_and_value(*name, *value);
 		return (-1);
 	}
-	
 	return (0);
 }

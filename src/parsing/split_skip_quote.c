@@ -6,25 +6,11 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 07:58:46 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 12:40:46 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/04 15:26:43 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
-
-int	skip_in_between(char *str, char c)
-{
-	int	i;
-
-	i = 1;
-	while (str[i] != '\0' && str[i] != c)
-	{
-		i++;
-	}
-	if (str[i] == c)
-		i += 1;
-	return (i);
-}
 
 static int	get_number_split(char *str)
 {

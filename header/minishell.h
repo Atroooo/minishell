@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/03 17:06:25 by marvin           ###   ########.fr       */
+/*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
+/*   Updated: 2023/05/04 15:29:46 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void		incrementation(int *index, int *nbr_char, char c);
 char		*copy_cmd(int size, char *src, char *dest);
 int			get_element(int *i, \
 			int (*get)(char *, t_cmd *), char *line, t_cmd *cmd);
+int			get_gbl_var(char *line, char *final_line, \
+						int *i_line, t_env_main *main_env);
 
 /*Builtins Parsing*/
 int			check_if_echo(char *line, t_cmd *cmd, int *error);
@@ -131,6 +133,26 @@ int			count_alpha(char *line);
 int			skip_char(char *line, char c);
 int			skip_in_between(char *str, char c);
 void		free_single_cmd(t_cmd *cmd);
+int			not_between_quote(char *line, int i_line);
+int			check_if_need_to_skip_global_variable( \
+			char *line, int *i_line);
+int			copy_all_arg(char **arg, t_cmd *cmd);
+int			list_copy(t_lst **dest, t_lst *src, int index, int index_inline);
+int			simple_operator_error(char *line);
+int			operator_with_pipe(char *line);
+int			check_if_pipe(char *line, int *consecutive_pipe, int *quote);
+int			check_char(char c, int *pipe, int *consecutive_pipe, \
+					int *only_space);
+int			first_error_case(int consecutive_pipe, int only_space, int quote);
+int			var_init(int *quote, int *consecutive_pipe, int *only_space, \
+						int *i);
+int			check_if_quote_increment(char c, int *quote);
+int			count_split(char **line);
+int			get_element(int *i, \
+			int (*get)(char *, t_cmd *), char *line, t_cmd *cmd);
+int			initialize_variable( \
+			t_cmd *cmd, int *error, int *no_command, int *is_echo);
+int			check_if_get_cmd(char c, int *no_command, int error);
 
 /*List utils*/
 int			lst_add_back(t_lst **lst, t_lst *new);
@@ -173,8 +195,9 @@ int			heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
 char		*get_delimiter(char *str);
 
 /*Builtins*/
-void		ft_echo(char **cmd, t_env_main *main_env);
+void		ft_echo(char **cmd);
 t_env_var	*ft_cd(char **cmd, t_env_var *env_list);
+t_env_var	*change_pwd(char *pwd, char *oldpwd, t_env_var *env_list);
 void		ft_pwd(char **cmd);
 t_env_var	*ft_export(char **cmd, t_env_main *main_env);
 int			check_if_in_env(t_env_var *lst, char *str);

@@ -6,53 +6,19 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/01 13:35:26 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/04 15:25:19 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-static int	count_split(char **line)
+static int	manage_get_content(int *error, int *i, char *line, t_cmd *cmd)
 {
-	int	i;
-
-	i = 0;
-	while (line[i] != NULL)
-	{
-		i++;
-	}
-	return (i);
-}
-
-static void	set_up_newlst(t_cmd *cmd)
-{
-	cmd->cmd = NULL;
-	cmd->flag = NULL;
-	cmd->content = NULL;
-	cmd->infile = NULL;
-	cmd->outfile = NULL;
-}
-
-int	get_element(int *i, \
-			int (*get)(char *, t_cmd *), char *line, t_cmd *cmd)
-{
-	int	temp;
-
-	temp = get(line, cmd);
-	if (temp == -1)
-		return (-1);
-	*i += temp;
-	return (0);
-}
-
-static int	initialize_variable( \
-			t_cmd *cmd, int *error, int *no_command, int *is_echo)
-{
-	*no_command = TRUE;
-	*is_echo = FALSE;
-	*error = 0;
-	set_up_newlst(cmd);
-	return (0);
+	*error = get_element(i, &get_content, &line[*i], cmd);
+	if (*error == 0 \
+		&& ft_strncmp(cmd->cmd, "echo", ft_strlen(cmd->content->data)) == 0)
+		return (TRUE);
+	return (FALSE);
 }
 
 int	set_up_arg(char *line, t_cmd *cmd)
@@ -69,24 +35,13 @@ int	set_up_arg(char *line, t_cmd *cmd)
 	{
 		i += skip_space(&line[i]);
 		if (line[i] == '<' || line[i] == '>')
-		{
-			error = get_element_file(&i, &line[i], cmd, y);
-			y++;
-		}
-		else if (line[i] != '\0' && no_command == TRUE && error == 0)
-		{
+			error = get_element_file(&i, &line[i], cmd, y++);
+		else if (check_if_get_cmd(line[i], &no_command, error))
 			error = get_element(&i, &get_cmd, &line[i], cmd);
-			no_command = FALSE;
-		}
 		else if (line[i] == '-' && error == 0 && is_echo == FALSE)
 			error = get_element(&i, &get_flag, &line[i], cmd);
 		else if (line[i] != '\0' && error == 0)
-		{
-			error = get_element(&i, &get_content, &line[i], cmd);
-			if (error == 0 \
-			&& ft_strncmp(cmd->cmd, "echo", ft_strlen(cmd->content->data)) == 0)
-				is_echo = TRUE;
-		}
+			is_echo = manage_get_content(&error, &i, line, cmd);
 	}
 	if (error == -1)
 		free_single_cmd(cmd);
