@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 17:34:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/04 12:42:42 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	print_msg(t_env_main *main_env, char **cmd, t_env_pipe *st)
 	}
 }
 
-static int	is_executable(char **cmd)
+int	is_executable(char **cmd)
 {
 	if (cmd[0] == NULL)
 		return (0);
@@ -91,6 +91,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 
 	path = NULL;
 	if (is_executable(cmd) == 1)
+	{
 		if (buildin_exec(cmd, main_env))
 		{
 			close(0);
@@ -98,6 +99,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 			close_function(st);
 			free_cmd_exec(all_cmd, st, main_env);
 		}
+	}
 	path = return_path(main_env->env, cmd, st);
 	if (path == NULL)
 	{

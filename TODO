@@ -1,5 +1,2 @@
-export ""
-<< k
-- ne pas mettre a jour l history si ligne vide
 - finir tty
 - hdoc : cas ou hdoc pas le dernier infile à gérer

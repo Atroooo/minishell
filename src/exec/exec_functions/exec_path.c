@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:55:29 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 17:21:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/04 12:43:41 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ char	*return_path(char **env, char **cmd, t_env_pipe *st)
 	char	*path;
 	int		path_pos_index;
 
+	if (is_executable(cmd) == 0)
+		return (NULL);
 	path_pos_index = find_path_index(env);
 	if (path_pos_index == -1)
 	{
