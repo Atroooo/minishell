@@ -66,8 +66,8 @@ int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 		{
 			global_var = replace_global_variable(tmp_str, main_env);
 			write(temp_pipe[1], global_var, ft_strlen(global_var));
-            free(global_var);
-            }
+			free(global_var);
+		}
 	}
 	close(temp_pipe[1]);
 	return (1);

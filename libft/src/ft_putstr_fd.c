@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:26:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/01/15 12:14:23 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/04 13:37:52 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	if (s == NULL)
 		return ;
-	(void)fd;
-	write(2, s, ft_strlen(s));
+	write(fd, s, ft_strlen(s));
 }

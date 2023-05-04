@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:46:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/04 12:43:06 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:02:50 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int			heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
 char		*get_delimiter(char *str);
 
 /*Builtins*/
-void		ft_echo(char **cmd, t_env_main *main_env);
+void		ft_echo(char **cmd, t_env_main *main_env, t_env_pipe *st);
 t_env_var	*ft_cd(char **cmd, t_env_var *env_list);
 void		ft_pwd(char **cmd);
 t_env_var	*ft_export(char **cmd, t_env_main *main_env);

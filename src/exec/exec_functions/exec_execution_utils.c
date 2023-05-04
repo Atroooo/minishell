@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 12:42:42 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:41:01 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	find_path_index(char **env)
 	return (-1);
 }
 
-static int	buildin_exec(char **cmd, t_env_main *main_env)
+static int	buildin_exec(char **cmd, t_env_main *main_env, t_env_pipe *st)
 {
 	if (ft_strcmp("cd", cmd[0]) == 0)
 		main_env->env_list = ft_cd(cmd, main_env->env_list);
 	else if (ft_strcmp("echo", cmd[0]) == 0)
-		ft_echo(cmd, main_env);
+		ft_echo(cmd, main_env, st);
 	else if (ft_strcmp("env", cmd[0]) == 0)
 	{
 		cmd = ft_env(cmd, main_env);
@@ -92,7 +92,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	path = NULL;
 	if (is_executable(cmd) == 1)
 	{
-		if (buildin_exec(cmd, main_env))
+		if (buildin_exec(cmd, main_env, st))
 		{
 			close(0);
 			close(1);
@@ -109,6 +109,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 		free_cmd_exec(all_cmd, st, main_env);
 		return (0);
 	}
+	close_function(st);
 	execve(path, cmd, main_env->env);
 	return (0);
 }
