@@ -23,7 +23,6 @@ SRC			 			= main.c init.c \
 						  exec/builtins/env.c \
 						  exec/builtins/exit.c \
 						  exec/builtins/pwd.c \
-						  exec/utils/chained_list.c exec/utils/utils.c \
 						  exec/exec_functions/exec_hub.c \
 						  exec/exec_functions/exec_setup_env.c \
 						  exec/exec_functions/exec_setup_struct.c \
@@ -37,6 +36,9 @@ SRC			 			= main.c init.c \
 						  exec/heredoc/heredoc.c \
 						  exec/heredoc/heredoc_utils.c \
 						  exec/free_functions/free_utils.c \
+						  exec/utils/chained_list.c \
+						  exec/utils/ft_addsort.c \
+						  exec/utils/utils.c \
 						  parsing/input_operator_error.c \
 						  parsing/input_operator_error_utils.c \
 						  parsing/pipe_error.c \
@@ -74,7 +76,7 @@ SANITIZE				= $(CFLAGS) -fsanitize=address
 
 RM 						= rm -rf
 
-$(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE) Makefile
+$(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE) Makefile 
 						@mkdir -p $(@D)
 						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -c $< -o $@
 
