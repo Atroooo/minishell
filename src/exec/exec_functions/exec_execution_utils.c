@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 21:39:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/08 11:44:54 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	find_path_index(char **env)
 	return (-1);
 }
 
-static int	buildin_exec(char **cmd, t_env_main *main_env, t_env_pipe *st)
+static int	buildin_exec(char **cmd, t_env_main *main_env, \
+	t_env_pipe *st, t_line *all_cmd)
 {
 	if (ft_strcmp("cd", cmd[0]) == 0)
 		main_env->env_list = ft_cd(cmd, main_env->env_list);
@@ -39,7 +40,7 @@ static int	buildin_exec(char **cmd, t_env_main *main_env, t_env_pipe *st)
 			return (main_env->exit_status = 0, 0);
 	}
 	else if (ft_strcmp("exit", cmd[0]) == 0)
-		return (1);
+		ft_exit(cmd, main_env, all_cmd);
 	else if (ft_strcmp("export", cmd[0]) == 0)
 		main_env->env_list = ft_export(cmd, main_env);
 	else if (ft_strcmp("pwd", cmd[0]) == 0)
@@ -94,7 +95,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	path = NULL;
 	if (is_executable(cmd) == 1)
 	{
-		if (buildin_exec(cmd, main_env, st))
+		if (buildin_exec(cmd, main_env, st, all_cmd))
 		{
 			close(0);
 			close(1);
