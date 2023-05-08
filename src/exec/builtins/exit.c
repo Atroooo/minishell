@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 13:38:18 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:47:51 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd)
 	}
 	else if (cmd[1])
 		main_env->exit_status = (unsigned char)ft_atoll(cmd[1]);
-	else
-		main_env->exit_status = 0;
 	if (all_cmd->nbr_cmd == 1)
 		free_exit_builtin(main_env, all_cmd);
 }
