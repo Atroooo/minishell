@@ -17,6 +17,8 @@ void	free_str(char **str)
 	int	index;
 
 	index = 0;
+	if (!str)
+		return ;
 	while (str[index])
 	{
 		if (str[index])

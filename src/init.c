@@ -6,26 +6,11 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:09:04 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 11:01:27 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:36:53 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-static void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
 
 static int	size_tab(char **tab)
 {
@@ -37,6 +22,21 @@ static int	size_tab(char **tab)
 	while (tab[i])
 		i++;
 	return (i);
+}
+
+static void	incr_shlvl(t_env_var *env_list)
+{
+	t_env_var	*tmp;
+	int			lvl;
+
+	tmp = env_list;
+	lvl = 0;
+	while (ft_strcmp(tmp->name, "SHLVL") != 0)
+		tmp = tmp->next;
+	lvl = ft_atoi(tmp->value);
+	lvl++;
+	free(tmp->value);
+	tmp->value = ft_itoa(lvl);
 }
 
 static int	init_env_list(t_env_var **env_list, char **env)
@@ -55,12 +55,12 @@ static int	init_env_list(t_env_var **env_list, char **env)
 			return (0);
 		new_var = ft_lstnew_env(env_split[0], NULL);
 		if (new_var == NULL)
-			return (ft_free_tab(env_split), 0);
+			return (free_str(env_split), 0);
 		if (size_tab(env_split) >= 2)
 			new_var->value = ft_strdup(env[i] + ft_strlen(env_split[0]) + 1);
 		if (!ft_lst_addback_env(env_list, new_var))
-			return (ft_free_tab(env_split), -1);
-		ft_free_tab(env_split);
+			return (free_str(env_split), -1);
+		free_str(env_split);
 		i++;
 	}
 	return (1);
@@ -97,5 +97,6 @@ void	init_main_env(t_env_main *main_env, char **env)
 		free_error_case(main_env);
 		exit(-1);
 	}
+	incr_shlvl(main_env->env_list);
 	termios_init(main_env);
 }
