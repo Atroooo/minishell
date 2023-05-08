@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 09:48:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 13:50:25 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	manage_get_content(int *error, int *i, char *line, t_cmd *cmd)
 {
 	*error = get_element(i, &get_content, &line[*i], cmd);
 	if (*error == 0 \
-		&& ft_strncmp(cmd->cmd, "echo", ft_strlen(cmd->content->data)) == 0)
+		&& ft_strcmp(cmd->cmd, "echo") == 0)
 		return (TRUE);
 	return (FALSE);
 }
