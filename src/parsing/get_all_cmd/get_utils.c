@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 20:25:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 11:45:43 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 15:51:38 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	skip_space(char *line)
 
 	i = 0;
 	while (line && line[i] != '\0' && line[i] == ' ')
-			i++;
+		i++;
 	return (i);
 }
 
@@ -58,39 +58,4 @@ int	get_size(char *line, int *size)
 	}
 	*size = i;
 	return (i - nbr_quote);
-}
-
-static int	set_up_del(int *del, char c)
-{
-	*del = c;
-	return (1);
-}
-
-static int	copy_single_char(char *dest, char src, int *y)
-{
-	dest[*y] = src;
-	*y += 1;
-	return (1);
-}
-
-char	*copy_cmd(int size, char *src, char *dest)
-{
-	int		i;
-	int		del;
-	int		y;
-
-	i = 0;
-	y = 0;
-	del = 0;
-	while (i < size)
-	{
-		if ((src[i] == '\'' || src[i] == '\"') && del == 0)
-			i += set_up_del(&del, src[i]);
-		else if (del != 0 && src[i] == del)
-			i += set_up_del(&del, 0);
-		else
-			i += copy_single_char(dest, src[i], &y);
-	}
-	dest[y] = '\0';
-	return (dest);
 }

@@ -10,17 +10,32 @@ HEADER_FILE				= minishell.h
 DIR						= src/
 SRC			 			= main.c init.c \
 						  parsing/parsing.c \
-						  exec/signal_handler/signal_handler.c exec/signal_handler/term_handler.c \
-						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/cd_utils.c exec/builtins/export.c exec/builtins/export_utils.c exec/builtins/export_similar_variable.c  \
-						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c exec/builtins/pwd.c \
+						  exec/signal_handler/signal_handler.c \
+						  exec/signal_handler/term_handler.c \
+						  exec/builtins/echo.c \
+						  exec/builtins/cd.c \
+						  exec/builtins/cd_utils.c \
+						  exec/builtins/export.c \
+						  exec/builtins/export_utils.c \
+						  exec/builtins/export_similar_variable.c  \
+						  exec/builtins/unset.c \
+						  exec/builtins/unset_utils.c \
+						  exec/builtins/env.c \
+						  exec/builtins/exit.c \
+						  exec/builtins/pwd.c \
 						  exec/utils/chained_list.c exec/utils/utils.c \
-						  exec/exec_functions/exec_hub.c exec/exec_functions/exec_setup_env.c \
+						  exec/exec_functions/exec_hub.c \
+						  exec/exec_functions/exec_setup_env.c \
 						  exec/exec_functions/exec_setup_struct.c \
-						  exec/exec_functions/exec_setup_files.c exec/exec_functions/exec_setup_files_utils.c \
-						  exec/exec_functions/exec_dup_manager.c exec/exec_functions/exec_path.c \
-						  exec/exec_functions/exec_execution.c exec/exec_functions/exec_execution_utils.c \
-						  exec/heredoc/heredoc.c exec/heredoc/heredoc_utils.c \
+						  exec/exec_functions/exec_setup_files.c \
+						  exec/exec_functions/exec_setup_files_utils.c \
+						  exec/exec_functions/exec_dup_manager.c \
+						  exec/exec_functions/exec_path.c \
+						  exec/exec_functions/exec_execution.c \
+						  exec/exec_functions/exec_execution_utils.c \
 						  exec/exec_functions/exec_quit_utils.c \
+						  exec/heredoc/heredoc.c \
+						  exec/heredoc/heredoc_utils.c \
 						  exec/free_functions/free_utils.c \
 						  parsing/input_operator_error.c \
 						  parsing/input_operator_error_utils.c \
@@ -33,6 +48,7 @@ SRC			 			= main.c init.c \
 						  parsing/get_all_cmd/get_flag.c \
 						  parsing/get_all_cmd/get_content.c \
 						  parsing/get_all_cmd/get_utils.c \
+						  parsing/get_all_cmd/get_utils_bis.c \
 						  parsing/list_utils.c \
 						  parsing/convert_3d_array.c \
 						  parsing/convert_3d_array_utils.c \

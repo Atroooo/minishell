@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable_utils_bis.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:27:24 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 13:49:52 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 15:40:41 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
-
 
 int	not_between_quote(char *line, int i_line)
 {

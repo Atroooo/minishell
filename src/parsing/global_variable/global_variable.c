@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:14:38 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 13:34:22 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 15:40:54 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static int	check_if_quote(char c, int *del)
 		return (1);
 	return (0);
 }
-
 
 int	gbl_var_check(char *line, char *final_line, \
 						int *i_line, t_env_main *main_env)
