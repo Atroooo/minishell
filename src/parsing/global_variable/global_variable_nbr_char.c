@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_variable_nbr_char.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:35:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/04/27 14:48:47 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:35:07 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	count_nbr_char(char *line, t_env_var *env_list)
 				if (get_global_variable(&line[index + 1], &nbr_char, env_list))
 					return (-1);
 			skip_gobal_variable(&index, line);
+			nbr_char += 1;
 		}
 		incrementation(&index, &nbr_char, line[index]);
 	}

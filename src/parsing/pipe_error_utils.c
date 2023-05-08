@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:00:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 15:04:11 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 13:40:00 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	var_init(int *quote, int *consecutive_pipe, int *only_space, int *i)
 	*quote = 0;
 	*consecutive_pipe = 0;
 	*only_space = 1;
-	*i = 1;
+	*i = 0;
 	return (0);
 }
 
