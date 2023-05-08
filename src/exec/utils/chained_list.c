@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chained_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:19:23 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/04/26 18:08:32 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 11:00:42 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,17 @@ t_env_var	*ft_lstlast_env(t_env_var *lst)
 	return (lst);
 }
 
-void	ft_lst_addback_env(t_env_var **lst, t_env_var *new)
+int	ft_lst_addback_env(t_env_var **lst, t_env_var *new)
 {
 	if (new == NULL)
-		return ;
+		return (0);
 	if (*lst == NULL)
 	{	
 		(*lst) = new;
-		return ;
+		return (1);
 	}
 	ft_lstlast_env(*lst)->next = new;
+	return (1);
 }
 
 int	ft_lstsize_env(t_env_var *lst)

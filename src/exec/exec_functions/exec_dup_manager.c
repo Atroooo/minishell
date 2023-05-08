@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 13:40:34 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/08 10:50:45 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,11 @@ static int	get_dup_done(t_env_pipe *st, t_line *all_cmd)
 			return (0);
 	}
 	else
+	{
 		if (dup2(st->fd[st->actual_pipe][1], STDOUT_FILENO) == -1)
 			return (0);
+		st->outfile = st->fd[st->actual_pipe][1];
+	}
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/03 16:24:47 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 11:03:38 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 		return (env_list);
 	else if (in_env == 1)
 		env_list = remove_similar_variable(name, env_list);
-	ft_lst_addback_env(&env_list, ft_lstnew_env(name, value));
+	if (!ft_lst_addback_env(&env_list, ft_lstnew_env(name, value)))
+		return (free_variable_name_and_value(name, value), NULL);
 	free_variable_name_and_value(name, value);
 	return (env_list);
 }
