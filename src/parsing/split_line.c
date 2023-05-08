@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:07:14 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 15:25:19 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 09:48:51 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	split_line(char *line, t_line *all_cmd)
 	all_cmd->all_cmd = NULL;
 	all_cmd->nbr_cmd = 0;
 	all_cmd->cmd = NULL;
-	(void)line;
 	splitted_line = split_skip_quote(line);
 	if (splitted_line == NULL)
 		return (-1);

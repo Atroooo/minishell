@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 20:25:13 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 13:59:19 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 11:10:33 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	count_len(char *line, char del, int *nbr_quote)
 		i += 1;
 		*nbr_quote += 1;
 	}
-	return (i);
+	return (1);
 }
 
 int	get_size(char *line, int *size)
