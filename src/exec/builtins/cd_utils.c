@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:12:50 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 11:02:39 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/08 11:12:36 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-
-static t_env_var	*change_pwds_lst(t_env_var *list, char *which_pwd, char *path)
+static t_env_var	*change_pwds_lst(t_env_var *list, \
+	char *which_pwd, char *path)
 {
 	t_env_var	*save;
 
@@ -24,7 +24,8 @@ static t_env_var	*change_pwds_lst(t_env_var *list, char *which_pwd, char *path)
 	}
 	if (list == NULL)
 	{
-		ft_lst_addback_env(&list, ft_lstnew_env(which_pwd, path));
+		if (!ft_lst_addback_env(&list, ft_lstnew_env(which_pwd, path)))
+			return (free(path), NULL);
 		free(path);
 	}
 	else

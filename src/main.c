@@ -1,12 +1,12 @@
-/************************************************************************ */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 07:56:05 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/03/29 17:09:34 by vgonnot          ###   ########.fr       */
+/*   Created: 2023/05/08 11:04:32 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/05/08 11:04:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static void	exec_core(char *line, t_env_main *main_env)
 	error = parsing(line, &all_cmd, main_env);
 	main_env->exit_status = g_status;
 	if (error == -1)
+	{
+		reset_terminal(main_env);
 		free_main_env(main_env);
+	}
 	else if (error == 0)
 		exec_hub(&all_cmd, main_env);
 }

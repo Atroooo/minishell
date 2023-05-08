@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 21:38:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/08 10:55:51 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ void		termios_init(t_env_main *main_env);
 void		reset_terminal(t_env_main *main_env);
 
 /*Manage files*/
-void		check_inout(t_env_pipe *st, t_line *all_cmd);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
 int			check_infile(t_line *all_cmd);
 int			setup_infile(t_env_pipe *st, char *file_raw);
@@ -217,7 +216,7 @@ int			get_total_cmd(t_line *all_cmd);
 char		*setup_file(char *raw_file);
 t_env_var	*ft_lstnew_env(char *name, char *value);
 void		ft_lstadd_front_env(t_env_var **lst, t_env_var *new);
-void		ft_lst_addback_env(t_env_var **lst, t_env_var *new);
+int			ft_lst_addback_env(t_env_var **lst, t_env_var *new);
 int			ft_lstsize_env(t_env_var *lst);
 t_lst		*lst_last(t_lst *lst);
 int			ft_lstsize_file(t_lst *lst);

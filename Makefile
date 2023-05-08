@@ -44,7 +44,6 @@ SRC			 			= main.c init.c \
 						  parsing/global_variable/global_variable_special_case.c \
 						  parsing/split_skip_quote.c \
 						  parsing/split_skip_quote_utils.c \
-						  exec/delete.c
 							
 OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
 	

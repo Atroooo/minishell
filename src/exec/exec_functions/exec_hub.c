@@ -36,7 +36,7 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 	return (1);
 }
 
-void	check_inout(t_env_pipe *st, t_line *all_cmd)
+static int	check_inout(t_env_pipe *st, t_line *all_cmd)
 {
 	st->hdoc = check_hdoc(all_cmd);
 	if (all_cmd->infile != NULL)
@@ -48,6 +48,9 @@ void	check_inout(t_env_pipe *st, t_line *all_cmd)
 		st->output = 1;
 	else
 		st->output = 0;
+	if (!open_files(st, all_cmd))
+		return (0);
+	return (1);
 }
 
 static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
@@ -55,7 +58,7 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 	t_env_pipe	*st;
 
 	if (!env_lst_to_char(main_env))
-		return (0);
+		return (-1);
 	if (all_cmd->nbr_cmd == 1)
 		if (buildin_exec(all_cmd, main_env))
 			return (1);
@@ -64,14 +67,13 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 	{
 		ft_putstr_fd("Error : ", 2);
 		ft_putendl_fd(strerror(errno), 2);
-		return (0);
+		return (-1);
 	}
 	st->error_msg = 0;
-	check_inout(st, all_cmd);
-	if (!open_files(st, all_cmd))
+	if (!check_inout(st, all_cmd))
 		return (0);
 	if (!setup_struct_cmd(st, all_cmd, main_env))
-		return (0);
+		return (-1);
 	if (!execution(all_cmd, st, main_env))
 	{
 		free_cmd_exec(all_cmd, st, main_env);
@@ -87,7 +89,7 @@ static void	redirection_hub(t_line *all_cmd)
 		if (!create_outfiles(all_cmd))
 			return ;
 	}
-	if (all_cmd->infile)
+	if (all_cmd->infile && all_cmd->all_cmd[0][0] == NULL)
 		check_infile(all_cmd);
 }
 
@@ -96,7 +98,17 @@ void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 	redirection_hub(all_cmd);
 	if (all_cmd->all_cmd[0][0] != NULL && all_cmd->nbr_cmd > 0)
 	{
-		exec_cmd(main_env, all_cmd);
+		if (exec_cmd(main_env, all_cmd) == -1)
+		{
+			if (main_env->env)
+				free_str(main_env->env);
+			free_cmd(all_cmd);
+			free_inout_list(all_cmd->infile);
+			free_inout_list(all_cmd->outfile);
+			reset_terminal(main_env);
+			free_main_env(main_env);
+			return ;
+		}
 		free_str(main_env->env);
 	}
 	free_cmd(all_cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_quit_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 16:03:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/08 09:45:44 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	free_env(t_env_pipe *st, int i)
 	{
 		while (i >= 0)
 		{
-			free(st->fd[i]);
+			if (st->fd[i] != NULL)
+				free(st->fd[i]);
 			i--;
 		}
 		free(st->pid);
