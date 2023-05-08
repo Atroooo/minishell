@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:28:37 by atro              #+#    #+#             */
-/*   Updated: 2023/05/04 21:31:05 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/08 14:00:04 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	termios_init(t_env_main *main_env)
 	if (rc)
 	{
 		perror("tcgetattr");
-		exit(1);
+		exit(main_env->exit_status);
 	}
 	termios_new = *main_env->tty;
 	termios_new.c_lflag &= ~ECHOCTL;
@@ -29,7 +29,7 @@ void	termios_init(t_env_main *main_env)
 	if (rc)
 	{
 		perror("tcsetattr");
-		exit(1);
+		exit(main_env->exit_status);
 	}
 }
 
@@ -42,7 +42,7 @@ void	reset_terminal(t_env_main *main_env)
 	if (rc)
 	{
 		perror("tcgetattr");
-		exit(1);
+		exit(main_env->exit_status);
 	}
 	termios_new = *main_env->tty;
 	termios_new.c_lflag |= ECHOCTL;
@@ -50,6 +50,6 @@ void	reset_terminal(t_env_main *main_env)
 	if (rc)
 	{
 		perror("tcsetattr");
-		exit(1);
+		exit(main_env->exit_status);
 	}
 }

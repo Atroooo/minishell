@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:09:04 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 11:01:27 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:06:17 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ static int	init_env_list(t_env_var **env_list, char **env)
 			return (ft_free_tab(env_split), 0);
 		if (size_tab(env_split) >= 2)
 			new_var->value = ft_strdup(env[i] + ft_strlen(env_split[0]) + 1);
-		if (!ft_lst_addback_env(env_list, new_var))
-			return (ft_free_tab(env_split), -1);
+		*env_list = ft_lst_addsort(*env_list, new_var);
 		ft_free_tab(env_split);
 		i++;
 	}

@@ -13,7 +13,7 @@ SRC			 			= main.c init.c \
 						  exec/signal_handler/signal_handler.c exec/signal_handler/term_handler.c \
 						  exec/builtins/echo.c exec/builtins/cd.c exec/builtins/cd_utils.c exec/builtins/export.c exec/builtins/export_utils.c exec/builtins/export_similar_variable.c  \
 						  exec/builtins/unset.c exec/builtins/env.c exec/builtins/exit.c exec/builtins/pwd.c \
-						  exec/utils/chained_list.c exec/utils/utils.c \
+						  exec/utils/chained_list.c exec/utils/utils.c exec/utils/ft_addsort.c\
 						  exec/exec_functions/exec_hub.c exec/exec_functions/exec_setup_env.c \
 						  exec/exec_functions/exec_setup_struct.c \
 						  exec/exec_functions/exec_setup_files.c exec/exec_functions/exec_setup_files_utils.c \
@@ -58,7 +58,7 @@ SANITIZE				= $(CFLAGS) -fsanitize=address
 
 RM 						= rm -rf
 
-$(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE) Makefile
+$(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE) Makefile 
 						@mkdir -p $(@D)
 						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -c $< -o $@
 

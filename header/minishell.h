@@ -3,25 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 10:55:51 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:02:00 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <signal.h>
 # include <termios.h>
 # include <errno.h>
-# include <fcntl.h>
 # include <limits.h>
-# include <unistd.h>
 # include <sys/wait.h>
 # include "../libft/header/libft.h"
 
@@ -153,6 +149,7 @@ int			get_element(int *i, \
 int			initialize_variable( \
 			t_cmd *cmd, int *error, int *no_command, int *is_echo);
 int			check_if_get_cmd(char c, int *no_command, int error);
+t_env_var	*ft_lst_addsort(t_env_var *env_list, t_env_var *new_var);
 
 /*List utils*/
 int			lst_add_back(t_lst **lst, t_lst *new);
