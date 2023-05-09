@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 13:52:54 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:28:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static int	buildin_exec(char **cmd, t_env_main *main_env, \
 	if (ft_strcmp("cd", cmd[0]) == 0)
 		main_env->env_list = ft_cd(cmd, main_env->env_list);
 	else if (ft_strcmp("echo", cmd[0]) == 0)
-		ft_echo(cmd, main_env, st);
+		ft_echo(cmd, st);
 	else if (ft_strcmp("env", cmd[0]) == 0)
 	{
 		cmd = ft_env(cmd, main_env);
-		if (main_env->exit_status == 2)
-			return (main_env->exit_status = 0, 0);
+		if (g_status == 2)
+			return (g_status = 0, 0);
 	}
 	else if (ft_strcmp("exit", cmd[0]) == 0)
 		ft_exit(cmd, main_env, all_cmd);
@@ -46,7 +46,7 @@ static int	buildin_exec(char **cmd, t_env_main *main_env, \
 	else if (ft_strcmp("pwd", cmd[0]) == 0)
 		ft_pwd(cmd);
 	else if (ft_strcmp("unset", cmd[0]) == 0)
-		main_env->env_list = ft_unset(cmd, main_env->env_list, main_env);
+		main_env->env_list = ft_unset(cmd, main_env->env_list);
 	else
 		return (0);
 	if (main_env->env_list == NULL)
@@ -54,7 +54,7 @@ static int	buildin_exec(char **cmd, t_env_main *main_env, \
 	return (1);
 }
 
-static void	print_msg(t_env_main *main_env, char **cmd, t_env_pipe *st)
+static void	print_msg(char **cmd, t_env_pipe *st)
 {
 	if (st->hdoc == 1)
 		return ;
@@ -64,17 +64,17 @@ static void	print_msg(t_env_main *main_env, char **cmd, t_env_pipe *st)
 	if (cmd && ft_strncmp(cmd[0], "./", 2) == 0)
 	{
 		ft_putendl_fd(": Permission denied", 2);
-		main_env->exit_status = 126;
+		g_status = 126;
 	}
 	else if (st->error_msg == 1)
 	{
 		ft_putendl_fd(": No such file or directory", 2);
-		main_env->exit_status = 1;
+		g_status = 1;
 	}
 	else
 	{
 		ft_putendl_fd(": command not found", 2);
-		main_env->exit_status = 127;
+		g_status = 127;
 	}
 }
 
@@ -108,7 +108,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	{
 		close(0);
 		close(1);
-		print_msg(main_env, cmd, st);
+		print_msg(cmd, st);
 		free_cmd_exec(all_cmd, st, main_env);
 		return (0);
 	}

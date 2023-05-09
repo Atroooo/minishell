@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 13:28:26 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 14:46:53 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:36:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ long long	ft_atoll(const char *str)
 	}
 	while (ft_isdigit(str[i]))
 	{
-		if (((nb * 10) + str[i] - '0') / 10 != nb)
+		if (((nb * 10) + str[i] - '0') * sign / 10 != nb * sign)
 			return (-1);
 		nb = (nb * 10) + str[i] - '0';
 		if (!str[i + 1])

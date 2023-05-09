@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 11:11:51 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:27:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	delete_node(t_env_var *env_list, int i)
 	}
 }
 
-static void	find_in_list(char *name, t_env_var *env_list, t_env_main *main_env)
+static void	find_in_list(char *name, t_env_var *env_list)
 {
 	t_env_var	*temp;
 	int			i;
@@ -94,7 +94,7 @@ static void	find_in_list(char *name, t_env_var *env_list, t_env_main *main_env)
 		if (temp && temp->name && ft_strcmp(temp->name, name) == 0)
 		{
 			delete_node(env_list, i);
-			main_env->exit_status = 0;
+			g_status = 0;
 			return ;
 		}
 		i++;
@@ -102,7 +102,7 @@ static void	find_in_list(char *name, t_env_var *env_list, t_env_main *main_env)
 	}
 }
 
-t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env)
+t_env_var	*ft_unset(char **cmd, t_env_var *env_list)
 {
 	int	i;
 
@@ -112,7 +112,7 @@ t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env)
 	while (cmd[i])
 	{
 		if (check_unset_error(cmd[i]) == 0)
-			find_in_list(cmd[i], env_list, main_env);
+			find_in_list(cmd[i], env_list);
 		i++;
 	}
 	return (env_list);

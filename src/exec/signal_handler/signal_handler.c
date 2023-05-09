@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/03 14:19:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/09 19:26:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	signal_action(int sig)
 	}
 }
 
-void	signal_handler(t_env_main *main_env)
+void	signal_handler(void)
 {
 	struct sigaction	sa;
 
@@ -41,5 +41,4 @@ void	signal_handler(t_env_main *main_env)
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
-	main_env->exit_status = g_status;
 }

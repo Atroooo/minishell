@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 16:02:00 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/09 19:29:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 typedef struct s_env_main
 {
 	char				**env;
-	int					exit_status;
 	int					to_execute;
 	struct s_env_var	*env_list;
 	struct termios		*tty;
@@ -158,7 +157,7 @@ t_lst		*lst_new_index(void *content, int index);
 t_lst		*lst_new_double_index(void *content, int index, int index_inline);
 
 /*Signal*/
-void		signal_handler(t_env_main *env_main);
+void		signal_handler(void);
 void		termios_init(t_env_main *main_env);
 void		reset_terminal(t_env_main *main_env);
 
@@ -194,7 +193,7 @@ int			heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env);
 char		*get_delimiter(char *str);
 
 /*Builtins*/
-void		ft_echo(char **cmd, t_env_main *main_env, t_env_pipe *st);
+void		ft_echo(char **cmd, t_env_pipe *st);
 t_env_var	*ft_cd(char **cmd, t_env_var *env_list);
 t_env_var	*change_pwd(char *pwd, char *oldpwd, t_env_var *env_list);
 void		ft_pwd(char **cmd);
@@ -202,7 +201,7 @@ t_env_var	*ft_export(char **cmd, t_env_main *main_env);
 int			check_if_in_env(t_env_var *lst, char *str);
 void		free_variable_name_and_value(char *name, char *value);
 int			set_variables_name_and_value(char *str, char **name, char **value);
-t_env_var	*ft_unset(char **cmd, t_env_var *env_list, t_env_main *main_env);
+t_env_var	*ft_unset(char **cmd, t_env_var *env_list);
 char		**ft_env(char **cmd, t_env_main *main_env);
 void		ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd);
 t_env_var	*remove_similar_variable(char *name, t_env_var *lst);

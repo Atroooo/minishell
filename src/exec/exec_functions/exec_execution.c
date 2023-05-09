@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/03 14:19:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/09 19:40:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	fork_declaration(t_line *all_cmd, char **cmd, \
 	return (1);
 }
 
-static void	wait_for_process(t_env_pipe *st, t_env_main *main_env)
+static void	wait_for_process(t_env_pipe *st)
 {
 	int	status;
 	int	i;
@@ -40,17 +40,15 @@ static void	wait_for_process(t_env_pipe *st, t_env_main *main_env)
 		waitpid(st->pid[i], &status, 0);
 		i++;
 	}
-	if (WIFEXITED(status))
-	{
-		main_env->exit_status = WEXITSTATUS(status);
-		g_status = main_env->exit_status;
-	}
+	g_status = WEXITSTATUS(status);
+	if (g_status == 255)
+		g_status = 0;
 }
 
-static void	end_the_progam(t_env_pipe *st, t_env_main *main_env)
+static void	end_the_progam(t_env_pipe *st)
 {
 	close_function(st);
-	wait_for_process(st, main_env);
+	wait_for_process(st);
 	free_pipe(st);
 }
 
@@ -64,6 +62,6 @@ int	execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env)
 		st->actual_pipe += 1;
 		st->i++;
 	}
-	end_the_progam(st, main_env);
+	end_the_progam(st);
 	return (1);
 }

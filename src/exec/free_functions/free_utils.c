@@ -82,5 +82,5 @@ void	free_main_env(t_env_main *main_env)
 			free(main_env->env_list);
 		main_env->env_list = tmp;
 	}
-	exit(main_env->exit_status);
+	exit(g_status);
 }

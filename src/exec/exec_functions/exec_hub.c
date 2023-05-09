@@ -24,7 +24,7 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 		main_env->env_list = ft_export(all_cmd->all_cmd[0], main_env);
 	else if (ft_strcmp("unset", all_cmd->all_cmd[0][0]) == 0)
 		main_env->env_list = ft_unset(all_cmd->all_cmd[0], \
-			main_env->env_list, main_env);
+			main_env->env_list);
 	else if (ft_strcmp("cd", all_cmd->all_cmd[0][0]) == 0)
 		main_env->env_list = ft_cd(all_cmd->all_cmd[0], main_env->env_list);
 	else if (ft_strcmp("pwd", all_cmd->all_cmd[0][0]) == 0)
@@ -43,9 +43,10 @@ static int	check_inout(t_env_pipe *st, t_line *all_cmd)
 		st->input = 1;
 	else
 		st->input = 0;
-	if (all_cmd->outfile != NULL && \
-		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1)
-		st->output = 1;
+	if ((all_cmd->outfile != NULL && \
+		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1) ||
+		(all_cmd->nbr_cmd > 1 && all_cmd->all_cmd[0][0] == NULL))
+			st->output = 1;
 	else
 		st->output = 0;
 	if (!open_files(st, all_cmd))
@@ -96,7 +97,7 @@ static void	redirection_hub(t_line *all_cmd)
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
 	redirection_hub(all_cmd);
-	if (all_cmd->all_cmd[0][0] != NULL && all_cmd->nbr_cmd > 0)
+	if ((all_cmd->all_cmd[0][0] != NULL && all_cmd->nbr_cmd > 0) || all_cmd->nbr_cmd > 1)
 	{
 		if (exec_cmd(main_env, all_cmd) == -1)
 		{

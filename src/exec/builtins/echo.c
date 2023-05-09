@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:57:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/04 21:39:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/09 19:26:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_if_flag(char *str)
 	return (0);
 }
 
-void	ft_echo(char **cmd, t_env_main *main_env, t_env_pipe *st)
+void	ft_echo(char **cmd, t_env_pipe *st)
 {
 	int	i;
 	int	n;
@@ -47,5 +47,5 @@ void	ft_echo(char **cmd, t_env_main *main_env, t_env_pipe *st)
 	}
 	if (!n)
 		write(st->outfile, "\n", 1);
-	main_env->exit_status = 0;
+	g_status = 0;
 }

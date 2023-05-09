@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:04:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 11:04:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:25:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	exec_core(char *line, t_env_main *main_env)
 
 	error = 0;
 	error = parsing(line, &all_cmd, main_env);
-	main_env->exit_status = g_status;
 	if (error == -1)
 	{
 		reset_terminal(main_env);
@@ -45,7 +44,7 @@ static void	exec_shell(t_env_main *main_env)
 	char	*line;
 
 	line = NULL;
-	signal_handler(main_env);
+	signal_handler();
 	line = readline("prompt> ");
 	while (1)
 	{
@@ -56,7 +55,7 @@ static void	exec_shell(t_env_main *main_env)
 		}
 		if (!line)
 		{
-			main_env->exit_status = 131;
+			g_status = 131;
 			reset_terminal(main_env);
 			free_main_env(main_env);
 		}

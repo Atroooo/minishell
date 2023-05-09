@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 14:47:51 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:25:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	exit_one_cmd(char **cmd, t_env_main *main_env, t_line *all_cmd)
 {
 	if (cmd_size(cmd) == 2 && ft_strcmp(cmd[1], "-1") == 0)
 	{
-		main_env->exit_status = (unsigned char)ft_atoll(cmd[1]);
+		g_status = (unsigned char)ft_atoll(cmd[1]);
 		if (all_cmd->nbr_cmd == 1)
 			free_exit_builtin(main_env, all_cmd);
 	}
@@ -53,7 +53,7 @@ static int	exit_one_cmd(char **cmd, t_env_main *main_env, t_line *all_cmd)
 		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(cmd[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		main_env->exit_status = 2;
+		g_status = 2;
 		return (1);
 	}
 	return (0);
@@ -69,11 +69,11 @@ void	ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd)
 	if (cmd_size(cmd) > 2)
 	{
 		ft_putendl_fd("exit: too many arguments", 2);
-		main_env->exit_status = 1;
+		g_status = 1;
 		return ;
 	}
 	else if (cmd[1])
-		main_env->exit_status = (unsigned char)ft_atoll(cmd[1]);
+		g_status = (unsigned char)ft_atoll(cmd[1]);
 	if (all_cmd->nbr_cmd == 1)
 		free_exit_builtin(main_env, all_cmd);
 }

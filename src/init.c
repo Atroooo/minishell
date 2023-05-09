@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:26:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 16:27:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:25:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	init_main_env(t_env_main *main_env, char **env)
 {
 	int	return_value;
 
-	main_env->exit_status = 0;
+	g_status = 0;
 	main_env->env_list = NULL;
 	return_value = init_env_list(&main_env->env_list, env);
 	if (return_value == 0)
