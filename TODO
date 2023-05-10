@@ -1,4 +1,3 @@
-- voir si peux pas fix error ctrl+c hdoc
 - lstat = check si fichier est un directory avant d effectuer la redirection
 - chmod 0 sur un fichier test : doit afficher code erreur 
 - utiliser perror pour afficher les erreurs : exemple infile inexistant : perror(file_name)
@@ -6,3 +5,5 @@
 - ./fsdkjfh mauvais message d erreur
 - cat et CTRL + C : doit afficher ctrl c + affiche pas instant 131
 - <Makefile | cat -> segfault ok mais infile pas bon
+
+- voir si peux pas fix error ctrl+c hdoc => a voir avec quelqu'un de fort

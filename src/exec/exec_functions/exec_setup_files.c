@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 18:18:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 21:38:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ static int	setup_pipe_files(t_line *all_cmd, t_env_pipe *st)
 
 int	open_files(t_env_pipe *st, t_line *all_cmd)
 {
+	st->infile = 0;
+	st->outfile = 0;
 	if (st->input == 0 && st->output == 0)
 	{
 		st->infile = 0;
