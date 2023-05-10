@@ -1,9 +1,0 @@
->
-build
-header
-libft
-Makefile
-minishell
-outfile
-src
-valgrind_ignore_leaks.txt
