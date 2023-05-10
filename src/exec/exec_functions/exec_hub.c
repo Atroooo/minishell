@@ -44,7 +44,7 @@ static int	check_inout(t_env_pipe *st, t_line *all_cmd)
 	else
 		st->input = 0;
 	if ((all_cmd->outfile != NULL && \
-		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1) ||
+		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd -1) || \
 		(all_cmd->nbr_cmd > 1 && all_cmd->all_cmd[0][0] == NULL))
 			st->output = 1;
 	else
@@ -97,7 +97,8 @@ static void	redirection_hub(t_line *all_cmd)
 void	exec_hub(t_line *all_cmd, t_env_main *main_env)
 {
 	redirection_hub(all_cmd);
-	if ((all_cmd->all_cmd[0][0] != NULL && all_cmd->nbr_cmd > 0) || all_cmd->nbr_cmd > 1)
+	if ((all_cmd->all_cmd[0][0] != NULL && all_cmd->nbr_cmd > 0) \
+		|| all_cmd->nbr_cmd > 1)
 	{
 		if (exec_cmd(main_env, all_cmd) == -1)
 		{

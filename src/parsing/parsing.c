@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 21:39:19 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/10 13:54:58 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 	if (line[0] == '\0')
 		return (1);
 	line = remove_tabs(line);
-	error = check_error(&line, all_cmd, main_env);
 	add_history(line);
+	error = check_error(&line, all_cmd, main_env);
 	if (error)
 	{
 		free(line);
@@ -85,6 +85,7 @@ int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 	error = split_line(line, all_cmd);
 	if (error == 0)
 		error = convert_in_3d_array(all_cmd);
+	//printf("%s\n", all_cmd->infile->data); //PROBLEM QUOTE IN HEREDOC
 	free_cmd_struct(all_cmd);
 	free(line);
 	return (error);

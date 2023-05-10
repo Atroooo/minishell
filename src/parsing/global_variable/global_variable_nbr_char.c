@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:35:09 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 11:35:07 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/10 09:37:38 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,26 @@ static int	get_global_variable(char *line, int *nbr_char, t_env_var *env_list)
 	return (0);
 }
 
+static void	check_if_quote(char c, int *dquote)
+{
+	if (*dquote == 0 && c == '"')
+		*dquote = 1;
+	else if (*dquote == 1 && c == '"')
+		*dquote = 0;
+}
+
 int	count_nbr_char(char *line, t_env_var *env_list)
 {
 	int	index;
 	int	nbr_char;
+	int	dquote;
 
 	index = 0;
 	nbr_char = 0;
+	dquote = 0;
 	while (line[index])
 	{
-		if (line[index] == '\'')
+		if (line[index] == '\'' && dquote == 0)
 			skip_simple_quote(&index, &nbr_char, line);
 		while (line[index] == '$')
 		{
@@ -73,6 +83,7 @@ int	count_nbr_char(char *line, t_env_var *env_list)
 			skip_gobal_variable(&index, line);
 			nbr_char += 1;
 		}
+		check_if_quote(line[index], &dquote);
 		incrementation(&index, &nbr_char, line[index]);
 	}
 	return (nbr_char + 1);
