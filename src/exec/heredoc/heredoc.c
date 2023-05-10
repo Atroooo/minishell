@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 15:47:02 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:51:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,17 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 	char	*tmp_str;
 	char	*global_var;
 	int		temp_pipe[2];
+	int		total_hdoc;
 	int		actual_hdoc;
 
 	pipe(temp_pipe);
 	st->infile = temp_pipe[0];
+	total_hdoc = get_nbr_hdoc(all_cmd);
 	actual_hdoc = 0;
 	while (1)
 	{
 		tmp_str = heredoc_parsing(all_cmd, &actual_hdoc);
-		if (actual_hdoc == get_nbr_hdoc(all_cmd))
+		if (actual_hdoc == total_hdoc)
 			break ;
 		else
 		{
