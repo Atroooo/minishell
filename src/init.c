@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:26:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 09:39:09 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:36:31 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	incr_shlvl(t_env_var *env_list)
 	while (ft_strcmp(tmp->name, "SHLVL") != 0)
 		tmp = tmp->next;
 	lvl = ft_atoi(tmp->value);
-	if (lvl == 999 || lvl < 0)
-		lvl = 0;
+	if (lvl >= 999 || lvl < 0)
+		lvl = 1;
 	else
 		lvl++;
 	free(tmp->value);
