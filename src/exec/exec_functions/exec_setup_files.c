@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 11:05:43 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:54:28 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ static int	setup_pipe_files(t_line *all_cmd, t_env_pipe *st)
 		st->infile = 0;
 	if (st->output == 1)
 	{
+		if (ft_lstsize_file(all_cmd->outfile) == 0 && check_hdoc(all_cmd) == 1)
+		{
+			st->outfile = 1;
+			st->output = 0;
+			return (1);
+		}
 		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data))
 			return (0);
 	}
