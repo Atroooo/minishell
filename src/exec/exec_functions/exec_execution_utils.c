@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/09 19:28:31 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/10 09:30:00 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	buildin_exec(char **cmd, t_env_main *main_env, \
 	else if (ft_strcmp("export", cmd[0]) == 0)
 		main_env->env_list = ft_export(cmd, main_env);
 	else if (ft_strcmp("pwd", cmd[0]) == 0)
-		ft_pwd(cmd);
+		ft_pwd(cmd, st);
 	else if (ft_strcmp("unset", cmd[0]) == 0)
 		main_env->env_list = ft_unset(cmd, main_env->env_list);
 	else

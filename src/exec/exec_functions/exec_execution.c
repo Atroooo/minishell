@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/09 19:40:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/10 09:49:14 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	wait_for_process(t_env_pipe *st)
 	int	i;
 
 	i = 0;
+	status = 0;
 	while (i < st->nbr_cmd)
 	{
 		waitpid(st->pid[i], &status, 0);

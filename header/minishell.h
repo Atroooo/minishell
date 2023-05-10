@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/09 19:29:17 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/10 09:30:25 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ char		*get_delimiter(char *str);
 void		ft_echo(char **cmd, t_env_pipe *st);
 t_env_var	*ft_cd(char **cmd, t_env_var *env_list);
 t_env_var	*change_pwd(char *pwd, char *oldpwd, t_env_var *env_list);
-void		ft_pwd(char **cmd);
+void		ft_pwd(char **cmd, t_env_pipe *st);
 t_env_var	*ft_export(char **cmd, t_env_main *main_env);
 int			check_if_in_env(t_env_var *lst, char *str);
 void		free_variable_name_and_value(char *name, char *value);

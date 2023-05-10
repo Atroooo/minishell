@@ -6,13 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:17:56 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/01 15:06:02 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 09:30:52 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void	ft_pwd(char **cmd)
+void	ft_pwd(char **cmd, t_env_pipe *st)
 {
 	char	cwd[4096];
 
@@ -31,6 +31,6 @@ void	ft_pwd(char **cmd)
 	}
 	g_status = 0;
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		printf("%s\n", cwd);
+		ft_putendl_fd(cwd, st->outfile);
 	cwd[0] = '\0';
 }

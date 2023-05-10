@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 16:26:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/09 19:25:03 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/10 09:39:09 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,17 @@ static void	incr_shlvl(t_env_var *env_list)
 	t_env_var	*tmp;
 	int			lvl;
 
+	if (env_list == NULL)
+		return ;
 	tmp = env_list;
 	lvl = 0;
 	while (ft_strcmp(tmp->name, "SHLVL") != 0)
 		tmp = tmp->next;
 	lvl = ft_atoi(tmp->value);
-	lvl++;
+	if (lvl == 999 || lvl < 0)
+		lvl = 0;
+	else
+		lvl++;
 	free(tmp->value);
 	tmp->value = ft_itoa(lvl);
 }
@@ -45,9 +50,9 @@ static int	init_env_list(t_env_var **env_list, char **env)
 	t_env_var	*new_var;
 	int			i;
 
-	if (!env)
-		exit(0);
 	i = 0;
+	if (env[0] == NULL)
+		return (1);
 	while (env[i])
 	{
 		env_split = ft_split(env[i], '=');

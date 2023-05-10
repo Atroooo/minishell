@@ -27,8 +27,6 @@ static int	buildin_exec(t_line *all_cmd, t_env_main *main_env)
 			main_env->env_list);
 	else if (ft_strcmp("cd", all_cmd->all_cmd[0][0]) == 0)
 		main_env->env_list = ft_cd(all_cmd->all_cmd[0], main_env->env_list);
-	else if (ft_strcmp("pwd", all_cmd->all_cmd[0][0]) == 0)
-		ft_pwd(all_cmd->all_cmd[0]);
 	else
 		return (0);
 	if (main_env->env_list == NULL)
@@ -46,7 +44,7 @@ static int	check_inout(t_env_pipe *st, t_line *all_cmd)
 	if ((all_cmd->outfile != NULL && \
 		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd - 1) ||
 		(all_cmd->nbr_cmd > 1 && all_cmd->all_cmd[0][0] == NULL))
-			st->output = 1;
+		st->output = 1;
 	else
 		st->output = 0;
 	if (!open_files(st, all_cmd))
