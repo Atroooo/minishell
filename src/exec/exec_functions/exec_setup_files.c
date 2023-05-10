@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 14:54:28 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:51:23 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ int	setup_infile(t_env_pipe *st, char *file_raw)
 	st->infile = open(file_name, O_RDWR);
 	if (st->infile == -1 && st->hdoc == 0)
 	{
-		ft_putstr_fd("Cannot open file : ", 2);
-		ft_putendl_fd(file_name, 2);
+		perror(file_name);
+		// ft_putstr_fd("Cannot open file : ", 2);
+		// ft_putendl_fd(file_name, 2);
 		free(file_name);
 		free(st);
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/04 13:16:19 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/10 17:12:26 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ static char	*get_oldpwd(void)
 static void	*manage_error(char *path, char *oldpwd)
 {
 	ft_putstr_fd("minishell: cd: ", 2);
-	ft_putstr_fd(path, 2);
-	ft_putendl_fd(": No such file or directory", 2);
+	perror(path);
 	g_status = 1;
 	free(oldpwd);
 	free(path);

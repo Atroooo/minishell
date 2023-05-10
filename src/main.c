@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:04:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 09:35:43 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:56:29 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,17 @@ static void	exec_shell(t_env_main *main_env)
 	line = NULL;
 	signal_handler();
 	line = readline("prompt> ");
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		while (line != NULL)
 		{
 			exec_core(line, main_env);
+			signal_handler();
 			line = readline("prompt> ");
+			signal(SIGINT, SIG_IGN);
+			signal(SIGQUIT, SIG_IGN);
 		}
 		if (!line)
 		{
