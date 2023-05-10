@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 15:51:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:01:12 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,13 @@ static char	*heredoc_parsing(t_line *all_cmd, int *hdoc_count)
 	return (ft_strjoin(get_str, "\n"));
 }
 
-static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
+static void	declare_var(int *total_hdoc, int *actual_hdoc, t_line *all_cmd)
+{
+	*total_hdoc = get_nbr_hdoc(all_cmd);
+	*actual_hdoc = 0;
+}
+
+static void	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
 	char	*tmp_str;
 	char	*global_var;
@@ -51,8 +57,7 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 
 	pipe(temp_pipe);
 	st->infile = temp_pipe[0];
-	total_hdoc = get_nbr_hdoc(all_cmd);
-	actual_hdoc = 0;
+	declare_var(&total_hdoc, &actual_hdoc, all_cmd);
 	while (1)
 	{
 		tmp_str = heredoc_parsing(all_cmd, &actual_hdoc);
@@ -69,7 +74,6 @@ static int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 		}
 	}
 	close(temp_pipe[1]);
-	return (1);
 }
 
 int	check_hdoc(t_line *all_cmd)
@@ -90,12 +94,8 @@ int	check_hdoc(t_line *all_cmd)
 
 int	heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
-	int		return_value;
-
 	if (check_hdoc(all_cmd) == 0)
 		return (0);
-	return_value = heredoc_loop(st, all_cmd, main_env);
-	if (return_value == -1)
-		return (-1);
-	return (return_value);
+	heredoc_loop(st, all_cmd, main_env);
+	return (1);
 }

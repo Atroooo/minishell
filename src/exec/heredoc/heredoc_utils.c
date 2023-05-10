@@ -59,5 +59,3 @@ int	get_nbr_hdoc(t_line *all_cmd)
 	}
 	return (count);
 }
-
-
