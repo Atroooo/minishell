@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 09:30:25 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:03:15 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <termios.h>
 # include <errno.h>
 # include <limits.h>
+# include <fcntl.h>
 # include <sys/wait.h>
 # include "../libft/header/libft.h"
 
