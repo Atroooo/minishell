@@ -41,9 +41,9 @@ static int	check_inout(t_env_pipe *st, t_line *all_cmd)
 		st->input = 1;
 	else
 		st->input = 0;
-	if ((all_cmd->outfile != NULL && \
-		lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd -1) || \
-		(all_cmd->nbr_cmd > 1 && all_cmd->all_cmd[0][0] == NULL))
+	if (all_cmd->outfile != NULL && \
+		((lst_last(all_cmd->outfile)->index == all_cmd->nbr_cmd -1) || \
+		(all_cmd->nbr_cmd > 1 && all_cmd->all_cmd[0][0] == NULL)))
 		st->output = 1;
 	else
 		st->output = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 16:01:12 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/10 18:27:17 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 	while (1)
 	{
 		tmp_str = heredoc_parsing(all_cmd, &actual_hdoc);
-		if (actual_hdoc == total_hdoc)
+		if (actual_hdoc == total_hdoc || g_status == 130)
 			break ;
 		else
 		{
@@ -96,6 +96,7 @@ int	heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
 	if (check_hdoc(all_cmd) == 0)
 		return (0);
+	signal_handler();
 	heredoc_loop(st, all_cmd, main_env);
 	return (1);
 }
