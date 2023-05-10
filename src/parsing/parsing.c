@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 13:54:58 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/10 14:00:13 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 	error = split_line(line, all_cmd);
 	if (error == 0)
 		error = convert_in_3d_array(all_cmd);
-	//printf("%s\n", all_cmd->infile->data); //PROBLEM QUOTE IN HEREDOC
 	free_cmd_struct(all_cmd);
 	free(line);
 	return (error);
