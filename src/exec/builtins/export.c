@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 16:02:22 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/10 15:16:03 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 
 static void	print_export_error(char *cmd, int s)
 {
+	g_status = 1;
 	if (s == 0)
 	{
 		ft_putstr_fd("export: `", 2);

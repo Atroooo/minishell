@@ -22,68 +22,42 @@ char	*get_delimiter(char *str)
 	return (delimiter);
 }
 
-static char	*get_last_hdoc(t_line *all_cmd)
+char	*get_delimiter_hdoc(t_line *all_cmd, int hdoc_count)
 {
 	t_lst	*last_hdoc;
 	char	*hdoc;
+	int		i;
 
 	last_hdoc = all_cmd->infile;
+	i = 0;
 	while (last_hdoc)
 	{
 		if (ft_strnstr(last_hdoc->data, "<<", 2) != NULL)
+		{
 			hdoc = last_hdoc->data;
+			i++;
+		}
+		if (hdoc_count == i)
+			break ;
 		last_hdoc = last_hdoc->next;
 	}
 	return (hdoc);
 }
 
-static char	*heredoc_parsing(t_line *all_cmd)
+int	get_nbr_hdoc(t_line *all_cmd)
 {
-	char	*delimiter;
-	char	*get_str;
+	t_lst	*temp_hdoc;
+	int		count;
 
-	get_str = readline("heredoc> ");
-	delimiter = get_delimiter(get_last_hdoc(all_cmd));
-	if (!delimiter)
-		return (NULL);
-	if (get_str == NULL)
+	temp_hdoc = all_cmd->infile;
+	count = 0;
+	while (temp_hdoc)
 	{
-		ft_printf("End of file : the delimiter was %s\n", delimiter);
-		free(delimiter);
-		return (NULL);
+		if (ft_strnstr(temp_hdoc->data, "<<", 2) != NULL)
+			count++;
+		temp_hdoc = temp_hdoc->next;
 	}
-	else if (ft_strcmp(delimiter, get_str) == 0)
-	{
-		free(delimiter);
-		free(get_str);
-		return (NULL);
-	}
-	free(delimiter);
-	if (get_str[0] == '\0')
-		return (ft_strdup("\n"));
-	return (ft_strjoin(get_str, "\n"));
+	return (count);
 }
 
-int	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
-{
-	char	*tmp_str;
-	char	*global_var;
-	int		temp_pipe[2];
 
-	pipe(temp_pipe);
-	st->infile = temp_pipe[0];
-	while (1)
-	{
-		tmp_str = heredoc_parsing(all_cmd);
-		if (!tmp_str)
-			break ;
-		else
-		{
-			global_var = replace_global_variable(tmp_str, main_env);
-			write(temp_pipe[1], global_var, ft_strlen(global_var));
-			free(global_var);
-		}
-	}
-	close(temp_pipe[1]);
-	return (1);
-}

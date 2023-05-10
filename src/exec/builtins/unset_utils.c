@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:50:43 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/08 15:50:58 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:17:55 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	print_unset_error(char *cmd, int s)
 {
+	g_status = 1;
 	if (s == 0)
 	{
 		ft_putstr_fd("export: `", 2);
