@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/04 14:48:56 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:39:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	check_infile(t_line *all_cmd)
 	fd = open(file_name, O_RDWR);
 	if (fd == -1)
 	{
-		ft_putstr_fd(file_name, 2);
-		ft_putendl_fd(": No such file or directory", 2);
+		perror(file_name);
 		free(file_name);
 		return (0);
 	}

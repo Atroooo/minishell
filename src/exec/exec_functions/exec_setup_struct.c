@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:17:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 08:04:23 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/11 17:40:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ static int	setup_pipe(t_env_pipe *st)
 static int	print_err_msg(t_line *all_cmd)
 {
 	char	*file_name;
-
-	ft_putstr_fd("Cannot open file : ", STDERR_FILENO);
+	
 	file_name = setup_file(lst_last(all_cmd->infile)->data);
 	if (!file_name)
 		return (0);
-	ft_putendl_fd(file_name, STDERR_FILENO);
+	perror(file_name);
 	free(file_name);
 	return (0);
 }

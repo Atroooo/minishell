@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_execution_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 18:07:07 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:38:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
-
-int	find_path_index(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strstart(env[i], "PATH="))
-			return (i);
-		i++;
-	}
-	return (-1);
-}
 
 static int	buildin_exec(char **cmd, t_env_main *main_env, \
 	t_env_pipe *st, t_line *all_cmd)
@@ -73,6 +59,7 @@ static void	print_msg(char **cmd, t_env_pipe *st)
 	}
 	else
 	{
+		
 		ft_putendl_fd(": command not found", 2);
 		g_status = 127;
 	}
@@ -87,6 +74,12 @@ int	is_executable(char **cmd)
 	return (1);
 }
 
+static void	close_zero_one(void)
+{
+	close(0);
+	close(1);
+}
+
 int	get_exec_done(t_line *all_cmd, char **cmd, \
 	t_env_pipe *st, t_env_main *main_env)
 {
@@ -97,8 +90,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	{
 		if (buildin_exec(cmd, main_env, st, all_cmd))
 		{
-			close(0);
-			close(1);
+			close_zero_one();
 			close_function(st);
 			free_cmd_exec(all_cmd, st, main_env);
 		}
@@ -106,8 +98,7 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	path = return_path(main_env->env, cmd, st);
 	if (path == NULL)
 	{
-		close(0);
-		close(1);
+		close_zero_one();
 		print_msg(cmd, st);
 		free_cmd_exec(all_cmd, st, main_env);
 		return (0);
