@@ -1,6 +1,5 @@
-- lstat = check si fichier est un directory avant d effectuer la redirection
-- chmod 0 sur un fichier test : doit afficher code erreur 
-- cat et CTRL + C : doit afficher ctrl c + affiche pas instant 131
-- <Makefile | cat -> segfault ok mais infile pas bon
+- lstat = voir si on a perm sur ce fichier (erreur notamment) test : doit afficher code erreur
+- cat et CTRL + C : affiche pas 130
 
-- voir si peux pas fix error ctrl+c hdoc => a voir avec quelqu'un de fort
+- <Makefile | cat -> finalement bon comportement mais a verif a l ecole
+- voir si peux pas fix error ctrl+c hdoc => a voir avec quelqu'un

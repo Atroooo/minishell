@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:04:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 18:08:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:20:06 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	exec_shell(t_env_main *main_env)
 		if (!line)
 		{
 			g_status = 131;
+			printf("exit\n");
 			reset_terminal(main_env);
 			free_main_env(main_env);
 		}

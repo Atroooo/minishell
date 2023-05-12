@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/11 17:39:26 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/12 12:19:36 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	open_outfile(t_env_pipe *st, t_line *all_cmd)
 	{
 		if (tmp->index == st->i)
 		{
-			if (!setup_outfile(st, tmp->data))
+			if (!setup_outfile(st, tmp->data, all_cmd))
 				return (0);
 			return (1);
 		}
@@ -87,9 +87,11 @@ int	open_outfile(t_env_pipe *st, t_line *all_cmd)
 
 int	create_outfiles(t_line *all_cmd)
 {
-	t_lst	*tmp_outfile;
-	char	*file_name;
-	int		c_outfile;
+	int			file_status;
+	struct stat	info;
+	t_lst		*tmp_outfile;
+	char		*file_name;
+	int			c_outfile;
 
 	tmp_outfile = all_cmd->outfile;
 	while (tmp_outfile != NULL)
@@ -98,6 +100,14 @@ int	create_outfiles(t_line *all_cmd)
 			tmp_outfile->index_inline > all_cmd->infile->index_inline)
 			break ;
 		file_name = setup_file(tmp_outfile->data);
+		file_status = lstat(file_name, &info);
+		if (file_status == 0 && S_ISDIR(info.st_mode))
+		{
+			ft_putstr_fd(file_name, 2);
+			ft_putendl_fd(": Is a directory", 2);
+			free(file_name);
+			break ;
+		}
 		if (ft_strnstr(tmp_outfile->data, ">>", 2) != NULL)
 			c_outfile = open(file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
 		else if (ft_strnstr(tmp_outfile->data, ">", 1) != NULL)

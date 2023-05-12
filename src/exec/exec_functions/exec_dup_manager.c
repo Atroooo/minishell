@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_dup_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/09 20:04:14 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/12 12:00:04 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	get_last_dup_done(t_env_pipe *st, t_line *all_cmd)
 		return (0);
 	if (st->output == 1)
 	{
-		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data))
+		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data, all_cmd))
 			return (0);
 	}
 	else

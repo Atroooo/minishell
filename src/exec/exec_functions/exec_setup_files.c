@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/11 17:39:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/12 12:08:05 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,24 @@ char	*setup_file(char *raw_file)
 	return (file);
 }
 
-int	setup_outfile(t_env_pipe *st, char *file_raw)
+int	setup_outfile(t_env_pipe *st, char *file_raw, t_line *all_cmd)
 {
-	char	*file_name;
+	struct stat	info;
+	char		*file_name;
 
 	if (!file_raw)
 		return (0);
 	file_name = setup_file(file_raw);
 	if (!file_name)
 		return (0);
+	lstat(file_name, &info);
+	if (S_ISDIR(info.st_mode))
+	{
+		free(file_name);
+		if (all_cmd->nbr_cmd == 1)
+			free(st);
+		return (0);
+	}
 	if (ft_strnstr(file_raw, ">>", 2) != NULL)
 	{
 		st->outfile = open(file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
@@ -88,7 +97,7 @@ static int	setup_pipe_files(t_line *all_cmd, t_env_pipe *st)
 		st->infile = 0;
 	if (st->output == 1)
 	{
-		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data))
+		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data, all_cmd))
 			return (0);
 	}
 	else

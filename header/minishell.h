@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 21:38:44 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/12 11:59:07 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
+# include <unistd.h>
+# include <sys/stat.h>
 # include <errno.h>
 # include <limits.h>
 # include <fcntl.h>
@@ -171,7 +173,7 @@ int			setup_infile(t_env_pipe *st, char *file_raw);
 int			create_outfiles(t_line *all_cmd);
 int			open_outfile(t_env_pipe *st, t_line *all_cmd);
 int			check_spe_outfile(t_env_pipe *st, t_line *all_cmd);
-int			setup_outfile(t_env_pipe *st, char *file_raw);
+int			setup_outfile(t_env_pipe *st, char *file_raw, t_line *all_cmd);
 int			dup_manager(t_env_pipe *st, t_line *all_cmd);
 int			get_dup_single_done(t_env_pipe *st);
 void		close_function(t_env_pipe *st);
