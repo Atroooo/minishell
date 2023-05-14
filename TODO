@@ -1,5 +1,3 @@
-- cat et CTRL + C : affiche pas 130
-- redirection pour le cas << EOF | cat
-
+- cat et CTRL + C : affiche pas 130 => idem voir avec quelqu'un
 - <Makefile | cat -> finalement bon comportement mais a verif a l ecole
 - voir si peux pas fix error ctrl+c hdoc => a voir avec quelqu'un
