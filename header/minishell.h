@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/12 11:59:07 by atro             ###   ########.fr       */
+/*   Updated: 2023/05/14 13:31:52 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct t_lst
 {
 	char			*data;
 	int				index;
-	int				index_inline;
+	int				idx_line;
 	struct t_lst	*next;
 }	t_lst;
 
@@ -135,7 +135,7 @@ int			not_between_quote(char *line, int i_line);
 int			check_if_need_to_skip_global_variable( \
 			char *line, int *i_line);
 int			copy_all_arg(char **arg, t_cmd *cmd);
-int			list_copy(t_lst **dest, t_lst *src, int index, int index_inline);
+int			list_copy(t_lst **dest, t_lst *src, int index, int idx_line);
 int			simple_operator_error(char *line);
 int			operator_with_pipe(char *line);
 int			check_if_pipe(char *line, int *consecutive_pipe, int *quote);
@@ -157,7 +157,7 @@ t_env_var	*ft_lst_addsort(t_env_var *env_list, t_env_var *new_var);
 int			lst_add_back(t_lst **lst, t_lst *new);
 t_lst		*lst_new(void *content);
 t_lst		*lst_new_index(void *content, int index);
-t_lst		*lst_new_double_index(void *content, int index, int index_inline);
+t_lst		*lst_new_double_index(void *content, int index, int idx_line);
 
 /*Signal*/
 void		signal_handler(void);
@@ -170,6 +170,9 @@ void		reset_terminal(t_env_main *main_env);
 int			open_files(t_env_pipe *st, t_line *all_cmd);
 int			check_infile(t_line *all_cmd);
 int			setup_infile(t_env_pipe *st, char *file_raw);
+int			check_file_status_redir(char *file_name);
+int			check_file_status_exec(char *file_name, t_env_pipe *st, \
+				t_line *all_cmd);
 int			create_outfiles(t_line *all_cmd);
 int			open_outfile(t_env_pipe *st, t_line *all_cmd);
 int			check_spe_outfile(t_env_pipe *st, t_line *all_cmd);

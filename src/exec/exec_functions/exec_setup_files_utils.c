@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/12 12:19:36 by atro             ###   ########.fr       */
+/*   Updated: 2023/05/14 13:38:31 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,36 +87,29 @@ int	open_outfile(t_env_pipe *st, t_line *all_cmd)
 
 int	create_outfiles(t_line *all_cmd)
 {
-	int			file_status;
-	struct stat	info;
-	t_lst		*tmp_outfile;
+	t_lst		*tmp;
 	char		*file_name;
 	int			c_outfile;
 
-	tmp_outfile = all_cmd->outfile;
-	while (tmp_outfile != NULL)
+	tmp = all_cmd->outfile;
+	while (tmp != NULL)
 	{
-		if (all_cmd->infile && \
-			tmp_outfile->index_inline > all_cmd->infile->index_inline)
+		if (all_cmd->infile && tmp->idx_line > all_cmd->infile->idx_line)
 			break ;
-		file_name = setup_file(tmp_outfile->data);
-		file_status = lstat(file_name, &info);
-		if (file_status == 0 && S_ISDIR(info.st_mode))
-		{
-			ft_putstr_fd(file_name, 2);
-			ft_putendl_fd(": Is a directory", 2);
-			free(file_name);
+		file_name = setup_file(tmp->data);
+		if (!file_name)
+			return (0);
+		if (!check_file_status_redir(file_name))
 			break ;
-		}
-		if (ft_strnstr(tmp_outfile->data, ">>", 2) != NULL)
+		if (ft_strnstr(tmp->data, ">>", 2) != NULL)
 			c_outfile = open(file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
-		else if (ft_strnstr(tmp_outfile->data, ">", 1) != NULL)
+		else if (ft_strnstr(tmp->data, ">", 1) != NULL)
 			c_outfile = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (c_outfile == -1)
 			return (0);
 		close(c_outfile);
 		free(file_name);
-		tmp_outfile = tmp_outfile->next;
+		tmp = tmp->next;
 	}
 	return (1);
 }

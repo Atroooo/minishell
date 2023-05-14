@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/12 12:08:05 by atro             ###   ########.fr       */
+/*   Updated: 2023/05/14 13:32:05 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,13 @@ char	*setup_file(char *raw_file)
 
 int	setup_outfile(t_env_pipe *st, char *file_raw, t_line *all_cmd)
 {
-	struct stat	info;
 	char		*file_name;
 
-	if (!file_raw)
-		return (0);
 	file_name = setup_file(file_raw);
 	if (!file_name)
 		return (0);
-	lstat(file_name, &info);
-	if (S_ISDIR(info.st_mode))
-	{
-		free(file_name);
-		if (all_cmd->nbr_cmd == 1)
-			free(st);
+	if (!check_file_status_exec(file_name, st, all_cmd))
 		return (0);
-	}
 	if (ft_strnstr(file_raw, ">>", 2) != NULL)
 	{
 		st->outfile = open(file_name, O_RDWR | O_CREAT | O_APPEND, 0644);

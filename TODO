@@ -1,4 +1,3 @@
-- lstat = voir si on a perm sur ce fichier (erreur notamment) test : doit afficher code erreur
 - cat et CTRL + C : affiche pas 130
 
 - <Makefile | cat -> finalement bon comportement mais a verif a l ecole
