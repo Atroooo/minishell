@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/14 15:09:27 by atro             ###   ########.fr       */
+/*   Updated: 2023/05/15 00:04:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ int	setup_spe_infile(t_env_pipe *st, t_line *all_cmd)
 			if (st->infile == -1)
 			{
 				perror(file_name);
-				free(file_name);
-				return (0);
+				return (free(file_name), 0);
 			}
 			free(file_name);
 			return (1);
