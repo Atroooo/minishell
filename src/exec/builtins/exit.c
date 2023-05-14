@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/11 18:02:12 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/14 14:16:23 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	special_case_exit(char **cmd, t_env_main *main_env, t_line *all_cmd)
 			free_exit_builtin(main_env, all_cmd);
 		return (0);
 	}
-	return (0);	
+	return (0);
 }
 
 static int	exit_one_cmd(char **cmd, t_env_main *main_env, t_line *all_cmd)

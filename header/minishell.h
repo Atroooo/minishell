@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/14 13:31:52 by atro             ###   ########.fr       */
+/*   Updated: 2023/05/14 14:33:25 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ void		reset_terminal(t_env_main *main_env);
 /*Manage files*/
 int			open_files(t_env_pipe *st, t_line *all_cmd);
 int			check_infile(t_line *all_cmd);
+int			check_spe_infile(t_env_pipe *st, t_line *all_cmd);
+int			setup_spe_infile(t_env_pipe *st, t_line *all_cmd);
 int			setup_infile(t_env_pipe *st, char *file_raw);
 int			check_file_status_redir(char *file_name);
 int			check_file_status_exec(char *file_name, t_env_pipe *st, \

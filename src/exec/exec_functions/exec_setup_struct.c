@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:17:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/11 17:40:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/14 14:16:05 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	setup_pipe(t_env_pipe *st)
 static int	print_err_msg(t_line *all_cmd)
 {
 	char	*file_name;
-	
+
 	file_name = setup_file(lst_last(all_cmd->infile)->data);
 	if (!file_name)
 		return (0);

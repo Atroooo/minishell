@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 17:44:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/14 14:16:54 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_env_var	*get_prev(t_env_var *env_list, int i)
 	return (prev);
 }
 
-static void	delete_node(t_env_var *env_list, int i) //A CHANGER CASSE LE PREMIER SEGFAULT RETURN LA LIST
+static void	delete_node(t_env_var *env_list, int i)
 {
 	t_env_var	*delete;
 	t_env_var	*prev;

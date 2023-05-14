@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:05:32 by atro              #+#    #+#             */
-/*   Updated: 2023/05/14 13:25:07 by atro             ###   ########.fr       */
+/*   Updated: 2023/05/14 14:17:51 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	print_list_delete(t_lst *lst)
 {
 	while (lst != NULL)
 	{
-		printf("idx %d idx in line %d %s -> ", lst->index, lst->idx_line, lst->data);
+		printf("idx %d idx in line %d %s -> ", \
+			lst->index, lst->idx_line, lst->data);
 		lst = lst->next;
 	}
 	printf("NULL\n");

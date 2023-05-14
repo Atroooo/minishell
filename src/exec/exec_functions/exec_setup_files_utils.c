@@ -6,7 +6,7 @@
 /*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/14 13:38:31 by atro             ###   ########.fr       */
+/*   Updated: 2023/05/14 15:09:27 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,31 @@ int	check_infile(t_line *all_cmd)
 	return (1);
 }
 
-int	check_spe_outfile(t_env_pipe *st, t_line *all_cmd)
+int	setup_spe_infile(t_env_pipe *st, t_line *all_cmd)
 {
 	t_lst	*tmp;
+	char	*file_name;
 
-	tmp = all_cmd->outfile;
+	tmp = all_cmd->infile;
 	while (tmp)
 	{
 		if (tmp->index == st->i)
+		{
+			if (ft_strnstr(tmp->data, "<<", 2) != NULL)
+				return (0);
+			file_name = setup_file(tmp->data);
+			if (!file_name)
+				return (0);
+			st->infile = open(file_name, O_RDWR);
+			if (st->infile == -1)
+			{
+				perror(file_name);
+				free(file_name);
+				return (0);
+			}
+			free(file_name);
 			return (1);
+		}
 		tmp = tmp->next;
 	}
 	return (0);
