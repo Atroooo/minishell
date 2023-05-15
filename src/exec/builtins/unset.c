@@ -6,35 +6,11 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 13:43:29 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 13:59:30 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
-
-int	check_unset_error(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	if (cmd[0] == '-')
-		return (print_unset_error(cmd, 0), 1);
-	if (ft_isdigit(cmd[0]) || cmd[0] == '=' || cmd[0] == '\0')
-		return (print_unset_error(cmd, 0), 1);
-	while (cmd[i] != '\0')
-	{	
-		if (cmd[i] == '!')
-			return (print_unset_error(&cmd[i], 1), 1);
-		if (cmd[i] == '@' || cmd[i] == '%' || cmd[i] == '?' \
-		|| cmd[i] == '*' || cmd[i] == '\\' || cmd[i] == '~' \
-		|| cmd[i] == '-' || cmd[i] == '.' || cmd[i] == '{' \
-		|| cmd[i] == '}' || cmd[i] == '#' || cmd[i] == '+' \
-		|| cmd[i] == '=' || cmd[i] == '^')
-			return (print_unset_error(cmd, 0), 1);
-		i++;
-	}
-	return (0);
-}
 
 static t_env_var	*get_prev(t_env_var *env_list, int i)
 {

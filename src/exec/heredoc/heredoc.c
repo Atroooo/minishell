@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 13:45:18 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 13:47:47 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ int	heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 	if (st->tmp_str != NULL)
 		free(st->tmp_str);
 	if (g_status == 130)
-		st->hdoc = 2;
+		return (2);
 	return (1);
 }
