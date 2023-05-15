@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 15:44:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 09:26:09 by vgonnot          ###   ########.fr       */
+/*   Created: 2023/05/15 13:42:05 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/05/15 13:44:56 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_infile(t_line *all_cmd)
 	fd = open(file_name, O_RDWR);
 	if (fd == -1)
 	{
-		ft_printf(2, "%s: No such file or directory\n", file_name);
+		perror(file_name);
 		free(file_name);
 		return (0);
 	}
@@ -53,15 +53,30 @@ int	check_infile(t_line *all_cmd)
 	return (1);
 }
 
-int	check_spe_outfile(t_env_pipe *st, t_line *all_cmd)
+int	setup_spe_infile(t_env_pipe *st, t_line *all_cmd)
 {
 	t_lst	*tmp;
+	char	*file_name;
 
-	tmp = all_cmd->outfile;
+	tmp = all_cmd->infile;
 	while (tmp)
 	{
 		if (tmp->index == st->i)
+		{
+			if (ft_strnstr(tmp->data, "<<", 2) != NULL)
+				return (0);
+			file_name = setup_file(tmp->data);
+			if (!file_name)
+				return (0);
+			st->infile = open(file_name, O_RDWR);
+			if (st->infile == -1)
+			{
+				perror(file_name);
+				return (free(file_name), 0);
+			}
+			free(file_name);
 			return (1);
+		}
 		tmp = tmp->next;
 	}
 	return (0);
@@ -76,7 +91,7 @@ int	open_outfile(t_env_pipe *st, t_line *all_cmd)
 	{
 		if (tmp->index == st->i)
 		{
-			if (!setup_outfile(st, tmp->data))
+			if (!setup_outfile(st, tmp->data, all_cmd))
 				return (0);
 			return (1);
 		}
@@ -87,26 +102,29 @@ int	open_outfile(t_env_pipe *st, t_line *all_cmd)
 
 int	create_outfiles(t_line *all_cmd)
 {
-	t_lst	*tmp_outfile;
-	char	*file_name;
-	int		c_outfile;
+	t_lst		*tmp;
+	char		*file_name;
+	int			c_outfile;
 
-	tmp_outfile = all_cmd->outfile;
-	while (tmp_outfile != NULL)
+	tmp = all_cmd->outfile;
+	while (tmp != NULL)
 	{
-		if (all_cmd->infile && \
-			tmp_outfile->index_inline > all_cmd->infile->index_inline)
+		if (all_cmd->infile && tmp->idx_line > all_cmd->infile->idx_line)
 			break ;
-		file_name = setup_file(tmp_outfile->data);
-		if (ft_strnstr(tmp_outfile->data, ">>", 2) != NULL)
+		file_name = setup_file(tmp->data);
+		if (!file_name)
+			return (0);
+		if (!check_file_status_redir(file_name))
+			break ;
+		if (ft_strnstr(tmp->data, ">>", 2) != NULL)
 			c_outfile = open(file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
-		else if (ft_strnstr(tmp_outfile->data, ">", 1) != NULL)
+		else if (ft_strnstr(tmp->data, ">", 1) != NULL)
 			c_outfile = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (c_outfile == -1)
 			return (0);
 		close(c_outfile);
 		free(file_name);
-		tmp_outfile = tmp_outfile->next;
+		tmp = tmp->next;
 	}
 	return (1);
 }

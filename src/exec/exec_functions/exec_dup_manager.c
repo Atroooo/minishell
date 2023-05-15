@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_dup_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 08:20:10 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/09 20:04:14 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/15 13:25:29 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	get_dup_single_done(t_env_pipe *st)
 
 static int	get_first_dup_done(t_env_pipe *st, t_line *all_cmd)
 {
+	if (check_spe_infile(st, all_cmd))
+	{
+		if (!setup_spe_infile(st, all_cmd))
+			return (0);
+	}
 	if (dup2(st->infile, STDIN_FILENO) == -1)
 		return (0);
 	if (check_spe_outfile(st, all_cmd))
@@ -47,11 +52,22 @@ static int	get_first_dup_done(t_env_pipe *st, t_line *all_cmd)
 
 static int	get_last_dup_done(t_env_pipe *st, t_line *all_cmd)
 {
-	if (dup2(st->fd[st->actual_pipe - 1][0], STDIN_FILENO) == -1)
-		return (0);
+	if (check_spe_infile(st, all_cmd) \
+		|| (st->hdoc == 1 && all_cmd->all_cmd[0][0] == NULL))
+	{
+		if (st->hdoc != 1 && !setup_spe_infile(st, all_cmd))
+			return (0);
+		if (dup2(st->infile, STDIN_FILENO) == -1)
+			return (0);
+	}
+	else
+	{
+		if (dup2(st->fd[st->actual_pipe - 1][0], STDIN_FILENO) == -1)
+			return (0);
+	}
 	if (st->output == 1)
 	{
-		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data))
+		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data, all_cmd))
 			return (0);
 	}
 	else
@@ -63,8 +79,16 @@ static int	get_last_dup_done(t_env_pipe *st, t_line *all_cmd)
 
 static int	get_dup_done(t_env_pipe *st, t_line *all_cmd)
 {
-	if (dup2(st->fd[st->actual_pipe - 1][0], STDIN_FILENO) == -1)
-		return (quit_function(st, 0));
+	if (check_spe_infile(st, all_cmd))
+	{
+		if (!setup_spe_infile(st, all_cmd))
+			return (0);
+		if (dup2(st->infile, STDIN_FILENO) == -1)
+			return (0);
+	}
+	else
+		if (dup2(st->fd[st->actual_pipe - 1][0], STDIN_FILENO) == -1)
+			return (0);
 	if (check_spe_outfile(st, all_cmd))
 	{
 		if (!open_outfile(st, all_cmd))

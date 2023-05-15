@@ -8,7 +8,7 @@ HEADER_DIR				= header/
 HEADER_FILE				= minishell.h
 
 DIR						= src/
-SRC			 			= main.c init.c \
+SRC			 			= main.c init.c delete.c\
 						  parsing/parsing.c \
 						  exec/signal_handler/signal_handler.c \
 						  exec/signal_handler/term_handler.c \
@@ -28,8 +28,10 @@ SRC			 			= main.c init.c \
 						  exec/exec_functions/exec_setup_struct.c \
 						  exec/exec_functions/exec_setup_files.c \
 						  exec/exec_functions/exec_setup_files_utils.c \
+						  exec/exec_functions/exec_setup_files_utils_bis.c \
 						  exec/exec_functions/exec_dup_manager.c \
 						  exec/exec_functions/exec_path.c \
+						  exec/exec_functions/exec_path_utils.c \
 						  exec/exec_functions/exec_execution.c \
 						  exec/exec_functions/exec_execution_utils.c \
 						  exec/exec_functions/exec_quit_utils.c \

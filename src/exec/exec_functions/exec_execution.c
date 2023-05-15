@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 09:49:14 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 13:36:53 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	fork_declaration(t_line *all_cmd, char **cmd, \
 	g_status = 255;
 	st->pid[st->i] = fork();
 	if (st->pid[st->i] < 0)
-		return (quit_function(st, 1));
+		return (0);
 	if (st->pid[st->i] == 0)
 	{
 		if (!dup_manager(st, all_cmd))
@@ -56,6 +56,8 @@ static void	end_the_progam(t_env_pipe *st)
 int	execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env)
 {
 	st->i = 0;
+	if (st->hdoc == 2)
+		return (1);
 	while (st->i < st->nbr_cmd)
 	{
 		if (!fork_declaration(all_cmd, all_cmd->all_cmd[st->i], st, main_env))

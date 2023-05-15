@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:06:19 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 15:30:12 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/14 13:25:07 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_lst	*lst_new_index(void *content, int index)
 	return (list);
 }
 
-t_lst	*lst_new_double_index(void *content, int index, int index_inline)
+t_lst	*lst_new_double_index(void *content, int index, int idx_line)
 {
 	t_lst	*list;
 
@@ -70,7 +70,7 @@ t_lst	*lst_new_double_index(void *content, int index, int index_inline)
 		return (NULL);
 	list->data = content;
 	list->index = index;
-	list->index_inline = index_inline;
+	list->idx_line = idx_line;
 	list->next = NULL;
 	return (list);
 }

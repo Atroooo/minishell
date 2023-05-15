@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 15:55:55 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 13:40:08 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <termios.h>
+# include <unistd.h>
+# include <sys/stat.h>
 # include <errno.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include "../libft/header/libft.h"
+# include <sys/ioctl.h>
 
 typedef struct s_env_main
 {
@@ -39,24 +42,26 @@ typedef struct s_env_var
 
 typedef struct s_env_pipe
 {
-	int	input;
-	int	output;
-	int	infile;
-	int	outfile;
-	int	nbr_cmd;
-	int	actual_pipe;
-	int	hdoc;
-	int	*pid;
-	int	**fd;
-	int	i;
-	int	error_msg;
+	int		input;
+	int		output;
+	int		infile;
+	int		outfile;
+	int		nbr_cmd;
+	int		actual_pipe;
+	int		hdoc;
+	int		*pid;
+	int		**fd;
+	int		i;
+	int		error_msg;
+	char	*delimiter;
+	char	*tmp_str;
 }	t_env_pipe;
 
 typedef struct t_lst
 {
 	char			*data;
 	int				index;
-	int				index_inline;
+	int				idx_line;
 	struct t_lst	*next;
 }	t_lst;
 
@@ -133,7 +138,7 @@ int			not_between_quote(char *line, int i_line);
 int			check_if_need_to_skip_global_variable( \
 			char *line, int *i_line);
 int			copy_all_arg(char **arg, t_cmd *cmd);
-int			list_copy(t_lst **dest, t_lst *src, int index, int index_inline);
+int			list_copy(t_lst **dest, t_lst *src, int index, int idx_line);
 int			simple_operator_error(char *line);
 int			operator_with_pipe(char *line);
 int			check_if_pipe(char *line, int *consecutive_pipe, int *quote);
@@ -155,21 +160,28 @@ t_env_var	*ft_lst_addsort(t_env_var *env_list, t_env_var *new_var);
 int			lst_add_back(t_lst **lst, t_lst *new);
 t_lst		*lst_new(void *content);
 t_lst		*lst_new_index(void *content, int index);
-t_lst		*lst_new_double_index(void *content, int index, int index_inline);
+t_lst		*lst_new_double_index(void *content, int index, int idx_line);
 
 /*Signal*/
 void		signal_handler(void);
+void		activate_sig(void);
+void		desactivate_sig(void);
 void		termios_init(t_env_main *main_env);
 void		reset_terminal(t_env_main *main_env);
 
 /*Manage files*/
 int			open_files(t_env_pipe *st, t_line *all_cmd);
 int			check_infile(t_line *all_cmd);
+int			check_spe_infile(t_env_pipe *st, t_line *all_cmd);
+int			setup_spe_infile(t_env_pipe *st, t_line *all_cmd);
 int			setup_infile(t_env_pipe *st, char *file_raw);
+int			check_file_status_redir(char *file_name);
+int			check_file_status_exec(char *file_name, t_env_pipe *st, \
+				t_line *all_cmd);
 int			create_outfiles(t_line *all_cmd);
 int			open_outfile(t_env_pipe *st, t_line *all_cmd);
 int			check_spe_outfile(t_env_pipe *st, t_line *all_cmd);
-int			setup_outfile(t_env_pipe *st, char *file_raw);
+int			setup_outfile(t_env_pipe *st, char *file_raw, t_line *all_cmd);
 int			dup_manager(t_env_pipe *st, t_line *all_cmd);
 int			get_dup_single_done(t_env_pipe *st);
 void		close_function(t_env_pipe *st);

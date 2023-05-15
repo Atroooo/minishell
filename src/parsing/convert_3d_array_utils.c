@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   convert_3d_array_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:45:01 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 13:48:50 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/14 13:25:07 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/minishell.h"
 
-int	list_copy(t_lst **dest, t_lst *src, int index, int index_inline)
+int	list_copy(t_lst **dest, t_lst *src, int index, int idx_line)
 {
 	char	*str;
 
 	str = ft_strdup(src->data);
 	if (str == NULL)
 		return (1);
-	if (lst_add_back(dest, lst_new_double_index(str, index, index_inline)))
+	if (lst_add_back(dest, lst_new_double_index(str, index, idx_line)))
 	{
 		free(str);
 		return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:39:48 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 16:51:23 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/14 15:08:02 by atro             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ char	*setup_file(char *raw_file)
 	return (file);
 }
 
-int	setup_outfile(t_env_pipe *st, char *file_raw)
+int	setup_outfile(t_env_pipe *st, char *file_raw, t_line *all_cmd)
 {
-	char	*file_name;
+	char		*file_name;
 
-	if (!file_raw)
-		return (0);
 	file_name = setup_file(file_raw);
 	if (!file_name)
+		return (0);
+	if (!check_file_status_exec(file_name, st, all_cmd))
 		return (0);
 	if (ft_strnstr(file_raw, ">>", 2) != NULL)
 	{
@@ -67,8 +67,6 @@ int	setup_infile(t_env_pipe *st, char *file_raw)
 	if (st->infile == -1 && st->hdoc == 0)
 	{
 		perror(file_name);
-		// ft_putstr_fd("Cannot open file : ", 2);
-		// ft_putendl_fd(file_name, 2);
 		free(file_name);
 		free(st);
 		return (0);
@@ -90,13 +88,7 @@ static int	setup_pipe_files(t_line *all_cmd, t_env_pipe *st)
 		st->infile = 0;
 	if (st->output == 1)
 	{
-		if (ft_lstsize_file(all_cmd->outfile) == 0 && check_hdoc(all_cmd) == 1)
-		{
-			st->outfile = 1;
-			st->output = 0;
-			return (1);
-		}
-		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data))
+		if (!setup_outfile(st, lst_last(all_cmd->outfile)->data, all_cmd))
 			return (0);
 	}
 	else
@@ -106,6 +98,8 @@ static int	setup_pipe_files(t_line *all_cmd, t_env_pipe *st)
 
 int	open_files(t_env_pipe *st, t_line *all_cmd)
 {
+	st->infile = 0;
+	st->outfile = 0;
 	if (st->input == 0 && st->output == 0)
 	{
 		st->infile = 0;
