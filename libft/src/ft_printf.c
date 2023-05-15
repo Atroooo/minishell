@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:52:49 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 13:17:57 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 13:58:10 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	ft_printf(int fd, const char *str, ...)
 	int		temp;
 
 	va_start(ap, str);
-	if (write(1, 0, 0) != 0)
+	if (write(fd, 0, 0) != 0)
 		return (-1);
 	variable_initialization(&i, &nbr_char);
 	while (str[i] != '\0')

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:42:03 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 13:36:53 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:19:27 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,18 @@ static void	wait_for_process(t_env_pipe *st)
 		waitpid(st->pid[i], &status, 0);
 		i++;
 	}
-	g_status = WEXITSTATUS(status);
+	if (WIFSIGNALED(status) && (WTERMSIG(status) == SIGINT \
+		|| WTERMSIG(status) == SIGQUIT))
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+			g_status = 131;
+		else if (WTERMSIG(status) == SIGINT)
+			g_status = 130;
+	}
+	else if (WEXITSTATUS(status))
+		g_status = WEXITSTATUS(status);
+	else
+		g_status = 0;
 	if (g_status == 255)
 		g_status = 0;
 }
@@ -57,7 +68,11 @@ int	execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env)
 {
 	st->i = 0;
 	if (st->hdoc == 2)
+	{
+		close_function(st);
+		free_pipe(st);
 		return (1);
+	}
 	while (st->i < st->nbr_cmd)
 	{
 		if (!fork_declaration(all_cmd, all_cmd->all_cmd[st->i], st, main_env))

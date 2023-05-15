@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 14:55:51 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 14:59:10 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-# include "../libft/header/libft.h"
 # include <sys/ioctl.h>
+# include "../libft/header/libft.h"
 
 typedef struct s_env_main
 {
@@ -155,6 +155,8 @@ int			initialize_variable( \
 			t_cmd *cmd, int *error, int *no_command, int *is_echo);
 int			check_if_get_cmd(char c, int *no_command, int error);
 t_env_var	*ft_lst_addsort(t_env_var *env_list, t_env_var *new_var);
+t_env_var	*delete_node(t_env_var *env_list, int i);
+t_env_var	*get_prev(t_env_var *env_list, int i);
 
 /*List utils*/
 int			lst_add_back(t_lst **lst, t_lst *new);
@@ -216,6 +218,7 @@ int			check_if_in_env(t_env_var *lst, char *str);
 void		free_variable_name_and_value(char *name, char *value);
 int			set_variables_name_and_value(char *str, char **name, char **value);
 t_env_var	*ft_unset(char **cmd, t_env_var *env_list);
+int			check_unset_error(char *cmd);
 char		**ft_env(char **cmd, t_env_main *main_env);
 void		ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd);
 t_env_var	*remove_similar_variable(char *name, t_env_var *lst);
@@ -242,10 +245,5 @@ void		free_pipe(t_env_pipe *st);
 int			quit_function(t_env_pipe *st, int error_code);
 void		free_cmd_exec(t_line *all_cmd, t_env_pipe *st, \
 				t_env_main *main_env);
-
-/*A DELETE*/
-void		print_all_cmd(char ***all_cmd);
-void		print_tab(char **tab);
-void		print_list_delete(t_lst *lst);
 
 #endif
