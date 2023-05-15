@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 14:06:55 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 14:22:31 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ int			check_if_in_env(t_env_var *lst, char *str);
 void		free_variable_name_and_value(char *name, char *value);
 int			set_variables_name_and_value(char *str, char **name, char **value);
 t_env_var	*ft_unset(char **cmd, t_env_var *env_list);
+int			check_unset_error(char *cmd);
 char		**ft_env(char **cmd, t_env_main *main_env);
 void		ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd);
 t_env_var	*remove_similar_variable(char *name, t_env_var *lst);
@@ -244,10 +245,5 @@ void		free_pipe(t_env_pipe *st);
 int			quit_function(t_env_pipe *st, int error_code);
 void		free_cmd_exec(t_line *all_cmd, t_env_pipe *st, \
 				t_env_main *main_env);
-
-/*A DELETE*/
-void		print_all_cmd(char ***all_cmd);
-void		print_tab(char **tab);
-void		print_list_delete(t_lst *lst);
 
 #endif
