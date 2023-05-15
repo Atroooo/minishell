@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 08:17:45 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 14:45:12 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ t_env_var	*ft_cd(char **cmd, t_env_var *env_list)
 		return (env_list);
 	}
 	if (chdir(path) == -1)
-		return (manage_error(path, oldpwd));
+	{
+		manage_error(path, oldpwd);
+		return (env_list);
+	}
 	else
 		env_list = change_pwd(path, oldpwd, env_list);
 	g_status = 0;

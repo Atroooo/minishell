@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 08:21:45 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 14:35:08 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	print_export_error(char *cmd, int s)
 	}
 	if (s == 1)
 	{
-		ft_printf(2, "%s: evnet not found", cmd);
+		ft_printf(2, "%s: event not found\n", cmd);
 		return ;
 	}
 }
