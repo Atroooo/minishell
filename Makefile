@@ -34,6 +34,7 @@ SRC			 			= main.c init.c \
 						  exec/exec_functions/exec_path_utils.c \
 						  exec/exec_functions/exec_execution.c \
 						  exec/exec_functions/exec_execution_utils.c \
+						  exec/exec_functions/exec_execution_utils_bis.c \
 						  exec/exec_functions/exec_quit_utils.c \
 						  exec/heredoc/heredoc.c \
 						  exec/heredoc/heredoc_utils.c \

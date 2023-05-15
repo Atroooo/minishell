@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 13:47:47 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:16:48 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*heredoc_parsing(t_line *all_cmd, int *hdoc_count, t_env_pipe *st)
 		return (NULL);
 	if (get_str == NULL)
 	{
-		*(hdoc_count) = get_nbr_hdoc(all_cmd);
+		*(hdoc_count) += 1;
 		ft_printf(1, "End of file : the delimiter was %s\n", st->delimiter);
 		free(st->delimiter);
 		return (NULL);

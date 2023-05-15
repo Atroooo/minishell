@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 15:41:06 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:27:39 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ int			setup_outfile(t_env_pipe *st, char *file_raw, t_line *all_cmd);
 int			dup_manager(t_env_pipe *st, t_line *all_cmd);
 int			get_dup_single_done(t_env_pipe *st);
 void		close_function(t_env_pipe *st);
+void		close_zero_one(void);
 
 /*Execution*/
 int			is_executable(char **cmd);

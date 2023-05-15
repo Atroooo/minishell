@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 15:31:47 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:29:54 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,12 @@ static void	print_msg(char **cmd, t_env_pipe *st)
 	}
 }
 
-int	is_executable(char **cmd)
+static void	special_case_global_var(char **cmd, char *path)
 {
-	if (cmd[0] == NULL)
-		return (0);
-	if (cmd[0][0] == '\0')
-		return (0);
-	return (1);
-}
-
-static void	close_zero_one(void)
-{
-	close(0);
-	close(1);
+	if (access(cmd[0], X_OK) != -1)
+		ft_printf(2, "%s: Is a directory\n", cmd[0]);
+	if (path)
+		free(path);
 }
 
 int	get_exec_done(t_line *all_cmd, char **cmd, \
@@ -109,5 +102,6 @@ int	get_exec_done(t_line *all_cmd, char **cmd, \
 	close_function(st);
 	activate_sig();
 	execve(path, cmd, main_env->env);
+	special_case_global_var(cmd, path);
 	return (0);
 }
