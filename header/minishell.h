@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 13:40:08 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:06:55 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,8 @@ int			initialize_variable( \
 			t_cmd *cmd, int *error, int *no_command, int *is_echo);
 int			check_if_get_cmd(char c, int *no_command, int error);
 t_env_var	*ft_lst_addsort(t_env_var *env_list, t_env_var *new_var);
+t_env_var	*delete_node(t_env_var *env_list, int i);
+t_env_var	*get_prev(t_env_var *env_list, int i);
 
 /*List utils*/
 int			lst_add_back(t_lst **lst, t_lst *new);

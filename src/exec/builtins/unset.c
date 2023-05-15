@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:31 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 13:43:29 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:10:10 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_unset_error(char *cmd)
 	return (0);
 }
 
-static t_env_var	*get_prev(t_env_var *env_list, int i)
+t_env_var	*get_prev(t_env_var *env_list, int i)
 {
 	t_env_var	*prev;
 	int			j;
@@ -51,40 +51,6 @@ static t_env_var	*get_prev(t_env_var *env_list, int i)
 		j++;
 	}
 	return (prev);
-}
-
-static void	free_node(t_env_var *delete)
-{
-	free(delete->name);
-	free(delete->value);
-	free(delete);
-}
-
-static t_env_var	*delete_node(t_env_var *env_list, int i)
-{
-	t_env_var	*temp;
-	t_env_var	*delete;
-	t_env_var	*prev;
-
-	temp = env_list;
-	if (i == 0)
-	{
-		delete = env_list;
-		env_list = env_list->next;
-		free_node(delete);
-		return (env_list);
-	}
-	else
-	{
-		prev = get_prev(env_list, i - 1);
-		if (!prev->next)
-			return (temp);
-		delete = prev->next;
-		prev->next = delete->next;
-		free_node(delete);
-		delete = NULL;
-		return (temp);
-	}
 }
 
 static t_env_var	*find_in_list(char *name, t_env_var *env_list)

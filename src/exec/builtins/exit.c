@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 13:43:42 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:00:28 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static int	exit_one_cmd(char **cmd, t_env_main *main_env, t_line *all_cmd)
 	if (!is_numeric(cmd[1]))
 	{
 		ft_printf(2, "exit: %s: numeric argument required\n", cmd[1]);
-
 		g_status = 2;
 		return (1);
 	}
