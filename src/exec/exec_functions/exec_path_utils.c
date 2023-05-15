@@ -31,6 +31,8 @@ int	check_cmd(char *str, t_env_pipe *st)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] != '/' && str[i] != '.')
