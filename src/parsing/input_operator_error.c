@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:31:27 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 09:53:41 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:29:17 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	first_case_error(char *line, int *i)
 	*i += skip_space(&line[*i +1]) + 1;
 	if (line[*i] == '\0')
 	{
-		ft_printf(2, "bash: syntax error near unexpected token `%s'\n", \
+		ft_printf(2, "bash: syntax error near unexpected token `%c'\n", \
 			operator);
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:55:27 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 14:33:49 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:25:02 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	simple_operator_error(char *line)
 	}
 	if ((line[i] == '<' || line[i] == '>' || line[i] == '|') && space)
 	{
-		ft_printf(2, "bash: syntax error near unexpected token `%s'\n", line[i]);
+		ft_printf(2, "bash: syntax error near unexpected token `%c'\n", line[i]);
 		return (1);
 	}
 	return (0);
