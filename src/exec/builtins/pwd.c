@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:17:56 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 08:24:02 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:05:29 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@ void	ft_pwd(char **cmd, t_env_pipe *st)
 		return ;
 	if (cmd[1])
 	{
-		if (cmd[1][0] == '-')
+		if (ft_strlen(cmd[1]) > 2)
 		{
 			g_status = 2;
-			ft_printf(2, "pwd: -p: invalid option\n");
+			ft_printf(2, "pwd: --: invalid option\n");
+			return ;
+		}
+		if (ft_strlen(cmd[1]) > 1 && cmd[1][0] == '-' && cmd[1][1] != '-')
+		{
+			g_status = 2;
+			ft_printf(2, "pwd: %s: invalid option\n", cmd[1]);
 			return ;
 		}
 	}

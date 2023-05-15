@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 14:19:41 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:31:47 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	print_msg(char **cmd, t_env_pipe *st)
 		return ;
 	if (cmd[0] == NULL)
 		return ;
-	if (cmd && ft_strncmp(cmd[0], "./", 2) == 0)
+	if (cmd && ft_strncmp(cmd[0], "./", 2) == 0 && st->error_msg != 2)
 	{
 		ft_printf(2, "%s: Permission Denied\n", cmd[0]);
 		g_status = 126;
@@ -55,6 +55,11 @@ static void	print_msg(char **cmd, t_env_pipe *st)
 	{
 		ft_printf(2, "%s: No such file or directory\n", cmd[0]);
 		g_status = 1;
+	}
+	else if (st->error_msg == 2)
+	{
+		ft_printf(2, "%s: is a directory\n", cmd[0]);
+		g_status = 126;
 	}
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:50:43 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 14:58:52 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:08:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_unset_error(char *cmd)
 {
 	g_status = 1;
-	ft_printf(2, "export: `%s': not a valid identifier\n", cmd);
+	ft_printf(2, "unset: `%s': not a valid identifier\n", cmd);
 	return ;
 }
 
