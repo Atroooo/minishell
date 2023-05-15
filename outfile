@@ -1,8 +1,0 @@
-total 784
-drwxr-xr-x 4 vgonnot 2022_lyon   4096 May 15 15:32 build
-drwxr-xr-x 2 vgonnot 2022_lyon   4096 May 15 14:58 header
-drwxr-xr-x 5 vgonnot 2022_lyon   4096 May 15 15:32 libft
--rw-r--r-- 1 vgonnot 2022_lyon   3473 May 15 14:58 Makefile
--rwxr-xr-x 1 vgonnot 2022_lyon 781384 May 15 15:32 minishell
--rw-r--r-- 1 vgonnot 2022_lyon      0 May 15 15:38 outfile
-drwxr-xr-x 4 vgonnot 2022_lyon   4096 May 15 14:58 src
