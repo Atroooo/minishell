@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:31:27 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/04 13:56:35 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 09:53:41 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ static int	first_case_error(char *line, int *i)
 	*i += skip_space(&line[*i +1]) + 1;
 	if (line[*i] == '\0')
 	{
-		ft_putstr_fd("bash: syntax error near unexpected token ", 2);
-		ft_putchar_fd('`', 2);
-		ft_putchar_fd(operator, 2);
-		ft_putendl_fd("'", 2);
+		ft_printf(2, "bash: syntax error near unexpected token `%s'\n", \
+			operator);
 		return (1);
 	}
 	return (0);
@@ -33,26 +31,17 @@ static int	second_case_error(char *line, int *i, char operator)
 {
 	*i += skip_space(&line[*i + 1]) + 1;
 	if (line[*i] == '\0' && line[*i])
-		return (ft_putendl_fd("bash: syntax error near \
-			unexpected token 'newline'", 2), 1);
+		return (ft_printf(2, "bash: syntax error near \
+			unexpected token 'newline'\n"), 1);
 	if (line[*i] == '<' || line[*i] == '>')
 	{
 		*i += skip_space(&line[*i + 1]) + 1;
 		if (line[*i] == '<' || line[*i] == '>')
-		{
-			ft_putstr_fd("bash: syntax error near unexpected token ", 2);
-			ft_putchar_fd('`', 2);
-			ft_putchar_fd(operator, 2);
-			ft_putchar_fd(operator, 2);
-			ft_putendl_fd("`", 2);
-		}
+			ft_printf(2, "bash: syntax error near unexpected token `%c%c`\n" \
+				, operator, operator);
 		else
-		{
-			ft_putstr_fd("bash: syntax error near unexpected token ", 2);
-			ft_putchar_fd('`', 2);
-			ft_putchar_fd(operator, 2);
-			ft_putendl_fd("`", 2);
-		}
+			ft_printf(2, "bash: syntax error near unexpected token `%c`\n" \
+					, operator);
 		return (1);
 	}
 	return (0);

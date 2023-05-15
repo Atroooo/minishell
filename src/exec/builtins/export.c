@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:32:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 15:16:03 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 08:21:45 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ static t_env_var	*add_env_value(char *str, t_env_var *env_list)
 		free_variable_name_and_value(name, value);
 		return (env_list);
 	}
-	if (in_env == 1 && value == NULL)
-		return (env_list);
-	else if (in_env == 1)
+	if (in_env == 1 && value != NULL && value[0] != '\0')
 		env_list = remove_similar_variable(name, env_list);
+	else if (in_env == 1)
+	{
+		free_variable_name_and_value(name, value);
+		return (env_list);
+	}
 	env_list = ft_lst_addsort(env_list, ft_lstnew_env(name, value));
 	free_variable_name_and_value(name, value);
 	return (env_list);
@@ -55,15 +58,12 @@ static void	print_export_error(char *cmd, int s)
 	g_status = 1;
 	if (s == 0)
 	{
-		ft_putstr_fd("export: `", 2);
-		ft_putstr_fd(cmd, 2);
-		ft_putendl_fd("': not a valid identifier", 2);
+		ft_printf(2, "export: `%s': not a valid identifier\n", cmd);
 		return ;
 	}
 	if (s == 1)
 	{
-		ft_putstr_fd(cmd, 2);
-		ft_putendl_fd(": event not found", 2);
+		ft_printf(2, "%s: evnet not found", cmd);
 		return ;
 	}
 }

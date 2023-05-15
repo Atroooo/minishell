@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:58:47 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 17:12:26 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 08:17:45 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*get_path_cd(char **cmd, t_env_var *env_list)
 	}
 	else if (cmd[2] != NULL)
 	{
-		ft_putendl_fd("minishell: cd: too many arguments", 2);
+		ft_printf(2, "minishell: cd: too many arguments\n");
 		return (NULL);
 	}
 	else
@@ -77,7 +77,7 @@ static char	*get_oldpwd(void)
 
 static void	*manage_error(char *path, char *oldpwd)
 {
-	ft_putstr_fd("minishell: cd: ", 2);
+	ft_printf(2, "minishell: cd: ");
 	perror(path);
 	g_status = 1;
 	free(oldpwd);

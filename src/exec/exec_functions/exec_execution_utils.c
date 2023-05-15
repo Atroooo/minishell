@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:31:08 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 16:58:15 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 13:30:17 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,19 @@ static void	print_msg(char **cmd, t_env_pipe *st)
 		return ;
 	if (cmd[0] == NULL)
 		return ;
-	ft_putstr_fd(cmd[0], 2);
 	if (cmd && ft_strncmp(cmd[0], "./", 2) == 0)
 	{
-		ft_putendl_fd(": Permission denied", 2);
+		ft_printf(2, "%s: Permission Denied\n", cmd[0]);
 		g_status = 126;
 	}
 	else if (st->error_msg == 1)
 	{
-		ft_putendl_fd(": No such file or directory", 2);
+		ft_printf(2, "%s: No such file or directory\n", cmd[0]);
 		g_status = 1;
 	}
 	else
 	{
-		ft_putendl_fd(": command not found", 2);
+		ft_printf(2, "%s: Command not found\n", cmd[0]);
 		g_status = 127;
 	}
 }

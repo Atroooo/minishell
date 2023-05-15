@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:14:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 08:06:04 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 08:10:41 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
-int				ft_printf(const char *str, ...);
-int				hexadecimal_conversion(char c, unsigned long nbr);
+int				ft_printf(int fd, const char *str, ...);
+int				hexadecimal_conversion(char c, unsigned long nbr, int fd);
 int				checker_int(char c);
 int				return_value(int i, int nbr_char);
 void			variable_initialization(int *i, int *nbr_char);

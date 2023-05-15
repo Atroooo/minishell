@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 10:00:20 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/01/10 12:47:34 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 08:11:38 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	convert(char c, unsigned long nbr, char *hexadecimal_str, int i)
 	return (i);
 }
 
-static void	reverse_tab(int len, char *str, char c)
+static void	revers_tab(int len, char *str, char c)
 {
 	int		i;
 	char	temp;
@@ -76,7 +76,7 @@ static void	reverse_tab(int len, char *str, char c)
 	}
 }
 
-int	hexadecimal_conversion(char c, unsigned long nbr)
+int	hexadecimal_conversion(char c, unsigned long nbr, int fd)
 {
 	char	*hexadecimal_str;
 	int		i;
@@ -100,6 +100,6 @@ int	hexadecimal_conversion(char c, unsigned long nbr)
 			hexadecimal_str[i++] = '0';
 		i = convert(c, (unsigned int)nbr, hexadecimal_str, i);
 	}
-	return (reverse_tab(i, hexadecimal_str, c), ft_putstr_fd(hexadecimal_str, 1)
+	return (revers_tab(i, hexadecimal_str, c), ft_putstr_fd(hexadecimal_str, fd)
 		, len = ft_strlen(hexadecimal_str), free(hexadecimal_str), len);
 }

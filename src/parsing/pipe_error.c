@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 07:31:45 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 13:39:15 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 09:42:13 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 static int	error_case(char *s, int *error)
 {
-	ft_putstr_fd("syntax error near unexpected token ", 2);
-	ft_putchar_fd('`', 2);
-	ft_putstr_fd(s, 2);
-	ft_putendl_fd("`", 2);
+	ft_printf(2, "syntax error near unexpected token `%s`\n", s);
 	*error = 1;
 	return (1);
 }

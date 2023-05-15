@@ -64,8 +64,7 @@ static int	exec_cmd(t_env_main *main_env, t_line *all_cmd)
 	st = malloc(sizeof(t_env_pipe));
 	if (st == NULL)
 	{
-		ft_putstr_fd("Error : ", 2);
-		ft_putendl_fd(strerror(errno), 2);
+		ft_printf(2, "Error: %s\n", strerror(errno));
 		return (-1);
 	}
 	st->error_msg = 0;

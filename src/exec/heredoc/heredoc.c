@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 16:01:12 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 08:13:31 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*heredoc_parsing(t_line *all_cmd, int *hdoc_count)
 	if (get_str == NULL)
 	{
 		*(hdoc_count) = get_nbr_hdoc(all_cmd);
-		ft_printf("End of file : the delimiter was %s\n", delimiter);
+		ft_printf(1, "End of file : the delimiter was %s\n", delimiter);
 		free(delimiter);
 		return (NULL);
 	}

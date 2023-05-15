@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_quit_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 07:50:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/08 09:45:44 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 09:24:08 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,9 @@ int	quit_function(t_env_pipe *st, int error_code)
 	close_function(st);
 	free_pipe(st);
 	if (error_code == 0)
-	{
-		ft_putstr_fd("Error : ", 2);
-		ft_putendl_fd(strerror(errno), 2);
-	}
+		ft_printf(2, "Error : %s\n", strerror(errno));
 	else if (error_code == 1)
-		ft_putendl_fd("Error : Fork", 2);
+		ft_printf(2, "Error : Fork");
 	else if (error_code == 2)
 		return (1);
 	return (0);

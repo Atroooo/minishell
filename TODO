@@ -1,3 +1,1 @@
-- echo > | cat = parsing
-- export a => afficher dans export mais pas env, mais export a=(chaine vide) a afficher dans les 2
-- si on fait un export a alors que a a une value, on remplace pas la value
+export a=(chaine vide) a afficher dans les 2

@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:04:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 16:56:29 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 13:24:03 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	check_param(int argc)
 {
 	if (argc != 1)
 	{
-		ft_printf("Usage: ./minishell\n");
+		ft_printf(1, "Usage: ./minishell\n");
 		exit(0);
 	}
 }

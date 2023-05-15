@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/09 19:25:03 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/15 08:20:00 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ static int	exit_one_cmd(char **cmd, t_env_main *main_env, t_line *all_cmd)
 	}
 	if (!is_numeric(cmd))
 	{
-		ft_putstr_fd("exit: ", 2);
-		ft_putstr_fd(cmd[1], 2);
-		ft_putendl_fd(": numeric argument required", 2);
+		ft_printf(2, "exit: %s: numeric argument required\n", cmd[1]);
+
 		g_status = 2;
 		return (1);
 	}
@@ -68,7 +67,7 @@ void	ft_exit(char **cmd, t_env_main *main_env, t_line *all_cmd)
 	}
 	if (cmd_size(cmd) > 2)
 	{
-		ft_putendl_fd("exit: too many arguments", 2);
+		ft_printf(2, "exit: too many arguments\n");
 		g_status = 1;
 		return ;
 	}
