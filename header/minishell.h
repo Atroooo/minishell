@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 14:22:31 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:26:53 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-# include "../libft/header/libft.h"
 # include <sys/ioctl.h>
+# include "../libft/header/libft.h"
 
 typedef struct s_env_main
 {
