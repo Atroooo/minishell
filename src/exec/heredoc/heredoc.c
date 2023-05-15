@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:31:40 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 09:54:08 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 13:36:24 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	declare_var(int *total_hdoc, int *actual_hdoc, t_line *all_cmd)
 
 static void	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 {
-	char	*tmp_str;
 	char	*global_var;
 	int		temp_pipe[2];
 	int		total_hdoc;
@@ -59,21 +58,19 @@ static void	heredoc_loop(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 	declare_var(&total_hdoc, &actual_hdoc, all_cmd);
 	while (1)
 	{
-		tmp_str = heredoc_parsing(all_cmd, &actual_hdoc, st);
+		st->tmp_str = heredoc_parsing(all_cmd, &actual_hdoc, st);
 		if (actual_hdoc == total_hdoc || g_status == 130)
 			break ;
 		else
 		{
-			if (tmp_str)
+			if (st->tmp_str)
 			{
-				global_var = replace_global_variable(tmp_str, main_env);
+				global_var = replace_global_variable(st->tmp_str, main_env);
 				write(temp_pipe[1], global_var, ft_strlen(global_var));
 				free(global_var);
 			}
 		}
 	}
-	if (tmp_str != NULL)
-		free(tmp_str);
 	close(temp_pipe[1]);
 }
 
@@ -100,5 +97,9 @@ int	heredoc(t_env_pipe *st, t_line *all_cmd, t_env_main *main_env)
 	signal_handler();
 	g_status = 254;
 	heredoc_loop(st, all_cmd, main_env);
+	if (st->tmp_str != NULL)
+		free(st->tmp_str);
+	if (g_status == 130)
+		st->hdoc = 2;
 	return (1);
 }

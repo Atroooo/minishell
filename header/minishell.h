@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 09:49:08 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 13:15:50 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_env_pipe
 	int		i;
 	int		error_msg;
 	char	*delimiter;
+	char	*tmp_str;
 }	t_env_pipe;
 
 typedef struct t_lst

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 09:47:54 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 13:25:51 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	signal_action(int sig)
 		}
 		if (g_status == 254)
 		{
-			ioctl(0, TIOCSTI, "\n");
+			ioctl(STDIN_FILENO, TIOCSTI, "\n");
 			rl_replace_line("", 0);
 			rl_on_new_line();
 		}
