@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 14:59:10 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 15:41:06 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ void		exec_hub(t_line *all_cmd, t_env_main *main_env);
 int			setup_struct_cmd(t_env_pipe *st, t_line *all_cmd, \
 				t_env_main *main_env);
 int			find_path_index(char **env);
+int			check_cmd(char *str, t_env_pipe *st);
 char		*return_path(char **env, char **cmd, t_env_pipe *st);
 int			execution(t_line *all_cmd, t_env_pipe *st, t_env_main *main_env);
 int			get_exec_done(t_line *all_cmd, char **cmd, \

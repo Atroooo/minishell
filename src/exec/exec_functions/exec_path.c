@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 10:55:29 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/11 17:31:22 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:56:51 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,19 @@ char	*return_path(char **env, char **cmd, t_env_pipe *st)
 	char	*path;
 	int		path_pos_index;
 
-	if (is_executable(cmd) == 0)
+	if (is_executable(cmd) == 0 || !check_cmd(cmd[0], st))
 		return (NULL);
 	if (cmd[0][0] != '.' && cmd[0][1] != '/' && ft_strchr(cmd[0], '/'))
-		return (ft_strdup(cmd[0]));
+	{
+		if (access(cmd[0], X_OK) != -1)
+			return (ft_strdup(cmd[0]));
+		return (NULL);
+	}
 	path_pos_index = find_path_index(env);
 	if (path_pos_index == -1)
 	{
+		if (access(cmd[0], X_OK) != -1)
+			return (ft_strdup(cmd[0]));
 		st->error_msg = 1;
 		return (NULL);
 	}

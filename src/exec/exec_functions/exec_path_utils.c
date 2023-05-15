@@ -25,3 +25,18 @@ int	find_path_index(char **env)
 	}
 	return (-1);
 }
+
+int	check_cmd(char *str, t_env_pipe *st)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '/' && str[i] != '.')
+			return (1);
+		i++;
+	}
+	st->error_msg = 2;
+	return (0);
+}
