@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:42 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/14 14:33:25 by atro             ###   ########.fr       */
+/*   Updated: 2023/05/15 09:49:08 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include "../libft/header/libft.h"
+# include <sys/ioctl.h>
 
 typedef struct s_env_main
 {
@@ -41,17 +42,18 @@ typedef struct s_env_var
 
 typedef struct s_env_pipe
 {
-	int	input;
-	int	output;
-	int	infile;
-	int	outfile;
-	int	nbr_cmd;
-	int	actual_pipe;
-	int	hdoc;
-	int	*pid;
-	int	**fd;
-	int	i;
-	int	error_msg;
+	int		input;
+	int		output;
+	int		infile;
+	int		outfile;
+	int		nbr_cmd;
+	int		actual_pipe;
+	int		hdoc;
+	int		*pid;
+	int		**fd;
+	int		i;
+	int		error_msg;
+	char	*delimiter;
 }	t_env_pipe;
 
 typedef struct t_lst

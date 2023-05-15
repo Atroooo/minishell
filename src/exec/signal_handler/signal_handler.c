@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:29:58 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/10 21:38:18 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/15 09:47:54 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	signal_action(int sig)
 			g_status = 131;
 			exit(g_status);
 		}
-		return ;
 	}
 	if (sig == SIGINT)
 	{
@@ -31,6 +30,12 @@ void	signal_action(int sig)
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
+		}
+		if (g_status == 254)
+		{
+			ioctl(0, TIOCSTI, "\n");
+			rl_replace_line("", 0);
+			rl_on_new_line();
 		}
 		g_status = 130;
 	}
