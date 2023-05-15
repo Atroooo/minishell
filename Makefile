@@ -1,4 +1,4 @@
-.PHONY:     			all $(NAME) mkbuild lib clean fclean re sanitize
+.PHONY:     			all $(NAME) mkbuild lib clean fclean re
 
 NAME					= minishell
 
@@ -75,7 +75,6 @@ LIB_DIR					= libft/
 GCC						= gcc
 CFLAGS					= -Wall -Wextra -Werror -g3  
 LDLIBS					= -lreadline
-SANITIZE				= $(CFLAGS) -fsanitize=address
 
 RM 						= rm -rf
 
@@ -90,9 +89,6 @@ mkbuild:
 						
 $(NAME): 				$(OBJECTS) $(LIB_DIR)$(LIBFT)
 						$(GCC) $(CFLAGS) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(LDLIBS)
-
-sanitize :				$(OBJECTS) $(LIB_DIR)$(LIBFT)
-						$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT)
 
 lib:
 						@make -C $(LIB_DIR)
