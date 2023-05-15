@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:55:27 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/15 09:32:35 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/15 14:33:49 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	simple_operator_error(char *line)
 	i = space + 1;
 	if (line[1] == '\0' || line[i] == '\0')
 	{
-		ft_printf(2, "bash: syntax error near unexpected token 'newline'");
+		ft_printf(2, "bash: syntax error near unexpected token 'newline'\n");
 		return (1);
 	}
 	if ((line[i] == '<' || line[i] == '>' || line[i] == '|') && space)
@@ -40,12 +40,12 @@ int	operator_with_pipe(char *line)
 	i += skip_space(&line[i]);
 	if (line[i] == '|')
 	{
-		ft_printf(2, "syntax error near unexpected token `|'");
+		ft_printf(2, "syntax error near unexpected token `|'\n");
 		return (1);
 	}
 	else if (line[i] == '\0')
 	{
-		ft_printf(2, "syntax error near unexpected token `newline'");
+		ft_printf(2, "syntax error near unexpected token `newline'\n");
 		return (1);
 	}
 	return (0);

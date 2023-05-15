@@ -6,25 +6,17 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:50:43 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 14:20:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:08:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/minishell.h"
 
-void	print_unset_error(char *cmd, int s)
+void	print_unset_error(char *cmd)
 {
 	g_status = 1;
-	if (s == 0)
-	{
-		ft_printf(2, "export; `%s': not a valid identifier\n", cmd);
-		return ;
-	}
-	if (s == 1)
-	{
-		ft_printf(2, "%s: event not found\n");
-		return ;
-	}
+	ft_printf(2, "unset: `%s': not a valid identifier\n", cmd);
+	return ;
 }
 
 static void	free_node(t_env_var *delete)
