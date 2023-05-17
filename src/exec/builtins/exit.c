@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:42:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/15 16:19:39 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:47:17 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ static int	special_case_exit(char **cmd, t_env_main *main_env, t_line *all_cmd)
 			i++;
 		}
 		if (is_numeric(cmd[2]))
+		{
+			ft_printf(2, "exit\nexit: %s: numeric argument required\n", cmd[1]);
+			g_status = 2;
 			free_exit_builtin(main_env, all_cmd);
+		}
 		return (0);
 	}
 	return (0);
@@ -70,8 +74,7 @@ static int	exit_one_cmd(char **cmd, t_env_main *main_env, t_line *all_cmd)
 	}
 	if (!is_numeric(cmd[1]))
 	{
-		printf("exit\n");
-		ft_printf(2, "exit: %s: numeric argument required\n", cmd[1]);
+		ft_printf(2, "exit\nexit: %s: numeric argument required\n", cmd[1]);
 		if (g_status == 255)
 			return (0);
 		g_status = 2;
