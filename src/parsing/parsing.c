@@ -6,7 +6,7 @@
 /*   By: vgonnot <vgonnot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 08:42:21 by vgonnot           #+#    #+#             */
-/*   Updated: 2023/05/10 15:37:07 by vgonnot          ###   ########.fr       */
+/*   Updated: 2023/05/17 14:55:26 by vgonnot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*remove_tabs(char *line)
 	{
 		if (line[i] == '\'' || line[i] == '"')
 			i += skip_in_between(&line[i], line[i]);
-		else if (line[i] == 9)
+		else if (line[i] >= 7 && line[i] <= 13)
 			line[i] = ' ';
 		else
 			i++;
@@ -68,14 +68,16 @@ char	*remove_tabs(char *line)
 	return (line);
 }
 
+
+
 int	parsing(char *line, t_line *all_cmd, t_env_main *main_env)
 {
 	int	error;
 
 	if (line[0] == '\0')
 		return (1);
-	line = remove_tabs(line);
 	add_history(line);
+	line = remove_tabs(line);
 	error = check_error(&line, all_cmd, main_env);
 	if (error)
 	{
