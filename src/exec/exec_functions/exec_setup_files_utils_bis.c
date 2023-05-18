@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup_files_utils_bis.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atro <atro@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:12:51 by atro              #+#    #+#             */
-/*   Updated: 2023/05/14 14:26:16 by atro             ###   ########.fr       */
+/*   Updated: 2023/05/18 19:09:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ int	check_spe_infile(t_env_pipe *st, t_line *all_cmd)
 	while (tmp)
 	{
 		if (tmp->index == st->i)
+		{
+			if (ft_strnstr(tmp->data, "<<", 2) != NULL)
+				return (0);
 			return (1);
+		}
 		tmp = tmp->next;
 	}
 	return (0);
